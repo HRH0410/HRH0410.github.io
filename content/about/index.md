@@ -981,11 +981,11 @@ article h2::after {
 ## Projects
 
 <div class="project-card">
-<div class="card-label">Vol. 01 · 国家级获奖项目</div>
+<div class="card-label">Vol. 01</div>
 <div class="card-title">知微见疾</div>
-<div class="card-subtitle">AI 医疗助手 · 国家级大学生创新训练计划</div>
+<div class="card-subtitle">基层医疗场景下的AI健康问诊与智能报告解读助手</div>
 <div class="card-desc">
-一款集「看、说、理解」于一体的 AI 医疗助手，围绕真实问诊场景设计，支持多模态输入与智能交互。
+一款能看、会说、懂你的AI医疗助手，围绕真实问诊场景设计，支持多模态输入与智能交互。
 </div>
 <div class="card-tags">
 <span>LLM</span>
@@ -996,16 +996,15 @@ article h2::after {
 </div>
 
 <div class="project-card">
-<div class="card-label">Vol. 02 · 科研项目</div>
+<div class="card-label">Vol. 02</div>
 <div class="card-title">LLM 不确定性量化</div>
-<div class="card-subtitle">国家级大学生创新训练计划</div>
+<div class="card-subtitle">国家级大学生创新训练计划项目</div>
 <div class="card-desc">
 围绕大语言模型在生成与推理过程中的不确定性展开研究，探索模型输出可靠性与置信度建模问题。
 </div>
 <div class="card-tags">
 <span>LLM</span>
 <span>Uncertainty</span>
-<span>推理分析</span>
 <span>科研训练</span>
 </div>
 </div>
@@ -1030,7 +1029,7 @@ article h2::after {
 <div class="mini-card">
 <div class="mini-label">Course.03</div>
 <div class="mini-title">森林版跳一跳</div>
-<div class="mini-subtitle">CPL 课程</div>
+<div class="mini-subtitle">CPL</div>
 <a href="https://github.com/HRH0410/Jump_jump" target="_blank" class="mini-link">GitHub →</a>
 </div>
 </div>
@@ -1041,12 +1040,12 @@ article h2::after {
 <div class="awards-list">
 <div class="award-item">
 <span class="award-date">2025.11</span>
-<span class="award-name"><span class="highlight">知微见疾</span> · 挑战杯人工智能+创意赛赛道<span class="award-badge">全国一等奖</span></span>
+<span class="award-name"><span class="highlight">知微见疾</span> · 第十九杯挑战杯“人工智能+”创意赛<span class="award-badge">全国一等奖</span></span>
 </div>
 
 <div class="award-item">
 <span class="award-date">2025.10</span>
-<span class="award-name"><span class="highlight">知微见疾</span> · 云智算杯AI+应用创新大赛<span class="award-badge">全国一等奖</span></span>
+<span class="award-name"><span class="highlight">知微见疾</span> · “云智算杯”AI+应用创新大赛<span class="award-badge">全国一等奖</span></span>
 </div>
 
 <div class="award-item">
@@ -1056,7 +1055,7 @@ article h2::after {
 
 <div class="award-item">
 <span class="award-date">2025.06</span>
-<span class="award-name"><span class="highlight">知微见疾</span> · 南京大学天池杯AI创新大赛<span class="award-badge">AI先锋冠军</span></span>
+<span class="award-name"><span class="highlight">知微见疾</span> · 南京大学“天池杯”AI创新大赛<span class="award-badge">AI先锋冠军</span></span>
 </div>
 
 <div class="award-item">
@@ -1068,6 +1067,12 @@ article h2::after {
 <span class="award-date">2024.11</span>
 <span class="award-name">"砥砺奋进 声动南苏" 南苏第二届十佳歌手<span class="award-badge">🎤 冠军</span></span>
 </div>
+
+<div class="award-item">
+<span class="award-date">2024.9</span>
+<span class="award-name">人民奖学金<span>
+</div>
+
 </div>
 
 <!-- ==================== 技能清单 ==================== -->
@@ -1093,7 +1098,7 @@ article h2::after {
 </div>
 <div class="skill-items">
 <div class="skill-item">Vibe Coding</div>
-<div class="skill-item">Prompt 设计</div>
+<div class="skill-item">Prompt Engineering</div>
 <div class="skill-item">百炼 / Dify</div>
 </div>
 </div>
@@ -1276,7 +1281,6 @@ article h2::after {
 
 <!-- ==================== 关于这个网站 ==================== -->
 ## About This Site
-{class="section-title"}
 
 <p style="font-size: 1rem; line-height: 1.8; color: #555; margin: 1.5rem 0 2rem;">
 这是我的 <strong style="color: #2a2a2a;">数字花园</strong> —— 一个记录想法、学习笔记和生活碎片的地方。
@@ -1286,6 +1290,40 @@ article h2::after {
 "只有滚动的石头，才能不长青苔"
 </blockquote>
 
-<p style="text-align: center; color: #aaa; font-size: 0.85rem; margin-top: 3.5rem; letter-spacing: 0.05em;">
+<!-- 分隔线 -->
+<div style="margin: 3.5rem 0 3rem;">
+<div style="width: 100%; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.06) 50%, transparent 100%);"></div>
+</div>
+
+<!-- 联系信息区域 -->
+<div style="max-width: 720px; margin: 0 auto 2.5rem;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+
+<!-- 邮箱卡片 -->
+<div style="background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%); border: 1px solid rgba(0,0,0,0.06); border-radius: 10px; padding: 1rem 1.25rem; transition: all 0.3s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+<div style="display: flex; align-items: center; gap: 0.65rem;">
+<div style="width: 32px; height: 32px; flex-shrink: 0; background: linear-gradient(135deg, #f0f0f0, #e8e8e8); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">📧</div>
+<div style="flex: 1; min-width: 0;">
+<div style="font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; font-weight: 600;">Email</div>
+<a href="mailto:231880191@smail.nju.edu.cn" style="font-size: 0.82rem; color: #555; text-decoration: none; font-weight: 500; display: block; word-break: break-all; line-height: 1.3;">231880191@smail.nju.edu.cn</a>
+</div>
+</div>
+</div>
+
+<!-- 地区卡片 -->
+<div style="background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%); border: 1px solid rgba(0,0,0,0.06); border-radius: 10px; padding: 1rem 1.25rem; transition: all 0.3s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+<div style="display: flex; align-items: center; gap: 0.65rem;">
+<div style="width: 32px; height: 32px; background: linear-gradient(135deg, #f0f0f0, #e8e8e8); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">📍</div>
+<div>
+<div style="font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; font-weight: 600;">Location</div>
+<div style="font-size: 0.85rem; color: #555; font-weight: 500;">NJU，苏州，中国</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<p style="text-align: center; color: #aaa; font-size: 0.82rem; margin: 0; letter-spacing: 0.05em; font-style: italic;">
 感谢你来到这里，期待与你交流 🌸
 </p>
+</div>

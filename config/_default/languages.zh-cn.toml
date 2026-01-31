@@ -9,6 +9,7 @@ weight = 1
 title = "Steph.H"
 
 [params]
+  logo = "/img/author.jpg" # 使用你的头像作为 Logo
   displayName = "中文"
   isoCode = "zh-CN"
   rtl = false

@@ -1,0 +1,23 @@
+/* =============================================
+   Custom Styles for Digital Garden Theme
+   ============================================= */
+
+/* Override Blowfish theme primary colors to be neutral */
+:root {
+    --color-primary-200: transparent !important;
+    --color-primary-800: transparent !important;
+}
+
+/* Hide any leftover theme header artifacts */
+header .container {
+    max-width: none !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+header .container {
+    max-width: none !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Home on Steph.H</title>
+    <title>Steph.H</title>
     <link>http://localhost:1313/</link>
-    <description>Recent content in Home on Steph.H</description>
+    <description>Recent content on Steph.H</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <managingEditor>231880191@smail.nju.edu.cn (Steph.H)</managingEditor>

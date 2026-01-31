@@ -1,0 +1,170 @@
+<div class="h-24"></div>
+<div class="fixed inset-x-0 top-4 z-100 flex justify-center px-6">
+  <nav
+    id="menu-blur"
+    class="pill-nav flex items-center gap-6 px-8 py-2.5 rounded-full">
+    {{ partial "header/basic.html" . }}
+  </nav>
+</div>
+
+<style>
+  /* === Apple-Style Pill Navigation === */
+  .pill-nav {
+    background: rgba(255, 255, 255, 0.72) !important;
+    backdrop-filter: saturate(180%) blur(20px) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.04),
+      0 4px 12px rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.25s ease !important;
+    padding-left: 1rem !important;
+    padding-right: 1.25rem !important; /* 右边多给点空间给月亮图标 */
+  }
+
+  .dark .pill-nav {
+    background: rgba(28, 28, 30, 0.78) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.2),
+      0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  /* Internal layout */
+  #menu-blur .main-menu {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 0.25rem !important; /* 缩小整体间距 */
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  /* Logo container - 缩小头像右边距 */
+  #menu-blur .main-menu > div:first-child {
+    margin-right: -0.5rem !important; /* 负边距让头像和名字更近 */
+    padding-right: 0 !important;
+  }
+
+  /* Logo - 修复居中裁剪问题 */
+  #menu-blur .logo,
+  #menu-blur img.logo,
+  .pill-nav .logo,
+  .pill-nav img.logo {
+    height: 36px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+    margin-right: 0 !important; /* 头像紧贴名字 */
+    margin-left: 0 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+
+  #menu-blur .logo:hover {
+    transform: scale(1.08) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+  }
+
+  /* Navigation Links */
+  #menu-blur .main-menu a,
+  #menu-blur nav a {
+    color: rgba(0, 0, 0, 0.75) !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    padding: 0.4rem 1rem !important;
+    border-radius: 8px !important;
+    transition: all 0.15s ease !important;
+  }
+
+  #menu-blur .main-menu a:hover,
+  #menu-blur nav a:hover {
+    background: rgba(0, 0, 0, 0.06) !important;
+    color: #000 !important;
+  }
+
+  .dark #menu-blur .main-menu a,
+  .dark #menu-blur nav a {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  .dark #menu-blur .main-menu a:hover,
+  .dark #menu-blur nav a:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+  }
+
+  /* Icons container - 搜索和切换按钮的容器 */
+  #menu-blur .main-menu .ms-auto,
+  #menu-blur .main-menu > div:last-child {
+    gap: 0.125rem !important;
+    margin-left: 0.5rem !important;
+  }
+
+  /* Icons (search, theme toggle, etc.) */
+  #menu-blur button,
+  .pill-nav button,
+  #menu-blur #search-button,
+  #menu-blur #appearance-switcher {
+    padding: 0.4rem !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: rgba(0, 0, 0, 0.6) !important;
+    transition: all 0.15s ease !important;
+  }
+
+  #menu-blur button:hover {
+    background: rgba(0, 0, 0, 0.06) !important;
+    color: #000 !important;
+  }
+
+  .dark #menu-blur button {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .dark #menu-blur button:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+  }
+
+  /* Site title */
+  #menu-blur .main-menu > a.text-base {
+    font-weight: 600 !important;
+    font-size: 0.9375rem !important;
+    letter-spacing: -0.01em !important;
+    margin-right: 0.25rem !important;
+    margin-left: 0 !important;
+  }
+
+  /* Divider between logo/title and nav items */
+  #menu-blur .main-menu .ms-auto::before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    margin-right: 0.75rem;
+  }
+
+  .dark #menu-blur .main-menu .ms-auto::before {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    #menu-blur {
+      padding: 0.5rem 1.25rem !important;
+      gap: 0.25rem !important;
+    }
+    #menu-blur .logo {
+      height: 30px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+    }
+  }
+</style>

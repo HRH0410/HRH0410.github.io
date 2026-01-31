@@ -36,7 +36,7 @@ showDate: false
     border-radius: 32px;
     padding: 3.5rem 2rem;
     max-width: 800px;
-    margin: 4rem auto;
+    margin: 3rem auto 4rem;
     text-align: center;
   }
 
@@ -65,24 +65,45 @@ showDate: false
     background: rgba(255, 255, 255, 0.1);
   }
   
-  .nav-line { position: absolute; bottom: -8px; left: 0; width: 100%; height: 1px; background: #f0f0f0; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-  .nav-active-line { position: absolute; bottom: -8px; left: 0; width: 0; height: 1px; background: #333; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-  .garden-nav-item:hover .nav-active-line { width: 100% !important; }
-  .dark .nav-line { background: #333 !important; }
-  .dark .nav-active-line { background: #eee !important; }
+  /* 去掉丑陋的黑线，改用优雅的渐变下划线 */
+  .nav-line { display: none; }
+  .nav-active-line { display: none; }
+  
+  /* 悬停时的微妙效果 */
+  .garden-nav-item .nav-title {
+    position: relative;
+  }
+  .garden-nav-item .nav-title::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(100, 100, 100, 0.3), transparent);
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .garden-nav-item:hover .nav-title::after {
+    width: 80%;
+  }
+  .dark .garden-nav-item .nav-title::after {
+    background: linear-gradient(90deg, transparent, rgba(200, 200, 200, 0.3), transparent);
+  }
 </style>
 
 <div class="glass-card">
 
   <img src="/img/author.jpg" alt="Steph.H" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; margin-bottom: 2rem;" class="floating-avatar">
 
-  <h1 style="font-size: 2.4rem; font-weight: 800; margin-bottom: 2.5rem; letter-spacing: 0.01em;">
+  <h1 style="font-size: 2.4rem; font-weight: 800; margin-bottom: 3rem; letter-spacing: 0.01em; line-height: 1.3;">
     {{< typeit speed=70 lifeLike=true >}}
     Hi, 我是 Steph.H 👋
-    一名行走在数字世界里的漫游者。{{< /typeit >}}
+    一名行走在数字世界里的漫游者 {{< /typeit >}}
   </h1>
 
-  <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2.5rem; color: #666; font-size: 0.95rem; align-items: center;">
+  <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 3.5rem; color: #666; font-size: 0.95rem; align-items: center;">
     <span style="display: flex; align-items: center; gap: 6px;">
       {{< icon "location-dot" >}} 苏州 · NJU
     </span>
@@ -92,49 +113,60 @@ showDate: false
     <span style="display: flex; align-items: center; gap: 6px;">{{< icon "mug-hot" >}} 近况：在世界里慢慢走</span>
   </div>
 
-
-
-  <div style="margin-bottom: 2.5rem; max-width: 550px; margin-left: auto; margin-right: auto;">
-    <p style="font-family: serif; font-style: italic; color: #777; font-size: 1.15rem; line-height: 1.8; opacity: 0.9;">
-      “ 只有滚动的石头 才能不长青苔”
+<div style="margin-bottom: 2.5rem; max-width: 550px; margin-left: auto; margin-right: auto;">
+    <p style="font-family: serif; font-style: italic; color: #777; font-size: 1.10rem; line-height: 1.8; opacity: 0.9;">
+      —— “ 只有滚动的石头 才能不长青苔”
     </p>
   </div>
 
-  <div style="display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;">
-    <a href="/posts/" class="garden-nav-item">
-      <span style="font-size: 0.75rem; color: #aaa; letter-spacing: 0.25rem; text-transform: uppercase;">Vol. 01</span>
-      <div style="margin-top: 0.6rem; position: relative; padding: 0 4px;">
-        <span style="font-size: 1.2rem; font-weight: 600;">学习与笔记</span>
-        <div class="nav-line"></div>
-        <div class="nav-active-line"></div>
-      </div>
-    </a>
-    <a href="/projects/" class="garden-nav-item">
-      <span style="font-size: 0.75rem; color: #aaa; letter-spacing: 0.25rem; text-transform: uppercase;">Vol. 02</span>
-      <div style="margin-top: 0.6rem; position: relative; padding: 0 4px;">
-        <span style="font-size: 1.2rem; font-weight: 600;">AI 与思考</span>
-        <div class="nav-line"></div>
-        <div class="nav-active-line"></div>
-      </div>
-    </a>
-    <a href="/tags/life/" class="garden-nav-item">
-      <span style="font-size: 0.75rem; color: #aaa; letter-spacing: 0.25rem; text-transform: uppercase;">Vol. 03</span>
-      <div style="margin-top: 0.6rem; position: relative; padding: 0 4px;">
-        <span style="font-size: 1.2rem; font-weight: 600;">生活与日常</span>
-        <div class="nav-line"></div>
-        <div class="nav-active-line"></div>
-      </div>
-    </a>
-  </div>
 
-<div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 4rem; margin-top: 2.5rem; font-size: 1.6rem;">
-    <a href="https://github.com/HRH0410" style="color: inherit; opacity: 0.6; transition: 0.3s;" target="_blank" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">{{< icon "github" >}}</a>
-    <a href="https://space.bilibili.com/1834168183" style="color: inherit; opacity: 0.6; transition: 0.3s;" target="_blank" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">{{< icon "bilibili" >}}</a>
-    <a href="https://v.douyin.com/W9pAmwPcBcg/" style="color: inherit; opacity: 0.6; transition: 0.3s;" target="_blank" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">{{< icon "dou" >}}</a>
+<!-- 四个导航入口 - 带分隔线的立体设计 -->
+<div style="display: flex; justify-content: center; align-items: stretch; flex-wrap: nowrap; margin: 0 auto; position: relative;">
+<!-- 顶部装饰线 -->
+<div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);"></div>
+<a href="/posts/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+<span style="font-size: 0.6rem; color: #ccc; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 01</span>
+<span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">拾光笔记</span>
+<span style="font-size: 0.65rem; color: #aaa; margin-top: 0.4rem; font-weight: 300;">学习与记录</span>
+</a>
+<!-- 竖线分隔 -->
+<div style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
+<a href="/projects/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+<span style="font-size: 0.6rem; color: #ccc; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 02</span>
+<span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">造物手记</span>
+<span style="font-size: 0.65rem; color: #aaa; margin-top: 0.4rem; font-weight: 300;">项目与作品</span>
+</a>
+<!-- 竖线分隔 -->
+<div style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
+<a href="/tags/life/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+<span style="font-size: 0.6rem; color: #ccc; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 03</span>
+<span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">漫步日常</span>
+<span style="font-size: 0.65rem; color: #aaa; margin-top: 0.4rem; font-weight: 300;">生活与思考</span>
+</a>
+<!-- 竖线分隔 -->
+<div style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
+<a href="/about/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+<span style="font-size: 0.6rem; color: #ccc; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 04</span>
+<span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">关于我</span>
+<span style="font-size: 0.65rem; color: #aaa; margin-top: 0.4rem; font-weight: 300;">认识一下</span>
+</a>
+<!-- 底部装饰线 -->
+<div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);"></div>
+</div>
+
+  <!-- 社交链接 - 更精致的设计 -->
+  <div style="margin-top: 3rem; margin-bottom: 2rem;">
+    <div style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; font-size: 1.5rem;">
+      <div style="flex: 1; height: 1px; background: linear-gradient(to left, rgba(0,0,0,0.08), transparent); max-width: 80px;"></div>
+      <a href="https://github.com/HRH0410" style="color: inherit; opacity: 0.45; transition: all 0.3s ease; padding: 0.5rem;" target="_blank" onmouseover="this.style.opacity='1'; this.style.transform='translateY(-3px)'" onmouseout="this.style.opacity='0.45'; this.style.transform='translateY(0)'">{{< icon "github" >}}</a>
+      <a href="https://space.bilibili.com/1834168183" style="color: inherit; opacity: 0.45; transition: all 0.3s ease; padding: 0.5rem;" target="_blank" onmouseover="this.style.opacity='1'; this.style.transform='translateY(-3px)'" onmouseout="this.style.opacity='0.45'; this.style.transform='translateY(0)'">{{< icon "bilibili" >}}</a>
+      <a href="https://v.douyin.com/W9pAmwPcBcg/" style="color: inherit; opacity: 0.45; transition: all 0.3s ease; padding: 0.5rem;" target="_blank" onmouseover="this.style.opacity='1'; this.style.transform='translateY(-3px)'" onmouseout="this.style.opacity='0.45'; this.style.transform='translateY(0)'">{{< icon "dou" >}}</a>
+      <div style="flex: 1; height: 1px; background: linear-gradient(to right, rgba(0,0,0,0.08), transparent); max-width: 80px;"></div>
+    </div>
   </div>
 
 </div>
 
-<div style="margin: 8rem 0 5rem; text-align: center; opacity: 0.25; font-size: 0.8rem; letter-spacing: 0.4rem; font-family: monospace;">
+<div style="margin: 4rem 0 5rem; text-align: center; opacity: 0.25; font-size: 0.8rem; letter-spacing: 0.4rem; font-family: monospace;">
   🌱 DIGITAL GARDEN MANIFESTO
 </div>

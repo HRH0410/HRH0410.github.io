@@ -827,7 +827,7 @@
     border-radius: 32px;
     padding: 3.5rem 2rem;
     max-width: 800px;
-    margin: 4rem auto;
+    margin: 3rem auto 4rem;
     text-align: center;
   }
 
@@ -856,21 +856,42 @@
     background: rgba(255, 255, 255, 0.1);
   }
   
-  .nav-line { position: absolute; bottom: -8px; left: 0; width: 100%; height: 1px; background: #f0f0f0; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-  .nav-active-line { position: absolute; bottom: -8px; left: 0; width: 0; height: 1px; background: #333; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-  .garden-nav-item:hover .nav-active-line { width: 100% !important; }
-  .dark .nav-line { background: #333 !important; }
-  .dark .nav-active-line { background: #eee !important; }
+  /* 去掉丑陋的黑线，改用优雅的渐变下划线 */
+  .nav-line { display: none; }
+  .nav-active-line { display: none; }
+  
+  /* 悬停时的微妙效果 */
+  .garden-nav-item .nav-title {
+    position: relative;
+  }
+  .garden-nav-item .nav-title::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(100, 100, 100, 0.3), transparent);
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .garden-nav-item:hover .nav-title::after {
+    width: 80%;
+  }
+  .dark .garden-nav-item .nav-title::after {
+    background: linear-gradient(90deg, transparent, rgba(200, 200, 200, 0.3), transparent);
+  }
 </style>
 <div class="glass-card">
   <img src="/img/author.jpg" alt="Steph.H" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; margin-bottom: 2rem;" class="floating-avatar">
-  <h1 style="font-size: 2.4rem; font-weight: 800; margin-bottom: 2.5rem; letter-spacing: 0.01em;">
+  <h1 style="font-size: 2.4rem; font-weight: 800; margin-bottom: 3rem; letter-spacing: 0.01em; line-height: 1.3;">
     <div id="typeit-6fb22d3943ec7794c447a8e7c1bb77a4"></div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
       new TypeIt("#typeit-6fb22d3943ec7794c447a8e7c1bb77a4", {
-        strings: ["","    Hi, 我是 Steph.H 👋","    一名行走在数字世界里的漫游者。"],
+        strings: ["","    Hi, 我是 Steph.H 👋","    一名行走在数字世界里的漫游者 "],
         speed:  70 ,
         lifeLike:  true ,
         startDelay:  0 ,
@@ -882,7 +903,7 @@
 </script>
 
   </h1>
-  <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2.5rem; color: #666; font-size: 0.95rem; align-items: center;">
+  <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 3.5rem; color: #666; font-size: 0.95rem; align-items: center;">
     <span style="display: flex; align-items: center; gap: 6px;">
       <span class="relative inline-block align-text-bottom icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z"/></svg></span> 苏州 · NJU
     </span>
@@ -891,44 +912,56 @@
     <span style="opacity: 0.3;">|</span>
     <span style="display: flex; align-items: center; gap: 6px;"><span class="relative inline-block align-text-bottom icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M88 0C74.7 0 64 10.7 64 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1C120.5 112.3 128 119.9 128 136c0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C119.5 47.7 112 40.1 112 24c0-13.3-10.7-24-24-24zM32 192c-17.7 0-32 14.3-32 32V416c0 53 43 96 96 96H288c53 0 96-43 96-96h16c61.9 0 112-50.1 112-112s-50.1-112-112-112H352 32zm352 64h16c26.5 0 48 21.5 48 48s-21.5 48-48 48H384V256zM224 24c0-13.3-10.7-24-24-24s-24 10.7-24 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1C232.5 112.3 240 119.9 240 136c0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C231.5 47.7 224 40.1 224 24z"/></svg></span> 近况：在世界里慢慢走</span>
   </div>
-  <div style="margin-bottom: 2.5rem; max-width: 550px; margin-left: auto; margin-right: auto;">
-    <p style="font-family: serif; font-style: italic; color: #777; font-size: 1.15rem; line-height: 1.8; opacity: 0.9;">
-      “ 只有滚动的石头 才能不长青苔”
+<div style="margin-bottom: 2.5rem; max-width: 550px; margin-left: auto; margin-right: auto;">
+    <p style="font-family: serif; font-style: italic; color: #777; font-size: 1.10rem; line-height: 1.8; opacity: 0.9;">
+      —— “ 只有滚动的石头 才能不长青苔”
     </p>
   </div>
-  <div style="display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;">
-    <a href="/posts/" class="garden-nav-item">
-      <span style="font-size: 0.75rem; color: #aaa; letter-spacing: 0.25rem; text-transform: uppercase;">Vol. 01</span>
-      <div style="margin-top: 0.6rem; position: relative; padding: 0 4px;">
-        <span style="font-size: 1.2rem; font-weight: 600;">学习与笔记</span>
-        <div class="nav-line"></div>
-        <div class="nav-active-line"></div>
-      </div>
-    </a>
-    <a href="/projects/" class="garden-nav-item">
-      <span style="font-size: 0.75rem; color: #aaa; letter-spacing: 0.25rem; text-transform: uppercase;">Vol. 02</span>
-      <div style="margin-top: 0.6rem; position: relative; padding: 0 4px;">
-        <span style="font-size: 1.2rem; font-weight: 600;">AI 与思考</span>
-        <div class="nav-line"></div>
-        <div class="nav-active-line"></div>
-      </div>
-    </a>
-    <a href="/tags/life/" class="garden-nav-item">
-      <span style="font-size: 0.75rem; color: #aaa; letter-spacing: 0.25rem; text-transform: uppercase;">Vol. 03</span>
-      <div style="margin-top: 0.6rem; position: relative; padding: 0 4px;">
-        <span style="font-size: 1.2rem; font-weight: 600;">生活与日常</span>
-        <div class="nav-line"></div>
-        <div class="nav-active-line"></div>
-      </div>
-    </a>
-  </div>
-<div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 4rem; margin-top: 2.5rem; font-size: 1.6rem;">
-    <a href="https://github.com/HRH0410" style="color: inherit; opacity: 0.6; transition: 0.3s;" target="_blank" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'"><span class="relative inline-block align-text-bottom icon"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1769844414268" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8583" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z" p-id="8584" fill="#8a8a8a"></path></svg></span></a>
-    <a href="https://space.bilibili.com/1834168183" style="color: inherit; opacity: 0.6; transition: 0.3s;" target="_blank" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'"><span class="relative inline-block align-text-bottom icon"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1769843534795" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4804" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M977.2 208.2c33.4 36.2 48.8 79.4 46.6 131.4v404.8c-0.8 52.8-18.4 96.2-53 130.2-34.4 34-78.2 51.8-131 53.4H184.04c-52.9-1.6-96.42-19.6-130.56-54.4C19.364 838.8 1.534 793 0 736.4V339.6c1.534-52 19.364-95.2 53.48-131.4 34.14-32.7 77.66-50.66 130.56-52.2h58.76l-50.7-51.62c-11.5-11.46-17.26-26-17.26-43.58 0-17.6 5.76-32.12 17.26-43.594C203.6 5.736 218.2 0 235.8 0s32.2 5.736 43.8 17.206L426.2 156h176l149-138.794C763.4 5.736 778.4 0 796 0c17.6 0 32.2 5.736 43.8 17.206C851.2 28.68 857 43.2 857 60.8c0 17.58-5.8 32.12-17.2 43.58L789.2 156h58.6c52.8 1.54 96 19.5 129.4 52.2z m-77.6 139.4c-0.8-19.2-7.4-34.8-21.4-47-10.4-12.2-28-18.8-45.4-19.6H192.1c-19.18 0.8-34.9 7.4-47.16 19.6-12.28 12.2-18.8 27.8-19.56 47v388.8c0 18.4 6.52 34 19.56 47S173.7 803 192.1 803h640.7c18.4 0 34-6.6 46.6-19.6 12.6-13 19.4-28.6 20.2-47V347.6zM371 433c12.6 12.6 19.4 28.2 20.2 46.4V546c-0.8 18.4-7.4 33.8-19.6 46.4-12.4 12.6-28 19-47.2 19-19.2 0-35-6.4-47.2-19-12.2-12.6-18.8-28-19.6-46.4v-66.6c0.8-18.2 7.6-33.8 20.2-46.4 12.6-12.6 26.4-19.2 46.6-20 18.4 0.8 34 7.4 46.6 20z m383 0c12.6 12.6 19.4 28.2 20.2 46.4V546c-0.8 18.4-7.4 33.8-19.6 46.4-12.2 12.6-28 19-47.2 19-19.2 0-34.8-6.4-47.2-19-14-12.6-18.8-28-19.4-46.4v-66.6c0.6-18.2 7.4-33.8 20-46.4 12.6-12.6 28.2-19.2 46.6-20 18.4 0.8 34 7.4 46.6 20z" p-id="4805" fill="#8a8a8a"></path></svg></span></a>
-    <a href="https://v.douyin.com/W9pAmwPcBcg/" style="color: inherit; opacity: 0.6; transition: 0.3s;" target="_blank" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'"><span class="relative inline-block align-text-bottom icon"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1769844026421" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6622" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M937.4 423.9c-84 0-165.7-27.3-232.9-77.8v352.3c0 179.9-138.6 325.6-309.6 325.6S85.3 878.3 85.3 698.4c0-179.9 138.6-325.6 309.6-325.6 17.1 0 33.7 1.5 49.9 4.3v186.6c-15.5-6.1-32-9.2-48.6-9.2-76.3 0-138.2 65-138.2 145.3 0 80.2 61.9 145.3 138.2 145.3 76.2 0 138.1-65.1 138.1-145.3V0H707c0 134.5 103.7 243.5 231.6 243.5v180.3l-1.2 0.1" p-id="6623" fill="#8a8a8a"></path></svg></span></a>
+<!-- 四个导航入口 - 带分隔线的立体设计 -->
+<div style="display: flex; justify-content: center; align-items: stretch; flex-wrap: nowrap; margin: 0 auto; position: relative;">
+<!-- 顶部装饰线 -->
+<div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);"></div>
+<a href="/posts/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+<span style="font-size: 0.6rem; color: #ccc; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 01</span>
+<span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">拾光笔记</span>
+<span style="font-size: 0.65rem; color: #aaa; margin-top: 0.4rem; font-weight: 300;">学习与记录</span>
+</a>
+<!-- 竖线分隔 -->
+<div style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
+<a href="/projects/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+<span style="font-size: 0.6rem; color: #ccc; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 02</span>
+<span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">造物手记</span>
+<span style="font-size: 0.65rem; color: #aaa; margin-top: 0.4rem; font-weight: 300;">项目与作品</span>
+</a>
+<!-- 竖线分隔 -->
+<div style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
+<a href="/tags/life/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+<span style="font-size: 0.6rem; color: #ccc; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 03</span>
+<span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">漫步日常</span>
+<span style="font-size: 0.65rem; color: #aaa; margin-top: 0.4rem; font-weight: 300;">生活与思考</span>
+</a>
+<!-- 竖线分隔 -->
+<div style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
+<a href="/about/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+<span style="font-size: 0.6rem; color: #ccc; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 04</span>
+<span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">关于我</span>
+<span style="font-size: 0.65rem; color: #aaa; margin-top: 0.4rem; font-weight: 300;">认识一下</span>
+</a>
+<!-- 底部装饰线 -->
+<div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);"></div>
+</div>
+  <!-- 社交链接 - 更精致的设计 -->
+  <div style="margin-top: 3rem; margin-bottom: 2rem;">
+    <div style="display: flex; justify-content: center; align-items: center; gap: 1.5rem; font-size: 1.5rem;">
+      <div style="flex: 1; height: 1px; background: linear-gradient(to left, rgba(0,0,0,0.08), transparent); max-width: 80px;"></div>
+      <a href="https://github.com/HRH0410" style="color: inherit; opacity: 0.45; transition: all 0.3s ease; padding: 0.5rem;" target="_blank" onmouseover="this.style.opacity='1'; this.style.transform='translateY(-3px)'" onmouseout="this.style.opacity='0.45'; this.style.transform='translateY(0)'"><span class="relative inline-block align-text-bottom icon"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1769844414268" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8583" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z" p-id="8584" fill="#8a8a8a"></path></svg></span></a>
+      <a href="https://space.bilibili.com/1834168183" style="color: inherit; opacity: 0.45; transition: all 0.3s ease; padding: 0.5rem;" target="_blank" onmouseover="this.style.opacity='1'; this.style.transform='translateY(-3px)'" onmouseout="this.style.opacity='0.45'; this.style.transform='translateY(0)'"><span class="relative inline-block align-text-bottom icon"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1769843534795" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4804" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M977.2 208.2c33.4 36.2 48.8 79.4 46.6 131.4v404.8c-0.8 52.8-18.4 96.2-53 130.2-34.4 34-78.2 51.8-131 53.4H184.04c-52.9-1.6-96.42-19.6-130.56-54.4C19.364 838.8 1.534 793 0 736.4V339.6c1.534-52 19.364-95.2 53.48-131.4 34.14-32.7 77.66-50.66 130.56-52.2h58.76l-50.7-51.62c-11.5-11.46-17.26-26-17.26-43.58 0-17.6 5.76-32.12 17.26-43.594C203.6 5.736 218.2 0 235.8 0s32.2 5.736 43.8 17.206L426.2 156h176l149-138.794C763.4 5.736 778.4 0 796 0c17.6 0 32.2 5.736 43.8 17.206C851.2 28.68 857 43.2 857 60.8c0 17.58-5.8 32.12-17.2 43.58L789.2 156h58.6c52.8 1.54 96 19.5 129.4 52.2z m-77.6 139.4c-0.8-19.2-7.4-34.8-21.4-47-10.4-12.2-28-18.8-45.4-19.6H192.1c-19.18 0.8-34.9 7.4-47.16 19.6-12.28 12.2-18.8 27.8-19.56 47v388.8c0 18.4 6.52 34 19.56 47S173.7 803 192.1 803h640.7c18.4 0 34-6.6 46.6-19.6 12.6-13 19.4-28.6 20.2-47V347.6zM371 433c12.6 12.6 19.4 28.2 20.2 46.4V546c-0.8 18.4-7.4 33.8-19.6 46.4-12.4 12.6-28 19-47.2 19-19.2 0-35-6.4-47.2-19-12.2-12.6-18.8-28-19.6-46.4v-66.6c0.8-18.2 7.6-33.8 20.2-46.4 12.6-12.6 26.4-19.2 46.6-20 18.4 0.8 34 7.4 46.6 20z m383 0c12.6 12.6 19.4 28.2 20.2 46.4V546c-0.8 18.4-7.4 33.8-19.6 46.4-12.2 12.6-28 19-47.2 19-19.2 0-34.8-6.4-47.2-19-14-12.6-18.8-28-19.4-46.4v-66.6c0.6-18.2 7.4-33.8 20-46.4 12.6-12.6 28.2-19.2 46.6-20 18.4 0.8 34 7.4 46.6 20z" p-id="4805" fill="#8a8a8a"></path></svg></span></a>
+      <a href="https://v.douyin.com/W9pAmwPcBcg/" style="color: inherit; opacity: 0.45; transition: all 0.3s ease; padding: 0.5rem;" target="_blank" onmouseover="this.style.opacity='1'; this.style.transform='translateY(-3px)'" onmouseout="this.style.opacity='0.45'; this.style.transform='translateY(0)'"><span class="relative inline-block align-text-bottom icon"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1769844026421" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6622" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M937.4 423.9c-84 0-165.7-27.3-232.9-77.8v352.3c0 179.9-138.6 325.6-309.6 325.6S85.3 878.3 85.3 698.4c0-179.9 138.6-325.6 309.6-325.6 17.1 0 33.7 1.5 49.9 4.3v186.6c-15.5-6.1-32-9.2-48.6-9.2-76.3 0-138.2 65-138.2 145.3 0 80.2 61.9 145.3 138.2 145.3 76.2 0 138.1-65.1 138.1-145.3V0H707c0 134.5 103.7 243.5 231.6 243.5v180.3l-1.2 0.1" p-id="6623" fill="#8a8a8a"></path></svg></span></a>
+      <div style="flex: 1; height: 1px; background: linear-gradient(to right, rgba(0,0,0,0.08), transparent); max-width: 80px;"></div>
+    </div>
   </div>
 </div>
-<div style="margin: 8rem 0 5rem; text-align: center; opacity: 0.25; font-size: 0.8rem; letter-spacing: 0.4rem; font-family: monospace;">
+<div style="margin: 4rem 0 5rem; text-align: center; opacity: 0.25; font-size: 0.8rem; letter-spacing: 0.4rem; font-family: monospace;">
   🌱 DIGITAL GARDEN MANIFESTO
 </div>
 </section>

@@ -1,0 +1,36 @@
+disabled = false
+
+# 语言本体
+languageCode = "zh-cn"
+languageName = "简体中文"
+weight = 1
+
+# 站点标题（浏览器标签/站点名称）
+title = "Steph.H"
+
+[params]
+  displayName = "中文"
+  isoCode = "zh-CN"
+  rtl = false
+  # 中文日期格式可选：2006-01-02 或 2006年01月02日
+  dateFormat = "2006-01-02"
+  description = "一句话描述：你的主页/博客主题（AI / Agent / 课程笔记 / 项目复盘）"
+  # copyright = "© 2026 Steph.H"
+
+
+[params.author]
+  name = "Steph.H"
+  email = "231880191@smail.nju.edu.cn"   # 可选
+  image = "/img/author.jpg"          # 放在 assets/img/author.jpg
+  imageQuality = 96                 # 可选：头像质量
+  headline = "AI / Agent / AIGC"
+  bio = "两三句话简介：你在做什么、关注什么、博客会写什么。"
+
+  links = [
+    { github = "https://github.com/HRH0410" },
+    # { email = "231880191@smail.nju.edu.cn" },
+    { bilibili = "https://space.bilibili.com/1834168183" },
+    # { zhihu = "https://www.zhihu.com/people/xxx" },  # 主题是否支持取决于图标集合
+    { dou = "https://v.douyin.com/W9pAmwPcBcg/" },
+    # { link = "https://你的个人简历链接或PDF" }
+  ]

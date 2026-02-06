@@ -1154,7 +1154,7 @@ article h2::after {
 
 <div class="award-item">
 <span class="award-date">2024.9</span>
-<span class="award-name">人民奖学金<span>
+<span class="award-name">人民奖学金</span>
 </div>
 
 </div>

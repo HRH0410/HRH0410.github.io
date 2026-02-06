@@ -9,6 +9,33 @@ showDate: false
 <style>
   /* 基础清理 */
   header + .relative { display: none !important; }
+
+  @keyframes bgFloat {
+    0% { transform: scale(1.03) translate3d(0, 0, 0); }
+    50% { transform: scale(1.035) translate3d(0, -6px, 0); }
+    100% { transform: scale(1.03) translate3d(0, 0, 0); }
+  }
+
+  /* 仅首页背景动效，其它元素不变 */
+  #background-image {
+    animation: bgFloat 28s ease-in-out infinite;
+    transform-origin: center top;
+    will-change: transform;
+    opacity: 0.7;
+  }
+
+  .dark #background-image { opacity: 0.7; }
+
+  @media (max-width: 768px) {
+    #background-image { animation-duration: 30s; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #background-image {
+      animation: none !important;
+      transform: none !important;
+    }
+  }
   
   @keyframes float {
     0% { transform: translateY(0px); }
@@ -199,7 +226,7 @@ showDate: false
 </a>
 <!-- 竖线分隔 -->
 <div class="separator-line-vertical" style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
-<a href="/tags/life/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+<a href="/tags/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
 <span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 03</span>
 <span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">漫步日常</span>
 <span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">生活与思考</span>

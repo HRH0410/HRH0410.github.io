@@ -52,7 +52,7 @@ forgejoDefaultServer = "https://v11.next.forgejo.org"
 
 [homepage]
   layout = "background" # 会将背景图充满全屏
-  homepageImage = "img/background.jpg"
+  homepageImage = "img/background.svg"
   showRecent = false
   showRecentItems = 0
   showMoreLink = false

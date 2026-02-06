@@ -1,15 +1,1 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Categories on Steph.H</title>
-    <link>http://localhost:1313/categories/</link>
-    <description>Recent content in Categories on Steph.H</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <managingEditor>231880191@smail.nju.edu.cn (Steph.H)</managingEditor>
-    <webMaster>231880191@smail.nju.edu.cn (Steph.H)</webMaster>
-    <copyright>© 2026 Steph.H</copyright>
-    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Categories on Steph.H</title><link>https://HRH0410.github.io/categories/</link><description>Recent content in Categories on Steph.H</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>231880191@smail.nju.edu.cn (Steph.H)</managingEditor><webMaster>231880191@smail.nju.edu.cn (Steph.H)</webMaster><copyright>© 2026 Steph.H</copyright><atom:link href="https://HRH0410.github.io/categories/index.xml" rel="self" type="application/rss+xml"/></channel></rss>

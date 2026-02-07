@@ -47,34 +47,29 @@ html.dark #appearance-switcher svg path {
 /* 目录容器 */
 .toc-right {
     position: sticky;
-    top: 6rem;
-    max-height: calc(100vh - 8rem);
-    padding-right: 1rem !important;
-}
-
-@keyframes toc-breathe {
-    0% { opacity: 0.65; transform: translateY(0); }
-    50% { opacity: 1; transform: translateY(-1px); }
-    100% { opacity: 0.65; transform: translateY(0); }
+    top: 6.4rem;
+    max-height: calc(100vh - 8.4rem);
+    padding-right: 0.8rem !important;
 }
 
 /* 目录内部边框 */
 .toc-right > div,
 .toc-inside > div {
-    border-left: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-left: 1px solid rgba(21, 32, 51, 0.12) !important;
     border-style: solid !important;
-    padding-left: 1.25rem !important;
+    padding-left: 1rem !important;
+    margin-left: 0 !important;
 }
 
 .dark .toc-right > div,
 .dark .toc-inside > div {
-    border-left-color: rgba(255, 255, 255, 0.1) !important;
+    border-left-color: rgba(198, 213, 235, 0.2) !important;
 }
 
 /* 目录链接样式 */
 #TableOfContents {
-    font-size: 0.875rem;
-    line-height: 1.7;
+    font-size: 0.92rem;
+    line-height: 1.55;
 }
 
 #TableOfContents ul {
@@ -84,99 +79,183 @@ html.dark #appearance-switcher svg path {
 }
 
 #TableOfContents > ul > li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 #TableOfContents li ul {
-    padding-left: 1rem;
-    margin-top: 0.35rem;
+    padding-left: 0.8rem;
+    margin-top: 0.2rem;
 }
 
 #TableOfContents a {
     display: block;
-    padding: 0.4rem 0.6rem 0.4rem 1.35rem;
-    color: #666;
+    padding: 0.34rem 0.55rem 0.34rem 1.05rem;
+    color: #5e6f88;
     text-decoration: none;
-    transition: all 0.25s ease;
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
     position: relative;
-    font-weight: 450;
-    border-radius: 999px;
+    font-weight: 520;
+    border-radius: 8px;
 }
 
 #TableOfContents a::before {
     content: '';
     position: absolute;
-    left: 0.35rem;
+    left: 0.2rem;
     top: 50%;
     transform: translateY(-50%);
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.25);
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
-    transition: all 0.25s ease;
+    background: rgba(59, 78, 106, 0.45);
+    box-shadow: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 #TableOfContents a:hover {
-    color: #2d2d2d;
-    background: rgba(0, 0, 0, 0.04);
-    transform: translateX(2px);
+    color: #2f425f;
+    background: rgba(59, 78, 106, 0.06);
+    transform: translateX(1px);
 }
 
 #TableOfContents a.active {
-    color: #1a1a1a;
-    font-weight: 600;
-    background: rgba(0, 0, 0, 0.06);
+    color: #21324c;
+    font-weight: 620;
+    background: rgba(59, 78, 106, 0.1);
 }
 
 #TableOfContents a.active::before {
-    width: 7px;
-    height: 7px;
-    background: linear-gradient(180deg, #333 0%, #888 100%);
-    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.06);
-    animation: toc-breathe 2.4s ease-in-out infinite;
+    width: 5px;
+    height: 5px;
+    background: #2d476d;
+    transform: translateY(-50%) scale(1.05);
 }
 
 /* 深色模式 */
 .dark #TableOfContents a {
-    color: #9a9a9a;
+    color: #9db1d0;
 }
 
 .dark #TableOfContents a:hover {
-    color: #d6d6d6;
-    background: rgba(255, 255, 255, 0.06);
+    color: #d3e1f6;
+    background: rgba(164, 186, 220, 0.12);
 }
 
 .dark #TableOfContents a.active {
-    color: #f0f0f0;
-    background: rgba(255, 255, 255, 0.08);
+    color: #eef5ff;
+    background: rgba(164, 186, 220, 0.18);
 }
 
 .dark #TableOfContents a.active::before {
-    background: linear-gradient(180deg, #f0f0f0 0%, #888 100%);
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+    background: #c4d7f6;
 }
 
 .dark #TableOfContents a::before {
-    background: rgba(255, 255, 255, 0.35);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+    background: rgba(187, 208, 236, 0.62);
 }
 
 /* 二级目录链接稍小 */
 #TableOfContents li ul a {
-    font-size: 0.82rem;
-    padding: 0.28rem 0.6rem 0.28rem 1.35rem;
-    color: #8a8a8a;
+    font-size: 0.83rem;
+    padding: 0.26rem 0.55rem 0.26rem 1rem;
+    color: #7d8ea7;
 }
 
 #TableOfContents li ul a:hover {
-    color: #555;
+    color: #4f6484;
 }
 
 .dark #TableOfContents li ul a {
-    color: #777;
+    color: #8ca0be;
 }
 
 .dark #TableOfContents li ul a:hover {
-    color: #aaa;
+    color: #c7d8f1;
+}
+
+/* =============================================
+   文章页顶部避让固定导航（全站生效）
+   ============================================= */
+#single_header {
+    padding-top: clamp(4.2rem, 7vw, 5.4rem);
+    margin-top: 0 !important;
+}
+
+@media (max-width: 768px) {
+    #single_header {
+        padding-top: clamp(3.9rem, 11vw, 4.8rem);
+    }
+}
+
+/* =============================================
+   Post 内联注记（Steph.H 名字由来）
+   ============================================= */
+.name-origin-card {
+    margin: 1.9rem 0 1.5rem;
+    padding: 0.15rem 0 0.15rem 0.95rem;
+    border-left: 2px solid rgba(70, 94, 128, 0.28);
+    max-width: 42rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+}
+
+.name-origin-avatar {
+    width: 82px;
+    height: 88px;
+    border-radius: 14px;
+    object-fit: cover;
+    object-position: 50% 22%;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 20px rgba(18, 33, 55, 0.16);
+    transform: rotate(-1.8deg);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.name-origin-card:hover .name-origin-avatar {
+    transform: rotate(0deg) translateY(-1px);
+    box-shadow: 0 12px 24px rgba(18, 33, 55, 0.2);
+}
+
+.name-origin-content {
+    font-size: 0.98rem;
+    line-height: 1.85;
+    color: #334864;
+}
+
+.name-origin-title {
+    display: block;
+    margin-bottom: 0.12rem;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.005em;
+    color: #24344c;
+}
+
+.dark .name-origin-card {
+    border-left-color: rgba(168, 191, 226, 0.42);
+}
+
+.dark .name-origin-content {
+    color: #cddcf0;
+}
+
+.dark .name-origin-title {
+    color: #edf4ff;
+}
+
+@media (max-width: 640px) {
+    .name-origin-card {
+        padding-left: 0.75rem;
+        gap: 0.7rem;
+    }
+
+    .name-origin-avatar {
+        width: 64px;
+        height: 68px;
+        border-radius: 12px;
+        transform: rotate(-1.2deg);
+    }
 }

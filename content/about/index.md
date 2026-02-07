@@ -4,6 +4,7 @@ description: "认识 Steph.H"
 showDate: false
 showAuthor: false
 showReadingTime: false
+showWordCount: false
 showTableOfContents: true
 ---
 
@@ -994,6 +995,166 @@ article h2::after {
 }
 .dark .about-site-divider {
   background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+}
+
+/* ==================== 设计收敛优化（克制统一） ==================== */
+article h2 {
+  margin: 3rem 0 1.1rem;
+  font-size: 1.52rem;
+  font-weight: 720;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: #1f2b43;
+}
+article h2::after {
+  width: 42px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(31,43,67,0.9) 0%, rgba(31,43,67,0.3) 60%, transparent 100%);
+}
+.dark article h2 {
+  color: #e6edf8;
+}
+.dark article h2::after {
+  background: linear-gradient(90deg, rgba(230,237,248,0.9) 0%, rgba(230,237,248,0.35) 60%, transparent 100%);
+}
+
+.profile-card {
+  border-radius: 24px;
+  padding: 2.2rem;
+  border: 1px solid rgba(255,255,255,0.62);
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.05),
+    0 22px 56px rgba(15, 23, 42, 0.03),
+    inset 0 1px 0 rgba(255,255,255,0.75);
+}
+.dark .profile-card {
+  border-color: rgba(255,255,255,0.12);
+}
+.profile-avatar {
+  width: 172px;
+  height: 172px;
+  border-radius: 20px;
+}
+.profile-info > p {
+  color: #3f4f67;
+  line-height: 1.95;
+  font-size: 1.03rem;
+}
+.dark .profile-info > p {
+  color: #b7c4d8;
+}
+
+.timeline {
+  padding-left: 1.75rem;
+}
+.timeline::before {
+  background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.14), rgba(0,0,0,0.04));
+}
+.dark .timeline::before {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.16), rgba(255,255,255,0.04));
+}
+.timeline-item {
+  padding: 1.15rem 0 1.15rem 1.45rem;
+}
+.timeline-title {
+  color: #243247;
+}
+.dark .timeline-title {
+  color: #edf3fc;
+}
+
+.tag {
+  background: rgba(255,255,255,0.72);
+  border-color: rgba(36,50,71,0.12);
+  color: #33445f;
+}
+.dark .tag {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.12);
+  color: #b9c8dd;
+}
+
+.project-card {
+  border-radius: 18px;
+  border-color: rgba(36,50,71,0.08);
+  background: linear-gradient(145deg, rgba(255,255,255,0.82), rgba(255,255,255,0.6));
+  box-shadow: 0 4px 14px rgba(15,23,42,0.04);
+}
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(15,23,42,0.08);
+}
+.dark .project-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border-color: rgba(255,255,255,0.12);
+}
+.project-card .card-label {
+  letter-spacing: 0.1em;
+}
+
+.mini-cards {
+  gap: 0.85rem;
+  background: transparent;
+}
+.mini-card {
+  border: 1px solid rgba(36,50,71,0.08);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.72), rgba(255,255,255,0.56));
+}
+.mini-card:hover {
+  transform: translateY(-2px);
+}
+.dark .mini-card {
+  border-color: rgba(255,255,255,0.1);
+}
+
+.travel-wall {
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.65), transparent 42%),
+    radial-gradient(circle at 80% 70%, rgba(240,240,240,0.4), transparent 38%),
+    linear-gradient(135deg, #f7f9fc, #f2f5fa);
+}
+.travel-wall::before {
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.14), transparent);
+  box-shadow: none;
+}
+.pin-card {
+  transform: none !important;
+  border-radius: 10px;
+}
+.pin-card::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  top: -4px;
+  border-radius: 50%;
+  background: #8a8a8a;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.18);
+}
+.pin-card::after {
+  display: none;
+}
+.pin-card:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.award-item:hover {
+  transform: translateX(4px);
+}
+
+.skill-label {
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+.skill-item:hover {
+  padding-left: 0.7rem;
+}
+
+.contact-card {
+  border-radius: 12px;
+  border-color: rgba(36,50,71,0.08);
 }
 
 /* 响应式 */

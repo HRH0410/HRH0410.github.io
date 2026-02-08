@@ -1,0 +1,13 @@
+{{ define "main" }}
+  {{ $allPosts := where site.RegularPages "Type" "posts" }}
+  {{ $pages := (where $allPosts "Params.postType" "personal").ByDate.Reverse }}
+
+  {{ partial "posts/channel-list.html" (dict
+    "pages" $pages
+    "variant" "daily"
+    "kicker" "VOL. 03"
+    "title" "漫步日常"
+    "desc" "生活片段、阶段思考与个人表达。"
+    "empty" "还没有发布日常记录。"
+  ) }}
+{{ end }}

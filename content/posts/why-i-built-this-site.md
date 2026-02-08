@@ -2,6 +2,7 @@
 date = "2026-02-06T20:30:00+08:00"
 draft = false
 title = "为什么我想搭这个网站"
+postType = "personal"
 tags = ["数字花园"]
 categories = ["自我介绍"]
 +++
@@ -34,9 +35,9 @@ categories = ["自我介绍"]
   <img class="name-origin-avatar" src="/img/Curry.jpg" alt="Stephen Curry" />
   <div class="name-origin-content">
     <span class="name-origin-title">Steph.H 这个名字的由来</span>
-    我大概是从 2018 年开始看 NBA 的。那时候我还在上初二，刚好赶上火勇大战。说不太清具体是哪一场开始的，只记得自己很快就被金州勇士那种流动、果断、彼此信任的球风吸引住了。  
-    也是从那时起，<strong>Stephen Curry</strong> 成了我最喜欢的球员。他让我觉得，真正厉害的不只是天赋和得分，更是节奏、判断和在压力下依然敢出手的自信。  
-    后来，因为我姓黄，朋友们也都知道我喜欢斯蒂芬·库里，于是他们经常喜欢叫我“斯蒂芬黄”。我把这个称呼写成英文并简化成 <strong>Steph.H</strong>，慢慢地，它就成了我在网络上一直沿用的名字。
+    我大概是从 2018 年开始看 NBA 的。那时候我还在上初二，刚好赶上火勇大战。说不太清具体是哪一场开始的，只记得自己很快就被金州勇士那种流动、果断、华丽的球风吸引住了。  
+    也是从那时起，<strong>Stephen Curry</strong> 成了我最喜欢的球员。他让我明白，"I can do all things"。  
+    后来，因为我姓黄，朋友们也都知道我喜欢斯蒂芬·库里，于是他们经常喜欢叫我“斯蒂芬黄”。我把这个称呼写成英文，并简化成 <strong>Steph.H</strong>，慢慢地，它就成了我在网络上一直沿用的名字。
   </div>
 </div>
 

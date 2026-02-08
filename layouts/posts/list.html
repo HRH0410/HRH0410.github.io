@@ -1,0 +1,81 @@
+{{ define "main" }}
+  {{ $allPosts := where site.RegularPages "Type" "posts" }}
+  {{ $study := (where $allPosts "Params.postType" "study").ByDate.Reverse }}
+  {{ $personal := (where $allPosts "Params.postType" "personal").ByDate.Reverse }}
+  {{ $latest := $allPosts.ByDate.Reverse }}
+
+  {{ $totalWords := 0 }}
+  {{ range $allPosts }}
+    {{ $totalWords = add $totalWords .WordCount }}
+  {{ end }}
+
+  <div class="posts-hub-page">
+    <header class="posts-hub-header">
+      <p class="posts-hub-kicker">Posts Guide</p>
+      <h1 class="posts-hub-title">我在写什么</h1>
+    </header>
+
+    <section class="posts-hub-stats">
+      <div class="posts-hub-stat-card">
+        <span class="posts-hub-stat-label">共</span>
+        <span class="posts-hub-stat-value">{{ len $allPosts }} 篇</span>
+      </div>
+      <div class="posts-hub-stat-card">
+        <span class="posts-hub-stat-label">累计</span>
+        <span class="posts-hub-stat-value">{{ $totalWords }} 字</span>
+      </div>
+      <div class="posts-hub-stat-card">
+        <span class="posts-hub-stat-label">学习笔记</span>
+        <span class="posts-hub-stat-value">{{ len $study }}</span>
+      </div>
+      <div class="posts-hub-stat-card">
+        <span class="posts-hub-stat-label">生活记录</span>
+        <span class="posts-hub-stat-value">{{ len $personal }}</span>
+      </div>
+    </section>
+
+    <section class="posts-hub-branches">
+      <div class="branch-stack branch-stack-notes">
+        <a href="/notes/" class="branch-card branch-card-notes">
+          <span class="branch-card-fold" aria-hidden="true"></span>
+          <div class="branch-card-content">
+            <span class="branch-vol">VOL. 01</span>
+            <h2 class="branch-title">拾光笔记</h2>
+            <div class="branch-meta">
+              <span>{{ len $study }} 篇</span>
+              {{ with index $study 0 }}
+                <span>最近更新 {{ .Date.Format "2006-01-02" }}</span>
+              {{ end }}
+            </div>
+            <span class="branch-cta">去看看</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="branch-stack branch-stack-daily">
+        <a href="/daily/" class="branch-card branch-card-daily">
+          <span class="branch-card-fold" aria-hidden="true"></span>
+          <div class="branch-card-content">
+            <span class="branch-vol">VOL. 03</span>
+            <h2 class="branch-title">漫步日常</h2>
+            <div class="branch-meta">
+              <span>{{ len $personal }} 篇</span>
+              {{ with index $personal 0 }}
+                <span>最近更新 {{ .Date.Format "2006-01-02" }}</span>
+              {{ end }}
+            </div>
+            <span class="branch-cta">去看看</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    {{ with index $latest 0 }}
+      <section class="posts-hub-latest">
+        <p class="posts-hub-latest-label">最近写了</p>
+        <a href="{{ .RelPermalink }}" class="posts-hub-latest-link">{{ .Title }}</a>
+        <p class="posts-hub-latest-meta">{{ .Date.Format "2006-01-02" }} · {{ .WordCount }} 字 · {{ .ReadingTime }} 分钟</p>
+      </section>
+    {{ end }}
+  </div>
+{{ end }}

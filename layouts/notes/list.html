@@ -1,0 +1,13 @@
+{{ define "main" }}
+  {{ $allPosts := where site.RegularPages "Type" "posts" }}
+  {{ $pages := (where $allPosts "Params.postType" "study").ByDate.Reverse }}
+
+  {{ partial "posts/channel-list.html" (dict
+    "pages" $pages
+    "variant" "notes"
+    "kicker" "VOL. 01"
+    "title" "拾光笔记"
+    "desc" "课程学习、方法总结与技术沉淀。"
+    "empty" "还没有发布学习笔记。"
+  ) }}
+{{ end }}

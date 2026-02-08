@@ -1,0 +1,21 @@
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var imgs = document.querySelectorAll(".article-content figure > img");
+  imgs.forEach(function (img) {
+    var applyClass = function () {
+      if (!img.naturalWidth || !img.naturalHeight) return;
+      if (img.naturalWidth / img.naturalHeight >= 1.25) {
+        img.classList.add("is-landscape");
+      } else {
+        img.classList.remove("is-landscape");
+      }
+    };
+
+    if (img.complete) {
+      applyClass();
+    } else {
+      img.addEventListener("load", applyClass, { once: true });
+    }
+  });
+});
+</script>

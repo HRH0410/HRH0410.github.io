@@ -1,0 +1,45 @@
+{{ $pages := .pages }}
+{{ $variant := .variant | default "notes" }}
+{{ $kicker := .kicker }}
+{{ $title := .title }}
+{{ $desc := .desc }}
+{{ $empty := .empty }}
+{{ $count := len $pages }}
+{{ $totalWords := 0 }}
+{{ range $pages }}
+  {{ $totalWords = add $totalWords .WordCount }}
+{{ end }}
+
+<div class="channel-page channel-page--{{ $variant }}">
+  <header class="channel-header">
+    <p class="channel-kicker">{{ $kicker }}</p>
+    <h1 class="channel-title">{{ $title }}</h1>
+    <p class="channel-desc">{{ $desc }}</p>
+
+    <div class="channel-badges">
+      <span class="channel-badge">{{ $count }} 篇</span>
+      {{ if gt $count 0 }}
+        <span class="channel-badge">累计 {{ $totalWords }} 字</span>
+        {{ with index $pages 0 }}
+          <span class="channel-badge">最近更新 {{ .Date.Format "2006-01-02" }}</span>
+        {{ end }}
+      {{ end }}
+    </div>
+  </header>
+
+  {{ if gt $count 0 }}
+    <section class="channel-list">
+      {{ range $pages }}
+        <div class="channel-item channel-item--{{ $variant }}">
+          {{ partial "article-link/simple.html" . }}
+        </div>
+      {{ end }}
+    </section>
+  {{ else }}
+    <section class="mt-10 prose dark:prose-invert">
+      <p class="py-8 border-t">
+        <em>{{ $empty }}</em>
+      </p>
+    </section>
+  {{ end }}
+</div>

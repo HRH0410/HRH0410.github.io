@@ -212,7 +212,7 @@ showDate: false
 <div style="display: flex; justify-content: center; align-items: stretch; flex-wrap: nowrap; margin: 0 auto; position: relative;">
 <!-- 顶部装饰线 -->
 <div class="separator-line-horizontal" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);"></div>
-<a href="/posts/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+<a href="/notes/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
 <span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 01</span>
 <span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">拾光笔记</span>
 <span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">学习与记录</span>
@@ -226,7 +226,7 @@ showDate: false
 </a>
 <!-- 竖线分隔 -->
 <div class="separator-line-vertical" style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
-<a href="/tags/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+<a href="/daily/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
 <span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 03</span>
 <span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">漫步日常</span>
 <span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">生活与思考</span>

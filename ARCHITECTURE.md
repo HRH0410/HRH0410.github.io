@@ -190,6 +190,37 @@ CACHE_DIR="$(pwd)/.hugo_cache" && hugo --minify --gc --cleanDestinationDir --cac
 - 将 `content/projects/_index.md`、`content/about/index.md` 的内联样式迁移到 `assets/css`，减少内容文件复杂度。
 - 将部分内联 HTML 组件抽成 `layouts/partials/*`，提高复用性。
 
+## 12. 最近变更快照（2026-02-09）
+
+### 12.1 项目页已重构为“展陈风”
+
+- 文件：`content/projects/_index.md`
+- 核心结构：
+  - `projects-hero`（页头导语）
+  - `feature-grid`（代表项目，不对称 7/5 栅格）
+  - `course-grid`（课程作品，3 列工作卡）
+- 关键样式：
+  - 继续使用页面内联 `<style>` 管理（当前无独立 css 文件）
+  - 标题避让 fixed nav 使用：
+    - `main#main-content > article > header > h1 { margin-top: ... }`
+  - 深色模式在同文件内配套覆盖（`.dark ...`）
+
+### 12.2 About This Site 引用区已独立风格化
+
+- 文件：`content/about/index.md`
+- 相关样式类：
+  - `.about-site-text`
+  - `.about-site-highlight`
+  - `.about-site-quote`
+- 当前目标：克制、居中、低装饰；避免与 About 其它模块割裂。
+
+### 12.3 一个关键坑：Markdown 与原生 HTML 混排
+
+- 在 `content/*.md` 里写原生 HTML 时，如果块内行首有缩进，Hugo/Goldmark 可能把后续内容渲染成代码块（`<pre><code>`）。
+- 规避规则：
+  - 原生 HTML 块尽量顶格写（不加多余缩进）。
+  - 改完后检查 `public/*.html` 是否出现异常 `<pre><code>`。
+
 ---
 
 如果后续出现“改动不生效/改错页”，先按下面顺序排查：

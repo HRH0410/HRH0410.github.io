@@ -272,6 +272,39 @@ article h2::after {
   color: #bbb;
 }
 
+.work-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+.work-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.12);
+  font-size: 0.78rem;
+  font-weight: 520;
+  color: #566d92;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.work-link:hover {
+  border-color: rgba(59,130,246,0.32);
+  color: #2f4f85;
+  background: rgba(59,130,246,0.05);
+  transform: translateY(-1px);
+}
+.dark .work-link {
+  border-color: rgba(255,255,255,0.14);
+  color: #b8cce8;
+}
+.dark .work-link:hover {
+  border-color: rgba(170,200,240,0.35);
+  color: #d8e6fb;
+  background: rgba(170,200,240,0.08);
+}
+
 .project-card .card-tags {
   display: flex;
   flex-wrap: wrap;
@@ -962,39 +995,104 @@ article h2::after {
 
 /* About This Site 文本样式 */
 .about-site-text {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #555;
-  margin: 1.5rem 0 2rem;
+  font-size: 1.03rem;
+  line-height: 1.78;
+  color: #64748b;
+  margin: 1rem auto 0.9rem;
+  text-align: center;
+  max-width: 620px;
 }
 .about-site-highlight {
-  color: #2a2a2a;
+  color: #0f172a;
+  font-weight: 600;
+  padding: 0 4px;
+  position: relative;
+  z-index: 1;
 }
+.about-site-highlight::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background-color: rgba(56, 189, 248, 0.2);
+  z-index: -1;
+  transform: rotate(-1deg);
+  border-radius: 4px;
+}
+
+/* About This Site 引用 */
 .about-site-quote {
-  margin: 2rem 0;
-  padding-left: 1.5rem;
-  border-left: 2px solid rgba(0,0,0,0.1);
-  font-style: italic;
-  color: #888;
-  font-size: 0.92rem;
+  font-family: "Noto Serif SC", "Songti SC", "Source Han Serif SC", "Georgia", serif;
+  font-size: clamp(0.4rem, 1.2vw, 1.2rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: #2f405d !important;
+  letter-spacing: 0.05em;
+  font-style: normal;
+  text-align: center;
+  position: relative;
+
+  max-width: 860px;
+  margin: 1.2rem auto 2.1rem;
+  padding: 1.35rem 0 1.25rem;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+
+  -webkit-text-fill-color: initial !important; 
+  text-fill-color: initial !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+
+  text-shadow: none;
 }
-.about-site-divider {
-  width: 100%;
+
+.about-site-quote::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 88px;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.06) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(140, 159, 188, 0.95) 50%, transparent 100%);
 }
+
+.about-site-quote::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(169, 183, 207, 0.9) 50%, transparent 100%);
+}
+
+.about-site-divider {
+  display: none; 
+}
+
 .dark .about-site-text {
-  color: #c2c2c2;
+  color: #94a3b8;
 }
 .dark .about-site-highlight {
-  color: #d6d6d6;
+  color: #e2e8f0;
+}
+.dark .about-site-highlight::after {
+  background-color: rgba(56, 189, 248, 0.15);
 }
 .dark .about-site-quote {
-  color: #b3b3b3;
-  border-left-color: rgba(255,255,255,0.08);
+  color: #d9e4f7 !important;
+  text-shadow: 0 6px 20px rgba(15, 23, 42, 0.35);
 }
-.dark .about-site-divider {
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+.dark .about-site-quote::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(136, 167, 219, 0.9) 50%, transparent 100%);
+}
+.dark .about-site-quote::after {
+  background: linear-gradient(90deg, transparent 0%, rgba(126, 152, 198, 0.85) 50%, transparent 100%);
 }
 
 /* ==================== 设计收敛优化（克制统一） ==================== */
@@ -1056,6 +1154,10 @@ article h2::after {
 .timeline-item {
   padding: 1.15rem 0 1.15rem 1.45rem;
 }
+.timeline-item::before {
+  transform: translateX(-7px);
+  top: 2.5rem;
+}
 .timeline-title {
   color: #243247;
 }
@@ -1090,6 +1192,419 @@ article h2::after {
 }
 .project-card .card-label {
   letter-spacing: 0.1em;
+}
+
+.creations-gallery {
+  position: relative;
+  margin-top: 0.2rem;
+  padding: 0.45rem 0.1rem 0.2rem;
+}
+
+.creations-gallery::before {
+  content: "";
+  position: absolute;
+  inset: -0.35rem -0.45rem -0.2rem;
+  border-radius: 20px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 10% 12%, rgba(137, 165, 209, 0.16), transparent 38%),
+    radial-gradient(circle at 92% 80%, rgba(137, 165, 209, 0.1), transparent 36%),
+    repeating-linear-gradient(
+      -12deg,
+      rgba(113, 138, 178, 0.04),
+      rgba(113, 138, 178, 0.04) 1px,
+      transparent 1px,
+      transparent 28px
+    );
+  opacity: 0.52;
+}
+
+.creations-gallery > * {
+  position: relative;
+  z-index: 1;
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.96rem;
+  align-items: start;
+}
+
+.work-card {
+  position: relative;
+  align-self: start;
+  border-radius: 18px;
+  border: 1px solid rgba(43, 63, 94, 0.16);
+  background: linear-gradient(145deg, rgba(250, 253, 255, 0.95), rgba(241, 248, 255, 0.88));
+  overflow: hidden;
+  box-shadow:
+    0 14px 26px -22px rgba(21, 39, 70, 0.38),
+    0 1px 0 rgba(255, 255, 255, 0.72) inset;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-card:nth-child(odd) {
+  transform: none;
+}
+
+.work-card:nth-child(even) {
+  transform: none;
+}
+
+.work-card:hover {
+  transform: translateY(-5px) rotate(0deg);
+  border-color: rgba(78, 117, 182, 0.42);
+  box-shadow:
+    0 20px 36px -24px rgba(25, 46, 84, 0.44),
+    0 1px 0 rgba(255, 255, 255, 0.76) inset;
+}
+
+.work-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(225, 236, 252, 0.56);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.work-cover {
+  position: relative;
+  aspect-ratio: 16 / 10.5;
+  overflow: hidden;
+  background: #0f1f38;
+}
+
+.work-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 16, 30, 0.16), rgba(8, 16, 30, 0.3));
+  z-index: 1;
+  pointer-events: none;
+}
+
+.work-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 16, 30, 0) 32%,
+    rgba(8, 16, 30, 0.46) 64%,
+    rgba(8, 16, 30, 0.84) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.work-cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100% !important;
+  min-height: 100% !important;
+  object-fit: cover;
+  filter: blur(2px);
+  transform: scale(1.03);
+  display: block;
+  margin: 0 !important;
+  max-width: none;
+  transition: transform 0.65s ease;
+  z-index: 0;
+}
+
+.work-card:hover .work-cover img {
+  transform: scale(1.06);
+}
+
+.work-meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.74rem 0.8rem 0.68rem;
+  background: transparent;
+  backdrop-filter: none;
+  z-index: 2;
+}
+
+.work-card .card-label {
+  font-size: 0.6rem;
+  font-weight: 560;
+  color: rgba(230, 242, 255, 0.92);
+  margin-bottom: 0.16rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.work-card .card-title {
+  margin: 0 0 0.14rem 0;
+  font-size: 0.98rem;
+  line-height: 1.3;
+  color: #f4f8ff;
+  text-shadow: 0 1px 3px rgba(4, 10, 22, 0.56);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.work-headline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.45rem;
+}
+
+.work-headline .card-title {
+  flex: 1;
+}
+
+.work-card .card-subtitle {
+  color: rgba(224, 238, 255, 0.88);
+  margin-bottom: 0.28rem;
+  font-size: 0.76rem;
+  line-height: 1.25;
+}
+
+.work-links {
+  display: none;
+}
+
+.work-link {
+  padding: 0.22rem 0.55rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1;
+  margin-top: 0.04rem;
+  color: #f0f6ff;
+  border: 1px solid rgba(219, 233, 255, 0.52);
+  border-radius: 999px;
+  background: rgba(14, 29, 52, 0.34);
+  opacity: 0;
+  transform: translateX(4px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.work-card:hover .work-link {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.work-card:focus-within .work-link {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.work-link:hover {
+  background: rgba(14, 29, 52, 0.58);
+  border-color: rgba(236, 244, 255, 0.72);
+}
+
+.dark .work-card {
+  border-color: rgba(170, 196, 234, 0.3);
+  background: linear-gradient(145deg, rgba(21, 34, 55, 0.9), rgba(18, 31, 50, 0.86));
+  box-shadow:
+    0 18px 34px -24px rgba(0,0,0,0.74),
+    0 1px 0 rgba(232, 240, 255, 0.08) inset;
+}
+
+.dark .work-card::after {
+  border-color: rgba(173, 199, 236, 0.22);
+}
+
+.dark .work-cover::before {
+  background: linear-gradient(180deg, rgba(4, 10, 22, 0.26), rgba(4, 10, 22, 0.38));
+}
+
+.dark .work-cover::after {
+  background: linear-gradient(
+    180deg,
+    rgba(4, 10, 22, 0) 28%,
+    rgba(4, 10, 22, 0.62) 62%,
+    rgba(4, 10, 22, 0.92) 100%
+  );
+}
+
+.dark .work-cover img {
+  filter: blur(1.4px);
+  transform: scale(1.02);
+}
+
+.dark .work-card:hover .work-cover img {
+  transform: scale(1.04);
+}
+
+.dark .work-meta {
+  background: transparent;
+}
+
+.dark .work-card .card-label {
+  color: rgba(232, 243, 255, 0.92);
+}
+
+.dark .work-card .card-title {
+  color: #f8fbff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+}
+
+.dark .work-card .card-subtitle {
+  color: rgba(224, 237, 255, 0.9);
+}
+
+.dark .work-link {
+  color: #f2f7ff;
+  border-color: rgba(204, 224, 252, 0.56);
+  background: rgba(18, 36, 64, 0.52);
+}
+
+.dark .work-link:hover {
+  background: rgba(22, 44, 78, 0.72);
+  border-color: rgba(230, 241, 255, 0.78);
+}
+
+.work-card.more-card {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: auto;
+  aspect-ratio: 32 / 10.5;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(166, 193, 232, 0.18), transparent 34%),
+    radial-gradient(circle at 80% 72%, rgba(166, 193, 232, 0.12), transparent 36%),
+    linear-gradient(135deg, rgba(250, 253, 255, 0.92), rgba(241, 248, 255, 0.8));
+  border: 1px solid rgba(88, 122, 178, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+}
+
+.work-card.more-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(88, 122, 178, 0.34);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.72),
+    0 12px 24px -18px rgba(58, 89, 138, 0.35);
+}
+
+.more-content {
+  text-align: center;
+  color: #5f759a;
+  position: relative;
+}
+
+.more-dots {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  color: rgba(81, 108, 148, 0.92);
+}
+
+.more-text {
+  margin-top: 0.2rem;
+  font-size: 1rem;
+  font-weight: 580;
+  letter-spacing: 0.06em;
+}
+
+.more-hint {
+  margin-top: 0.2rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: rgba(94, 117, 155, 0.78);
+  text-transform: uppercase;
+}
+
+.dark .work-card.more-card {
+  background:
+    radial-gradient(circle at 24% 18%, rgba(90, 121, 167, 0.14), transparent 34%),
+    radial-gradient(circle at 80% 76%, rgba(90, 121, 167, 0.1), transparent 36%),
+    linear-gradient(135deg, rgba(16, 27, 44, 0.88), rgba(15, 24, 40, 0.84));
+  border-color: rgba(184, 207, 240, 0.28);
+  box-shadow:
+    inset 0 0 0 1px rgba(206, 223, 247, 0.06),
+    0 18px 34px -24px rgba(0, 0, 0, 0.74);
+}
+
+.dark .work-card.more-card:hover {
+  border-color: rgba(196, 219, 249, 0.4);
+  box-shadow:
+    inset 0 0 0 1px rgba(214, 230, 255, 0.1),
+    0 18px 34px -24px rgba(0, 0, 0, 0.74);
+}
+
+.dark .more-content {
+  color: #a8c1e7;
+}
+
+.dark .more-dots {
+  color: rgba(170, 197, 235, 0.92);
+}
+
+.dark .more-text {
+  color: #a6c0e6;
+}
+
+.dark .more-hint {
+  color: rgba(166, 194, 231, 0.72);
+}
+
+.dark .creations-gallery::before {
+  opacity: 0.28;
+}
+
+@media (max-width: 760px) {
+  .works-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .work-card,
+  .work-card:nth-child(odd),
+  .work-card:nth-child(even) {
+    transform: none;
+  }
+
+  .work-cover {
+    aspect-ratio: 16 / 9.8;
+  }
+
+  .work-meta {
+    padding: 0.7rem 0.72rem 0.68rem;
+  }
+
+  .work-card .card-label {
+    font-size: 0.62rem;
+  }
+
+  .work-card .card-title {
+    font-size: 0.92rem;
+  }
+
+  .work-card .card-subtitle {
+    font-size: 0.75rem;
+  }
+
+  .work-link {
+    font-size: 0.62rem;
+  }
+
+  .work-card.more-card {
+    grid-column: span 1;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+@media (max-width: 520px) {
+  .works-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .mini-cards {
@@ -1222,60 +1737,74 @@ article h2::after {
 > 我在 **XXX 实验室** 进行研究，专注于复杂环境下的强化学习，涵盖理论研究和决策模型的实际应用。
 -->
 
-<!-- ==================== 项目经历 ==================== -->
-## Projects
+<!-- ==================== 作品 ==================== -->
+## Creations
 
-<div class="project-card">
-<div class="card-label">Vol. 01</div>
-<div class="card-title">知微见疾</div>
-<div class="card-subtitle">基层医疗场景下的AI健康问诊与智能报告解读助手</div>
-<div class="card-desc">
-一款能看、会说、懂你的AI医疗助手，围绕真实问诊场景设计，支持多模态输入与智能交互。
-</div>
-<div class="card-tags">
-<span>LLM</span>
-<span>Agent</span>
-<span>多模态</span>
-<span>医疗应用</span>
-</div>
-</div>
-
-<div class="project-card">
-<div class="card-label">Vol. 02</div>
-<div class="card-title">LLM 不确定性量化</div>
-<div class="card-subtitle">国家级大学生创新训练计划项目</div>
-<div class="card-desc">
-围绕大语言模型在生成与推理过程中的不确定性展开研究，探索模型输出可靠性与置信度建模问题。
-</div>
-<div class="card-tags">
-<span>LLM</span>
-<span>Uncertainty</span>
-<span>科研训练</span>
-</div>
+<div class="creations-gallery">
+<div class="works-grid">
+<div class="work-card">
+  <div class="work-cover">
+    <img src="/img/works/第五公设.jpg" alt="《第五公设》海报" style="object-position:center 20%;">
+    <div class="work-meta">
+      <div class="card-label">Vol. 01</div>
+      <div class="work-headline">
+        <div class="card-title">第五公设</div>
+        <a class="work-link" href="https://www.bilibili.com/video/BV1QQGNedEio/?spm_id_from=333.1387.0.0&vd_source=2db54e40bd1d8587ec698619193da3e0" target="_blank">Bilibili ↗</a>
+      </div>
+      <div class="card-subtitle"></div>
+    </div>
+  </div>
 </div>
 
-<div style="font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #888; margin: 2.5rem 0 1.2rem;">Course Projects</div>
-
-<div class="mini-cards">
-<div class="mini-card">
-<div class="mini-label">Course.01</div>
-<div class="mini-title">像素版植物大战僵尸</div>
-<div class="mini-subtitle">程序设计实训</div>
-<a href="https://github.com/wyaaaattwho/PVZ" target="_blank" class="mini-link">GitHub →</a>
+<div class="work-card">
+  <div class="work-cover">
+    <img src="/img/works/雅音寻踪.jpg" alt="雅音寻踪纪录片海报" style="object-position:center 38%;">
+    <div class="work-meta">
+      <div class="card-label">Vol. 02</div>
+      <div class="work-headline">
+        <div class="card-title">雅音寻踪</div>
+        <a class="work-link" href="https://www.bilibili.com/video/BV1knPsegE2e?spm_id_from=333.788.recommend_more_video.3&trackid=web_related_0.router-related-2481894-52kq4.1770619667576.10&vd_source=2db54e40bd1d8587ec698619193da3e0" target="_blank">Bilibili ↗</a>
+      </div>
+      <div class="card-subtitle"></div>
+    </div>
+  </div>
 </div>
 
-<div class="mini-card">
-<div class="mini-label">Course.02</div>
-<div class="mini-title">异形工厂 Shapez</div>
-<div class="mini-subtitle">高级程序设计</div>
-<a href="https://github.com/HRH0410/Shapez" target="_blank" class="mini-link">GitHub →</a>
+<div class="work-card">
+  <div class="work-cover">
+    <img src="/img/works/无名的人.jpg" alt="《无名的人》演出封面" style="object-position:center 52%;">
+    <div class="work-meta">
+      <div class="card-label">Vol. 03</div>
+      <div class="work-headline">
+        <div class="card-title">无名的人</div>
+        <a class="work-link" href="https://www.bilibili.com/video/BV1WVz3Y3Eq1?spm_id_from=333.788.recommend_more_video.4&trackid=web_related_0.router-related-2481894-qz286.1770620994643.833&vd_source=2db54e40bd1d8587ec698619193da3e0" target="_blank">Bilibili ↗</a>
+      </div>
+      <div class="card-subtitle"></div>
+    </div>
+  </div>
 </div>
 
-<div class="mini-card">
-<div class="mini-label">Course.03</div>
-<div class="mini-title">森林版跳一跳</div>
-<div class="mini-subtitle">CPL</div>
-<a href="https://github.com/HRH0410/Jump_jump" target="_blank" class="mini-link">GitHub →</a>
+<div class="work-card">
+  <div class="work-cover">
+    <img src="/img/works/南方姑娘.jpg" alt="《南方姑娘》演出封面" style="object-position:center 70%;">
+    <div class="work-meta">
+      <div class="card-label">Vol. 04</div>
+      <div class="work-headline">
+        <div class="card-title">南方姑娘</div>
+        <a class="work-link" href="https://www.bilibili.com/video/BV1q1zgY8E4M?spm_id_from=333.788.videopod.sections&vd_source=2db54e40bd1d8587ec698619193da3e0" target="_blank">Bilibili ↗</a>
+      </div>
+      <div class="card-subtitle"></div>
+    </div>
+  </div>
+</div>
+
+<div class="work-card more-card" aria-hidden="true">
+  <div class="more-content">
+    <div class="more-dots">...</div>
+    <div class="more-text"></div>
+    <div class="more-hint">to be continued</div>
+  </div>
+</div>
 </div>
 </div>
 
@@ -1344,7 +1873,7 @@ article h2::after {
 <div class="skill-items">
 <div class="skill-item">Vibe Coding</div>
 <div class="skill-item">Prompt Engineering</div>
-<div class="skill-item">百炼 / Dify</div>
+<div class="skill-item">百炼 / Dify / Coze</div>
 </div>
 </div>
 
@@ -1531,14 +2060,11 @@ article h2::after {
 这是我的 <strong class="about-site-highlight">数字花园</strong> —— 一个记录想法、学习笔记和生活碎片的地方。
 </p>
 
-<blockquote class="about-site-quote">
-"只有滚动的石头，才能不长青苔"
-</blockquote>
-
-<!-- 分隔线 -->
-<div style="margin: 3.5rem 0 3rem;">
-<div class="about-site-divider"></div>
+<div class="about-site-quote">
+只有滚动的石头，才能不长青苔
 </div>
+
+<!-- 分隔线已整合至 quote 样式中 -->
 
 <!-- 联系信息区域 -->
 <div class="contact-wrapper">

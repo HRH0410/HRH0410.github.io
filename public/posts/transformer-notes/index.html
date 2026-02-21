@@ -1,133 +1,2145 @@
-<!doctype html><html lang=zh-CN dir=ltr class=scroll-smooth data-default-appearance=light data-auto-appearance=true><head><meta charset=utf-8><meta http-equiv=content-language content="zh-cn"><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><meta name=theme-color><title>Transformer 学习笔记 &#183; Steph.H</title><meta name=title content="Transformer 学习笔记 &#183; Steph.H"><meta name=description content="一句话描述：你的主页/博客主题（AI / Agent / 课程笔记 / 项目复盘）"><meta name=keywords content="数字花园,"><link rel=canonical href=https://HRH0410.github.io/posts/transformer-notes/><meta name=author content="Steph.H"><link href=https://github.com/HRH0410 rel=me><link href=https://space.bilibili.com/1834168183 rel=me><link href=https://v.douyin.com/W9pAmwPcBcg/ rel=me><meta property="og:url" content="https://HRH0410.github.io/posts/transformer-notes/"><meta property="og:site_name" content="Steph.H"><meta property="og:title" content="Transformer 学习笔记"><meta property="og:description" content="一句话描述：你的主页/博客主题（AI / Agent / 课程笔记 / 项目复盘）"><meta property="og:locale" content="zh_cn"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-02-07T20:45:00+08:00"><meta property="article:modified_time" content="2026-02-07T20:45:00+08:00"><meta property="article:tag" content="数字花园"><meta name=twitter:card content="summary"><meta name=twitter:title content="Transformer 学习笔记"><meta name=twitter:description content="一句话描述：你的主页/博客主题（AI / Agent / 课程笔记 / 项目复盘）"><link type=text/css rel=stylesheet href=/css/main.bundle.min.e41ee59dc46558c0c96396ad66f321c091dff5db3bbb7051cdc9a60b4bee881917c4434c7a46e6938a9db5e9e056c5f448cfdfb6ab7eb2843fb174b1b89a1228.css integrity="sha512-5B7lncRlWMDJY5atZvMhwJHf9ds7u3BRzcmmC0vuiBkXxENMekbmk4qdtengVsX0SM/ftqt+soQ/sXSxuJoSKA=="><script type=text/javascript src=/js/appearance.min.6f41174b3a05b680820fe08cadbfa5fb7a7ca347b76a0955cdc68b9d8aca1ce24f0547e138cea33bcc7904d551a90afcb1cc7f2d9fe8557075d501419046c08c.js integrity="sha512-b0EXSzoFtoCCD+CMrb+l+3p8o0e3aglVzcaLnYrKHOJPBUfhOM6jO8x5BNVRqQr8scx/LZ/oVXB11QFBkEbAjA=="></script><script src=/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7+kfJ6kKCJxQGC+8wm+Bz9JucDjDTGNew=="></script><script defer type=text/javascript id=script-bundle src=/js/main.bundle.min.67624a357c928d29b9fe19ba01a1e32c05ad1329ca2a712bf10446df0c6872903d0c14b21f76896b57a5a0710940805416cee38851d9067db6555881188e35a5.js integrity="sha512-Z2JKNXySjSm5/hm6AaHjLAWtEynKKnEr8QRG3wxocpA9DBSyH3aJa1eloHEJQIBUFs7jiFHZBn22VViBGI41pQ==" data-copy=复制 data-copied=已复制></script><script src=/lib/jquery/jquery.slim.min.b0dca576e87d7eaa5850ae4e61759c065786cdb6489d68fcc82240539eebd5da522bdb4fda085ffd245808c8fe2acb2516408eb774ef26b5f6015fc6737c0ea8.js integrity="sha512-sNylduh9fqpYUK5OYXWcBleGzbZInWj8yCJAU57r1dpSK9tP2ghf/SRYCMj+KsslFkCOt3TvJrX2AV/Gc3wOqA=="></script><link type=text/css rel=stylesheet href=/lib/katex/katex.min.d2ee85d2418f4d482ca2af2a3dad30d370b1c66133dea61f97d7933c92fc0cae10244f7f5cbd524a8897a1886f0d70ab04c0555ad680216b16a028354e42726c.css integrity="sha512-0u6F0kGPTUgsoq8qPa0w03CxxmEz3qYfl9eTPJL8DK4QJE9/XL1SSoiXoYhvDXCrBMBVWtaAIWsWoCg1TkJybA=="><script defer type=text/javascript src=/js/katex.bundle.30c179d64bdee5ed56cf63adf7227f13507841aa61a91a492e45b333d618bc901f2b196d2effcfe6716a23e01416a572441480d511b13320dba26d58e1246178.js integrity="sha512-MMF51kve5e1Wz2Ot9yJ/E1B4QaphqRpJLkWzM9YYvJAfKxltLv/P5nFqI+AUFqVyRBSA1RGxMyDbom1Y4SRheA==" id=katex-render></script><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><script type=application/ld+json>[{"@context":"https://schema.org","@type":"Article","articleSection":"Posts","name":"Transformer 学习笔记","headline":"Transformer 学习笔记","inLanguage":"zh-cn","url":"https://HRH0410.github.io/posts/transformer-notes/","author":{"@type":"Person","name":"Steph.H"},"copyrightYear":"2026","dateCreated":"2026-02-07T20:45:00\u002b08:00","datePublished":"2026-02-07T20:45:00\u002b08:00","dateModified":"2026-02-07T20:45:00\u002b08:00","keywords":["数字花园"],"mainEntityOfPage":"true","wordCount":"6939"}]</script><script>document.addEventListener("DOMContentLoaded",function(){var e=document.querySelectorAll(".article-content figure > img");e.forEach(function(e){var t=function(){if(!e.naturalWidth||!e.naturalHeight)return;e.naturalWidth/e.naturalHeight>=1.25?e.classList.add("is-landscape"):e.classList.remove("is-landscape")};e.complete?t():e.addEventListener("load",t,{once:!0})})})</script></head><body class="flex flex-col h-screen m-auto leading-7 max-w-7xl px-6 sm:px-14 md:px-24 lg:px-32 text-lg bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral bf-scrollbar"><div id=the-top class="absolute flex self-center"><a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600" href=#main-content><span class="font-bold text-primary-600 pe-2 dark:text-primary-400">&darr;</span>
-跳过正文</a></div><div class=h-24></div><div class="fixed inset-x-0 top-4 z-100 flex justify-center px-6"><nav id=menu-blur class="pill-nav flex items-center gap-6 px-8 py-2.5 rounded-full"><div class="main-menu flex items-center w-full gap-2 p-1 pl-0"><div><a href=/ class=flex><span class=sr-only>Steph.H</span>
-<img src=/img/author.jpg width=616 height=464 class="logo max-h-20 max-w-20 object-scale-down object-left nozoom" alt></a></div><a href=/ class="text-base font-medium truncate min-w-0 shrink">Steph.H</a><div class="flex items-center ms-auto"><div class="hidden md:flex"><nav class="flex items-center gap-x-5 h-12"><a href=/posts/ class="flex items-center bf-icon-color-hover" aria-label=文章 title=Posts><span class="text-base font-medium break-normal">文章
-</span></a><a href=/projects/ class="flex items-center bf-icon-color-hover" aria-label=项目 title=项目><span class="text-base font-medium break-normal">项目
-</span></a><a href=/about/ class="flex items-center bf-icon-color-hover" aria-label=关于我 title=关于我><span class="text-base font-medium break-normal">关于我
-</span></a><button id=search-button aria-label=Search class="text-base bf-icon-color-hover" title="搜索 (/)">
-<span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7 405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9.0 208 0S0 93.1.0 208s93.1 208 208 208c48.3.0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9.0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7.0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7.0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg></span></button><div class="flex items-center"><button id=appearance-switcher aria-label="Dark mode switcher" type=button class="text-base bf-icon-color-hover"><div class="flex items-center justify-center dark:hidden"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M32 256C32 132.2 132.3 32 255.8 32c11.36.0 29.7 1.668 40.9 3.746 9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3 9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480 132.1 480 32 379.6 32 256z"/></svg></span></div><div class="items-center justify-center hidden dark:flex"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02.0-95.1 42.98-95.1 95.1s41.2 96.9 95.1 96.9 95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347l-63.2-91.9 63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89 164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6 12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256 2.74 347.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7 19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109 109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69.0-127.1-57.31-127.1-127.1.0-70.69 57.31-127.1 127.1-127.1S383.1 186.2 383.1 256c0 70.7-56.4 127.1-127.1 127.1z"/></svg></span></div></button></div></nav></div><div class="flex md:hidden"><div class="flex items-center h-14 gap-4"><button id=search-button-mobile aria-label=Search class="flex items-center justify-center bf-icon-color-hover" title="搜索 (/)">
-<span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7 405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9.0 208 0S0 93.1.0 208s93.1 208 208 208c48.3.0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9.0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7.0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7.0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
-</span></button>
-<button id=appearance-switcher-mobile type=button aria-label="Dark mode switcher" class="flex items-center justify-center text-neutral-900 hover:text-primary-600 dark:text-neutral-200 dark:hover:text-primary-400"><div class=dark:hidden><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M32 256C32 132.2 132.3 32 255.8 32c11.36.0 29.7 1.668 40.9 3.746 9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3 9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480 132.1 480 32 379.6 32 256z"/></svg></span></div><div class="hidden dark:block"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02.0-95.1 42.98-95.1 95.1s41.2 96.9 95.1 96.9 95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347l-63.2-91.9 63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89 164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6 12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256 2.74 347.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7 19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109 109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69.0-127.1-57.31-127.1-127.1.0-70.69 57.31-127.1 127.1-127.1S383.1 186.2 383.1 256c0 70.7-56.4 127.1-127.1 127.1z"/></svg></span></div></button>
-<input type=checkbox id=mobile-menu-toggle autocomplete=off class="hidden peer">
-<label for=mobile-menu-toggle class="flex items-center justify-center cursor-pointer bf-icon-color-hover"><span class="relative block icon"><svg viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416c17.7.0 32 14.33 32 32 0 17.7-14.3 32-32 32H32C14.33 128 0 113.7.0 96zM0 256c0-17.7 14.33-32 32-32H416c17.7.0 32 14.3 32 32s-14.3 32-32 32H32c-17.67.0-32-14.3-32-32zM416 448H32c-17.67.0-32-14.3-32-32s14.33-32 32-32H416c17.7.0 32 14.3 32 32s-14.3 32-32 32z"/></svg></span></label><div role=dialog aria-modal=true style=scrollbar-gutter:stable class="fixed inset-0 z-50 invisible overflow-y-auto px-6 py-20 opacity-0 transition-[opacity,visibility] duration-300 peer-checked:visible peer-checked:opacity-100 bg-neutral-50/97 dark:bg-neutral-900/99
-bf-scrollbar"><label for=mobile-menu-toggle class="fixed end-8 top-5 flex items-center justify-center z-50 h-12 w-12 cursor-pointer select-none rounded-full bf-icon-color-hover border bf-border-color bf-border-color-hover bg-neutral-50 dark:bg-neutral-900"><span class="relative block icon"><svg viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75.0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3 54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75.0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75.0-45.25s32.75-12.5 45.25.0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25.0s12.5 32.75.0 45.25l-105.4 105.4L310.6 361.4z"/></svg></span></label><nav class="mx-auto max-w-md space-y-6"><div class=px-2><a href=/posts/ aria-label=文章 class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200"><span title=Posts class="text-2xl font-bold tracking-tight">文章</span></a></div><div class=px-2><a href=/projects/ aria-label=项目 class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200"><span title=项目 class="text-2xl font-bold tracking-tight">项目</span></a></div><div class=px-2><a href=/about/ aria-label=关于我 class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200"><span title=关于我 class="text-2xl font-bold tracking-tight">关于我</span></a></div><div class="flex flex-wrap items-center [&_span]:text-2xl [&_.translation_button_.icon]:text-4xl! [&_.translation_button_span]:text-base! [&_.translation_.menuhide_span]:text-sm! gap-x-6 ps-2 mt-8 pt-8 border-t bf-border-color"></div></nav></div></div></div></div></div></nav></div><style>.pill-nav{background:rgba(255,255,255,.72)!important;backdrop-filter:saturate(180%)blur(20px)!important;-webkit-backdrop-filter:saturate(180%)blur(20px)!important;border:1px solid rgba(255,255,255,.5)!important;box-shadow:0 1px 3px rgba(0,0,0,4%),0 4px 12px rgba(0,0,0,6%)!important;transition:all .25s ease!important;padding-left:1rem!important;padding-right:1.25rem!important}.dark .pill-nav{background:rgba(28,28,30,.78)!important;border:1px solid rgba(255,255,255,8%)!important;box-shadow:0 1px 3px rgba(0,0,0,.2),0 4px 12px rgba(0,0,0,.3)!important}#menu-blur .main-menu{border:none!important;padding:0!important;margin:0!important;gap:.25rem!important;display:flex!important;align-items:center!important}#menu-blur .main-menu>div:first-child{margin-right:-.5rem!important;padding-right:0!important}#menu-blur .logo,#menu-blur img.logo,.pill-nav .logo,.pill-nav img.logo{height:36px!important;width:36px!important;min-width:36px!important;max-width:36px!important;object-fit:cover!important;object-position:center center!important;border-radius:50%!important;margin-right:0!important;margin-left:0!important;box-shadow:0 2px 8px rgba(0,0,0,.1)!important;transition:transform .2s ease,box-shadow .2s ease!important}#menu-blur .logo:hover{transform:scale(1.08)!important;box-shadow:0 4px 12px rgba(0,0,0,.15)!important}#menu-blur .main-menu a,#menu-blur nav a{color:rgba(0,0,0,.75)!important;font-size:.9rem!important;font-weight:500!important;padding:.4rem 1rem!important;border-radius:8px!important;transition:all .15s ease!important}#menu-blur .main-menu a:hover,#menu-blur nav a:hover{background:rgba(0,0,0,6%)!important;color:#000!important}.dark #menu-blur .main-menu a,.dark #menu-blur nav a{color:rgba(255,255,255,.85)!important}.dark #menu-blur .main-menu a:hover,.dark #menu-blur nav a:hover{background:rgba(255,255,255,.1)!important;color:#fff!important}#menu-blur .main-menu .ms-auto,#menu-blur .main-menu>div:last-child{gap:.125rem!important;margin-left:.5rem!important}#menu-blur button,.pill-nav button,#menu-blur #search-button,#menu-blur #appearance-switcher{padding:.4rem!important;border-radius:8px!important;display:flex!important;align-items:center!important;justify-content:center!important;color:rgba(0,0,0,.6)!important;transition:all .15s ease!important}#menu-blur button:hover{background:rgba(0,0,0,6%)!important;color:#000!important}.dark #menu-blur button{color:rgba(255,255,255,.7)!important}.dark #menu-blur button:hover{background:rgba(255,255,255,.1)!important;color:#fff!important}#menu-blur .main-menu>a.text-base{font-weight:600!important;font-size:.9375rem!important;letter-spacing:-.01em!important;margin-right:.25rem!important;margin-left:0!important}#menu-blur .main-menu .ms-auto::before{content:'';display:block;width:1px;height:20px;background:rgba(0,0,0,.1);margin-right:.75rem}.dark #menu-blur .main-menu .ms-auto::before{background:rgba(255,255,255,.15)}@media(max-width:768px){#menu-blur{padding:.5rem 1.25rem!important;gap:.25rem!important}#menu-blur .logo{height:30px!important;width:30px!important;min-width:30px!important}}</style><div class="relative flex flex-col grow"><main id=main-content class=grow><article><header id=single_header class="mt-5 max-w-prose"><h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">Transformer 学习笔记</h1><div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden"><div class="flex flex-row flex-wrap items-center"><time datetime=2026-02-07T20:45:00+08:00>2026-02-07</time><span class="px-2 text-primary-500">&#183;</span><span>6939 字</span><span class="px-2 text-primary-500">&#183;</span><span title=预计阅读>14 分钟</span></div></div></header><section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row"><div class="order-first lg:ms-auto px-0 lg:order-last lg:ps-8 lg:max-w-2xs"><div class="toc ps-5 print:hidden lg:sticky lg:top-[140px]"><details open id=TOCView class="toc-right mt-0 overflow-y-auto overscroll-contain bf-scrollbar rounded-lg -ms-5 ps-5 pe-2 hidden lg:block"><summary class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 -ms-5 ps-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">目录</summary><div class="min-w-[220px] py-2 border-dotted border-s-1 -ms-5 ps-5 dark:border-neutral-600"><nav id=TableOfContents><ul><li><a href=#transformer的诞生背景>Transformer的诞生背景</a></li><li><a href=#transformer整体结构>Transformer整体结构</a><ul><li><ul><li><a href=#第一步>第一步</a></li><li><a href=#第二步>第二步</a></li><li><a href=#第三步>第三步</a></li></ul></li><li><a href=#transformer的输入>Transformer的输入</a></li><li><a href=#self-attention自注意力机制>Self-Attention（自注意力机制）</a><ul><li><a href=#self-attention内部结构>Self-Attention内部结构</a></li><li><a href=#qkv的计算>Q，K，V的计算</a></li><li><a href=#self-attention-的输出>Self-Attention 的输出</a></li><li><a href=#从语义角度理解>从语义角度理解：</a></li><li><a href=#multi-head-attention>Multi-Head Attention</a></li></ul></li><li><a href=#encoder结构>Encoder结构</a><ul><li><a href=#add--norm>Add & Norm</a></li><li><a href=#补充layer-normalization>补充：Layer Normalization</a></li><li><a href=#feed-forward>Feed Forward</a></li><li><a href=#组成-encoder>组成 Encoder</a></li></ul></li><li><a href=#decoder-结构>Decoder 结构</a><ul><li><a href=#第一个-multi-head-attention>第一个 Multi-Head Attention</a></li><li><a href=#第二个-multi-head-attention>第二个 Multi-Head Attention</a></li><li><a href=#softmax-预测输出单词>Softmax 预测输出单词</a></li></ul></li></ul></li><li><a href=#transformer-总结>Transformer 总结</a></li></ul></nav></div></details><details class="toc-inside mt-0 overflow-hidden rounded-lg -ms-5 ps-5 lg:hidden"><summary class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 -ms-5 ps-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">目录</summary><div class="py-2 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600"><nav id=TableOfContents><ul><li><a href=#transformer的诞生背景>Transformer的诞生背景</a></li><li><a href=#transformer整体结构>Transformer整体结构</a><ul><li><ul><li><a href=#第一步>第一步</a></li><li><a href=#第二步>第二步</a></li><li><a href=#第三步>第三步</a></li></ul></li><li><a href=#transformer的输入>Transformer的输入</a></li><li><a href=#self-attention自注意力机制>Self-Attention（自注意力机制）</a><ul><li><a href=#self-attention内部结构>Self-Attention内部结构</a></li><li><a href=#qkv的计算>Q，K，V的计算</a></li><li><a href=#self-attention-的输出>Self-Attention 的输出</a></li><li><a href=#从语义角度理解>从语义角度理解：</a></li><li><a href=#multi-head-attention>Multi-Head Attention</a></li></ul></li><li><a href=#encoder结构>Encoder结构</a><ul><li><a href=#add--norm>Add & Norm</a></li><li><a href=#补充layer-normalization>补充：Layer Normalization</a></li><li><a href=#feed-forward>Feed Forward</a></li><li><a href=#组成-encoder>组成 Encoder</a></li></ul></li><li><a href=#decoder-结构>Decoder 结构</a><ul><li><a href=#第一个-multi-head-attention>第一个 Multi-Head Attention</a></li><li><a href=#第二个-multi-head-attention>第二个 Multi-Head Attention</a></li><li><a href=#softmax-预测输出单词>Softmax 预测输出单词</a></li></ul></li></ul></li><li><a href=#transformer-总结>Transformer 总结</a></li></ul></nav></div></details></div></div><div class="min-w-0 min-h-0 max-w-fit"><div class="article-content max-w-prose mb-20"><h2 class="relative group">Transformer的诞生背景<div id=transformer的诞生背景 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#transformer%e7%9a%84%e8%af%9e%e7%94%9f%e8%83%8c%e6%99%af aria-label=锚点>#</a></span></h2><p>传统的模型只能一次处理一个词，比如RNN、LSTM，他们：</p><ul><li><strong>无法并行计算</strong>：必须<strong>一个时间步一个时间步地算</strong>；序列越长，训练越慢</li><li><strong>长程依赖问题</strong>：RNN
-理论上能记住过去所有信息，但实际上<strong>梯度会消失或爆炸</strong></li><li><strong>信息压缩严重、难以捕捉全局关系</strong>：RNN 的隐藏状态 \(h_t\)
+<!doctype html>
+<html
+  lang="zh-CN"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  
+    <meta http-equiv="content-language" content="zh-cn">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color">
+
+  
+  
+    <title>Transformer 学习笔记 &middot; Steph.H</title>
+    <meta name="title" content="Transformer 学习笔记 &middot; Steph.H">
+  
+
+  
+  
+    <meta name="description" content="一句话描述：你的主页/博客主题（AI / Agent / 课程笔记 / 项目复盘）">
+  
+  
+    <meta name="keywords" content="数字花园,">
+  
+  
+  
+  <link rel="canonical" href="http://localhost:1313/posts/transformer-notes/">
+  
+
+  
+  
+    <meta name="author" content="Steph.H">
+  
+  
+    
+      
+        
+          <link href="https://github.com/HRH0410" rel="me">
+        
+      
+    
+      
+        
+          <link href="https://space.bilibili.com/1834168183" rel="me">
+        
+      
+    
+      
+        
+          <link href="https://v.douyin.com/W9pAmwPcBcg/" rel="me">
+        
+      
+    
+  
+
+  
+  <meta property="og:url" content="http://localhost:1313/posts/transformer-notes/">
+  <meta property="og:site_name" content="Steph.H">
+  <meta property="og:title" content="Transformer 学习笔记">
+  <meta property="og:description" content="一句话描述：你的主页/博客主题（AI / Agent / 课程笔记 / 项目复盘）">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-07T20:45:00+08:00">
+    <meta property="article:modified_time" content="2026-02-07T20:45:00+08:00">
+    <meta property="article:tag" content="数字花园">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Transformer 学习笔记">
+  <meta name="twitter:description" content="一句话描述：你的主页/博客主题（AI / Agent / 课程笔记 / 项目复盘）">
+
+  
+  
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+  
+    
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/css/main.bundle.min.e41ee59dc46558c0c96396ad66f321c091dff5db3bbb7051cdc9a60b4bee881917c4434c7a46e6938a9db5e9e056c5f448cfdfb6ab7eb2843fb174b1b89a1228.css"
+    integrity="sha512-5B7lncRlWMDJY5atZvMhwJHf9ds7u3BRzcmmC0vuiBkXxENMekbmk4qdtengVsX0SM/ftqt&#43;soQ/sXSxuJoSKA==">
+
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/appearance.min.6f41174b3a05b680820fe08cadbfa5fb7a7ca347b76a0955cdc68b9d8aca1ce24f0547e138cea33bcc7904d551a90afcb1cc7f2d9fe8557075d501419046c08c.js"
+    integrity="sha512-b0EXSzoFtoCCD&#43;CMrb&#43;l&#43;3p8o0e3aglVzcaLnYrKHOJPBUfhOM6jO8x5BNVRqQr8scx/LZ/oVXB11QFBkEbAjA=="></script>
+  
+  
+  
+  
+  
+  
+    
+    <script src="/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js" integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7&#43;kfJ6kKCJxQGC&#43;8wm&#43;Bz9JucDjDTGNew=="></script>
+  
+
+  
+  
+  
+    
+  
+  
+    
+  
+  
+  
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="/js/main.bundle.min.67624a357c928d29b9fe19ba01a1e32c05ad1329ca2a712bf10446df0c6872903d0c14b21f76896b57a5a0710940805416cee38851d9067db6555881188e35a5.js"
+      integrity="sha512-Z2JKNXySjSm5/hm6AaHjLAWtEynKKnEr8QRG3wxocpA9DBSyH3aJa1eloHEJQIBUFs7jiFHZBn22VViBGI41pQ=="
+      data-copy="复制"
+      data-copied="已复制"></script>
+  
+
+  
+  
+
+<script src="/lib/jquery/jquery.slim.min.b0dca576e87d7eaa5850ae4e61759c065786cdb6489d68fcc82240539eebd5da522bdb4fda085ffd245808c8fe2acb2516408eb774ef26b5f6015fc6737c0ea8.js" integrity="sha512-sNylduh9fqpYUK5OYXWcBleGzbZInWj8yCJAU57r1dpSK9tP2ghf/SRYCMj&#43;KsslFkCOt3TvJrX2AV/Gc3wOqA=="></script>
+
+
+
+
+
+
+
+
+
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/lib/katex/katex.min.d2ee85d2418f4d482ca2af2a3dad30d370b1c66133dea61f97d7933c92fc0cae10244f7f5cbd524a8897a1886f0d70ab04c0555ad680216b16a028354e42726c.css"
+    integrity="sha512-0u6F0kGPTUgsoq8qPa0w03CxxmEz3qYfl9eTPJL8DK4QJE9/XL1SSoiXoYhvDXCrBMBVWtaAIWsWoCg1TkJybA==">
+  
+  
+  
+  <script
+    defer
+    type="text/javascript"
+    src="/js/katex.bundle.30c179d64bdee5ed56cf63adf7227f13507841aa61a91a492e45b333d618bc901f2b196d2effcfe6716a23e01416a572441480d511b13320dba26d58e1246178.js"
+    integrity="sha512-MMF51kve5e1Wz2Ot9yJ/E1B4QaphqRpJLkWzM9YYvJAfKxltLv/P5nFqI&#43;AUFqVyRBSA1RGxMyDbom1Y4SRheA=="
+    id="katex-render"></script>
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+  
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "Transformer 学习笔记",
+    "headline": "Transformer 学习笔记",
+    
+    "inLanguage": "zh-cn",
+    "url" : "http://localhost:1313/posts/transformer-notes/",
+    "author" : {
+      "@type": "Person",
+      "name": "Steph.H"
+    },
+    "copyrightYear": "2026",
+    "dateCreated": "2026-02-07T20:45:00\u002b08:00",
+    "datePublished": "2026-02-07T20:45:00\u002b08:00",
+    
+    "dateModified": "2026-02-07T20:45:00\u002b08:00",
+    
+    "keywords": ["数字花园"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "6939"
+  }]
+  </script>
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+  var imgs = document.querySelectorAll(".article-content figure > img");
+  imgs.forEach(function (img) {
+    var applyClass = function () {
+      if (!img.naturalWidth || !img.naturalHeight) return;
+      if (img.naturalWidth / img.naturalHeight >= 1.25) {
+        img.classList.add("is-landscape");
+      } else {
+        img.classList.remove("is-landscape");
+      }
+    };
+
+    if (img.complete) {
+      applyClass();
+    } else {
+      img.addEventListener("load", applyClass, { once: true });
+    }
+  });
+});
+</script>
+
+  
+
+  
+  
+
+  
+  
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <body class="flex flex-col h-screen m-auto leading-7 max-w-7xl px-6 sm:px-14 md:px-24 lg:px-32 text-lg bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral bf-scrollbar">
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content">
+        <span class="font-bold text-primary-600 pe-2 dark:text-primary-400">&darr;</span>
+        跳过正文
+      </a>
+    </div>
+    
+    
+      <div class="h-24"></div>
+<div class="fixed inset-x-0 top-4 z-100 flex justify-center px-6">
+  <nav
+    id="menu-blur"
+    class="pill-nav flex items-center gap-6 px-8 py-2.5 rounded-full">
+    <div class="main-menu flex items-center w-full gap-2 p-1 pl-0">
+  
+    
+    
+      <div>
+        <a href="/" class="flex">
+          <span class="sr-only">Steph.H</span>
+          
+            <img
+              src="/img/author.jpg"
+              width="616"
+              height="464"
+              class="logo max-h-20 max-w-20 object-scale-down object-left nozoom"
+              alt="">
+          
+        </a>
+      </div>
+    
+  
+  
+    <a href="/" class="text-base font-medium truncate min-w-0 shrink">
+      Steph.H
+    </a>
+  
+  <div class="flex items-center ms-auto">
+    <div class="hidden md:flex">
+      <nav class="flex items-center gap-x-5 h-12">
+  
+    
+      
+  
+    <a
+      href="/posts/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="文章"
+      title="Posts">
+      
+      
+        <span class="text-base font-medium break-normal">
+          文章
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/projects/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="项目"
+      title="项目">
+      
+      
+        <span class="text-base font-medium break-normal">
+          项目
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/about/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="关于我"
+      title="关于我">
+      
+      
+        <span class="text-base font-medium break-normal">
+          关于我
+        </span>
+      
+    </a>
+  
+
+    
+  
+
+  
+
+  
+
+  
+    <button
+      id="search-button"
+      aria-label="Search"
+      class="text-base bf-icon-color-hover"
+      title="搜索 (/)">
+      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+    </button>
+  
+
+  
+    <div class="flex items-center">
+      <button
+        id="appearance-switcher"
+        aria-label="Dark mode switcher"
+        type="button"
+        class="text-base bf-icon-color-hover">
+        <div class="flex items-center justify-center dark:hidden">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+        </div>
+        <div class="items-center justify-center hidden dark:flex">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+        </div>
+      </button>
+    </div>
+  
+</nav>
+
+
+
+    </div>
+    <div class="flex md:hidden">
+      <div class="flex items-center h-14 gap-4">
+  
+    <button
+      id="search-button-mobile"
+      aria-label="Search"
+      class="flex items-center justify-center bf-icon-color-hover"
+      title="搜索 (/)">
+      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+    </button>
+  
+
+  
+    <button
+      id="appearance-switcher-mobile"
+      type="button"
+      aria-label="Dark mode switcher"
+      class="flex items-center justify-center text-neutral-900 hover:text-primary-600 dark:text-neutral-200 dark:hover:text-primary-400">
+      <div class="dark:hidden">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+      </div>
+      <div class="hidden dark:block">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+      </div>
+    </button>
+  
+
+  
+    <input type="checkbox" id="mobile-menu-toggle" autocomplete="off" class="hidden peer">
+    <label for="mobile-menu-toggle" class="flex items-center justify-center cursor-pointer bf-icon-color-hover">
+      <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+</span>
+    </label>
+
+    <div
+      role="dialog"
+      aria-modal="true"
+      style="scrollbar-gutter: stable;"
+      class="fixed inset-0 z-50 invisible overflow-y-auto px-6 py-20 opacity-0 transition-[opacity,visibility] duration-300 peer-checked:visible peer-checked:opacity-100 bg-neutral-50/97 dark:bg-neutral-900/99
+      bf-scrollbar">
+      <label
+        for="mobile-menu-toggle"
+        class="fixed end-8 top-5 flex items-center justify-center z-50 h-12 w-12 cursor-pointer select-none rounded-full bf-icon-color-hover border bf-border-color bf-border-color-hover bg-neutral-50 dark:bg-neutral-900">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </label>
+      <nav class="mx-auto max-w-md space-y-6">
+        
+  
+    
+    <div class="px-2">
+      <a
+        href="/posts/"
+        aria-label="文章"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="Posts" class="text-2xl font-bold tracking-tight">
+          文章
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/projects/"
+        aria-label="项目"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="项目" class="text-2xl font-bold tracking-tight">
+          项目
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/about/"
+        aria-label="关于我"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="关于我" class="text-2xl font-bold tracking-tight">
+          关于我
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+
+        
+  
+
+        
+  
+    <div
+      class="flex flex-wrap items-center [&_span]:text-2xl [&_.translation_button_.icon]:text-4xl! [&_.translation_button_span]:text-base! [&_.translation_.menuhide_span]:text-sm! gap-x-6 ps-2 mt-8 pt-8 border-t bf-border-color">
+      
+
+
+      
+    </div>
+  
+
+      </nav>
+    </div>
+  
+</div>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  </nav>
+</div>
+
+<style>
+   
+  .pill-nav {
+    background: rgba(255, 255, 255, 0.72) !important;
+    backdrop-filter: saturate(180%) blur(20px) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.04),
+      0 4px 12px rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.25s ease !important;
+    padding-left: 1rem !important;
+    padding-right: 1.25rem !important;  
+  }
+
+  .dark .pill-nav {
+    background: rgba(28, 28, 30, 0.78) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.2),
+      0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  }
+
+   
+  #menu-blur .main-menu {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 0.25rem !important;  
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+   
+  #menu-blur .main-menu > div:first-child {
+    margin-right: -0.5rem !important;  
+    padding-right: 0 !important;
+  }
+
+   
+  #menu-blur .logo,
+  #menu-blur img.logo,
+  .pill-nav .logo,
+  .pill-nav img.logo {
+    height: 36px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    border-radius: 50% !important;
+    margin-right: 0 !important;  
+    margin-left: 0 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+
+  #menu-blur .logo:hover {
+    transform: scale(1.08) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+  }
+
+   
+  #menu-blur .main-menu a,
+  #menu-blur nav a {
+    color: rgba(0, 0, 0, 0.75) !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    padding: 0.4rem 1rem !important;
+    border-radius: 8px !important;
+    transition: all 0.15s ease !important;
+  }
+
+  #menu-blur .main-menu a:hover,
+  #menu-blur nav a:hover {
+    background: rgba(0, 0, 0, 0.06) !important;
+    color: #000 !important;
+  }
+
+  .dark #menu-blur .main-menu a,
+  .dark #menu-blur nav a {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  .dark #menu-blur .main-menu a:hover,
+  .dark #menu-blur nav a:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+  }
+
+   
+  #menu-blur .main-menu .ms-auto,
+  #menu-blur .main-menu > div:last-child {
+    gap: 0.125rem !important;
+    margin-left: 0.5rem !important;
+  }
+
+   
+  #menu-blur button,
+  .pill-nav button,
+  #menu-blur #search-button,
+  #menu-blur #appearance-switcher {
+    padding: 0.4rem !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: rgba(0, 0, 0, 0.6) !important;
+    transition: all 0.15s ease !important;
+  }
+
+  #menu-blur button:hover {
+    background: rgba(0, 0, 0, 0.06) !important;
+    color: #000 !important;
+  }
+
+  .dark #menu-blur button {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .dark #menu-blur button:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+  }
+
+   
+  #menu-blur .main-menu > a.text-base {
+    font-weight: 600 !important;
+    font-size: 0.9375rem !important;
+    letter-spacing: -0.01em !important;
+    margin-right: 0.25rem !important;
+    margin-left: 0 !important;
+  }
+
+   
+  #menu-blur .main-menu .ms-auto::before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    margin-right: 0.75rem;
+  }
+
+  .dark #menu-blur .main-menu .ms-auto::before {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+   
+  @media (max-width: 768px) {
+    #menu-blur {
+      padding: 0.5rem 1.25rem !important;
+      gap: 0.25rem !important;
+    }
+    #menu-blur .logo {
+      height: 30px !important;
+      width: 30px !important;
+      min-width: 30px !important;
+    }
+  }
+</style>
+
+    
+    <div class="relative flex flex-col grow">
+      <main id="main-content" class="grow">
+        
+  
+  <article>
+    
+    
+
+    
+    <header id="single_header" class="mt-5 max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Transformer 学习笔记
+      </h1>
+      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2026-02-07T20:45:00&#43;08:00">2026-02-07</time><span class="px-2 text-primary-500">&middot;</span><span>6939 字</span><span class="px-2 text-primary-500">&middot;</span><span title="预计阅读">14 分钟</span>
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  
+
+  
+  
+
+
+
+      </div>
+      
+        
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+      
+    </header>
+
+    
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+      
+      
+      
+      
+      
+        <div class="order-first lg:ms-auto px-0 lg:order-last lg:ps-8 lg:max-w-2xs">
+          <div class="toc ps-5 print:hidden lg:sticky lg:top-[140px]">
+            <details
+  open
+  id="TOCView"
+  class="toc-right mt-0 overflow-y-auto overscroll-contain bf-scrollbar rounded-lg -ms-5 ps-5 pe-2 hidden lg:block">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 -ms-5 ps-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    目录
+  </summary>
+  <div
+    class="min-w-[220px] py-2 border-dotted border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#transformer的诞生背景">Transformer的诞生背景</a></li>
+    <li><a href="#transformer整体结构">Transformer整体结构</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#第一步">第一步</a></li>
+            <li><a href="#第二步">第二步</a></li>
+            <li><a href="#第三步">第三步</a></li>
+          </ul>
+        </li>
+        <li><a href="#transformer的输入">Transformer的输入</a></li>
+        <li><a href="#self-attention自注意力机制">Self-Attention（自注意力机制）</a>
+          <ul>
+            <li><a href="#self-attention内部结构">Self-Attention内部结构</a></li>
+            <li><a href="#qkv的计算">Q，K，V的计算</a></li>
+            <li><a href="#self-attention-的输出">Self-Attention 的输出</a></li>
+            <li><a href="#从语义角度理解">从语义角度理解：</a></li>
+            <li><a href="#multi-head-attention">Multi-Head Attention</a></li>
+          </ul>
+        </li>
+        <li><a href="#encoder结构">Encoder结构</a>
+          <ul>
+            <li><a href="#add--norm">Add &amp; Norm</a></li>
+            <li><a href="#补充layer-normalization">补充：Layer Normalization</a></li>
+            <li><a href="#feed-forward">Feed Forward</a></li>
+            <li><a href="#组成-encoder">组成 Encoder</a></li>
+          </ul>
+        </li>
+        <li><a href="#decoder-结构">Decoder 结构</a>
+          <ul>
+            <li><a href="#第一个-multi-head-attention">第一个 Multi-Head Attention</a></li>
+            <li><a href="#第二个-multi-head-attention">第二个 Multi-Head Attention</a></li>
+            <li><a href="#softmax-预测输出单词">Softmax 预测输出单词</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#transformer-总结">Transformer 总结</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+<details class="toc-inside mt-0 overflow-hidden rounded-lg -ms-5 ps-5 lg:hidden">
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 -ms-5 ps-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    目录
+  </summary>
+  <div
+    class="py-2 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#transformer的诞生背景">Transformer的诞生背景</a></li>
+    <li><a href="#transformer整体结构">Transformer整体结构</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#第一步">第一步</a></li>
+            <li><a href="#第二步">第二步</a></li>
+            <li><a href="#第三步">第三步</a></li>
+          </ul>
+        </li>
+        <li><a href="#transformer的输入">Transformer的输入</a></li>
+        <li><a href="#self-attention自注意力机制">Self-Attention（自注意力机制）</a>
+          <ul>
+            <li><a href="#self-attention内部结构">Self-Attention内部结构</a></li>
+            <li><a href="#qkv的计算">Q，K，V的计算</a></li>
+            <li><a href="#self-attention-的输出">Self-Attention 的输出</a></li>
+            <li><a href="#从语义角度理解">从语义角度理解：</a></li>
+            <li><a href="#multi-head-attention">Multi-Head Attention</a></li>
+          </ul>
+        </li>
+        <li><a href="#encoder结构">Encoder结构</a>
+          <ul>
+            <li><a href="#add--norm">Add &amp; Norm</a></li>
+            <li><a href="#补充layer-normalization">补充：Layer Normalization</a></li>
+            <li><a href="#feed-forward">Feed Forward</a></li>
+            <li><a href="#组成-encoder">组成 Encoder</a></li>
+          </ul>
+        </li>
+        <li><a href="#decoder-结构">Decoder 结构</a>
+          <ul>
+            <li><a href="#第一个-multi-head-attention">第一个 Multi-Head Attention</a></li>
+            <li><a href="#第二个-multi-head-attention">第二个 Multi-Head Attention</a></li>
+            <li><a href="#softmax-预测输出单词">Softmax 预测输出单词</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#transformer-总结">Transformer 总结</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+
+
+          </div>
+        </div>
+      
+
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+
+        <div class="article-content max-w-prose mb-20">
+          
+
+
+<h2 class="relative group">Transformer的诞生背景
+    <div id="transformer的诞生背景" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#transformer%e7%9a%84%e8%af%9e%e7%94%9f%e8%83%8c%e6%99%af" aria-label="锚点">#</a>
+    </span>
+    
+</h2>
+<p>传统的模型只能一次处理一个词，比如RNN、LSTM，他们：</p>
+<ul>
+<li><strong>无法并行计算</strong>：必须<strong>一个时间步一个时间步地算</strong>；序列越长，训练越慢</li>
+<li><strong>长程依赖问题</strong>：RNN
+理论上能记住过去所有信息，但实际上<strong>梯度会消失或爆炸</strong></li>
+<li><strong>信息压缩严重、难以捕捉全局关系</strong>：RNN 的隐藏状态 \(h_t\)
 是一个固定长度的向量，但它要“压缩”从第 1 个到第 t
-个所有词的信息，导致信息丢失，并且无法建模任意两个词之间的全局依赖。</li></ul><p>而Transformer的出现改变了这一状况，它直接抛弃了循环结构，提出了一个<strong>全并行的注意力机制模型</strong>。他可以一次性看到全文，可以反复回看，找到关键句，还能从多角度理解句子。</p><h2 class="relative group">Transformer整体结构<div id=transformer整体结构 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#transformer%e6%95%b4%e4%bd%93%e7%bb%93%e6%9e%84 aria-label=锚点>#</a></span></h2><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image1.png><figcaption>该图为 Transformer 用于中英文翻译的整体结构</figcaption></figure><p>Transformer 由 Encoder 和 Decoder 两个部分组成，Encoder 和 Decoder
-都包含 6 个 block。Transformer 的工作流程大体如下：</p><h4 class="relative group">第一步<div id=第一步 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#%e7%ac%ac%e4%b8%80%e6%ad%a5 aria-label=锚点>#</a></span></h4><p>获取输入句子的每一个单词的表示向量 X，X由单词的
+个所有词的信息，导致信息丢失，并且无法建模任意两个词之间的全局依赖。</li>
+</ul>
+<p>而Transformer的出现改变了这一状况，它直接抛弃了循环结构，提出了一个<strong>全并行的注意力机制模型</strong>。他可以一次性看到全文，可以反复回看，找到关键句，还能从多角度理解句子。</p>
+
+<h2 class="relative group">Transformer整体结构
+    <div id="transformer整体结构" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#transformer%e6%95%b4%e4%bd%93%e7%bb%93%e6%9e%84" aria-label="锚点">#</a>
+    </span>
+    
+</h2>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image1.png"
+    ><figcaption>该图为 Transformer 用于中英文翻译的整体结构</figcaption></figure>
+<p>Transformer 由 Encoder 和 Decoder 两个部分组成，Encoder 和 Decoder
+都包含 6 个 block。Transformer 的工作流程大体如下：</p>
+
+<h4 class="relative group">第一步
+    <div id="第一步" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e7%ac%ac%e4%b8%80%e6%ad%a5" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<p>获取输入句子的每一个单词的表示向量 X，X由单词的
 Embedding（Embedding就是从原始数据提取出来的Feature） 和单词位置的
-Embedding 相加得到。</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image2.png><figcaption>Transformer的输入表示</figcaption></figure><h4 class="relative group">第二步<div id=第二步 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#%e7%ac%ac%e4%ba%8c%e6%ad%a5 aria-label=锚点>#</a></span></h4><p>将得到的单词表示向量矩阵 (如上图所示，每一行是一个单词的表示 x) 传入
+Embedding 相加得到。</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image2.png"
+    ><figcaption>Transformer的输入表示</figcaption></figure>
+
+<h4 class="relative group">第二步
+    <div id="第二步" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e7%ac%ac%e4%ba%8c%e6%ad%a5" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<p>将得到的单词表示向量矩阵 (如上图所示，每一行是一个单词的表示 x) 传入
 Encoder 中，经过 6 个 Encoder block 后可以得到句子所有单词的编码信息矩阵
 C，如下图。单词向量矩阵用\(\mathbf{X}_{n \times d}\)表示， n
 是句子中单词个数，d 是表示向量的维度 (论文中 d=512)。每一个 Encoder
-block 输出的矩阵维度与输入完全一致。</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image3.png><figcaption>Transformer Encoder 编码句子信息</figcaption></figure><h4 class="relative group">第三步<div id=第三步 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#%e7%ac%ac%e4%b8%89%e6%ad%a5 aria-label=锚点>#</a></span></h4><p>将 Encoder 输出的编码信息矩阵 C 传递到 Decoder 中，Decoder
+block 输出的矩阵维度与输入完全一致。</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image3.png"
+    ><figcaption>Transformer Encoder 编码句子信息</figcaption></figure>
+
+<h4 class="relative group">第三步
+    <div id="第三步" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e7%ac%ac%e4%b8%89%e6%ad%a5" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<p>将 Encoder 输出的编码信息矩阵 C 传递到 Decoder 中，Decoder
 依次会根据当前翻译过的单词 1~ i 翻译下一个单词
 i+1，如下图所示。在使用的过程中，翻译到单词 i+1 的时候需要通过 Mask
-(掩盖) 操作遮盖住 i+1 之后的单词。</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image4.png><figcaption>Transofrmer Decoder 预测</figcaption></figure><p>上图 Decoder 接收了 Encoder 的编码矩阵 C，然后首先输入一个翻译开始符
-&ldquo;&lt;Begin>"，预测第一个单词 &ldquo;I&rdquo;；然后输入翻译开始符 &ldquo;&lt;Begin>&rdquo; 和单词
-&ldquo;I&rdquo;，预测单词 &ldquo;have&rdquo;，以此类推。</p><p>这是 Transformer 使用时候的大致流程，细节将在下方娓娓道来。</p><h3 class="relative group">Transformer的输入<div id=transformer的输入 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#transformer%e7%9a%84%e8%be%93%e5%85%a5 aria-label=锚点>#</a></span></h3><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image5.png></figure><ul><li><strong>单词Embedding</strong>：有很多种获取方式，例如可以采用 Word2Vec、Glove
-等算法预训练得到，也可以在 Transformer 中训练得到。</li><li><strong>位置Embedding</strong>：由于不采用RNN结构，而是使用全局信息，Transformer不能利用单词的顺序信息，所以使用位置Embedding 保存单词在序列中的相对或绝对位置。</li></ul><p>位置 Embedding 用 PE表示，PE 的维度与单词 Embedding 是一样的。PE可以通过训练得到，也可以使用某种公式计算得到。在 Transformer中采用了后者，计算公式如下：<figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image6.png></figure>其中，pos 表示单词在句子中的位置，d 表示 PE的维度 (与词 Embedding一样)，2i 表示偶数的维度，2i+1 表示奇数维度 (即 2i≤d, 2i+1≤d)。使用这种公式计算 PE 有以下的好处：</p><ul><li>使 PE
+(掩盖) 操作遮盖住 i+1 之后的单词。</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image4.png"
+    ><figcaption>Transofrmer Decoder 预测</figcaption></figure>
+<p>上图 Decoder 接收了 Encoder 的编码矩阵 C，然后首先输入一个翻译开始符
+&ldquo;&lt;Begin&gt;&quot;，预测第一个单词 &ldquo;I&rdquo;；然后输入翻译开始符 &ldquo;&lt;Begin&gt;&rdquo; 和单词
+&ldquo;I&rdquo;，预测单词 &ldquo;have&rdquo;，以此类推。</p>
+<p>这是 Transformer 使用时候的大致流程，细节将在下方娓娓道来。</p>
+
+<h3 class="relative group">Transformer的输入
+    <div id="transformer的输入" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#transformer%e7%9a%84%e8%be%93%e5%85%a5" aria-label="锚点">#</a>
+    </span>
+    
+</h3>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image5.png"
+    ></figure>
+<ul>
+<li><strong>单词Embedding</strong>：有很多种获取方式，例如可以采用 Word2Vec、Glove
+等算法预训练得到，也可以在 Transformer 中训练得到。</li>
+<li><strong>位置Embedding</strong>：由于不采用RNN结构，而是使用全局信息，Transformer不能利用单词的顺序信息，所以使用位置Embedding 保存单词在序列中的相对或绝对位置。</li>
+</ul>
+<p>位置 Embedding 用 PE表示，PE 的维度与单词 Embedding 是一样的。PE可以通过训练得到，也可以使用某种公式计算得到。在 Transformer中采用了后者，计算公式如下：<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image6.png"
+    ></figure>
+其中，pos 表示单词在句子中的位置，d 表示 PE的维度 (与词 Embedding一样)，2i 表示偶数的维度，2i+1 表示奇数维度 (即 2i≤d, 2i+1≤d)。使用这种公式计算 PE 有以下的好处：</p>
+<ul>
+<li>使 PE
 能够适应比训练集里面所有句子更长的句子，假设训练集里面最长的句子是有
 20 个单词，突然来了一个长度为 21
-的句子，则使用公式计算的方法可以计算出第 21 位的 Embedding。</li><li>可以让模型容易地计算出相对位置，对于固定长度的间距 k，PE(pos+k) 可以用
+的句子，则使用公式计算的方法可以计算出第 21 位的 Embedding。</li>
+<li>可以让模型容易地计算出相对位置，对于固定长度的间距 k，PE(pos+k) 可以用
 PE(pos) 计算得到。因为 Sin(A+B) = Sin(A)Cos(B) + Cos(A)Sin(B),
-Cos(A+B) = Cos(A)Cos(B) - Sin(A)Sin(B)。</li></ul><blockquote><p>位置编码是给 Transformer “加入顺序感”的方法。
+Cos(A+B) = Cos(A)Cos(B) - Sin(A)Sin(B)。</li>
+</ul>
+<blockquote><p>位置编码是给 Transformer “加入顺序感”的方法。
 它用一组不同频率的正弦和余弦波，为每个词生成唯一的位置向量，
-让模型在并行处理时也能知道词与词的先后关系。</p></blockquote><p>将单词的词 Embedding 和位置 Embedding 相加，就可以得到单词的表示向量
-x，x 就是 Transformer 的输入。</p><h3 class="relative group">Self-Attention（自注意力机制）<div id=self-attention自注意力机制 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#self-attention%e8%87%aa%e6%b3%a8%e6%84%8f%e5%8a%9b%e6%9c%ba%e5%88%b6 aria-label=锚点>#</a></span></h3><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image7.png><figcaption>Transformer Encoder 和 Decoder</figcaption></figure><ul><li>左侧为 Encoder block，右侧为 Decoder block</li><li>红色框中的Multi-Head Attention由多个 Self-Attention组成<ul><li>Encoder block 包含一个 Multi-Head Attention，而 Decoder block 包含两个
-Multi-Head Attention (其中有一个用到 Masked)</li><li>Multi-Head Attention 上方还包括一个 Add & Norm 层，Add 表示残差连接
+让模型在并行处理时也能知道词与词的先后关系。</p>
+</blockquote><p>将单词的词 Embedding 和位置 Embedding 相加，就可以得到单词的表示向量
+x，x 就是 Transformer 的输入。</p>
+
+<h3 class="relative group">Self-Attention（自注意力机制）
+    <div id="self-attention自注意力机制" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#self-attention%e8%87%aa%e6%b3%a8%e6%84%8f%e5%8a%9b%e6%9c%ba%e5%88%b6" aria-label="锚点">#</a>
+    </span>
+    
+</h3>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image7.png"
+    ><figcaption>Transformer Encoder 和 Decoder</figcaption></figure>
+<ul>
+<li>左侧为 Encoder block，右侧为 Decoder block</li>
+<li>红色框中的Multi-Head Attention由多个 Self-Attention组成
+<ul>
+<li>Encoder block 包含一个 Multi-Head Attention，而 Decoder block 包含两个
+Multi-Head Attention (其中有一个用到 Masked)</li>
+<li>Multi-Head Attention 上方还包括一个 Add &amp; Norm 层，Add 表示残差连接
 (Residual Connection) 用于防止网络退化，Norm 表示 Layer
-Normalization，用于对每一层的激活值进行归一化</li></ul></li></ul><h4 class="relative group">Self-Attention内部结构<div id=self-attention内部结构 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#self-attention%e5%86%85%e9%83%a8%e7%bb%93%e6%9e%84 aria-label=锚点>#</a></span></h4><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image8.png><figcaption>Self-Attention 结构</figcaption></figure><p>Self-Attention 在计算的时候需要用到矩阵Q(查询),K(键值),V(值)</p><p>在实际中，Self-Attention 接收的是输入(单词的表示向量x组成的矩阵X)
+Normalization，用于对每一层的激活值进行归一化</li>
+</ul>
+</li>
+</ul>
+
+<h4 class="relative group">Self-Attention内部结构
+    <div id="self-attention内部结构" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#self-attention%e5%86%85%e9%83%a8%e7%bb%93%e6%9e%84" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image8.png"
+    ><figcaption>Self-Attention 结构</figcaption></figure>
+<p>Self-Attention 在计算的时候需要用到矩阵Q(查询),K(键值),V(值)</p>
+<p>在实际中，Self-Attention 接收的是输入(单词的表示向量x组成的矩阵X)
 或者上一个 Encoder block 的输出。而Q,K,V正是通过 Self-Attention
-的输入进行<strong>线性变换</strong>得到的。</p><h4 class="relative group">Q，K，V的计算<div id=qkv的计算 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#qkv%e7%9a%84%e8%ae%a1%e7%ae%97 aria-label=锚点>#</a></span></h4><p>Self-Attention
-的输入用矩阵X进行表示，则可以使用线性变阵矩阵WQ, WK, WV计算得到Q, K, V。</p><p><strong>注意 X, Q, K, V 的每一行都表示一个单词。</strong></p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image9.png><figcaption>Q, K, V 的计算</figcaption></figure><h4 class="relative group">Self-Attention 的输出<div id=self-attention-的输出 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#self-attention-%e7%9a%84%e8%be%93%e5%87%ba aria-label=锚点>#</a></span></h4><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image10.png><figcaption>Self-Attention 的输出</figcaption></figure><p>公式中计算矩阵Q和K每一行向量的内积，为了防止内积过大，因此除以 \(d_k\)
+的输入进行<strong>线性变换</strong>得到的。</p>
+
+<h4 class="relative group">Q，K，V的计算
+    <div id="qkv的计算" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#qkv%e7%9a%84%e8%ae%a1%e7%ae%97" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<p>Self-Attention
+的输入用矩阵X进行表示，则可以使用线性变阵矩阵WQ, WK, WV计算得到Q, K, V。</p>
+<p><strong>注意 X, Q, K, V 的每一行都表示一个单词。</strong></p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image9.png"
+    ><figcaption>Q, K, V 的计算</figcaption></figure>
+
+<h4 class="relative group">Self-Attention 的输出
+    <div id="self-attention-的输出" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#self-attention-%e7%9a%84%e8%be%93%e5%87%ba" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image10.png"
+    ><figcaption>Self-Attention 的输出</figcaption></figure>
+<p>公式中计算矩阵Q和K每一行向量的内积，为了防止内积过大，因此除以 \(d_k\)
 的平方根。Q乘以K的转置后，得到的矩阵行列数都为 n，n
 为句子单词数，这个矩阵可以表示单词之间的 attention 强度。下图为Q乘以 \(K^T\)
-，1234 表示的是句子中的单词。</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image11.png><figcaption>Q乘以K的转置的计算</figcaption></figure><p>得到 \(QK^T\) 之后，使用 Softmax 计算每一个单词对于其他单词的 attention
+，1234 表示的是句子中的单词。</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image11.png"
+    ><figcaption>Q乘以K的转置的计算</figcaption></figure>
+<p>得到 \(QK^T\) 之后，使用 Softmax 计算每一个单词对于其他单词的 attention
 系数，公式中的 Softmax 是对矩阵的每一行进行 Softmax，即每一行的和都变为
-1.</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image12.png><figcaption>对矩阵的每一行进行 Softmax</figcaption></figure><p>得到 Softmax 矩阵之后可以和V相乘，得到最终的输出Z。</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image13.png><figcaption>Self-Attention 输出</figcaption></figure><p>上图中 Softmax 矩阵的第 1 行表示单词 1 与其他所有单词的 attention
+1.</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image12.png"
+    ><figcaption>对矩阵的每一行进行 Softmax</figcaption></figure>
+<p>得到 Softmax 矩阵之后可以和V相乘，得到最终的输出Z。</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image13.png"
+    ><figcaption>Self-Attention 输出</figcaption></figure>
+<p>上图中 Softmax 矩阵的第 1 行表示单词 1 与其他所有单词的 attention
 系数，最终单词 1 的输出 \(Z_1\) 等于所有单词 i 的值 \(V_i\) 根据 attention
-系数的比例加在一起得到，如下图所示：</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image14.png><figcaption>Zi 的计算方法</figcaption></figure><h4 class="relative group">从语义角度理解：<div id=从语义角度理解 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#%e4%bb%8e%e8%af%ad%e4%b9%89%e8%a7%92%e5%ba%a6%e7%90%86%e8%a7%a3 aria-label=锚点>#</a></span></h4><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image15.png><figcaption>Attention 机制的实际运算架构</figcaption></figure><p>比如这样一句话：“He booked a room at a
+系数的比例加在一起得到，如下图所示：</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image14.png"
+    ><figcaption>Zi 的计算方法</figcaption></figure>
+
+<h4 class="relative group">从语义角度理解：
+    <div id="从语义角度理解" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e4%bb%8e%e8%af%ad%e4%b9%89%e8%a7%92%e5%ba%a6%e7%90%86%e8%a7%a3" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image15.png"
+    ><figcaption>Attention 机制的实际运算架构</figcaption></figure>
+<p>比如这样一句话：“He booked a room at a
 hotel.”。我们对其中“booked”这个单词（实际上是 token）做 Attention
 机制。“booked”会对“He booked a room at a hotel.”这句话中所有的 token
 ，包括“booked”自己，都做一遍点乘，然后做 Softmax 。再然后，Softmax
 后的结果与“He booked a room at a hotel.”转换成的 V
 向量相乘，得到加权后的变换结果：0.55*booked+0.15*room+0.3*hotel=booked，即“booked”这个单词可以用“0.55*booked+0.15*room+0.3*hotel”
-这样一个复杂的单词来表示（把“0.55*booked+0.15*room+0.3*hotel”想象成一个单词，便能轻松理解这样表示的意义），见下图：</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image16.png><figcaption>booked 在 Attention 机制处理后的语义变体示意</figcaption></figure><p>从中可以看出“booked”在全句中与“hotel”关联度最大，其次是“room”。所以“booked”这个单词也可以理解为“hotel-room-booked”。这便把“booked”在这句话中的本质通过“变形”给体现出来了。“booked”本身并没有变，而是通过“变形”展示出了另外一种变体状态“hotel-room-booked”。</p><p>一张图总结Multi-Attention机制之间的逻辑关系：</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image17.png><figcaption>Multi-Head Attention 机制关系图</figcaption></figure><h4 class="relative group">Multi-Head Attention<div id=multi-head-attention class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#multi-head-attention aria-label=锚点>#</a></span></h4><p>Multi-Head Attention由多个Self-Attention组合而成</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image18.png><figcaption>Multi-Head Attention</figcaption></figure><p>首先将输入X分别传递到 h 个不同的 Self-Attention 中，计算得到 h
-个输出矩阵Z。</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image19.png><figcaption>8个 Self-Attention，得到8个z</figcaption></figure><p>得到 8 个输出矩阵 \(Z_1\) 到 \(Z_8\) 之后，Multi-Head Attention 将它们拼接在一起
-(Concat)，然后传入一个Linear层，得到 Multi-Head Attention 最终的输出Z。</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image20.png><figcaption>Multi-Head Attention 的输出</figcaption></figure><p>Multi-Head Attention 输出的矩阵Z与其输入的矩阵X的维度是一样的</p><p><strong>以上的Multi-Head Attention似乎稍有偏差，实际步骤如下</strong>：</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image21.jpeg></figure><blockquote><p>通过把 Embedding 向量线性变幻成 8 个 1/8 的向量再分别去做 Attention 机制运算，这其实在本质上并不会耽误每个 token 的语义表达，而只是细分出了不同的语义子空间，即不同类型的细分语义逻辑而已，Attention 机制运算起来将更细腻精准、更有针对性。</p></blockquote><h3 class="relative group">Encoder结构<div id=encoder结构 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#encoder%e7%bb%93%e6%9e%84 aria-label=锚点>#</a></span></h3><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image22.png><figcaption>Transformer Encoder block</figcaption></figure><p>Transformer 的 Encoder block 结构，可以看到是由 Multi-Head Attention,
-Add & Norm, Feed Forward, Add & Norm 组成的。</p><h4 class="relative group">Add & Norm<div id=add--norm class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#add--norm aria-label=锚点>#</a></span></h4><p>Add & Norm 层由 Add 和 Norm 两部分组成，其计算公式如下：</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image23.png><figcaption>Add & Norm 公式</figcaption></figure><p>其中 X表示 Multi-Head Attention 或者 Feed Forward
+这样一个复杂的单词来表示（把“0.55*booked+0.15*room+0.3*hotel”想象成一个单词，便能轻松理解这样表示的意义），见下图：</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image16.png"
+    ><figcaption>booked 在 Attention 机制处理后的语义变体示意</figcaption></figure>
+<p>从中可以看出“booked”在全句中与“hotel”关联度最大，其次是“room”。所以“booked”这个单词也可以理解为“hotel-room-booked”。这便把“booked”在这句话中的本质通过“变形”给体现出来了。“booked”本身并没有变，而是通过“变形”展示出了另外一种变体状态“hotel-room-booked”。</p>
+<p>一张图总结Multi-Attention机制之间的逻辑关系：</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image17.png"
+    ><figcaption>Multi-Head Attention 机制关系图</figcaption></figure>
+
+<h4 class="relative group">Multi-Head Attention
+    <div id="multi-head-attention" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#multi-head-attention" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<p>Multi-Head Attention由多个Self-Attention组合而成</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image18.png"
+    ><figcaption>Multi-Head Attention</figcaption></figure>
+<p>首先将输入X分别传递到 h 个不同的 Self-Attention 中，计算得到 h
+个输出矩阵Z。</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image19.png"
+    ><figcaption>8个 Self-Attention，得到8个z</figcaption></figure>
+<p>得到 8 个输出矩阵 \(Z_1\) 到 \(Z_8\) 之后，Multi-Head Attention 将它们拼接在一起
+(Concat)，然后传入一个Linear层，得到 Multi-Head Attention 最终的输出Z。</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image20.png"
+    ><figcaption>Multi-Head Attention 的输出</figcaption></figure>
+<p>Multi-Head Attention 输出的矩阵Z与其输入的矩阵X的维度是一样的</p>
+<p><strong>以上的Multi-Head Attention似乎稍有偏差，实际步骤如下</strong>：</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image21.jpeg"
+    ></figure>
+<blockquote><p>通过把 Embedding 向量线性变幻成 8 个 1/8 的向量再分别去做 Attention 机制运算，这其实在本质上并不会耽误每个 token 的语义表达，而只是细分出了不同的语义子空间，即不同类型的细分语义逻辑而已，Attention 机制运算起来将更细腻精准、更有针对性。</p>
+</blockquote>
+<h3 class="relative group">Encoder结构
+    <div id="encoder结构" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#encoder%e7%bb%93%e6%9e%84" aria-label="锚点">#</a>
+    </span>
+    
+</h3>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image22.png"
+    ><figcaption>Transformer Encoder block</figcaption></figure>
+<p>Transformer 的 Encoder block 结构，可以看到是由 Multi-Head Attention,
+Add &amp; Norm, Feed Forward, Add &amp; Norm 组成的。</p>
+
+<h4 class="relative group">Add &amp; Norm
+    <div id="add--norm" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#add--norm" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<p>Add &amp; Norm 层由 Add 和 Norm 两部分组成，其计算公式如下：</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image23.png"
+    ><figcaption>Add &amp; Norm 公式</figcaption></figure>
+<p>其中 X表示 Multi-Head Attention 或者 Feed Forward
 的输入，MultiHeadAttention(X) 和 FeedForward(X) 表示输出 (输出与输入 X
-维度是一样的，所以可以相加)。</p><p>Add指
+维度是一样的，所以可以相加)。</p>
+<p>Add指
 X+MultiHeadAttention(X)，是一种残差连接，通常用于解决多层网络训练的问题，可以让网络只关注当前差异的部分，在
-ResNet 中经常用到：</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image24.png><figcaption>残差连接</figcaption></figure><p>Norm指 Layer Normalization，通常用于 RNN 结构，Layer Normalization
-会将每一层神经元的输入都转成均值方差都一样的，这样可以加快收敛。</p><div class="admonition relative overflow-hidden rounded-lg border-l-4 my-3 px-4 py-3 shadow-sm" data-type=important><div class="flex items-center gap-2 font-semibold text-inherit"><div class="flex shrink-0 h-5 w-5 items-center justify-center text-lg"><span class="relative block icon"><svg viewBox="0 0 576 512"><path fill="currentColor" d="M287.9.0C297.1.0 305.5 5.25 309.5 13.52L378.1 154.8l153.3 22.7C540.4 178.8 547.8 185.1 550.7 193.7 553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4l26.3 155.5C461.4 492.9 457.7 502.1 450.2 507.4 442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9 150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4 118.2 502.1 114.5 492.9 115.1 483.9l27.1-155.5L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7 28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8 266.3 13.52C270.4 5.249 278.7.0 287.9.0zm0 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9 184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7l105.2-56.2C283.7 383.7 292.2 383.7 299.2 387.5l105.2 56.2-20.2-119.6C382.9 316.4 385.5 308.5 391 303l85.9-85.1-118.3-17.4C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z"/></svg></span></div><div class=grow>重要</div></div><div class="admonition-content mt-3 text-base leading-relaxed text-inherit"><h4 class="relative group">补充：Layer Normalization<div id=补充layer-normalization class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#%e8%a1%a5%e5%85%85layer-normalization aria-label=锚点>#</a></span></h4><p><strong>BN 的诞生背景</strong></p><p>在深度学习训练中，有一个经典问题叫做内部协变量偏移（Internal Covariate Shift）：</p><ul><li>网络每一层的输入分布会随着前一层参数更新而不断变化。</li><li>这就像训练目标一直在移动，导致每一层都要不断适应新的分布，训练会更困难，通常需要更小学习率和更谨慎的初始化。</li></ul><p>Batch Normalization（BN）因此被提出：它在一个 batch 的样本之间，对每个神经元激活做归一化。</p><p>但 BN 在序列建模里有几个明显问题：</p><ul><li><strong>对 batch size 敏感</strong>：小 batch 下统计量估计不稳定，因为统计量估计不准确。</li><li><strong>不适用于变长序列</strong>：在 RNN 或 Transformer 中，每个时间步的 BN 是独立的，处理变长序列时很麻烦。
+ResNet 中经常用到：</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image24.png"
+    ><figcaption>残差连接</figcaption></figure>
+<p>Norm指 Layer Normalization，通常用于 RNN 结构，Layer Normalization
+会将每一层神经元的输入都转成均值方差都一样的，这样可以加快收敛。</p>
+<div class="admonition relative overflow-hidden rounded-lg border-l-4 my-3 px-4 py-3 shadow-sm" data-type="important">
+      <div class="flex items-center gap-2 font-semibold text-inherit">
+        <div class="flex shrink-0 h-5 w-5 items-center justify-center text-lg"><span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z"/></svg></span></div>
+        <div class="grow">
+          重要
+        </div>
+      </div><div class="admonition-content mt-3 text-base leading-relaxed text-inherit">
+<h4 class="relative group">补充：Layer Normalization
+    <div id="补充layer-normalization" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e8%a1%a5%e5%85%85layer-normalization" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<p><strong>BN 的诞生背景</strong></p>
+<p>在深度学习训练中，有一个经典问题叫做内部协变量偏移（Internal Covariate Shift）：</p>
+<ul>
+<li>网络每一层的输入分布会随着前一层参数更新而不断变化。</li>
+<li>这就像训练目标一直在移动，导致每一层都要不断适应新的分布，训练会更困难，通常需要更小学习率和更谨慎的初始化。</li>
+</ul>
+<p>Batch Normalization（BN）因此被提出：它在一个 batch 的样本之间，对每个神经元激活做归一化。</p>
+<p>但 BN 在序列建模里有几个明显问题：</p>
+<ul>
+<li><strong>对 batch size 敏感</strong>：小 batch 下统计量估计不稳定，因为统计量估计不准确。</li>
+<li><strong>不适用于变长序列</strong>：在 RNN 或 Transformer 中，每个时间步的 BN 是独立的，处理变长序列时很麻烦。
 比如输入批次 <code>X</code> 的维度是 <code>[batch_size, sequence_length, feature_size]</code>
 例如 <code>[2, 3, 4]</code>
 说明有两个句子（样本），每个句子三个单词（时间步），每个单词有四维特征
 BN会认为有 <code>3 * 4 = 12</code> 个独立的“神经元”，并计算它们的均值和方差
-但假设第二个句子实际只有两个单词，为组成一个批次用0填充到最大长度3，假设使用BN，在“第三个时间步”计算均值方差时就会将原本<strong>有意义的值与填充的0混在一起</strong>，导致严重的<strong>统计偏差</strong>。</li><li><strong>训练与推理不一致</strong>：3. 推理时依赖于移动平均的全局统计量，这有时会引入偏差。
+但假设第二个句子实际只有两个单词，为组成一个批次用0填充到最大长度3，假设使用BN，在“第三个时间步”计算均值方差时就会将原本<strong>有意义的值与填充的0混在一起</strong>，导致严重的<strong>统计偏差</strong>。</li>
+<li><strong>训练与推理不一致</strong>：3. 推理时依赖于移动平均的全局统计量，这有时会引入偏差。
 训练时BN会实时计算每个小批次的均值和方差，并用它们来归一化数据。
 但同时，BN会维护两个全局可训练的变量，叫做“移动平均值”：
 \[全局均值 = momentum * 旧全局均值 + (1 - momentum) * 当前批次均值\]
 \[全局方差 = momentum * 旧全局方差 + (1 - momentum) * 当前批次方差\]
 这个“全局均值/方差”在训练过程中不断被更新，以期望它能逐渐逼近整个训练数据集的真实分布。
-但推理时可能只使用一个样本，因此只能使用在训练阶段最终得到的那个“全局均值”和“全局方差”，可能会引入偏差。</li></ul><p><strong>为什么要有 LN</strong>
-LN 在 Transformer 中能有效规避 BN 的问题。核心思想是：</p><p>不再在一个 Batch 的样本之间做归一化，而是在一个样本内部、一个层的所有神经元之间做归一化。</p><p>在每个 token 的特征维度上，把该 token 的激活值“标准化到均值≈0、方差≈1”（再学习一个线性缩放与平移），从而：</p><ul><li>让各层看到尺度更一致的输入信号</li><li>让学习率和初始化更鲁棒</li><li>让训练更稳定、收敛更快，深层网络更容易训练</li></ul><p><strong>BN 和 LN 的直观对比</strong>
-假设我们有一个全连接层，输入是一个向量 <code>x = [x1, x2, x3]</code>，输出是 <code>h = [h1, h2, h3, h4]</code>（有 4 个神经元）。</p><ul><li>Batch Norm 的做法是：对于 Batch 中所有样本的 <code>h1</code>，计算均值和方差，然后归一化。对 <code>h2</code>, <code>h3</code>, <code>h4</code> 做同样的事。它归一化的维度是 [Batch]。</li><li>Layer Norm 的做法是：对于单个样本，计算它自己的 <code>h = [h1, h2, h3, h4]</code> 这个向量的均值和方差，然后用这个均值和方差来归一化这个向量本身。它归一化的维度是 <code>[Hidden_Size]</code>。</li></ul><p><strong>数学定义</strong>
-设某层输入某个 token 的向量为 \(x \in \mathbb{R}^{d}\)（\(d\) 为隐藏维度）。</p><p>对该 token 的特征维度计算均值与方差：</p>$$
-\mu=\frac{1}{d}\sum_{i=1}^{d}x_i,\quad
-\sigma^2=\frac{1}{d}\sum_{i=1}^{d}(x_i-\mu)^2
-$$<p>标准化并做线性变换：</p>$$
-\hat{x}_i=\frac{x_i-\mu}{\sqrt{\sigma^2+\varepsilon}},\quad
-y_i=\gamma_i\hat{x}_i+\beta_i
-$$<p>其中：</p><ul><li>\(\varepsilon\)：数值稳定项（如 \(1\times10^{-5}\)）</li><li>\(\gamma,\beta \in \mathbb{R}^{d}\)：可学习逐维缩放/平移参数</li></ul><blockquote><p>注意：LN 的统计是 per-sample-per-position，不依赖 batch 大小。</p></blockquote><p><strong>LN 放在哪</strong></p><ul><li><strong>Post-LN（原始 Transformer）</strong>：\(y=\mathrm{LayerNorm}(x+F(x))\)。早期常见，但深层训练稳定性较弱(随深度增大梯度更难传播)。</li><li><strong>Pre-LN（现主流，如 BERT/GPT/ViT）</strong>：\(y=x+F(\mathrm{LayerNorm}(x))\)。梯度可更顺畅穿过残差主干，通常更稳、更易扩展到深层。</li></ul></div></div><h4 class="relative group">Feed Forward<div id=feed-forward class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#feed-forward aria-label=锚点>#</a></span></h4><p>Feed Forward 层比较简单，是一个两层的全连接层，第一层的激活函数为
-Relu，第二层不使用激活函数，对应的公式如下。</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image25.png><figcaption>Feed Forward</figcaption></figure><p>X是输入，Feed Forward 最终得到的输出矩阵的维度与X一致。</p><h4 class="relative group">组成 Encoder<div id=组成-encoder class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#%e7%bb%84%e6%88%90-encoder aria-label=锚点>#</a></span></h4><p>Encoder block
+但推理时可能只使用一个样本，因此只能使用在训练阶段最终得到的那个“全局均值”和“全局方差”，可能会引入偏差。</li>
+</ul>
+<p><strong>为什么要有 LN</strong>
+LN 在 Transformer 中能有效规避 BN 的问题。核心思想是：</p>
+<p>不再在一个 Batch 的样本之间做归一化，而是在一个样本内部、一个层的所有神经元之间做归一化。</p>
+<p>在每个 token 的特征维度上，把该 token 的激活值“标准化到均值≈0、方差≈1”（再学习一个线性缩放与平移），从而：</p>
+<ul>
+<li>让各层看到尺度更一致的输入信号</li>
+<li>让学习率和初始化更鲁棒</li>
+<li>让训练更稳定、收敛更快，深层网络更容易训练</li>
+</ul>
+<p><strong>BN 和 LN 的直观对比</strong>
+假设我们有一个全连接层，输入是一个向量 <code>x = [x1, x2, x3]</code>，输出是 <code>h = [h1, h2, h3, h4]</code>（有 4 个神经元）。</p>
+<ul>
+<li>Batch Norm 的做法是：对于 Batch 中所有样本的 <code>h1</code>，计算均值和方差，然后归一化。对 <code>h2</code>, <code>h3</code>, <code>h4</code> 做同样的事。它归一化的维度是 [Batch]。</li>
+<li>Layer Norm 的做法是：对于单个样本，计算它自己的 <code>h = [h1, h2, h3, h4]</code> 这个向量的均值和方差，然后用这个均值和方差来归一化这个向量本身。它归一化的维度是 <code>[Hidden_Size]</code>。</li>
+</ul>
+<p><strong>数学定义</strong>
+设某层输入某个 token 的向量为 \(x \in \mathbb{R}^{d}\)（\(d\) 为隐藏维度）。</p>
+<p>对该 token 的特征维度计算均值与方差：
+</p>
+$$
+ \mu=\frac{1}{d}\sum_{i=1}^{d}x_i,\quad
+ \sigma^2=\frac{1}{d}\sum_{i=1}^{d}(x_i-\mu)^2
+ $$<p>标准化并做线性变换：
+</p>
+$$
+ \hat{x}_i=\frac{x_i-\mu}{\sqrt{\sigma^2+\varepsilon}},\quad
+ y_i=\gamma_i\hat{x}_i+\beta_i
+ $$<p>其中：</p>
+<ul>
+<li>\(\varepsilon\)：数值稳定项（如 \(1\times10^{-5}\)）</li>
+<li>\(\gamma,\beta \in \mathbb{R}^{d}\)：可学习逐维缩放/平移参数</li>
+</ul>
+<blockquote><p>注意：LN 的统计是 per-sample-per-position，不依赖 batch 大小。</p>
+</blockquote><p><strong>LN 放在哪</strong></p>
+<ul>
+<li><strong>Post-LN（原始 Transformer）</strong>：\(y=\mathrm{LayerNorm}(x+F(x))\)。早期常见，但深层训练稳定性较弱(随深度增大梯度更难传播)。</li>
+<li><strong>Pre-LN（现主流，如 BERT/GPT/ViT）</strong>：\(y=x+F(\mathrm{LayerNorm}(x))\)。梯度可更顺畅穿过残差主干，通常更稳、更易扩展到深层。</li>
+</ul></div></div>
+<h4 class="relative group">Feed Forward
+    <div id="feed-forward" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#feed-forward" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<p>Feed Forward 层比较简单，是一个两层的全连接层，第一层的激活函数为
+Relu，第二层不使用激活函数，对应的公式如下。</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image25.png"
+    ><figcaption>Feed Forward</figcaption></figure>
+<p>X是输入，Feed Forward 最终得到的输出矩阵的维度与X一致。</p>
+
+<h4 class="relative group">组成 Encoder
+    <div id="组成-encoder" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e7%bb%84%e6%88%90-encoder" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<p>Encoder block
 接收输入矩阵\(\text{X}_{(n \times d)}\)，并输出一个矩阵\(\text{O}_{(n \times d)}\)。通过多个
-Encoder block 叠加就可以组成 Encoder。</p><p>第一个 Encoder block 的输入为句子单词的表示向量矩阵，后续 Encoder block
+Encoder block 叠加就可以组成 Encoder。</p>
+<p>第一个 Encoder block 的输入为句子单词的表示向量矩阵，后续 Encoder block
 的输入是前一个 Encoder block 的输出，最后一个 Encoder block
-输出的矩阵就是编码信息矩阵 C，这一矩阵后续会用到 Decoder 中。</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image3.png><figcaption>Encoder 编码句子信息</figcaption></figure><h3 class="relative group">Decoder 结构<div id=decoder-结构 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#decoder-%e7%bb%93%e6%9e%84 aria-label=锚点>#</a></span></h3><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image26.png><figcaption>Transformer Decoder block</figcaption></figure><ul><li>包含两个 Multi-Head Attention 层。</li><li>第一个 Multi-Head Attention 层采用了 <strong>Masked 操作</strong>。</li><li>第二个 Multi-Head Attention 层的K, V矩阵使用 Encoder
-的编码信息矩阵C进行计算，而Q使用上一个 Decoder block 的输出计算。</li><li>最后有一个 Softmax 层计算下一个翻译单词的概率。</li></ul><h4 class="relative group">第一个 Multi-Head Attention<div id=第一个-multi-head-attention class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#%e7%ac%ac%e4%b8%80%e4%b8%aa-multi-head-attention aria-label=锚点>#</a></span></h4><p>第一个Multi-Head
-Attention采用了Masked操作，因为在翻译过程中是按顺序翻译的。</p><p>通过 Masked 操作可以防止第 i 个单词知道 i+1 个单词之后的信息。</p><p>下面以 &ldquo;我有一只猫&rdquo; 翻译成 &ldquo;I have a cat&rdquo; 为例：</p><p>在 Decoder
+输出的矩阵就是编码信息矩阵 C，这一矩阵后续会用到 Decoder 中。</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image3.png"
+    ><figcaption>Encoder 编码句子信息</figcaption></figure>
+
+<h3 class="relative group">Decoder 结构
+    <div id="decoder-结构" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#decoder-%e7%bb%93%e6%9e%84" aria-label="锚点">#</a>
+    </span>
+    
+</h3>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image26.png"
+    ><figcaption>Transformer Decoder block</figcaption></figure>
+<ul>
+<li>包含两个 Multi-Head Attention 层。</li>
+<li>第一个 Multi-Head Attention 层采用了 <strong>Masked 操作</strong>。</li>
+<li>第二个 Multi-Head Attention 层的K, V矩阵使用 Encoder
+的编码信息矩阵C进行计算，而Q使用上一个 Decoder block 的输出计算。</li>
+<li>最后有一个 Softmax 层计算下一个翻译单词的概率。</li>
+</ul>
+
+<h4 class="relative group">第一个 Multi-Head Attention
+    <div id="第一个-multi-head-attention" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e7%ac%ac%e4%b8%80%e4%b8%aa-multi-head-attention" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<p>第一个Multi-Head
+Attention采用了Masked操作，因为在翻译过程中是按顺序翻译的。</p>
+<p>通过 Masked 操作可以防止第 i 个单词知道 i+1 个单词之后的信息。</p>
+<p>下面以 &ldquo;我有一只猫&rdquo; 翻译成 &ldquo;I have a cat&rdquo; 为例：</p>
+<p>在 Decoder
 的时候，是需要根据之前的翻译，求解当前最有可能的翻译，如下图所示。首先根据输入
-&ldquo;&lt;Begin>&rdquo; 预测出第一个单词为 &ldquo;I&rdquo;，然后根据输入 &ldquo;&lt;Begin> I&rdquo;
-预测下一个单词 &ldquo;have&rdquo;。</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image27.png><figcaption>Decoder预测</figcaption></figure><p>Decoder 可以在训练的过程中<strong>使用 Teacher Forcing
-并且并行化训练</strong>，即将正确的单词序列 (&lt;Begin> I have a cat) 和对应输出
-(I have a cat &lt;end>) 传递到 Decoder。那么在预测第 i 个输出时，就要将第
+&ldquo;&lt;Begin&gt;&rdquo; 预测出第一个单词为 &ldquo;I&rdquo;，然后根据输入 &ldquo;&lt;Begin&gt; I&rdquo;
+预测下一个单词 &ldquo;have&rdquo;。</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image27.png"
+    ><figcaption>Decoder预测</figcaption></figure>
+<p>Decoder 可以在训练的过程中<strong>使用 Teacher Forcing
+并且并行化训练</strong>，即将正确的单词序列 (&lt;Begin&gt; I have a cat) 和对应输出
+(I have a cat &lt;end&gt;) 传递到 Decoder。那么在预测第 i 个输出时，就要将第
 i+1 之后的单词掩盖住，注意 Mask 操作是在 Self-Attention 的 Softmax
-之前使用的，下面用 0 1 2 3 4 5 分别表示 &ldquo;&lt;Begin> I have a cat
-&lt;end>"。</p><ul><li><strong>第一步</strong>:是 Decoder 的输入矩阵和 Mask 矩阵，输入矩阵包含 &ldquo;&lt;Begin>
+之前使用的，下面用 0 1 2 3 4 5 分别表示 &ldquo;&lt;Begin&gt; I have a cat
+&lt;end&gt;&quot;。</p>
+<ul>
+<li><strong>第一步</strong>:是 Decoder 的输入矩阵和 Mask 矩阵，输入矩阵包含 &ldquo;&lt;Begin&gt;
 I have a cat&rdquo; (0, 1, 2, 3, 4) 五个单词的表示向量，Mask 是一个 5×5
 的矩阵。在 Mask 可以发现单词 0 只能使用单词 0 的信息，而单词 1
-可以使用单词 0, 1 的信息，即只能使用之前的信息。</li></ul><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image28.png><figcaption>输入矩阵与 Mask 矩阵</figcaption></figure><p>Attention 计算中有：</p>$$
-\text{scores} = \frac{QK^{T}}{\sqrt{d_{k}}}
-$$<p>（形状是 [seq_len, seq_len]）</p><p>然后加上 mask：</p>$$
-scores = scores + mask
-$$<p>其中：</p><ul><li>mask 的形状同样是 [seq_len, seq_len]；</li><li>对<strong>不遮挡的位置</strong> → mask = 0；</li><li>对<strong>遮挡的位置</strong> → mask = -∞（或一个非常大的负数，比如 -1e9）。</li></ul><p>最后做 softmax：</p>$$
+可以使用单词 0, 1 的信息，即只能使用之前的信息。</li>
+</ul>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image28.png"
+    ><figcaption>输入矩阵与 Mask 矩阵</figcaption></figure>
+<p>Attention 计算中有：</p>
+$$
+ \text{scores} = \frac{QK^{T}}{\sqrt{d_{k}}}
+$$<p>（形状是 [seq_len, seq_len]）</p>
+<p>然后加上 mask：
+</p>
+$$
+ scores = scores + mask
+$$<p>
+其中：</p>
+<ul>
+<li>mask 的形状同样是 [seq_len, seq_len]；</li>
+<li>对<strong>不遮挡的位置</strong> → mask = 0；</li>
+<li>对<strong>遮挡的位置</strong> → mask = -∞（或一个非常大的负数，比如 -1e9）。</li>
+</ul>
+<p>最后做 softmax：</p>
+$$
 \text{attention} = \text{softmax(scores)}
-$$<p>由于 softmax(–∞) ≈ 0，<br>被遮挡的部分注意力权重几乎为 0，<strong>不会被关注</strong>。</p><ul><li><strong>第二步</strong>:接下来的操作和之前的 Self-Attention
-一样，通过输入矩阵X计算得到Q,K,V矩阵。然后计算Q和 K^T 的乘积 QK^T</li></ul><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image29.png><figcaption>Q乘以K的转置</figcaption></figure><ul><li><strong>第三步</strong>：在得到 QK^T 之后需要进行 Softmax，计算 attention
+$$<p>由于 softmax(–∞) ≈ 0，<br>
+被遮挡的部分注意力权重几乎为 0，<strong>不会被关注</strong>。</p>
+<ul>
+<li><strong>第二步</strong>:接下来的操作和之前的 Self-Attention
+一样，通过输入矩阵X计算得到Q,K,V矩阵。然后计算Q和 K^T 的乘积 QK^T</li>
+</ul>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image29.png"
+    ><figcaption>Q乘以K的转置</figcaption></figure>
+<ul>
+<li><strong>第三步</strong>：在得到 QK^T 之后需要进行 Softmax，计算 attention
 score，我们在 Softmax
-之前需要使用Mask矩阵遮挡住每一个单词之后的信息，遮挡操作如下：</li></ul><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image30.png><figcaption>Softmax 之前 Mask</figcaption></figure><p>得到 Mask QK^T 之后在 Mask QK^T 上进行 Softmax，每一行的和都为
-1。但是单词 0 在单词 1, 2, 3, 4 上的 attention score 都为 0。</p><ul><li><strong>第四步</strong>：使用 Mask QK^T 与矩阵 V相乘，得到输出 Z，则单词 1
-的输出向量 是只包含单词 1 信息的。</li></ul><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image31.png><figcaption>Mask 之后的输出</figcaption></figure><ul><li><strong>第五步</strong>：通过上述步骤就可以得到一个 Mask Self-Attention 的输出矩阵
+之前需要使用Mask矩阵遮挡住每一个单词之后的信息，遮挡操作如下：</li>
+</ul>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image30.png"
+    ><figcaption>Softmax 之前 Mask</figcaption></figure>
+<p>得到 Mask QK^T 之后在 Mask QK^T 上进行 Softmax，每一行的和都为
+1。但是单词 0 在单词 1, 2, 3, 4 上的 attention score 都为 0。</p>
+<ul>
+<li><strong>第四步</strong>：使用 Mask QK^T 与矩阵 V相乘，得到输出 Z，则单词 1
+的输出向量 是只包含单词 1 信息的。</li>
+</ul>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image31.png"
+    ><figcaption>Mask 之后的输出</figcaption></figure>
+<ul>
+<li><strong>第五步</strong>：通过上述步骤就可以得到一个 Mask Self-Attention 的输出矩阵
 \(Z_i\) ，然后和 Encoder 类似，通过 Multi-Head Attention 拼接多个输出 \(Z_i\)
-然后计算得到第一个 Multi-Head Attention 的输出Z，Z与输入X维度一样。</li></ul><h4 class="relative group">第二个 Multi-Head Attention<div id=第二个-multi-head-attention class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#%e7%ac%ac%e4%ba%8c%e4%b8%aa-multi-head-attention aria-label=锚点>#</a></span></h4><p>其中 Self-Attention 的 K, V矩阵不是使用 上一个 Decoder block
-的输出计算的，而是使用 Encoder 的编码信息矩阵 C 计算的。</p><p>根据 Encoder 的输出 C 计算得到 K, V，根据上一个 Decoder block 的输出 Z
+然后计算得到第一个 Multi-Head Attention 的输出Z，Z与输入X维度一样。</li>
+</ul>
+
+<h4 class="relative group">第二个 Multi-Head Attention
+    <div id="第二个-multi-head-attention" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e7%ac%ac%e4%ba%8c%e4%b8%aa-multi-head-attention" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<p>其中 Self-Attention 的 K, V矩阵不是使用 上一个 Decoder block
+的输出计算的，而是使用 Encoder 的编码信息矩阵 C 计算的。</p>
+<p>根据 Encoder 的输出 C 计算得到 K, V，根据上一个 Decoder block 的输出 Z
 计算 Q (如果是第一个 Decoder block 则使用输入矩阵 X
-进行计算)，后续的计算方法与之前描述的一致。</p><p>这样做的好处是在 Decoder 的时候，每一位单词都可以利用到 Encoder
-所有单词的信息 (这些信息无需 Mask)。</p><h4 class="relative group">Softmax 预测输出单词<div id=softmax-预测输出单词 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#softmax-%e9%a2%84%e6%b5%8b%e8%be%93%e5%87%ba%e5%8d%95%e8%af%8d aria-label=锚点>#</a></span></h4><p>Decoder block 最后的部分是利用 Softmax
+进行计算)，后续的计算方法与之前描述的一致。</p>
+<p>这样做的好处是在 Decoder 的时候，每一位单词都可以利用到 Encoder
+所有单词的信息 (这些信息无需 Mask)。</p>
+
+<h4 class="relative group">Softmax 预测输出单词
+    <div id="softmax-预测输出单词" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#softmax-%e9%a2%84%e6%b5%8b%e8%be%93%e5%87%ba%e5%8d%95%e8%af%8d" aria-label="锚点">#</a>
+    </span>
+    
+</h4>
+<p>Decoder block 最后的部分是利用 Softmax
 预测下一个单词，在之前的网络层我们可以得到一个最终的输出 Z，因为 Mask
-的存在，使得单词 0 的输出 \(Z_0\) 只包含单词 0 的信息，如下：</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image32.png><figcaption>Decoder Softmax 之前的 Z</figcaption></figure><p>Softmax 根据输出矩阵的每一行预测下一个单词：</p><figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt src=/img/posts/transformer/image33.png><figcaption>Decoder Softmax 预测</figcaption></figure><p>这就是 Decoder block 的定义，与 Encoder 一样，Decoder 是由多个 Decoder
-block 组合而成。</p><div class="admonition relative overflow-hidden rounded-lg border-l-4 my-3 px-4 py-3 shadow-sm" data-type=important><div class="flex items-center gap-2 font-semibold text-inherit"><div class="flex shrink-0 h-5 w-5 items-center justify-center text-lg"><span class="relative block icon"><svg viewBox="0 0 576 512"><path fill="currentColor" d="M287.9.0C297.1.0 305.5 5.25 309.5 13.52L378.1 154.8l153.3 22.7C540.4 178.8 547.8 185.1 550.7 193.7 553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4l26.3 155.5C461.4 492.9 457.7 502.1 450.2 507.4 442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9 150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4 118.2 502.1 114.5 492.9 115.1 483.9l27.1-155.5L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7 28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8 266.3 13.52C270.4 5.249 278.7.0 287.9.0zm0 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9 184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7l105.2-56.2C283.7 383.7 292.2 383.7 299.2 387.5l105.2 56.2-20.2-119.6C382.9 316.4 385.5 308.5 391 303l85.9-85.1-118.3-17.4C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z"/></svg></span></div><div class=grow>重要</div></div><div class="admonition-content mt-3 text-base leading-relaxed text-inherit"><p>感觉以上讲的有些不清楚，tranformer的训练和推理过程对应的图也是不一样的</p><p>Transformer
+的存在，使得单词 0 的输出 \(Z_0\) 只包含单词 0 的信息，如下：</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image32.png"
+    ><figcaption>Decoder Softmax 之前的 Z</figcaption></figure>
+<p>Softmax 根据输出矩阵的每一行预测下一个单词：</p>
+<figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt=""
+    src="/img/posts/transformer/image33.png"
+    ><figcaption>Decoder Softmax 预测</figcaption></figure>
+<p>这就是 Decoder block 的定义，与 Encoder 一样，Decoder 是由多个 Decoder
+block 组合而成。</p>
+<div class="admonition relative overflow-hidden rounded-lg border-l-4 my-3 px-4 py-3 shadow-sm" data-type="important">
+      <div class="flex items-center gap-2 font-semibold text-inherit">
+        <div class="flex shrink-0 h-5 w-5 items-center justify-center text-lg"><span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z"/></svg></span></div>
+        <div class="grow">
+          重要
+        </div>
+      </div><div class="admonition-content mt-3 text-base leading-relaxed text-inherit"><p>感觉以上讲的有些不清楚，tranformer的训练和推理过程对应的图也是不一样的</p>
+<p>Transformer
 能并行训练，是因为训练阶段一次性输入“右移后的目标句子”，同时计算所有位置的
-z_i，即训练阶段一次性输出所有预测，正如上图所示。</p><p>而推理阶段必须自回归生成，只能一步步用最新的 z
-来预测下一个词，所以每次循环都会生成一个新的Z，模型只用最下面那一行（最新时间步）来生成下一个词</p><p>至于“Softmax 根据输出矩阵的每一行预测下一个单词”是怎么实现的：</p><ul><li>第一步：将最后一个decoder的输出，通过一个linear层，将向量维度转换为词表大小。</li><li>第二步：将linear层的输出，通过一个softmax，将每个词的可能性概率化。</li></ul><p>也就是说，转换成词表大小的是linear层，softmax仅仅是概率化</p></div></div><table><thead><tr><th>阶段</th><th>输入是什么</th><th>Mask 做什么</th><th>计算结果</th><th>能否并行</th></tr></thead><tbody><tr><td>训练阶段 (Teacher Forcing)</td><td>整个目标句子右移：[BOS] 我爱你</td><td>遮挡未来位置（不能看第 i+1 个词）</td><td>一次计算得到所有 (z_0, z_1, z_2, z_3)</td><td>✅ 可以并行（每个位置独立算）</td></tr><tr><td>推理阶段 (Autoregressive Inference)</td><td>当前已生成的部分：[BOS] 我爱</td><td>仍遮挡未来</td><td>计算新的 (Z)，取最后一行 (z_t)</td><td>❌ 只能串行（逐词生成）</td></tr></tbody></table><h2 class="relative group">Transformer 总结<div id=transformer-总结 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#transformer-%e6%80%bb%e7%bb%93 aria-label=锚点>#</a></span></h2><ul><li>Transformer 与 RNN 不同，可以比较好地并行训练。</li><li>Transformer 本身是不能利用单词的顺序信息的，因此需要在输入中添加位置
-Embedding，否则 Transformer 就是一个词袋模型了。</li><li>Transformer 的重点是 Self-Attention 结构，其中用到的 Q, K,
-V矩阵通过输出进行线性变换得到。</li><li>Transformer 中 Multi-Head Attention 中有多个
-Self-Attention，可以捕获单词之间多种维度上的相关系数 attention score。</li></ul></div></div><script type=text/javascript src=/js/page.min.54b6f4371722649edbe871e431d8670d670878c22be8f36e229fe53cc9b786fe25a834def5e6de621f7a3e37b72bc8cd73839aa5ed907ed6cbd45cd3e1b0fa20.js integrity="sha512-VLb0NxciZJ7b6HHkMdhnDWcIeMIr6PNuIp/lPMm3hv4lqDTe9ebeYh96Pje3K8jNc4Oape2QftbL1FzT4bD6IA==" data-oid=views_posts/transformer-notes.md data-oid-likes=likes_posts/transformer-notes.md></script></section><footer class="pt-8 max-w-prose print:hidden"><div class=pt-8><hr class="border-dotted border-neutral-300 dark:border-neutral-600"><div class="flex justify-between pt-3"><span class="flex flex-col"><a class="flex text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400" href=/posts/why-i-built-this-site/><span class=leading-6><span class="inline-block rtl:rotate-180">&larr;</span>&ensp;为什么我想搭这个网站
-</span></a><span class="ms-6 mt-1 text-xs text-neutral-500 dark:text-neutral-400"><time datetime=2026-02-06T20:30:00+08:00>2026-02-06</time>
-</span></span><span class="flex flex-col items-end"></span></div></div></footer></article><div id=scroll-to-top class="fixed bottom-6 end-6 z-50 transform translate-y-4 opacity-0 duration-200"><a href=#the-top class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" aria-label=返回顶部 title=返回顶部>&uarr;</a></div></main><footer id=site-footer class="py-10 print:hidden"><nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400"><ul class="flex list-none flex-col sm:flex-row"><li class="flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0"><a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center" href=/posts/ title=Posts>文章</a></li><li class="flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0"><a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center" href=/projects/ title=项目>项目</a></li><li class="flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0"><a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center" href=/about/ title=关于我>关于我</a></li></ul></nav><div class="flex items-center justify-between"><p class="text-sm text-neutral-500 dark:text-neutral-400">&copy;
-2026
-Steph.H</p><p class="text-xs text-neutral-500 dark:text-neutral-400">由 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href=https://gohugo.io/ target=_blank rel="noopener noreferrer">Hugo</a> & <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href=https://blowfish.page/ target=_blank rel="noopener noreferrer">Blowfish</a> 强力驱动</p></div><script>mediumZoom(document.querySelectorAll("img:not(.nozoom)"),{margin:24,background:"rgba(0,0,0,0.5)",scrollOffset:0})</script><script type=text/javascript src=/js/process.min.ee03488f19c93c2efb199e2e3014ea5f3cb2ce7d45154adb3399a158cac27ca52831db249ede5bb602700ef87eb02434139de0858af1818ab0fb4182472204a4.js integrity="sha512-7gNIjxnJPC77GZ4uMBTqXzyyzn1FFUrbM5mhWMrCfKUoMdsknt5btgJwDvh+sCQ0E53ghYrxgYqw+0GCRyIEpA=="></script></footer><div id=search-wrapper class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500" data-url=https://HRH0410.github.io/><div id=search-modal class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800"><header class="relative z-10 flex items-center justify-between flex-none px-2"><form class="flex items-center flex-auto min-w-0"><div class="flex items-center justify-center w-8 h-8 text-neutral-400"><span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7 405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9.0 208 0S0 93.1.0 208s93.1 208 208 208c48.3.0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9.0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7.0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7.0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg></span></div><input type=search id=search-query class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent" placeholder=搜索 tabindex=0></form><button id=close-search-button class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400" title="关闭 (Esc)">
-<span class="relative block icon"><svg viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75.0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3 54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75.0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75.0-45.25s32.75-12.5 45.25.0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25.0s12.5 32.75.0 45.25l-105.4 105.4L310.6 361.4z"/></svg></span></button></header><section class="flex-auto px-2 overflow-auto"><ul id=search-results></ul></section></div></div></div></body></html>
+z_i，即训练阶段一次性输出所有预测，正如上图所示。</p>
+<p>而推理阶段必须自回归生成，只能一步步用最新的 z
+来预测下一个词，所以每次循环都会生成一个新的Z，模型只用最下面那一行（最新时间步）来生成下一个词</p>
+<p>至于“Softmax 根据输出矩阵的每一行预测下一个单词”是怎么实现的：</p>
+<ul>
+<li>第一步：将最后一个decoder的输出，通过一个linear层，将向量维度转换为词表大小。</li>
+<li>第二步：将linear层的输出，通过一个softmax，将每个词的可能性概率化。</li>
+</ul>
+<p>也就是说，转换成词表大小的是linear层，softmax仅仅是概率化</p></div></div><table>
+  <thead>
+      <tr>
+          <th>阶段</th>
+          <th>输入是什么</th>
+          <th>Mask 做什么</th>
+          <th>计算结果</th>
+          <th>能否并行</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>训练阶段 (Teacher Forcing)</td>
+          <td>整个目标句子右移：[BOS] 我爱你</td>
+          <td>遮挡未来位置（不能看第 i+1 个词）</td>
+          <td>一次计算得到所有 (z_0, z_1, z_2, z_3)</td>
+          <td>✅ 可以并行（每个位置独立算）</td>
+      </tr>
+      <tr>
+          <td>推理阶段 (Autoregressive Inference)</td>
+          <td>当前已生成的部分：[BOS] 我爱</td>
+          <td>仍遮挡未来</td>
+          <td>计算新的 (Z)，取最后一行 (z_t)</td>
+          <td>❌ 只能串行（逐词生成）</td>
+      </tr>
+  </tbody>
+</table>
+
+<h2 class="relative group">Transformer 总结
+    <div id="transformer-总结" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#transformer-%e6%80%bb%e7%bb%93" aria-label="锚点">#</a>
+    </span>
+    
+</h2>
+<ul>
+<li>Transformer 与 RNN 不同，可以比较好地并行训练。</li>
+<li>Transformer 本身是不能利用单词的顺序信息的，因此需要在输入中添加位置
+Embedding，否则 Transformer 就是一个词袋模型了。</li>
+<li>Transformer 的重点是 Self-Attention 结构，其中用到的 Q, K,
+V矩阵通过输出进行线性变换得到。</li>
+<li>Transformer 中 Multi-Head Attention 中有多个
+Self-Attention，可以捕获单词之间多种维度上的相关系数 attention score。</li>
+</ul>
+
+          
+          
+          
+        </div>
+        
+        
+
+        
+
+        
+
+      </div>
+
+      
+      
+        
+        
+          
+          
+        
+        
+        
+        <script
+          type="text/javascript"
+          src="/js/page.min.54b6f4371722649edbe871e431d8670d670878c22be8f36e229fe53cc9b786fe25a834def5e6de621f7a3e37b72bc8cd73839aa5ed907ed6cbd45cd3e1b0fa20.js"
+          integrity="sha512-VLb0NxciZJ7b6HHkMdhnDWcIeMIr6PNuIp/lPMm3hv4lqDTe9ebeYh96Pje3K8jNc4Oape2QftbL1FzT4bD6IA=="
+          data-oid="views_posts/transformer-notes.md"
+          data-oid-likes="likes_posts/transformer-notes.md"></script>
+      
+    </section>
+
+    
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+      <div class="flex justify-between pt-3">
+        <span class="flex flex-col">
+          
+            <a
+              class="flex text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+              href="/posts/why-i-built-this-site/">
+              <span class="leading-6">
+                <span class="inline-block rtl:rotate-180">&larr;</span>&ensp;为什么我想搭这个网站
+              </span>
+            </a>
+            
+              <span class="ms-6 mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+                <time datetime="2026-02-06T20:30:00&#43;08:00">2026-02-06</time>
+              </span>
+            
+          
+        </span>
+        <span class="flex flex-col items-end">
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+        
+
+
+  
+
+
+
+
+
+
+<div
+  id="scroll-to-top"
+  class="fixed bottom-6 end-6 z-50 transform translate-y-4 opacity-0 duration-200">
+  <a
+    href="#the-top"
+    class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="返回顶部"
+    title="返回顶部">
+    &uarr;
+  </a>
+</div>
+
+      </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+      
+      
+        
+          
+          
+      
+      
+      
+      <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400 ">
+        <ul class="flex list-none flex-col sm:flex-row">
+          
+            <li class=" flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0 ">
+              <a
+                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
+                href="/posts/"
+                title="Posts">
+                
+                文章
+              </a>
+            </li>
+          
+            <li class=" flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0 ">
+              <a
+                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
+                href="/projects/"
+                title="项目">
+                
+                项目
+              </a>
+            </li>
+          
+            <li class=" flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0 ">
+              <a
+                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
+                href="/about/"
+                title="关于我">
+                
+                关于我
+              </a>
+            </li>
+          
+        </ul>
+      </nav>
+    
+  
+  <div class="flex items-center justify-between">
+    
+    
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2026
+          Steph.H
+      </p>
+    
+
+    
+    
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        
+        
+        由 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a> 强力驱动
+      </p>
+    
+  </div>
+  
+    <script>
+      mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+        margin: 24,
+        background: "rgba(0,0,0,0.5)",
+        scrollOffset: 0,
+      });
+    </script>
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/process.min.ee03488f19c93c2efb199e2e3014ea5f3cb2ce7d45154adb3399a158cac27ca52831db249ede5bb602700ef87eb02434139de0858af1818ab0fb4182472204a4.js"
+    integrity="sha512-7gNIjxnJPC77GZ4uMBTqXzyyzn1FFUrbM5mhWMrCfKUoMdsknt5btgJwDvh&#43;sCQ0E53ghYrxgYqw&#43;0GCRyIEpA=="></script>
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500"
+  data-url="http://localhost:1313/">
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="搜索"
+          tabindex="0">
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="关闭 (Esc)">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+  
+</html>

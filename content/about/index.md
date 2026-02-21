@@ -518,6 +518,14 @@ article h2::after {
   gap: 1rem;
 }
 
+/* 2026 单独排布：桌面端一行四个 */
+.year-section.year-2026 .cities-pins {
+  flex-wrap: nowrap;
+}
+.year-section.year-2026 .pin-card {
+  flex: 0 0 auto;
+}
+
 /* 钉子卡片 - 纸张质感 */
 .pin-card {
   position: relative;
@@ -639,6 +647,10 @@ article h2::after {
   }
   .cities-pins {
     gap: 0.75rem;
+  }
+
+  .year-section.year-2026 .cities-pins {
+    flex-wrap: wrap;
   }
 }
 
@@ -1470,12 +1482,12 @@ article h2::after {
 }
 
 .work-card.more-card {
-  grid-column: span 2;
+  grid-column: span 1;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: auto;
-  aspect-ratio: 32 / 10.5;
+  aspect-ratio: 16 / 10.5;
   background:
     radial-gradient(circle at 22% 18%, rgba(166, 193, 232, 0.18), transparent 34%),
     radial-gradient(circle at 80% 72%, rgba(166, 193, 232, 0.12), transparent 36%),
@@ -1798,6 +1810,20 @@ article h2::after {
   </div>
 </div>
 
+<div class="work-card">
+  <div class="work-cover">
+    <img src="/img/works/五彩星河夜.png" alt="《五彩星河夜》封面" style="object-position:center 58%;">
+    <div class="work-meta">
+      <div class="card-label">Vol. 05</div>
+      <div class="work-headline">
+        <div class="card-title">五彩星河夜</div>
+        <a class="work-link" href="https://mp.weixin.qq.com/s/6N7C4FG2jWM0jVwhyJ4wQg" target="_blank" rel="noopener noreferrer">公众号 ↗</a>
+      </div>
+      <div class="card-subtitle"></div>
+    </div>
+  </div>
+</div>
+
 <div class="work-card more-card" aria-hidden="true">
   <div class="more-content">
     <div class="more-dots">...</div>
@@ -1909,13 +1935,31 @@ article h2::after {
 <div class="wall-timeline">
 
 <!-- 2026 -->
-<div class="year-section">
+<div class="year-section year-2026">
 <div class="year-label">2026</div>
 <div class="cities-pins">
 <div class="pin-card">
 <div class="pin-city">
 <span class="pin-emoji">🏔️</span>
-<span>西藏</span>
+<span>拉萨</span>
+</div>
+</div>
+<div class="pin-card">
+<div class="pin-city">
+<span class="pin-emoji">🏞️</span>
+<span>日喀则</span>
+</div>
+</div>
+<div class="pin-card">
+<div class="pin-city">
+<span class="pin-emoji">🌲</span>
+<span>林芝</span>
+</div>
+</div>
+<div class="pin-card">
+<div class="pin-city">
+<span class="pin-emoji">🌊</span>
+<span>连云港</span>
 </div>
 </div>
 </div>

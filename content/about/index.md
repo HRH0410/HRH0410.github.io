@@ -518,12 +518,14 @@ article h2::after {
   gap: 1rem;
 }
 
-/* 2026 单独排布：桌面端一行四个 */
+/* 2026 单独排布：桌面端固定每行 4 个 */
 .year-section.year-2026 .cities-pins {
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
 }
 .year-section.year-2026 .pin-card {
-  flex: 0 0 auto;
+  min-width: 0;
 }
 
 /* 钉子卡片 - 纸张质感 */
@@ -608,10 +610,14 @@ article h2::after {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  white-space: nowrap;
   font-size: 0.95rem;
   font-weight: 600;
   color: #2a2a2a;
   letter-spacing: 0.02em;
+}
+.pin-city span:not(.pin-emoji) {
+  word-break: keep-all;
 }
 .dark .pin-city {
   color: #e0e0e0;
@@ -650,7 +656,11 @@ article h2::after {
   }
 
   .year-section.year-2026 .cities-pins {
+    display: flex;
     flex-wrap: wrap;
+  }
+  .year-section.year-2026 .pin-card {
+    flex: 0 0 auto;
   }
 }
 
@@ -1707,9 +1717,7 @@ article h2::after {
 
 我叫**黄荣昊**（Steph.H），是南京大学智能科学与技术专业的一名本科生。
 
-现在的我，正在探索**AIGC**这片快速生长的领域，于**NJU Reasoning & Learning Group**进行早期科研训练，师从**范琦教授**。
-
-我对**LLM**与**Agent**充满好奇，也乐于探索技术与创意、理性与感受之间的交汇点。
+我对**LLM**、**AIGC**与**Agent**充满好奇，也乐于探索技术与创意、理性与感受之间的交汇点。
 
 在这里，我会记录自己的学习、项目、思考，也会写下生活中的一些片段——希望它们能成为时间里可回望的痕迹。
 
@@ -1954,6 +1962,12 @@ article h2::after {
 <div class="pin-city">
 <span class="pin-emoji">🌲</span>
 <span>林芝</span>
+</div>
+</div>
+<div class="pin-card">
+<div class="pin-city">
+<span class="pin-emoji">🃏</span>
+<span>泰兴</span>
 </div>
 </div>
 <div class="pin-card">

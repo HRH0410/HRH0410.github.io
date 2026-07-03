@@ -1,5 +1,5 @@
 <div class="h-24"></div>
-<div class="fixed inset-x-0 top-4 z-100 flex justify-center px-6">
+<div class="site-nav-shell fixed inset-x-0 top-4 z-100 flex justify-center px-6">
   <nav
     id="menu-blur"
     class="pill-nav flex items-center gap-6 px-8 py-2.5 rounded-full">
@@ -20,6 +20,10 @@
     transition: all 0.25s ease !important;
     padding-left: 1rem !important;
     padding-right: 1.25rem !important; /* 右边多给点空间给月亮图标 */
+  }
+
+  .site-nav-shell {
+    top: 1rem !important;
   }
 
   .dark .pill-nav {
@@ -157,14 +161,157 @@
 
   /* Responsive */
   @media (max-width: 768px) {
-    #menu-blur {
-      padding: 0.5rem 1.25rem !important;
-      gap: 0.25rem !important;
+    .site-nav-shell {
+      top: 0.45rem !important;
+      padding-left: 0.95rem !important;
+      padding-right: 0.95rem !important;
+      z-index: 100 !important;
     }
-    #menu-blur .logo {
-      height: 30px !important;
-      width: 30px !important;
-      min-width: 30px !important;
+
+    #menu-blur {
+      width: min(100%, 18.75rem) !important;
+      min-height: 2.82rem !important;
+      padding: 0.3rem 0.52rem !important;
+      gap: 0.18rem !important;
+      border-radius: 999px !important;
+    }
+
+    #menu-blur .main-menu {
+      gap: 0.12rem !important;
+      width: 100% !important;
+    }
+
+    #menu-blur .logo,
+    #menu-blur img.logo,
+    .pill-nav .logo,
+    .pill-nav img.logo {
+      height: 24px !important;
+      width: 24px !important;
+      min-width: 24px !important;
+      max-width: 24px !important;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1) !important;
+    }
+
+    #menu-blur .main-menu > div:first-child {
+      margin-right: 0 !important;
+    }
+
+    #menu-blur .main-menu > a.text-base {
+      font-size: 0.86rem !important;
+      max-width: 5.8rem !important;
+      margin-right: 0 !important;
+      padding: 0.22rem 0.38rem !important;
+      line-height: 1.1 !important;
+    }
+
+    #menu-blur .main-menu .ms-auto,
+    #menu-blur .main-menu > div:last-child {
+      gap: 0.1rem !important;
+      margin-left: auto !important;
+      height: auto !important;
+      min-height: 0 !important;
+    }
+
+    #menu-blur .main-menu .ms-auto::before {
+      height: 1.25rem !important;
+      margin-right: 0.26rem !important;
+    }
+
+    #menu-blur .main-menu .ms-auto > .flex {
+      height: auto !important;
+      min-height: 0 !important;
+      gap: 0.18rem !important;
+      align-items: center !important;
+    }
+
+    #search-button-mobile,
+    #appearance-switcher-mobile,
+    #mobile-menu-toggle + label {
+      width: 1.7rem !important;
+      height: 1.7rem !important;
+      padding: 0.26rem !important;
+      border-radius: 999px !important;
+    }
+
+    #search-button-mobile svg,
+    #appearance-switcher-mobile svg,
+    #mobile-menu-toggle + label svg {
+      width: 1.08rem !important;
+      height: 1.08rem !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] {
+      position: fixed !important;
+      inset: auto 0.85rem auto auto !important;
+      top: 3.45rem !important;
+      width: min(10.8rem, calc(100vw - 1.7rem)) !important;
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 0.36rem !important;
+      border-radius: 0.82rem !important;
+      background: rgba(255, 255, 255, 0.86) !important;
+      border: 1px solid rgba(127, 143, 166, 0.16) !important;
+      box-shadow: 0 14px 34px rgba(30, 41, 59, 0.12) !important;
+      backdrop-filter: blur(14px) saturate(145%) !important;
+      -webkit-backdrop-filter: blur(14px) saturate(145%) !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    .dark #mobile-menu-toggle:checked ~ div[role="dialog"] {
+      background: rgba(18, 22, 31, 0.93) !important;
+      border-color: rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36) !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] > label {
+      top: 0.3rem !important;
+      right: 0.3rem !important;
+      width: 1.3rem !important;
+      height: 1.3rem !important;
+      opacity: 0.48 !important;
+      border-color: transparent !important;
+      background: transparent !important;
+      border-radius: 999px !important;
+      box-shadow: none !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] nav {
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 1.28rem 0 0 !important;
+      display: grid !important;
+      gap: 0.22rem !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] nav > div {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a {
+      min-height: 1.62rem !important;
+      justify-content: flex-start !important;
+      border-radius: 999px !important;
+      padding: 0.18rem 0.44rem !important;
+      background: rgba(255, 255, 255, 0.5) !important;
+      border: 1px solid rgba(127, 143, 166, 0.15) !important;
+      box-shadow: none !important;
+    }
+
+    .dark #mobile-menu-toggle:checked ~ div[role="dialog"] a {
+      background: rgba(255, 255, 255, 0.06) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      box-shadow: none !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a span {
+      font-size: 0.76rem !important;
+      line-height: 1.2 !important;
+      font-weight: 620 !important;
+      letter-spacing: 0 !important;
     }
   }
 </style>

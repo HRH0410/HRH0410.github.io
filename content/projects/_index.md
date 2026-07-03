@@ -363,6 +363,27 @@ main#main-content > article > header > h1 {
   --tilt: 0.24deg;
 }
 
+.labora-card {
+  gap: 0;
+}
+
+.labora-card .project-head {
+  margin-bottom: 0.48rem;
+}
+
+.labora-card .tags {
+  margin: 0 0 0.58rem;
+}
+
+.labora-card .highlight-grid {
+  margin-top: 0.82rem;
+}
+
+.labora-card .actions {
+  margin-top: 0;
+  padding-top: 0.86rem;
+}
+
 .project-head {
   display: flex;
   justify-content: space-between;
@@ -375,6 +396,25 @@ main#main-content > article > header > h1 {
   font-size: 1.5rem;
   line-height: 1.2;
   color: var(--ink);
+}
+
+.project-name--with-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.project-logo {
+  width: 2.95rem;
+  height: 2.95rem;
+  flex: 0 0 auto;
+  object-fit: contain;
+  margin: 0 !important;
+  border: 1.5px solid rgba(48, 41, 33, 0.72);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.82);
+  padding: 0.22rem;
+  box-shadow: 2px 3px 0 rgba(31, 26, 21, 0.46);
 }
 
 .status {
@@ -416,6 +456,46 @@ main#main-content > article > header > h1 {
 
 .project-desc {
   font-size: 1rem;
+}
+
+.project-shot {
+  margin: 0.2rem 0 0.9rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1.5px solid rgba(48, 41, 33, 0.72);
+  border-radius: 14px 6px 16px 8px / 8px 16px 6px 14px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 3px 4px 0 rgba(31, 26, 21, 0.28);
+}
+
+.project-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  object-fit: cover;
+}
+
+.project-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(220px, 30%, 320px);
+  align-items: start;
+  gap: 1.05rem;
+  margin: 0.12rem 0 0;
+}
+
+.featured-card .project-shot {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  margin: 0;
+  box-shadow: 2px 3px 0 rgba(31, 26, 21, 0.24);
+}
+
+.project-summary .project-desc {
+  grid-column: 1;
+  grid-row: 1;
+  padding-top: 0.08rem;
 }
 
 .highlight-grid {
@@ -615,8 +695,14 @@ main#main-content > article > header > h1 {
 .dark .status,
 .dark .tags span,
 .dark .sketch-btn,
+.dark .project-shot,
 .dark .highlight-grid article {
   border-color: rgba(218, 201, 174, 0.34);
+}
+
+.dark .project-shot {
+  background: rgba(255, 248, 232, 0.08);
+  box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.36);
 }
 
 .dark .hero-quote,
@@ -656,58 +742,271 @@ main#main-content > article > header > h1 {
 
 @media (max-width: 768px) {
   .neo-sketch {
-    margin-top: clamp(1.2rem, 8vw, 2rem);
-    padding: 0.82rem 0.72rem 0.92rem;
-    border-radius: 16px;
+    margin-top: clamp(5rem, 21vw, 5.6rem);
+    padding: 0.95rem 0.9rem 1rem;
+    border-width: 2px;
+    border-radius: 14px;
+    box-shadow: 5px 6px 0 rgba(35, 30, 23, 0.82);
+  }
+
+  .neo-sketch::after {
+    inset: 9px;
   }
 
   .studio-hero {
     grid-template-columns: 1fr;
-    gap: 0.72rem;
+    gap: 0.48rem;
+    margin-bottom: 0.7rem;
+    padding-bottom: 0.68rem;
+  }
+
+  .studio-hero::after,
+  .doodle {
+    display: none;
   }
 
   .profile-polaroid {
-    width: min(180px, 100%);
+    width: min(126px, 42vw);
+    justify-self: center;
+    padding: 0.28rem 0.28rem 0.78rem;
+    border-width: 1.5px;
+    box-shadow: 3px 4px 0 rgba(29, 24, 18, 0.78);
+    transform: rotate(-2.2deg);
+  }
+
+  .profile-polaroid::after {
+    width: 42px;
+    height: 12px;
+    top: -8px;
+  }
+
+  .profile-avatar {
+    border-width: 1.5px;
+    border-radius: 6px;
+  }
+
+  .profile-handle {
+    margin-top: 0.24rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.03em;
+  }
+
+  .hero-main {
+    padding: 0 0.2rem;
+  }
+
+  .hero-kicker {
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+  }
+
+  .hero-title {
+    margin-top: 0.14rem;
+    padding-bottom: 0;
+    font-size: clamp(1.42rem, 8vw, 1.86rem);
+    line-height: 1.04;
   }
 
   .hero-quote {
     max-width: none;
-    transform: rotate(-0.2deg);
-    font-size: 0.86rem;
+    padding: 0.44rem 0.5rem;
+    border-width: 1.5px;
+    box-shadow: 2px 3px 0 rgba(33, 28, 22, 0.72);
+    transform: rotate(-0.1deg);
+    font-size: 0.78rem;
+    line-height: 1.48;
+  }
+
+  .hero-actions {
+    justify-content: center;
+    gap: 0.36rem;
+  }
+
+  .ink-action {
+    padding: 0.32rem 0.54rem;
+    border-width: 1.5px;
+    box-shadow: 2px 2px 0 rgba(33, 28, 22, 0.72);
+    font-size: 0.74rem;
   }
 
   .block-title {
-    font-size: 1.22rem;
+    font-size: 1.06rem;
+  }
+
+  .block-head {
+    margin: 0.76rem 0 0.52rem;
+  }
+
+  .block-mark {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+  }
+
+  .featured-grid,
+  .course-grid {
+    gap: 0.72rem;
+    margin-bottom: 1rem;
   }
 
   .sketch-card {
-    padding: 0.9rem 0.84rem 0.84rem;
+    padding: 0.92rem 0.86rem 0.82rem;
+    border-width: 1.5px;
+    box-shadow: 3px 4px 0 rgba(31, 26, 21, 0.72);
     transform: none !important;
   }
 
+  .sketch-card::after {
+    top: -8px;
+    width: 46px;
+    height: 14px;
+    border-width: 1px;
+  }
+
+  .project-head {
+    gap: 0.45rem;
+  }
+
+  .labora-card .project-head {
+    margin-bottom: 0.32rem;
+  }
+
+  .labora-card .tags {
+    margin: 0 0 0.38rem;
+  }
+
+  .labora-card .highlight-grid {
+    margin-top: 0.52rem;
+  }
+
+  .labora-card .actions {
+    padding-top: 0.48rem;
+  }
+
   .project-name {
-    font-size: 1.24rem;
+    font-size: 1.08rem;
+    line-height: 1.18;
+  }
+
+  .project-name--with-logo {
+    gap: 0.4rem;
+  }
+
+  .project-logo {
+    width: 2.18rem;
+    height: 2.18rem;
+    border-radius: 9px;
+    padding: 0.16rem;
+    box-shadow: 1px 2px 0 rgba(31, 26, 21, 0.42);
   }
 
   .project-desc {
-    font-size: 0.92rem;
+    font-size: 0.84rem;
+    line-height: 1.58;
+  }
+
+  .project-shot {
+    width: 100%;
+    margin: 0.12rem 0 0.58rem;
+    border-width: 1px;
+    border-radius: 10px 5px 12px 6px / 6px 12px 5px 10px;
+    box-shadow: 2px 3px 0 rgba(31, 26, 21, 0.22);
+  }
+
+  .featured-card .project-shot {
+    grid-column: auto;
+    grid-row: auto;
+    width: 100%;
+    margin: 0.12rem 0 0.58rem;
+  }
+
+  .project-summary {
+    display: block;
+    margin-top: 0;
+  }
+
+  .project-summary .project-desc {
+    grid-column: auto;
+    grid-row: auto;
+    padding-top: 0;
+  }
+
+  .status {
+    font-size: 0.66rem;
+    padding: 0.14rem 0.38rem;
+    border-width: 1px;
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.14);
+  }
+
+  .tags {
+    gap: 0.28rem;
+    margin: 0.42rem 0 0.52rem;
+  }
+
+  .tags span {
+    font-size: 0.64rem;
+    padding: 0.14rem 0.4rem;
+    border-width: 1px;
   }
 
   .highlight-grid {
     grid-template-columns: 1fr;
+    gap: 0.34rem;
+    margin-top: 0.72rem;
+  }
+
+  .highlight-grid article {
+    padding: 0.56rem 0.62rem;
+    border-width: 1px;
+    box-shadow: 1px 1px 0 rgba(40, 35, 28, 0.12);
+  }
+
+  .highlight-grid strong {
+    font-size: 0.68rem;
+  }
+
+  .highlight-grid span {
+    font-size: 0.63rem;
+    line-height: 1.34;
+  }
+
+  .actions {
+    padding-top: 0.72rem;
     gap: 0.42rem;
+  }
+
+  .sketch-btn {
+    padding: 0.2rem 0.52rem;
+    border-width: 1.4px;
+    box-shadow: 1px 2px 0 rgba(32, 27, 22, 0.68);
+    font-size: 0.72rem;
   }
 
   .course-grid {
     grid-template-columns: 1fr;
   }
 
+  .course-card {
+    padding: 0.74rem 0.68rem 0.68rem;
+  }
+
+  .course-card::before {
+    top: 0.72rem;
+    right: 0.72rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+  }
+
   .course-name {
-    font-size: 1rem;
+    margin-bottom: 0.38rem;
+    padding-right: 2.35rem;
+    font-size: 0.92rem;
+    line-height: 1.3;
   }
 
   .course-desc {
-    font-size: 0.86rem;
+    margin-top: 0.52rem;
+    font-size: 0.78rem;
+    line-height: 1.46;
   }
 }
 </style>
@@ -832,7 +1131,12 @@ main#main-content > article > header > h1 {
 <span>生存指南</span>
 <span>全景攻略</span>
 </div>
+<div class="project-summary">
+<figure class="project-shot">
+<img src="/img/works/njuis-wiki.png" alt="NJUIS-Wiki 网站界面截图" loading="lazy">
+</figure>
 <p class="project-desc">面向南京大学智能科学与技术学院的开源 Wiki 协作平台。我们致力于聚合历届同学的经验心血，打造结构化的体系指南，内容涵盖专业学习、科学研究、职场就业与苏州生活等方方面面，全方位帮助后来者少走弯路。</p>
+</div>
 <div class="highlight-grid">
 <article><strong>学业与科创</strong><span>汇总核心课程通关方法，梳理实验室套磁与科研入门向导</span></article>
 <article><strong>求职与生活</strong><span>汇集真实大厂面经与实习体验，并提供苏州校区衣食住行攻略</span></article>
@@ -844,25 +1148,59 @@ main#main-content > article > header > h1 {
 </div>
 </article>
 
+<article class="sketch-card featured-card labora-card">
+<div class="project-head">
+<h3 class="project-name project-name--with-logo"><img class="project-logo" src="/img/labora-logo.png" alt="Labora logo">Labora</h3>
+<span class="status">工程开发中</span>
+</div>
+<div class="tags">
+<span>Next.js</span>
+<span>NestJS</span>
+<span>Prisma</span>
+<span>科研机会</span>
+<span>学术协作</span>
+</div>
+<div class="project-summary">
+<figure class="project-shot">
+<img src="/img/works/labora.PNG" alt="Labora 项目界面截图" loading="lazy">
+</figure>
+<p class="project-desc">Labora 是一个面向本科生、硕博生、老师和科研团队的科研机会发现与连接平台。它来自 Lab + Agora：前者指向实验室、科研与探索，后者是古希腊城邦里的公共广场。我们希望它既是发现科研机会的入口，也是一座校园里的“学术广场”，让分散在群聊、朋友圈、平台笔记与熟人推荐里的信息被沉淀、搜索、筛选和连接。</p>
+</div>
+<div class="highlight-grid">
+<article><strong>真实困惑</strong><span>高校里从不缺机会和想尝试的人，缺的是清晰入口、可被搜索的信息和及时的相遇</span></article>
+<article><strong>双向连接</strong><span>学生展示经历、技能与兴趣，老师和团队发布招募、研究方向并找到合适的人</span></article>
+<article><strong>学术广场</strong><span>RA 招募、实验室招新、项目合作与比赛组队在这里流动、沉淀并继续生长</span></article>
+</div>
+<div class="actions">
+<a class="sketch-btn sketch-btn--primary" href="https://labora.cn" target="_blank" rel="noopener noreferrer">访问 labora.cn →</a>
+<span class="sketch-btn sketch-btn--passive">内测中</span>
+</div>
+</article>
+
 <article class="sketch-card featured-card">
 <div class="project-head">
 <h3 class="project-name">🩺 知微见疾</h3>
 <span class="status">推进中</span>
 </div>
 <div class="tags">
-<span>LLM</span>
 <span>Agent</span>
-<span>多模态</span>
+<span>Workflow</span>
+<span>RAG</span>
 <span>医疗应用</span>
 </div>
+<div class="project-summary">
+<figure class="project-shot">
+<img src="/img/works/zhiwei-jianji.png" alt="知微见疾项目界面截图" loading="lazy">
+</figure>
 <p class="project-desc">基层医疗场景下的 AI 健康问诊与智能报告解读助手，围绕真实问诊流程设计多模态交互与可靠输出能力。</p>
+</div>
 <div class="highlight-grid">
 <article><strong>多模态问诊</strong><span>结合文本与报告理解的场景化交互</span></article>
 <article><strong>流程对齐</strong><span>按真实问诊步骤组织任务流与反馈</span></article>
 <article><strong>可靠输出</strong><span>强调可解释、可落地的建议表达</span></article>
 </div>
 <div class="actions">
-<span class="sketch-btn sketch-btn--passive">持续迭代中</span>
+<span class="sketch-btn sketch-btn--passive">鸿蒙商城上线中</span>
 </div>
 </article>
 </div>
@@ -877,11 +1215,14 @@ main#main-content > article > header > h1 {
 <article class="sketch-card course-card">
 <h3 class="course-name">🧟 植物大战僵尸像素版</h3>
 <div class="tags">
-<span>课程项目</span>
+<span>C++</span>
+<span>Qt</span>
 <span>像素风</span>
-<span>关卡玩法</span>
 </div>
-<p class="course-desc">课程实践中的玩法复刻项目，重点打磨了像素化表现、交互反馈与节奏设计。</p>
+<figure class="project-shot">
+<img src="/img/works/pvz-pixel.png" alt="植物大战僵尸像素版游戏截图" loading="lazy">
+</figure>
+<p class="course-desc">程序设计实训 Project，基于 C++ 与 Qt 复刻《植物大战僵尸》的核心玩法，包括植物种植、僵尸推进、攻击判定与关卡流程，并引入了更轻量的像素风。</p>
 <div class="actions">
 <a class="sketch-btn" href="https://www.bilibili.com/video/BV1HrypYJEnx/?spm_id_from=333.1387.homepage.video_card.click&amp;vd_source=2db54e40bd1d8587ec698619193da3e0" target="_blank" rel="noopener noreferrer">Bilibili →</a>
 </div>
@@ -890,11 +1231,14 @@ main#main-content > article > header > h1 {
 <article class="sketch-card course-card">
 <h3 class="course-name">🌲 跳一跳森林版</h3>
 <div class="tags">
-<span>课程项目</span>
+<span>C</span>
+<span>SDL</span>
 <span>小游戏</span>
-<span>交互体验</span>
 </div>
-<p class="course-desc">将经典“跳一跳”做成森林主题版本，围绕操作手感、关卡过渡与视觉反馈做了完整实现。</p>
+<figure class="project-shot">
+<img src="/img/works/jump-forest.png" alt="跳一跳森林版游戏截图" loading="lazy">
+</figure>
+<p class="course-desc">CPL 课程项目，使用 C 与 SDL 实现“跳一跳”的主要交互逻辑，并以森林探险为主题进行相应的美工设计。</p>
 <div class="actions">
 <a class="sketch-btn" href="https://github.com/HRH0410/Jump_jump" target="_blank" rel="noopener noreferrer">GitHub →</a>
 <a class="sketch-btn" href="https://www.bilibili.com/video/BV1c4421P75c/?spm_id_from=333.1387.collection.video_card.click&amp;vd_source=2db54e40bd1d8587ec698619193da3e0" target="_blank" rel="noopener noreferrer">Bilibili →</a>
@@ -905,10 +1249,13 @@ main#main-content > article > header > h1 {
 <h3 class="course-name">🏭 异形工厂 Shapez</h3>
 <div class="tags">
 <span>C++</span>
-<span>课程项目</span>
-<span>工程实现</span>
+<span>Qt</span>
+<span>玩法复刻</span>
 </div>
-<p class="course-desc">高级程序设计课程项目，围绕玩法机制与程序架构完成的工程化实践与视频记录。</p>
+<figure class="project-shot">
+<img src="/img/works/shapez.png" alt="异形工厂 Shapez 游戏截图" loading="lazy">
+</figure>
+<p class="course-desc">高级程序设计 Project，使用 C++ 与 Qt 复刻 Shapez 的基础生产线玩法，实现采矿、加工、运输等核心机制，呈现自动化工厂的运行过程。</p>
 <div class="actions">
 <a class="sketch-btn" href="https://github.com/HRH0410/Shapez" target="_blank" rel="noopener noreferrer">GitHub →</a>
 <a class="sketch-btn" href="https://www.bilibili.com/video/BV1nJh5eLEi8/?spm_id_from=333.1387.collection.video_card.click&amp;vd_source=2db54e40bd1d8587ec698619193da3e0" target="_blank" rel="noopener noreferrer">Bilibili →</a>

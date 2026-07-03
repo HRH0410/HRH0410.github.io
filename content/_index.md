@@ -179,6 +179,111 @@ showDate: false
     opacity: 0.4 !important;
     color: #888 !important;
   }
+
+  @media (max-width: 768px) {
+    .glass-card {
+      max-width: calc(100% - 1.5rem) !important;
+      margin: 0.75rem auto 3rem !important;
+      padding: 2.25rem 1rem !important;
+      border-radius: 24px !important;
+    }
+
+    .floating-avatar {
+      width: 108px !important;
+      height: 108px !important;
+      margin-bottom: 1.5rem !important;
+    }
+
+    .glass-card > h1 {
+      font-size: 1.72rem !important;
+      line-height: 1.32 !important;
+      margin-bottom: 2rem !important;
+    }
+
+    .info-text {
+      flex-wrap: wrap !important;
+      gap: 0.62rem 0.9rem !important;
+      margin-bottom: 2.2rem !important;
+      font-size: 0.86rem !important;
+      line-height: 1.45 !important;
+    }
+
+    .info-text .info-separator {
+      display: none !important;
+    }
+
+    .info-text > span:not(.info-separator) {
+      justify-content: center;
+      min-width: min(100%, 9.5rem);
+    }
+
+    .home-nav-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.35rem 0.45rem;
+      align-items: stretch !important;
+      width: 100%;
+      max-width: 520px;
+      padding: 0.7rem 0;
+    }
+
+    .home-nav-grid .garden-nav-item {
+      min-width: 0;
+      padding: 1rem 0.55rem !important;
+      border-radius: 14px;
+    }
+
+    .home-nav-grid .separator-line-vertical {
+      display: none !important;
+    }
+
+    .home-nav-grid .separator-line-horizontal {
+      width: 86% !important;
+    }
+
+    .garden-nav-item span:first-of-type {
+      font-size: 0.56rem !important;
+      letter-spacing: 0.14rem !important;
+    }
+
+    .garden-nav-item .nav-title {
+      font-size: 0.98rem !important;
+      white-space: nowrap;
+    }
+
+    .garden-nav-item span:last-of-type {
+      font-size: 0.62rem !important;
+      white-space: nowrap;
+    }
+
+    .quote-text {
+      font-size: 1rem !important;
+      line-height: 1.7 !important;
+    }
+
+    .manifesto-text {
+      margin: 3rem 0 4rem !important;
+      letter-spacing: 0.22rem !important;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .home-nav-grid {
+      gap: 0.25rem;
+    }
+
+    .home-nav-grid .garden-nav-item {
+      padding: 0.9rem 0.35rem !important;
+    }
+
+    .garden-nav-item .nav-title {
+      font-size: 0.92rem !important;
+    }
+
+    .garden-nav-item span:last-of-type {
+      font-size: 0.58rem !important;
+    }
+  }
 </style>
 
 <div class="glass-card">
@@ -195,9 +300,9 @@ showDate: false
     <span style="display: flex; align-items: center; gap: 6px;">
       {{< icon "location-dot" >}} 苏州 · NJU
     </span>
-    <span style="opacity: 0.3;">|</span>
+    <span class="info-separator" style="opacity: 0.3;">|</span>
     <span style="display: flex; align-items: center; gap: 6px;">{{< icon "fire" >}} 正在探索 AIGC</span>
-    <span style="opacity: 0.3;">|</span>
+    <span class="info-separator" style="opacity: 0.3;">|</span>
     <span style="display: flex; align-items: center; gap: 6px;">{{< icon "mug-hot" >}} 近况：在世界里慢慢走</span>
   </div>
 
@@ -209,7 +314,7 @@ showDate: false
 
 
 <!-- 四个导航入口 - 带分隔线的立体设计 -->
-<div style="display: flex; justify-content: center; align-items: stretch; flex-wrap: nowrap; margin: 0 auto; position: relative;">
+<div class="home-nav-grid" style="display: flex; justify-content: center; align-items: stretch; flex-wrap: nowrap; margin: 0 auto; position: relative;">
 <!-- 顶部装饰线 -->
 <div class="separator-line-horizontal" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);"></div>
 <a href="/notes/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">

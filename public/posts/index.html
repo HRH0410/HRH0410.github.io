@@ -116,8 +116,8 @@
   <link
     type="text/css"
     rel="stylesheet"
-    href="/css/main.bundle.min.e41ee59dc46558c0c96396ad66f321c091dff5db3bbb7051cdc9a60b4bee881917c4434c7a46e6938a9db5e9e056c5f448cfdfb6ab7eb2843fb174b1b89a1228.css"
-    integrity="sha512-5B7lncRlWMDJY5atZvMhwJHf9ds7u3BRzcmmC0vuiBkXxENMekbmk4qdtengVsX0SM/ftqt&#43;soQ/sXSxuJoSKA==">
+    href="/css/main.bundle.min.31459664648fa2897b92c75e31d9d3b5e8163561e336d94906904d1a7f2b597f21c5883a88c4300a1e9785fc7b0230740771c734bfbc82144bbf05c9ad23057b.css"
+    integrity="sha512-MUWWZGSPool7ksdeMdnTtegWNWHjNtlJBpBNGn8rWX8hxYg6iMQwCh6Xhfx7AjB0B3HHNL&#43;8ghRLvwXJrSMFew==">
 
   
   
@@ -230,11 +230,11 @@
       "@type": "Person",
       "name": "Steph.H"
     },
-    "copyrightYear": "2026",
-    "dateCreated": "2026-02-07T20:45:00\u002b08:00",
-    "datePublished": "2026-02-07T20:45:00\u002b08:00",
     
-    "dateModified": "2026-02-07T20:45:00\u002b08:00",
+    
+    
+    
+    
     
     
     
@@ -254,8 +254,41 @@
   
   
     <script>
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   var imgs = document.querySelectorAll(".article-content figure > img");
+  var shouldCorrectHash = Boolean(window.location.hash);
+
+  function scrollToHashTarget() {
+    if (!shouldCorrectHash || !window.location.hash) return;
+
+    var rawId = window.location.hash.slice(1);
+    var decodedId = rawId;
+    try {
+      decodedId = decodeURIComponent(rawId);
+    } catch (error) {
+      decodedId = rawId;
+    }
+
+    var target = document.getElementById(decodedId) || document.getElementById(rawId);
+    if (!target) return;
+
+    target.scrollIntoView({ block: "start" });
+  }
+
+  function scheduleHashCorrection() {
+    if (!window.location.hash) return;
+    [80, 350, 900, 1600, 3000, 5000].forEach(function (delay) {
+      window.setTimeout(scrollToHashTarget, delay);
+    });
+    window.setTimeout(function () {
+      shouldCorrectHash = false;
+    }, 5600);
+  }
+
   imgs.forEach(function (img) {
     var applyClass = function () {
       if (!img.naturalWidth || !img.naturalHeight) return;
@@ -269,9 +302,24 @@ document.addEventListener("DOMContentLoaded", function () {
     if (img.complete) {
       applyClass();
     } else {
-      img.addEventListener("load", applyClass, { once: true });
+      img.addEventListener("load", function () {
+        applyClass();
+      }, { once: true });
     }
   });
+
+  scheduleHashCorrection();
+  window.addEventListener("load", scheduleHashCorrection, { once: true });
+  window.addEventListener("hashchange", function () {
+    shouldCorrectHash = true;
+    scheduleHashCorrection();
+  });
+  window.addEventListener("wheel", function () {
+    shouldCorrectHash = false;
+  }, { once: true, passive: true });
+  window.addEventListener("touchmove", function () {
+    shouldCorrectHash = false;
+  }, { once: true, passive: true });
 });
 </script>
 
@@ -314,7 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     
       <div class="h-24"></div>
-<div class="fixed inset-x-0 top-4 z-100 flex justify-center px-6">
+<div class="site-nav-shell fixed inset-x-0 top-4 z-100 flex justify-center px-6">
   <nav
     id="menu-blur"
     class="pill-nav flex items-center gap-6 px-8 py-2.5 rounded-full">
@@ -550,14 +598,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         
   
-    <div
-      class="flex flex-wrap items-center [&_span]:text-2xl [&_.translation_button_.icon]:text-4xl! [&_.translation_button_span]:text-base! [&_.translation_.menuhide_span]:text-sm! gap-x-6 ps-2 mt-8 pt-8 border-t bf-border-color">
-      
-
-
-      
-    </div>
-  
 
       </nav>
     </div>
@@ -731,14 +771,152 @@ document.addEventListener("DOMContentLoaded", function () {
 
    
   @media (max-width: 768px) {
-    #menu-blur {
-      padding: 0.5rem 1.25rem !important;
-      gap: 0.25rem !important;
+    .site-nav-shell {
+      top: 0.45rem !important;
+      padding-left: 0.95rem !important;
+      padding-right: 0.95rem !important;
+      z-index: 100 !important;
     }
-    #menu-blur .logo {
-      height: 30px !important;
-      width: 30px !important;
-      min-width: 30px !important;
+
+    #menu-blur {
+      width: min(100%, 18.75rem) !important;
+      min-height: 2.82rem !important;
+      padding: 0.3rem 0.52rem !important;
+      gap: 0.18rem !important;
+      border-radius: 999px !important;
+    }
+
+    #menu-blur .main-menu {
+      gap: 0.12rem !important;
+      width: 100% !important;
+    }
+
+    #menu-blur .logo,
+    #menu-blur img.logo,
+    .pill-nav .logo,
+    .pill-nav img.logo {
+      height: 24px !important;
+      width: 24px !important;
+      min-width: 24px !important;
+      max-width: 24px !important;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1) !important;
+    }
+
+    #menu-blur .main-menu > div:first-child {
+      margin-right: 0 !important;
+    }
+
+    #menu-blur .main-menu > a.text-base {
+      font-size: 0.86rem !important;
+      max-width: 5.8rem !important;
+      margin-right: 0 !important;
+      padding: 0.22rem 0.38rem !important;
+      line-height: 1.1 !important;
+    }
+
+    #menu-blur .main-menu .ms-auto,
+    #menu-blur .main-menu > div:last-child {
+      gap: 0.1rem !important;
+      margin-left: auto !important;
+      height: auto !important;
+      min-height: 0 !important;
+    }
+
+    #menu-blur .main-menu .ms-auto::before {
+      height: 1.25rem !important;
+      margin-right: 0.26rem !important;
+    }
+
+    #menu-blur .main-menu .ms-auto > .flex {
+      height: auto !important;
+      min-height: 0 !important;
+      gap: 0.18rem !important;
+      align-items: center !important;
+    }
+
+    #search-button-mobile,
+    #appearance-switcher-mobile,
+    #mobile-menu-toggle + label {
+      width: 1.7rem !important;
+      height: 1.7rem !important;
+      padding: 0.26rem !important;
+      border-radius: 999px !important;
+    }
+
+    #search-button-mobile svg,
+    #appearance-switcher-mobile svg,
+    #mobile-menu-toggle + label svg {
+      width: 1.08rem !important;
+      height: 1.08rem !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] {
+      position: fixed !important;
+      inset: auto 0.85rem auto auto !important;
+      top: 3.75rem !important;
+      width: min(12.4rem, calc(100vw - 1.7rem)) !important;
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 0.42rem !important;
+      border-radius: 0.95rem !important;
+      background: rgba(255, 255, 255, 0.92) !important;
+      border: 1px solid rgba(127, 143, 166, 0.2) !important;
+      box-shadow: 0 18px 42px rgba(30, 41, 59, 0.18) !important;
+      backdrop-filter: blur(16px) saturate(150%) !important;
+      -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    .dark #mobile-menu-toggle:checked ~ div[role="dialog"] {
+      background: rgba(18, 22, 31, 0.93) !important;
+      border-color: rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36) !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] > label {
+      top: 0.34rem !important;
+      right: 0.34rem !important;
+      width: 1.62rem !important;
+      height: 1.62rem !important;
+      border-radius: 999px !important;
+      box-shadow: none !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] nav {
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 1.58rem 0 0 !important;
+      display: grid !important;
+      gap: 0.26rem !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] nav > div {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a {
+      min-height: 1.86rem !important;
+      justify-content: flex-start !important;
+      border-radius: 0.62rem !important;
+      padding: 0.24rem 0.48rem !important;
+      background: rgba(255, 255, 255, 0.58) !important;
+      border: 1px solid rgba(127, 143, 166, 0.18) !important;
+      box-shadow: none !important;
+    }
+
+    .dark #mobile-menu-toggle:checked ~ div[role="dialog"] a {
+      background: rgba(255, 255, 255, 0.06) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      box-shadow: none !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a span {
+      font-size: 0.82rem !important;
+      line-height: 1.2 !important;
+      font-weight: 650 !important;
+      letter-spacing: 0 !important;
     }
   }
 </style>
@@ -758,6 +936,18 @@ document.addEventListener("DOMContentLoaded", function () {
   
     
   
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
 
   <div class="posts-hub-page">
     <header class="posts-hub-header">
@@ -768,15 +958,15 @@ document.addEventListener("DOMContentLoaded", function () {
     <section class="posts-hub-stats">
       <div class="posts-hub-stat-card">
         <span class="posts-hub-stat-label">共</span>
-        <span class="posts-hub-stat-value">2 篇</span>
+        <span class="posts-hub-stat-value">8 篇</span>
       </div>
       <div class="posts-hub-stat-card">
         <span class="posts-hub-stat-label">累计</span>
-        <span class="posts-hub-stat-value">7499 字</span>
+        <span class="posts-hub-stat-value">132173 字</span>
       </div>
       <div class="posts-hub-stat-card">
         <span class="posts-hub-stat-label">学习笔记</span>
-        <span class="posts-hub-stat-value">1</span>
+        <span class="posts-hub-stat-value">7</span>
       </div>
       <div class="posts-hub-stat-card">
         <span class="posts-hub-stat-label">生活记录</span>
@@ -792,9 +982,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <span class="branch-vol">VOL. 01</span>
             <h2 class="branch-title">拾光笔记</h2>
             <div class="branch-meta">
-              <span>1 篇</span>
+              <span>7 篇</span>
               
-                <span>最近更新 2026-02-07</span>
+                <span>最近更新 2026-07-02</span>
               
             </div>
             <span class="branch-cta">去看看</span>
@@ -823,8 +1013,8 @@ document.addEventListener("DOMContentLoaded", function () {
     
       <section class="posts-hub-latest">
         <p class="posts-hub-latest-label">最近写了</p>
-        <a href="/posts/transformer-notes/" class="posts-hub-latest-link">Transformer 学习笔记</a>
-        <p class="posts-hub-latest-meta">2026-02-07 · 6939 字 · 14 分钟</p>
+        <a href="/posts/2025%E6%98%A5-%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95-%E6%9C%9F%E6%9C%AB%E7%AC%94%E8%AE%B0/" class="posts-hub-latest-link">2025春 计算方法 期末笔记</a>
+        <p class="posts-hub-latest-meta">2026-07-02 · 61 字 · 1 分钟</p>
       </section>
     
   </div>

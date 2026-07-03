@@ -120,8 +120,8 @@
   <link
     type="text/css"
     rel="stylesheet"
-    href="/css/main.bundle.min.e41ee59dc46558c0c96396ad66f321c091dff5db3bbb7051cdc9a60b4bee881917c4434c7a46e6938a9db5e9e056c5f448cfdfb6ab7eb2843fb174b1b89a1228.css"
-    integrity="sha512-5B7lncRlWMDJY5atZvMhwJHf9ds7u3BRzcmmC0vuiBkXxENMekbmk4qdtengVsX0SM/ftqt&#43;soQ/sXSxuJoSKA==">
+    href="/css/main.bundle.min.31459664648fa2897b92c75e31d9d3b5e8163561e336d94906904d1a7f2b597f21c5883a88c4300a1e9785fc7b0230740771c734bfbc82144bbf05c9ad23057b.css"
+    integrity="sha512-MUWWZGSPool7ksdeMdnTtegWNWHjNtlJBpBNGn8rWX8hxYg6iMQwCh6Xhfx7AjB0B3HHNL&#43;8ghRLvwXJrSMFew==">
 
   
   
@@ -251,8 +251,41 @@
   
   
     <script>
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   var imgs = document.querySelectorAll(".article-content figure > img");
+  var shouldCorrectHash = Boolean(window.location.hash);
+
+  function scrollToHashTarget() {
+    if (!shouldCorrectHash || !window.location.hash) return;
+
+    var rawId = window.location.hash.slice(1);
+    var decodedId = rawId;
+    try {
+      decodedId = decodeURIComponent(rawId);
+    } catch (error) {
+      decodedId = rawId;
+    }
+
+    var target = document.getElementById(decodedId) || document.getElementById(rawId);
+    if (!target) return;
+
+    target.scrollIntoView({ block: "start" });
+  }
+
+  function scheduleHashCorrection() {
+    if (!window.location.hash) return;
+    [80, 350, 900, 1600, 3000, 5000].forEach(function (delay) {
+      window.setTimeout(scrollToHashTarget, delay);
+    });
+    window.setTimeout(function () {
+      shouldCorrectHash = false;
+    }, 5600);
+  }
+
   imgs.forEach(function (img) {
     var applyClass = function () {
       if (!img.naturalWidth || !img.naturalHeight) return;
@@ -266,9 +299,24 @@ document.addEventListener("DOMContentLoaded", function () {
     if (img.complete) {
       applyClass();
     } else {
-      img.addEventListener("load", applyClass, { once: true });
+      img.addEventListener("load", function () {
+        applyClass();
+      }, { once: true });
     }
   });
+
+  scheduleHashCorrection();
+  window.addEventListener("load", scheduleHashCorrection, { once: true });
+  window.addEventListener("hashchange", function () {
+    shouldCorrectHash = true;
+    scheduleHashCorrection();
+  });
+  window.addEventListener("wheel", function () {
+    shouldCorrectHash = false;
+  }, { once: true, passive: true });
+  window.addEventListener("touchmove", function () {
+    shouldCorrectHash = false;
+  }, { once: true, passive: true });
 });
 </script>
 
@@ -311,7 +359,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     
       <div class="h-24"></div>
-<div class="fixed inset-x-0 top-4 z-100 flex justify-center px-6">
+<div class="site-nav-shell fixed inset-x-0 top-4 z-100 flex justify-center px-6">
   <nav
     id="menu-blur"
     class="pill-nav flex items-center gap-6 px-8 py-2.5 rounded-full">
@@ -401,33 +449,6 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
   
-  <div class="translation nested-menu">
-    <button class="cursor-pointer flex items-center">
-      <span class="me-1">
-        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-    <path fill="currentColor" d="M0 128C0 92.7 28.7 64 64 64H256h48 16H576c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H320 304 256 64c-35.3 0-64-28.7-64-64V128zm320 0V384H576V128H320zM178.3 175.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1 .1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1h73.6l8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4l-64-144zM160 233.2L179 276H141l19-42.8zM448 164c11 0 20 9 20 20v4h44 16c11 0 20 9 20 20s-9 20-20 20h-2l-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9 .6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9l-18.9-11.3c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8l-12.2-12.2c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6 .5 .5c12.4-13.1 22.5-28.3 29.8-45H448 376c-11 0-20-9-20-20s9-20 20-20h52v-4c0-11 9-20 20-20z"/></svg></span>
-      </span>
-      <span class="text-sm font-medium bf-icon-color-hover" title="">简体中文</span>
-    </button>
-    <ul class="menuhide">
-      <li class="rounded-xl backdrop-blur shadow-2xl p-2 flex flex-col gap-1">
-        
-          <a href="/" class="flex items-center bf-icon-color-hover px-3 py-1">
-            <span class="text-sm font-sm" title="">
-              中文
-            </span>
-          </a>
-        
-          <a href="/en/" class="flex items-center bf-icon-color-hover px-3 py-1">
-            <span class="text-sm font-sm" title="">
-              EN
-            </span>
-          </a>
-        
-      </li>
-    </ul>
-  </div>
-
 
   
 
@@ -573,41 +594,6 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
         
-  
-    <div
-      class="flex flex-wrap items-center [&_span]:text-2xl [&_.translation_button_.icon]:text-4xl! [&_.translation_button_span]:text-base! [&_.translation_.menuhide_span]:text-sm! gap-x-6 ps-2 mt-8 pt-8 border-t bf-border-color">
-      
-  <div class="translation nested-menu">
-    <button class="cursor-pointer flex items-center">
-      <span class="me-1">
-        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-    <path fill="currentColor" d="M0 128C0 92.7 28.7 64 64 64H256h48 16H576c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H320 304 256 64c-35.3 0-64-28.7-64-64V128zm320 0V384H576V128H320zM178.3 175.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1 .1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1h73.6l8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4l-64-144zM160 233.2L179 276H141l19-42.8zM448 164c11 0 20 9 20 20v4h44 16c11 0 20 9 20 20s-9 20-20 20h-2l-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9 .6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9l-18.9-11.3c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8l-12.2-12.2c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6 .5 .5c12.4-13.1 22.5-28.3 29.8-45H448 376c-11 0-20-9-20-20s9-20 20-20h52v-4c0-11 9-20 20-20z"/></svg></span>
-      </span>
-      <span class="text-sm font-medium bf-icon-color-hover" title="">简体中文</span>
-    </button>
-    <ul class="menuhide">
-      <li class="rounded-xl backdrop-blur shadow-2xl p-2 flex flex-col gap-1">
-        
-          <a href="/" class="flex items-center bf-icon-color-hover px-3 py-1">
-            <span class="text-sm font-sm" title="">
-              中文
-            </span>
-          </a>
-        
-          <a href="/en/" class="flex items-center bf-icon-color-hover px-3 py-1">
-            <span class="text-sm font-sm" title="">
-              EN
-            </span>
-          </a>
-        
-      </li>
-    </ul>
-  </div>
-
-
-
-      
-    </div>
   
 
       </nav>
@@ -782,14 +768,152 @@ document.addEventListener("DOMContentLoaded", function () {
 
    
   @media (max-width: 768px) {
-    #menu-blur {
-      padding: 0.5rem 1.25rem !important;
-      gap: 0.25rem !important;
+    .site-nav-shell {
+      top: 0.45rem !important;
+      padding-left: 0.95rem !important;
+      padding-right: 0.95rem !important;
+      z-index: 100 !important;
     }
-    #menu-blur .logo {
-      height: 30px !important;
-      width: 30px !important;
-      min-width: 30px !important;
+
+    #menu-blur {
+      width: min(100%, 18.75rem) !important;
+      min-height: 2.82rem !important;
+      padding: 0.3rem 0.52rem !important;
+      gap: 0.18rem !important;
+      border-radius: 999px !important;
+    }
+
+    #menu-blur .main-menu {
+      gap: 0.12rem !important;
+      width: 100% !important;
+    }
+
+    #menu-blur .logo,
+    #menu-blur img.logo,
+    .pill-nav .logo,
+    .pill-nav img.logo {
+      height: 24px !important;
+      width: 24px !important;
+      min-width: 24px !important;
+      max-width: 24px !important;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1) !important;
+    }
+
+    #menu-blur .main-menu > div:first-child {
+      margin-right: 0 !important;
+    }
+
+    #menu-blur .main-menu > a.text-base {
+      font-size: 0.86rem !important;
+      max-width: 5.8rem !important;
+      margin-right: 0 !important;
+      padding: 0.22rem 0.38rem !important;
+      line-height: 1.1 !important;
+    }
+
+    #menu-blur .main-menu .ms-auto,
+    #menu-blur .main-menu > div:last-child {
+      gap: 0.1rem !important;
+      margin-left: auto !important;
+      height: auto !important;
+      min-height: 0 !important;
+    }
+
+    #menu-blur .main-menu .ms-auto::before {
+      height: 1.25rem !important;
+      margin-right: 0.26rem !important;
+    }
+
+    #menu-blur .main-menu .ms-auto > .flex {
+      height: auto !important;
+      min-height: 0 !important;
+      gap: 0.18rem !important;
+      align-items: center !important;
+    }
+
+    #search-button-mobile,
+    #appearance-switcher-mobile,
+    #mobile-menu-toggle + label {
+      width: 1.7rem !important;
+      height: 1.7rem !important;
+      padding: 0.26rem !important;
+      border-radius: 999px !important;
+    }
+
+    #search-button-mobile svg,
+    #appearance-switcher-mobile svg,
+    #mobile-menu-toggle + label svg {
+      width: 1.08rem !important;
+      height: 1.08rem !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] {
+      position: fixed !important;
+      inset: auto 0.85rem auto auto !important;
+      top: 3.75rem !important;
+      width: min(12.4rem, calc(100vw - 1.7rem)) !important;
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 0.42rem !important;
+      border-radius: 0.95rem !important;
+      background: rgba(255, 255, 255, 0.92) !important;
+      border: 1px solid rgba(127, 143, 166, 0.2) !important;
+      box-shadow: 0 18px 42px rgba(30, 41, 59, 0.18) !important;
+      backdrop-filter: blur(16px) saturate(150%) !important;
+      -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    .dark #mobile-menu-toggle:checked ~ div[role="dialog"] {
+      background: rgba(18, 22, 31, 0.93) !important;
+      border-color: rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36) !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] > label {
+      top: 0.34rem !important;
+      right: 0.34rem !important;
+      width: 1.62rem !important;
+      height: 1.62rem !important;
+      border-radius: 999px !important;
+      box-shadow: none !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] nav {
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 1.58rem 0 0 !important;
+      display: grid !important;
+      gap: 0.26rem !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] nav > div {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a {
+      min-height: 1.86rem !important;
+      justify-content: flex-start !important;
+      border-radius: 0.62rem !important;
+      padding: 0.24rem 0.48rem !important;
+      background: rgba(255, 255, 255, 0.58) !important;
+      border: 1px solid rgba(127, 143, 166, 0.18) !important;
+      box-shadow: none !important;
+    }
+
+    .dark #mobile-menu-toggle:checked ~ div[role="dialog"] a {
+      background: rgba(255, 255, 255, 0.06) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      box-shadow: none !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a span {
+      font-size: 0.82rem !important;
+      line-height: 1.2 !important;
+      font-weight: 650 !important;
+      letter-spacing: 0 !important;
     }
   }
 </style>
@@ -1007,6 +1131,111 @@ document.addEventListener("DOMContentLoaded", function () {
     opacity: 0.4 !important;
     color: #888 !important;
   }
+
+  @media (max-width: 768px) {
+    .glass-card {
+      max-width: calc(100% - 1.5rem) !important;
+      margin: 0.75rem auto 3rem !important;
+      padding: 2.25rem 1rem !important;
+      border-radius: 24px !important;
+    }
+
+    .floating-avatar {
+      width: 108px !important;
+      height: 108px !important;
+      margin-bottom: 1.5rem !important;
+    }
+
+    .glass-card > h1 {
+      font-size: 1.72rem !important;
+      line-height: 1.32 !important;
+      margin-bottom: 2rem !important;
+    }
+
+    .info-text {
+      flex-wrap: wrap !important;
+      gap: 0.62rem 0.9rem !important;
+      margin-bottom: 2.2rem !important;
+      font-size: 0.86rem !important;
+      line-height: 1.45 !important;
+    }
+
+    .info-text .info-separator {
+      display: none !important;
+    }
+
+    .info-text > span:not(.info-separator) {
+      justify-content: center;
+      min-width: min(100%, 9.5rem);
+    }
+
+    .home-nav-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.35rem 0.45rem;
+      align-items: stretch !important;
+      width: 100%;
+      max-width: 520px;
+      padding: 0.7rem 0;
+    }
+
+    .home-nav-grid .garden-nav-item {
+      min-width: 0;
+      padding: 1rem 0.55rem !important;
+      border-radius: 14px;
+    }
+
+    .home-nav-grid .separator-line-vertical {
+      display: none !important;
+    }
+
+    .home-nav-grid .separator-line-horizontal {
+      width: 86% !important;
+    }
+
+    .garden-nav-item span:first-of-type {
+      font-size: 0.56rem !important;
+      letter-spacing: 0.14rem !important;
+    }
+
+    .garden-nav-item .nav-title {
+      font-size: 0.98rem !important;
+      white-space: nowrap;
+    }
+
+    .garden-nav-item span:last-of-type {
+      font-size: 0.62rem !important;
+      white-space: nowrap;
+    }
+
+    .quote-text {
+      font-size: 1rem !important;
+      line-height: 1.7 !important;
+    }
+
+    .manifesto-text {
+      margin: 3rem 0 4rem !important;
+      letter-spacing: 0.22rem !important;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .home-nav-grid {
+      gap: 0.25rem;
+    }
+
+    .home-nav-grid .garden-nav-item {
+      padding: 0.9rem 0.35rem !important;
+    }
+
+    .garden-nav-item .nav-title {
+      font-size: 0.92rem !important;
+    }
+
+    .garden-nav-item span:last-of-type {
+      font-size: 0.58rem !important;
+    }
+  }
 </style>
 <div class="glass-card">
   <img src="/img/author.jpg" alt="Steph.H" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; margin-bottom: 2rem;" class="floating-avatar">
@@ -1032,9 +1261,9 @@ document.addEventListener("DOMContentLoaded", function () {
     <span style="display: flex; align-items: center; gap: 6px;">
       <span class="relative inline-block align-text-bottom icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 256c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64z"/></svg></span> 苏州 · NJU
     </span>
-    <span style="opacity: 0.3;">|</span>
+    <span class="info-separator" style="opacity: 0.3;">|</span>
     <span style="display: flex; align-items: center; gap: 6px;"><span class="relative inline-block align-text-bottom icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor"  d="M159.3 5.4c7.8-7.3 19.9-7.2 27.7 .1c27.6 25.9 53.5 53.8 77.7 84c11-14.4 23.5-30.1 37-42.9c7.9-7.4 20.1-7.4 28 .1c34.6 33 63.9 76.6 84.5 118c20.3 40.8 33.8 82.5 33.8 111.9C448 404.2 348.2 512 224 512C98.4 512 0 404.1 0 276.5c0-38.4 17.8-85.3 45.4-131.7C73.3 97.7 112.7 48.6 159.3 5.4zM225.7 416c25.3 0 47.7-7 68.8-21c42.1-29.4 53.4-88.2 28.1-134.4c-2.8-5.6-5.6-11.2-9.8-16.8l-50.6 58.8s-81.4-103.6-87.1-110.6C133.1 243.8 112 273.2 112 306.8C112 375.4 162.6 416 225.7 416z"/></svg></span> 正在探索 AIGC</span>
-    <span style="opacity: 0.3;">|</span>
+    <span class="info-separator" style="opacity: 0.3;">|</span>
     <span style="display: flex; align-items: center; gap: 6px;"><span class="relative inline-block align-text-bottom icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M88 0C74.7 0 64 10.7 64 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1C120.5 112.3 128 119.9 128 136c0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C119.5 47.7 112 40.1 112 24c0-13.3-10.7-24-24-24zM32 192c-17.7 0-32 14.3-32 32V416c0 53 43 96 96 96H288c53 0 96-43 96-96h16c61.9 0 112-50.1 112-112s-50.1-112-112-112H352 32zm352 64h16c26.5 0 48 21.5 48 48s-21.5 48-48 48H384V256zM224 24c0-13.3-10.7-24-24-24s-24 10.7-24 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1C232.5 112.3 240 119.9 240 136c0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C231.5 47.7 224 40.1 224 24z"/></svg></span> 近况：在世界里慢慢走</span>
   </div>
 <div style="margin-bottom: 2.5rem; max-width: 550px; margin-left: auto; margin-right: auto;">
@@ -1043,7 +1272,7 @@ document.addEventListener("DOMContentLoaded", function () {
     </p>
   </div>
 <!-- 四个导航入口 - 带分隔线的立体设计 -->
-<div style="display: flex; justify-content: center; align-items: stretch; flex-wrap: nowrap; margin: 0 auto; position: relative;">
+<div class="home-nav-grid" style="display: flex; justify-content: center; align-items: stretch; flex-wrap: nowrap; margin: 0 auto; position: relative;">
 <!-- 顶部装饰线 -->
 <div class="separator-line-horizontal" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);"></div>
 <a href="/notes/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">

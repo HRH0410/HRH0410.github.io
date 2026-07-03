@@ -1694,8 +1694,26 @@ article h2::after {
   border-color: rgba(36,50,71,0.08);
 }
 
+/* Final heading tuning: keep About calm and remove imported article markers. */
+#single_header h1,
+.article-title {
+  font-size: clamp(1.95rem, 4.2vw, 2.7rem) !important;
+  line-height: 1.06 !important;
+}
+
+.article-content h2::before,
+article h2::before {
+  display: none !important;
+  content: none !important;
+}
+
 /* 响应式 */
 @media (max-width: 640px) {
+  #single_header h1,
+  .article-title {
+    font-size: clamp(1.58rem, 8.4vw, 2.05rem) !important;
+  }
+
   .profile-card {
     flex-direction: column;
     align-items: center;
@@ -1708,6 +1726,8 @@ article h2::after {
 }
 </style>
 
+<div class="about-page-content">
+
 <!-- ==================== 个人简介卡片 ==================== -->
 <div class="profile-card">
 <img src="/img/author.jpg" alt="Steph.H" class="profile-avatar">
@@ -1715,9 +1735,9 @@ article h2::after {
 
 ## About
 
-我叫**黄荣昊**（Steph.H），是南京大学智能科学与技术专业的一名本科生。
+我是 **Steph.H**，南京大学智能科学与技术专业的一名本科生。
 
-我对**LLM**、**AIGC**与**Agent**充满好奇，也乐于探索技术与创意、理性与感受之间的交汇点。
+我喜欢把自己扔进各种新鲜事物里，也乐于探索技术与创意、理性与感受之间的交汇点。这些看似“不务正业”的尝试，恰恰构成了我理解世界、表达自己和创造东西的方式。
 
 在这里，我会记录自己的学习、项目、思考，也会写下生活中的一些片段——希望它们能成为时间里可回望的痕迹。
 
@@ -1744,10 +1764,10 @@ article h2::after {
 ## Research Interests
 
 <div class="tag-list">
-<span class="tag">LLM</span>
+<span class="tag">AI Product</span>
 <span class="tag">Agent</span>
-<span class="tag">World Model</span>
-<span class="tag">AIGC</span>
+<span class="tag">Human-AI Interaction</span>
+<span class="tag">MLLM</span>
 </div>
 
 
@@ -2155,4 +2175,6 @@ article h2::after {
 <p style="text-align: center; color: #aaa; font-size: 0.82rem; margin: 0; letter-spacing: 0.05em; font-style: italic;">
 感谢你来到这里，期待与你交流 🌸
 </p>
+</div>
+
 </div>

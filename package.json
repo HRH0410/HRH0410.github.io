@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "import:notion": "python3 scripts/import_notion_export.py",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

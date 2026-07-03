@@ -1,0 +1,4893 @@
++++
+title = "2026春 PRCV 期末笔记"
+date = "2026-07-02T08:52:12+08:00"
+draft = false
+postType = "study"
+tags = ["数字花园", "Notion"]
+categories = ["学习笔记"]
+showTableOfContents = true
+notionSource = "2026春 PRCV 期末笔记 384f867979aa804ebbb8ca4acce31de5.md"
++++
+
+{{< katex >}}
+## 第一章 绪论
+
+PR-方法论：从数据中找到规律，根据规律做判断
+
+CV-应用领域：赋予计算机感知能力，让他从图像、视频等视觉输入中理解世界
+
+数据→特征→学习→评估→应用
+
+困难：语义鸿沟，计算能力，数据获取
+
+## 第二章 数学知识回顾
+
+#### 向量
+
+\[
+\mathbf{x}=(x_1,x_2,\dots,x_d)^T\in \mathbb{R}^d
+\]
+
+\[
+\mathbf{x}^T\mathbf{y}=\mathbf{y}^T\mathbf{x}=\sum_{i=1}^{d}x_i y_i=
+\|\mathbf{x}\|\,\|\mathbf{y}\|\cos\theta
+\]
+
+\[
+\|\mathbf{x}\|=\sqrt{\mathbf{x}^T\mathbf{x}}=
+\sqrt{x_1^2+x_2^2+\cdots+x_d^2}
+\]
+
+柯西-施瓦茨不等式：
+
+\[
+\left(\sum_{k=1}^{n}a_kb_k\right)^2\leq\left(\sum_{k=1}^{n}a_k^2\right)\left(\sum_{k=1}^{n}b_k^2\right)
+\]
+
+柯西-施瓦茨不等式的向量形式：
+
+\[
+|\mathbf{x}^T\mathbf{y}|\leq\|\mathbf{x}\|\,\|\mathbf{y}\|
+\]
+
+\(\mathbf{x}\) 在 \(\mathbf{y}\)  方向上的投影：
+
+\[
+\operatorname{proj}_{\mathbf{y}}\mathbf{x}=\frac{\mathbf{x}^T\mathbf{y}}{\|\mathbf{y}\|^2}\mathbf{y}
+\]
+
+#### 矩阵
+
+行列式：
+
+\[
+|X|\quad \text{或} \quad\det(X)
+\]
+
+\[
+|XY|=|X||Y|
+\]
+
+\[
+|\lambda X|=\lambda^n |X|
+\]
+
+逆矩阵：
+
+\[
+XX^{-1}=X^{-1}X=I_n
+\]
+
+一个方阵可逆的条件是：
+
+\[
+|X|\neq 0
+\]
+
+特征值和特征向量：
+
+\[
+A\mathbf{x}=\lambda\mathbf{x}
+\]
+
+这里 A 是 \(n\times n\) 方阵，\(\mathbf{x}\) 是非零向量，\(\lambda\) 是标量。这个公式的意思是：矩阵 A 作用在某些特殊方向 \(\mathbf{x}\) 上时，不会改变方向，只会把它拉长、缩短或反向，而拉伸倍数就是 \(\lambda\)。
+
+迹：
+
+\[
+\operatorname{tr}(A)=\sum_{i=1}^{n}a_{ii}=\sum_{i=1}^{n}\lambda_i
+\]
+
+\[
+\operatorname{tr}(AB)=\operatorname{tr}(BA)
+\]
+
+行列式和特征值的关系是：
+
+\[
+\det(A)=\prod_{i=1}^{n}\lambda_i
+\]
+
+实对称矩阵：
+
+\[
+X=X^T
+\]
+
+所有特征值都是实数；不同特征值对应的特征向量可以取成互相正交；如果把单位特征向量记为：
+
+\[
+\boldsymbol{\xi}_1,\boldsymbol{\xi}_2,\dots,\boldsymbol{\xi}_n
+\]
+
+那么它们可以组成一个正交矩阵：
+
+\[
+E=[\boldsymbol{\xi}_1,\boldsymbol{\xi}_2,\dots,\boldsymbol{\xi}_n]
+\]
+
+\[
+E^TE=EE^T=I
+\]
+
+\[
+E^{-1}=E^T
+\]
+
+谱分解：
+
+\[
+X=\sum_{i=1}^{n}\lambda_i\boldsymbol{\xi}_i\boldsymbol{\xi}_i^T
+\]
+
+也可以写成矩阵形式：
+
+\[
+X=E\Lambda E^T
+\]
+
+\[
+\Lambda=\begin{pmatrix}\lambda_1 & 0 & \cdots & 0\\0 & \lambda_2 & \cdots & 0\\\vdots & \vdots & \ddots & \vdots\\0 & 0 & \cdots & \lambda_n\end{pmatrix}
+\]
+
+对称方阵 A 是正定的，当且仅当：
+
+\[
+\forall \mathbf{x}\neq \mathbf{0},\quad \mathbf{x}^TA\mathbf{x}\gt 0
+\]
+
+半正定：
+
+\[
+\forall \mathbf{x}\neq \mathbf{0},\quad \mathbf{x}^TA\mathbf{x}\geq 0
+\]
+
+\[
+A\succ 0 \Longleftrightarrow A\text{ 的特征值全为正}
+\]
+
+\[
+A\succeq 0 \Longleftrightarrow A\text{ 的特征值全为非负}
+\]
+
+**正定矩阵的任意主子矩阵也是正定矩阵**
+
+#### 期望
+
+假设有函数 \(f(\mathbf{x})\)，而 \(\mathbf{x}\) 服从分布 \(p(\mathbf{x})\)，离散情况下：
+
+\[
+E[f(X)]=\sum_{\mathbf{x}} f(\mathbf{x})p(X=\mathbf{x})
+\]
+
+连续情况下求和变积分：
+
+\[
+E[f(X)]=\int f(\mathbf{x})p(\mathbf{x})\,d\mathbf{x}
+\]
+
+条件期望：
+
+\[
+E[f(\mathbf{x})|Y=\mathbf{y}]=\sum_{\mathbf{x}}f(\mathbf{x})p(\mathbf{x}|\mathbf{y})
+\]
+
+方差：
+
+\[
+\operatorname{Var}(X)=E[(X-EX)^2]
+\]
+
+\[
+\operatorname{Var}(X)=E[X^2]-(EX)^2
+\]
+
+X 和 Y 独立，独立表示一个变量的取值不会影响另一个变量的分布：
+
+\[
+p(x,y)=p(x)p(y)
+\]
+
+协方差：
+
+\[
+\operatorname{Cov}(X,Y)=E[(X-EX)(Y-EY)]
+\]
+
+它衡量的是两个变量是否一起变化。如果 X 比均值大时，Y 也常常比均值大，那么协方差为正；如果 X 大时 Y 往往小，协方差为负；如果没有明显线性关系，协方差接近 0。
+
+Pearson 相关系数是标准化后的协方差：
+
+\[
+\rho_{XY}=\frac{\operatorname{Cov}(X,Y)}{\sqrt{\operatorname{Var}(X)}\sqrt{\operatorname{Var}(Y)}}
+\]
+
+\[
+-1\leq \rho_{XY}\leq 1
+\]
+
+独立一定推出不相关，但不相关不一定推出独立
+
+#### 高斯分布
+
+一维高斯分布：
+
+\[
+X\sim N(\mu,\sigma^2)
+\]
+
+\[
+p(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\]
+
+Markov不等式：若 \(X \geq 0\)（非负随机变量），则
+
+\[
+P(X \geq a) \leq \frac{EX}{a}
+\]
+
+Chebyshev不等式：对任何分布，
+
+\[
+P\bigl((X - \mu)^2 \geq k^2\bigr) \leq \frac{\sigma^2}{k^2}
+\quad\text{或}\quad
+P(|X - \mu| \gt  k) \leq \frac{\sigma^2}{k^2} \quad (k \gt  0)
+\]
+
+多维高斯分布：
+
+\[
+\mathbf{x}\sim N(\boldsymbol{\mu},\Sigma)
+\]
+
+\[
+p(\mathbf{x})=(2\pi)^{-\frac{D}{2}}|\Sigma|^{-\frac{1}{2}}\exp\left(-\frac12(\mathbf{x}-\boldsymbol{\mu})^T\Sigma^{-1}(\mathbf{x}-\boldsymbol{\mu})\right)
+\]
+
+\((\mathbf{x}-\boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x}-\boldsymbol{\mu})\) 叫 Mahalanobis 距离的平方。它不是简单的欧氏距离，因为它考虑了不同维度的方差和维度之间的相关性。如果某个方向上数据本来就很分散，那么在这个方向上偏离均值一点不算奇怪；如果某个方向上数据很集中，那么同样大小的偏离就很异常。
+
+**对于多维高斯分布，不相关意味着协方差矩阵中非对角线项是0**
+
+**在正态分布中，不相关就等价于独立**
+
+#### 误差
+
+泛化误差定义为：
+
+\[
+E_{(\mathbf{x},y)\sim p(\mathbf{x},y)}\mathbf{1}\big(f(\mathbf{x})\neq y\big)
+\]
+
+在真实数据分布上，模型平均会犯多少错。问题是，真实分布 \(p(\mathbf{x},y)\) 通常不知道，所以泛化误差无法直接计算。
+
+用测试误差近似：
+
+\[
+err=\frac{1}{n}\sum_{i=1}^{n}\mathbf{1}\big(f(\mathbf{x}_i)\neq y_i\big),\quad \mathbf{x}_i\in D_{test}
+\]
+
+在测试集上统计错误样本数量，再除以测试样本总数。
+
+把难优化的 0-1 损失换成一个性质相似但更容易优化的损失，比如平方损失：
+
+\[
+(f(\mathbf{x}_i)-y_i)^2
+\]
+
+正则化 regularization 是降低过拟合风险的方法。它的基本思想是：在优化训练误差的同时，惩罚模型复杂度。比如线性模型可以写成：
+
+\[
+\min_{\mathbf{w}}\sum_i(f(\mathbf{x}_i)-y_i)^2+\lambda\|\mathbf{w}\|^2
+\]
+
+交叉验证：
+
+把数据分成 N 份，每次取其中一份当测试集，其余 N−1 份当训练集，得到每次错误率然后计算总错误率：
+
+\[
+\frac{1}{N}\sum_{i=1}^{N}err_i
+\]
+
+**混淆矩阵（重要）**
+
+PR 曲线横轴是 Recall，纵轴是 Precision。它比 ROC 更关注正类表现，所以在正负样本极不平衡时，AUC-PR 往往比 AUC-ROC 更有参考价值。
+
+例如医学筛查中，负样本很多，FPR 即使很小，也可能对应很多 FP；这时 ROC 看起来不错，但 Precision 可能很低。PR 曲线直接看“预测为正的样本里到底有多少是真的正”，所以对稀有正类任务更敏感。
+
+#### 贝叶斯公式
+
+\[
+p(y=i|\mathbf{x})=\frac{p(\mathbf{x}|y=i)p(y=i)}{p(\mathbf{x})}
+\]
+
+常见二分类 0-1 代价矩阵：
+
+\[
+\begin{pmatrix}\lambda_{11} & \lambda_{12}\\\lambda_{21} & \lambda_{22}\end{pmatrix}=\begin{pmatrix}0 & 1\\1 & 0\end{pmatrix}
+\]
+
+贝叶斯决策规则：选择期望代价最小的类别输出
+
+\[
+\hat{y}=\arg\min_j\sum_i\lambda_{ij}p(y=i|\mathbf{x})
+\]
+
+#### 偏置-方差分解
+
+\[
+E_D\left[f(\mathbf{x};D)-F(\mathbf{x})\right]^2=\left(E_D[f(\mathbf{x};D)]-F(\mathbf{x})\right)^2+E_D\left[f(\mathbf{x};D)-E_D[f(\mathbf{x};D)]\right]^2
+\]
+
+第一项是叫偏置平方。它衡量的是：如果我们换很多训练集、训练很多模型，然后把这些模型预测取平均，这个平均预测离真实函数有多远。偏置大，说明模型整体方向就错了。
+
+第二项是叫方差。它衡量的是：换不同训练集时，模型预测会波动多大。
+
+如果数据本身还有噪声，那么：
+
+\[
+误差=偏置^2+方差+噪声
+\]
+
+## 第三章 Normalization & FLD
+
+#### 每维度 Min-Max 归一化：
+
+\[
+\mathbf{x}_i=(x_{i1},x_{i2},\dots,x_{id})
+\]
+
+对于每一维 j，我们看训练集中这一维的所有值：
+
+\[
+x_{1j},x_{2j},\dots,x_{nj}
+\]
+
+然后取这一维的最小值和最大值：
+
+\[
+x_{\min,j},\quad x_{\max,j}
+\]
+
+\[
+x_{ij}\leftarrow\frac{x_{ij}-x_{\min,j}}{x_{\max,j}-x_{\min,j}}
+\]
+
+归一到[-1, 1]：
+
+\[
+x_{ij}\leftarrow2\times\frac{x_{ij}-x_{\min,j}}{x_{\max,j}-x_{\min,j}}-1
+\]
+
+稀疏数据要小心min-max归一化：
+
+如果所有数据都非负，原来的 0 可能有特殊含义，比如“这个词没有出现”“这个特征没有激活”。但做 Min-Max 归一化时，如果某一维的最小值不是 0，或者映射公式改变了 0 的位置，原本的稀疏结构可能被破坏。很多原来为 0 的位置会变成非零值，稀疏矩阵变稠密，存储和计算都会变得更贵，而且语义也可能被改变。
+
+何时应该使用min-max归一化？
+
+- 特征量纲差异大：消除量纲影响
+- 模型对于输入范围敏感
+- 数据分布有明确的最大/最小值
+- 对数值解释有直观需求
+
+#### L2归一化：
+
+\[
+x_{ij}
+\leftarrow
+\frac{x_{ij}}{\|\mathbf{x}_i\|_2}
+\]
+
+所有样本都被放到单位球面上，只保留方向，不保留原始长度。
+
+#### L1归一化：
+
+\[
+x_{ij}\leftarrow\frac{x_{ij}}{\|\mathbf{x}_i\|_1}
+\]
+
+L2 归一化常用于方向相似度，L1 归一化常用于比例分布或直方图。
+
+#### Z-score 标准化：把每一维变成均值 0、方差 1
+
+\[
+x_{ij}\leftarrow\frac{x_{ij}-\hat{\mu}_j}{\hat{\sigma}_j}
+\]
+
+这个方法比 Min-Max 更不依赖最大最小值，通常更适合线性模型、逻辑回归、SVM、神经网络等方法。但它对离群点仍然敏感，因为均值和标准差都会被极端值影响。
+
+#### Robust Scaling：面对离群点更稳健
+
+\[
+x_{ij}\leftarrow\frac{x_{ij}-\operatorname{median}}{IQR}
+\]
+
+\[
+IQR=Q3-Q1
+\]
+
+Robust Scaling 的核心思想是：均值和标准差容易被离群点影响，但中位数和四分位距更稳健。
+
+#### 测试数据归一化
+
+只在训练集上计算归一化参数，然后保存这些参数，再用同样参数处理测试集
+
+如果不同维度量纲差异大、范围明确，可以考虑 Min-Max；如果每个样本整体大小不重要、方向或比例重要，可以考虑 L2/L1；如果每维近似高斯，适合 z-score；如果有离群点，考虑 robust scaling；如果是稀疏数据，要避免破坏稀疏结构。
+
+#### Fisher线性判别分析
+
+PCA 在数据是单个高斯分布时有很好的表示意义，但 PCA 和分类无关。PCA 关心的是“哪个方向数据方差最大”，而分类关心的是“哪个方向类别最容易分开”。这两个目标不一定一致。
+
+FLD 的核心问题是：
+
+**给定带标签的数据，能不能找到一个线性投影方向，使得数据投影到一维后，不同类别之间尽量远，同一类别内部尽量集中？**
+
+\[
+u_i=\mathbf{w}^T\mathbf{x}_i
+\]
+
+\[
+m_1=\mathbf{w}^T\boldsymbol{\mu}_1 ,\quad m_2=\mathbf{w}^T\boldsymbol{\mu}_2
+\]
+
+\[
+J(\mathbf{w})=\frac{(m_2-m_1)^2}{s_1^2+s_2^2}
+\]
+
+\[
+s_k^2=\sum_{y_i=k}(u_i-m_k)^2,\quad k=1,2
+\]
+
+类内散度矩阵：
+
+\[
+S_1=\sum_{y_i=1}(\mathbf{x}_i-\boldsymbol{\mu}_1)(\mathbf{x}_i-\boldsymbol{\mu}_1)^T
+\]
+
+\[
+S_2=\sum_{y_i=2}(\mathbf{x}_i-\boldsymbol{\mu}_2)(\mathbf{x}_i-\boldsymbol{\mu}_2)^T
+\]
+
+\[
+s_1^2+s_2^2=\mathbf{w}^T(S_1+S_2)\mathbf{w}=\mathbf{w}^TS_W\mathbf{w}
+\]
+
+类间散度矩阵：
+
+\[
+(m_2-m_1)^2=\mathbf{w}^T(\boldsymbol{\mu}_2-\boldsymbol{\mu}_1)(\boldsymbol{\mu}_2-\boldsymbol{\mu}_1)^T\mathbf{w}
+\]
+
+\[
+S_B=(\boldsymbol{\mu}_2-\boldsymbol{\mu}_1)(\boldsymbol{\mu}_2-\boldsymbol{\mu}_1)^T
+\]
+
+\[
+J(\mathbf{w})=\frac{\mathbf{w}^TS_B\mathbf{w}}{\mathbf{w}^TS_W\mathbf{w}}
+\]
+
+**这种形式称为广义瑞利商 generalized Rayleigh quotient**
+
+用拉格朗日乘子法可以证明，最优解满足：
+
+\[
+S_B\mathbf{w}=\lambda S_W\mathbf{w}
+\]
+
+**二分类 FLD 常用解是：**
+
+\[
+\mathbf{w}=S_W^{-1}(\boldsymbol{\mu}_2-\boldsymbol{\mu}_1)
+\]
+
+FLD的完整步骤：
+
+先计算两类均值：
+
+\[
+\boldsymbol{\mu}_1,\boldsymbol{\mu}_2
+\]
+
+再计算类内散度矩阵：
+
+\[
+S_W=S_1+S_2
+\]
+
+然后计算投影方向：
+
+\[
+\mathbf{w}=S_W^{-1}(\boldsymbol{\mu}_2-\boldsymbol{\mu}_1)
+\]
+
+最后归一化：
+
+\[
+\mathbf{w}
+\leftarrow
+\frac{\mathbf{w}}{\|\mathbf{w}\|}
+\]
+
+归一化这一步不是为了改变分类效果，而是为了让 \(\mathbf{w}\) 变成单位方向，方便表示和数值稳定。
+
+如果 \(S_W\) 不可逆怎么办？
+
+Moore–Penrose 伪逆。因为 \(S_W\) 是实对称矩阵，而且至少半正定，所以可以做谱分解：
+
+\[
+S_W=E\Lambda E^T
+\]
+
+这里 \(\Lambda\) 是特征值对角矩阵：
+
+\[
+\Lambda=\operatorname{diag}(\lambda_{11},\lambda_{22},\dots,\lambda_{dd})
+\]
+
+由于 S_W 半正定，所以：
+
+\[
+\lambda_{ii}\geq 0
+\]
+
+伪逆的做法是：如果某个特征值大于 0，就取倒数；如果等于 0，就仍然置为 0：
+
+\[
+\lambda_{ii}^+=\begin{cases}
+1/\lambda_{ii},& \lambda_{ii}\gt 0\\
+0,& \lambda_{ii}=0
+\end{cases}
+\]
+
+然后：
+
+\[
+\Lambda^+=\operatorname{diag}(\lambda_{11}^+,\lambda_{22}^+,\dots,\lambda_{dd}^+)
+\]
+
+最终：
+
+\[
+S_W^+=E\Lambda^+E^T
+\]
+
+于是可以用：
+
+\[
+\mathbf{w}=S_W^+(\boldsymbol{\mu}_2-\boldsymbol{\mu}_1)
+\]
+
+代替原来的逆矩阵。直观理解是：在 \(S_W\) 有信息的方向上正常求逆，在没有信息或方差为 0 的方向上不强行除以 0。
+
+#### 多分类FLD
+
+\[
+\boldsymbol{\mu}=\frac{1}{N}\sum_{i=1}^{C}N_i\boldsymbol{\mu}_i=\frac{1}{N}\sum_{\mathbf{x}}\mathbf{x}
+\]
+
+\[
+S_W=\sum_{i=1}^{C}S_i
+\]
+
+\[
+S_B=\sum_{i=1}^{C}N_i(\boldsymbol{\mu}_i-\boldsymbol{\mu})(\boldsymbol{\mu}_i-\boldsymbol{\mu})^T
+\]
+
+\[
+S_T=\sum_{\mathbf{x}}(\mathbf{x}-\boldsymbol{\mu})(\mathbf{x}-\boldsymbol{\mu})^T=S_W+S_B
+\]
+
+多分类最多只有 C−1 个有效投影方向。直观上，C 个类别的均值点最多张成一个 C−1 维的子空间。比如两个类别只有一条连接线，所以最多 1 个判别方向；三个类别的均值最多确定一个平面，所以最多 2 个判别方向；四个类别最多 3 个方向。
+
+FLD的主要拓展（略）
+
+PCA + FLD：Fisherfaces
+
+PCA 先解决高维、小样本和冗余表示问题；FLD 再利用类别标签找最有判别力的方向。
+
+## 第四章 概率方法
+
+非概率方法通常是直接学习一个决策边界或者映射关系，比如支持向量机、线性判别分析、最近邻分类器、神经网络、决策树等；概率方法则显式使用贝叶斯定理，例如贝叶斯分类器、逻辑回归、HMM 和深度生成模型等
+
+为什么要用概率方法：
+
+- 处理不确定性
+- 灵活表达复杂关系
+- 结合先验知识
+- 模型解释与可扩展性
+- 生成与判别能力结合
+- 处理缺失数据与部分观测
+
+数据分布  \(p(\mathcal X)\)，先验分布 \(p(\mathcal Y)\)，联合分布 \(p(\mathcal X,\mathcal Y)\)，类条件分布 \(p(\mathcal X|y=i)\)，以及后验分布 \(p(y=i|\mathbf{x})\)
+
+#### 参数估计与非参数估计
+
+参数方法像是你先规定“这堆数据大概是一座钟形山”，然后只估计山峰位置和宽度；非参数方法则不规定山的形状，而是直接看数据在哪里密集，哪里稀疏。非参数不代表没有参数，可以有无数个参数。
+
+#### 生成模型与判别模型
+
+生成模型 generative models 估计：
+
+\[
+p(\mathbf{x}|y=i)
+\quad \text{和} \quad
+p(y=i)
+\]
+
+然后通过贝叶斯公式得到：
+
+\[
+p(y=i|\mathbf{x})
+\]
+
+判别模型 discriminative models 则直接估计：
+
+\[
+p(y=i|\mathbf{x})
+\]
+
+#### 最大似然估计 MLE：选择最能解释数据的参数
+
+\[
+D=\{x_1,x_2,\dots,x_n\}
+\]
+
+\[
+\boldsymbol{\theta}=(\mu,\sigma)
+\]
+
+\[
+p(D|\boldsymbol{\theta})=\prod_{i=1}^{n}p(x_i|\boldsymbol{\theta})
+\]
+
+\[
+\boldsymbol{\theta}^*=\arg\max_{\boldsymbol{\theta}}\ell(\boldsymbol{\theta})
+\]
+
+\[
+\ell(\boldsymbol{\theta})=p(D|\boldsymbol{\theta})=\prod_{i=1}^{n}p(x_i|\boldsymbol{\theta})
+\]
+
+由于很多概率相乘会非常小，计算不方便，所以常用对数似然：
+
+\[
+LL(\boldsymbol{\theta})=\ln p(D|\boldsymbol{\theta})=\sum_{i=1}^{n}\ln p(x_i|\boldsymbol{\theta})
+\]
+
+#### 高斯分布的 MLE
+
+\[
+\ln L(\boldsymbol{\mu},\Sigma)=-\frac{nd}{2}\ln(2\pi)-\frac{n}{2}\ln|\Sigma|-\frac{1}{2}\sum_{i=1}^{n}(\mathbf{x}_i-\boldsymbol{\mu})^T\Sigma^{-1}(\mathbf{x}_i-\boldsymbol{\mu})
+\]
+
+\[
+\hat{\boldsymbol{\mu}}_{MLE}=\frac{1}{n}\sum_{i=1}^{n}\mathbf{x}_i
+\]
+
+\[
+\hat{\Sigma}_{MLE}=\frac{1}{n}\sum_{i=1}^{n}(\mathbf{x}_i-\hat{\boldsymbol{\mu}}_{MLE})(\mathbf{x}_i-\hat{\boldsymbol{\mu}}_{MLE})^T
+\]
+
+#### MAP：最大后验估计把先验也考虑进来
+
+\[
+\boldsymbol{\theta}^*=\arg\max_{\boldsymbol{\theta}}\ell(\boldsymbol{\theta})p(\boldsymbol{\theta})
+\]
+
+\[
+\arg\max_{\boldsymbol{\theta}}\left[\ln p(D|\boldsymbol{\theta})+\ln p(\boldsymbol{\theta})\right]
+\]
+
+#### MAP 和正则化的关系
+
+L2正则化：
+
+\[
+\min_{\mathbf{w}}\sum_{i=1}^{n}(y_i-\mathbf{w}^T\mathbf{x}_i)^2+\lambda\|\mathbf{w}\|_2^2
+\]
+
+从 MAP 角度看，这等价于假设参数 w 服从高斯先验：
+
+\[
+p(\mathbf{w})\propto\exp(-\alpha\|\mathbf{w}\|_2^2)
+\]
+
+L1正则化：
+
+如果参数服从拉普拉斯分布：
+
+\[
+p(\mathbf{w})\propto\exp(-\alpha\|\mathbf{w}\|_1)
+\]
+
+#### 贝叶斯参数估计：不是估计一个点，而是估计一个分布
+
+\[
+D=\{x_1,\dots,x_n\}
+\]
+
+先验设为：
+
+\[
+p(\mu)=N(\mu_0,\sigma_0^2)
+\]
+
+\[
+p(\mu|D)=\frac{p(D|\mu)p(\mu)}{\int p(D|\mu)p(\mu)d\mu}
+\]
+
+\[
+p(\mu|D)=\alpha p(D|\mu)p(\mu)=\alpha\prod_{i=1}^{n}p(x_i|\mu)p(\mu)
+\]
+
+这里 \(\alpha\) 是归一化常数，对应分母。
+
+在高斯似然 + 高斯先验的情况下，后验仍然是高斯：
+
+\[
+p(\mu|D)=N(\mu_n,\sigma_n^2)
+\]
+
+后验均值：
+
+\[
+\mu_n=\frac{\sigma^2}{n\sigma_0^2+\sigma^2}\mu_0+\frac{n\sigma_0^2}{n\sigma_0^2+\sigma^2}\mu_{ML}
+\]
+
+\[
+\mu_{ML}=\frac{1}{n}\sum_{i=1}^{n}x_i
+\]
+
+后验方差满足：
+
+\[
+\frac{1}{\sigma_n^2}=\frac{1}{\sigma_0^2}+\frac{n}{\sigma^2}
+\]
+
+贝叶斯方法优点是理论完整、可以表达不确定性、能结合先验知识；缺点是推导困难、计算量大，因为经常要算积分
+
+#### 非参数估计：为什么不用固定分布？
+
+常用参数分布基本都是单峰 single modal，比如一个高斯分布只有一个峰。但真实数据可能很复杂，可能有多个峰。比如身高分布可能因为男女混合而呈现多峰，图像特征分布也可能非常复杂。此时用单个高斯分布描述就不够。
+
+最简单的非参数方法是直方图 histogram。它把数值范围切成若干 bin，然后统计每个 bin 里有多少样本。某个 bin 里样本越多，说明该区域概率密度越高。
+
+但 bin 个数和宽度的影响都很大，并且有维度灾难
+
+#### KDE核密度估计
+
+\[
+p(x)=\frac{1}{n}\sum_{i=1}^{n}\frac{1}{h}K\left(\frac{x-x_i}{h}\right)
+\]
+
+- 核函数K（非负、积分为1、对称）
+- 带宽h，控制核的宽度，决定估计的平滑程度。
+
+一维高斯核 Parzen window：
+
+\[
+p(x)=\frac{1}{n}\sum_{i=1}^{n}\frac{1}{(2\pi h^2)^{1/2}}\exp\left(-\frac{|x-x_i|^2}{2h^2}\right)
+\]
+
+这其实就是每个样本点 \(x_i\) 放一个均值为 \(x_i\)、方差为 \(h^2\) 的高斯分布，然后把所有高斯分布平均起来。它的优点是连续、直观、可以描述复杂多峰分布；缺点是通常需要保存训练数据，预测时要对很多样本求和，存储和计算代价大，而且带宽 h 很难选
+
+#### 决策
+
+在 0-1 风险下，最简单的规则是选择后验概率最大的类别：
+
+\[
+\hat{y}=\arg\max_ip(y=i|\mathbf{x};\boldsymbol{\theta})
+\]
+
+这条规则的意思是：如果所有错误代价都相同，那就选最可能的类别。
+
+引入判别函数：
+
+\[
+g_i(\mathbf{x})=p(y=i|\mathbf{x};\boldsymbol{\theta})=\frac{p(\mathbf{x}|y=i;\boldsymbol{\theta})p(y=i)}{p(\mathbf{x};\boldsymbol{\theta})}
+\]
+
+为了计算方便，可以去掉分母并取对数：
+
+\[
+g_i(\mathbf{x})=\ln p(\mathbf{x}|y=i;\boldsymbol{\theta})+\ln p(y=i)
+\]
+
+**在“类条件高斯、共享协方差、先验相等”等条件下，FLD 和高斯贝叶斯分类器得到的判别方向是一致的。**
+
+## 第五章 距离度量
+
+RBF核：
+
+\[
+K_{RBF}(\mathbf{x},\mathbf{y})=\exp(-\gamma\|\mathbf{x}-\mathbf{y}\|^2)
+\]
+
+它本质上把“距离”通过指数函数转换成了一个 (0,1] 范围内的相似度值。
+
+如果 \(\gamma\) 很大，哪怕距离稍微大一点，相似度也会迅速降到接近 0，这表示模型只认为非常近的点相似；如果 \(\gamma\) 很小，距离变化对相似度影响较弱，较远的点也可能被认为有一定相似性。
+
+#### 距离度量metric
+
+非负性：
+
+\[
+d(\mathbf{x},\mathbf{y})\geq 0
+\]
+
+对称性：
+
+\[
+d(\mathbf{x},\mathbf{y})=d(\mathbf{y},\mathbf{x})
+\]
+
+同一性：
+
+\[
+d(\mathbf{x},\mathbf{y})=0 \Longleftrightarrow \mathbf{x}=\mathbf{y}
+\]
+
+三角不等式：
+
+\[
+d(\mathbf{x},\mathbf{z})\leq d(\mathbf{x},\mathbf{y})+d(\mathbf{y},\mathbf{z})
+\]
+
+#### 向量范数和度量
+
+\[
+d(\mathbf{x},\mathbf{y})=\|\mathbf{x}-\mathbf{y}\|
+\]
+
+向量范数需要满足的三个性质：
+
+齐次性：
+
+\[
+f(c\mathbf{x})=|c|f(\mathbf{x})
+\]
+
+非负性：
+
+\[
+f(\mathbf{x})=0 \Longleftrightarrow \mathbf{x}=\mathbf{0}
+\]
+
+三角不等式：
+
+\[
+f(\mathbf{x}+\mathbf{y})\leq f(\mathbf{x})+f(\mathbf{y})
+\]
+
+如果 f 是一个合法范数，那么定义 \(d(\mathbf{x},\mathbf{y})=f(\mathbf{x}-\mathbf{y})\) 就可以得到一个合法距离
+
+#### \(l_p\) 范数：一族距离的统一形式
+
+\[
+\|\mathbf{x}\|_p=\left(\sum_{i=1}^{d}|x_i|^p\right)^{1/p},\quad p\geq 1
+\]
+
+l1范数：
+
+\[
+\|\mathbf{x}\|_1=\sum_{i=1}^{d}|x_i|
+\]
+
+欧式范数：
+
+\[
+\|\mathbf{x}\|_2=\left(\sum_{i=1}^{d}x_i^2\right)^{1/2}
+\]
+
+无穷范数：
+
+\[
+\|\mathbf{x}\|_\infty=\max_{1\leq i\leq d}|x_i|
+\]
+
+曼哈顿距离：
+
+\[
+d_1(\mathbf{x},\mathbf{y})=\sum_i |x_i-y_i|
+\]
+
+欧氏距离：
+
+\[
+d_2(\mathbf{x},\mathbf{y})=\sqrt{\sum_i(x_i-y_i)^2}
+\]
+
+当 \(p=\infty\) 时：
+
+\[
+d_\infty(\mathbf{x},\mathbf{y})=\max_i |x_i-y_i|
+\]
+
+如果 0<p<1，所谓的 \(l_p\) “范数”不满足三角不等式，因此不是合法范数。
+
+\[
+\|\mathbf{x}\|_0=\sum_{i=1}^{d}\mathbf{1}(x_i\neq 0)
+\]
+
+它常被叫做 \(l_0\) 范数，但严格来说不是范数，因为它不满足齐次性。
+
+#### 马氏距离
+
+欧氏距离默认所有维度同等重要，且维度之间互不相关。但真实数据往往不是这样。比如身高和体重有相关性；图像特征中某些维度方差大，某些维度方差小；如果不考虑这些结构，欧氏距离可能不合理。
+
+\[
+f(\mathbf{x})=\|G\mathbf{x}\|
+\]
+
+对应距离为：
+
+\[
+\|G(\mathbf{x}-\mathbf{y})\|
+\]
+
+\[
+d_A^2(\mathbf{x},\mathbf{y})=(\mathbf{x}-\mathbf{y})^T A(\mathbf{x}-\mathbf{y})
+\]
+
+\[
+A=G^TG
+\]
+
+当\(A=\Sigma^{-1}\)时，就得到经典马氏距离：
+
+\[
+d_M^2(\mathbf{x},\mathbf{y})=(\mathbf{x}-\mathbf{y})^T\Sigma^{-1}(\mathbf{x}-\mathbf{y})
+\]
+
+这里 \(\Sigma\) 是协方差矩阵。它的意义是：在方差大的方向上，同样的差异不算太大；在方差小的方向上，同样的差异更重要。因为方差大的方向本来数据波动就大，偏离一点不稀奇；方差小的方向数据本来很稳定，偏离一点就很显著。
+
+白化变换：
+
+\[
+\Sigma^{-1/2}(\mathbf{x}-\bar{\mathbf{x}})
+\]
+
+白化的作用是把原来有相关性、不同方差的数据变成各方向方差相同、协方差接近单位矩阵的数据。在白化后的空间里用欧氏距离，就等价于在原空间里用马氏距离。
+
+#### 度量学习：距离也可以被学习
+
+既然距离的选择这么重要，那我们能不能从数据中学出一个好的距离？这就是 metric learning。
+
+常见形式是学习一个矩阵 A：
+
+\[
+\|\mathbf{x}-\mathbf{y}\|_A^2=(\mathbf{x}-\mathbf{y})^T A(\mathbf{x}-\mathbf{y})
+\]
+
+常用的目标：三元组损失 triplet loss。它通常使用三个样本：
+
+\[
+(\mathbf{x}_a,\mathbf{x}_p,\mathbf{x}_n)
+\]
+
+其中 \(\mathbf{x}_a\) 是 anchor，\(\mathbf{x}_p\) 是 positive，与 anchor 同类；\(\mathbf{x}_n\) 是 negative，与 anchor 不同类。目标是让同类距离小于异类距离，并且至少小一个 margin：
+
+\[
+d(\mathbf{x}_a,\mathbf{x}_p)+m\lt d(\mathbf{x}_a,\mathbf{x}_n)
+\]
+
+\[
+L=\max\left(0,d(\mathbf{x}_a,\mathbf{x}_p)-d(\mathbf{x}_a,\mathbf{x}_n)+m\right)
+\]
+
+#### 稀疏机器学习
+
+数据往往不是任意混乱的，而是有结构、有冗余、有可压缩性。
+
+所谓稀疏，往往是在某种更合适的表示空间中稀疏。
+
+例如人脸图像在光照变化下可能存在于一个低维子空间中；监控视频中背景变化慢，可以看成低频或低秩结构，前景变化快，可以看成稀疏异常；语音信号和噪声可能占据不同频段。因此，稀疏不是说原始数据里有很多 0，而是说：**在某个合适的基、字典或变换域里，只需要少数几个成分就能表示主要信息。**
+
+\[
+\mathbf{x}\rightarrow \mathbf{y}
+\]
+
+其中 \(\mathbf{y}\) 是稀疏的。也就是说，我们希望把原始样本 \(\mathbf{x}\) 变成一种新的表示 \(\mathbf{y}\)，并且 \(\mathbf{y}\) 中大部分元素为 0，只有少数元素非零。
+
+对于 PCA，原来的低维表示是：
+
+\[
+\mathbf{y}_i=E_d^T(\mathbf{x}_i-\bar{\mathbf{x}})
+\]
+
+这里 \(E_d\) 是 PCA 选择的前 d 个主成分方向，\(\mathbf{x}_i-\bar{\mathbf{x}}\) 是中心化后的样本。这个公式表示把样本投影到 PCA 子空间中。
+
+如果想让 PCA 表示也稀疏，可以考虑目标：
+
+\[
+\min_{\mathbf{y}_i}\left\|\mathbf{y}_i-E_d^T(\mathbf{x}_i-\bar{\mathbf{x}})\right\|^2+\lambda \|\mathbf{y}_i\|_0
+\]
+
+但这个目标有问题：
+
+\(l_0\) “范数”不连续、不可微，优化非常困难；同时，PCA 本来已经被证明能在某种意义下最小化重构误差，强行加入稀疏性通常会牺牲一部分重构质量。
+
+因此常用 \(l_1\) 来替代 \(l_0\)。\(l_1\) 是凸的、连续的，除了 0 点以外可导，并且能够诱导稀疏性。
+
+从几何上看，\(l_1\) 约束：
+
+\[
+\|\mathbf{x}\|_1\leq t
+\]
+
+在二维里是一个菱形。菱形的角落正好落在坐标轴上，而优化目标的等高线很容易先碰到这些角点。一旦碰到坐标轴，就意味着某些坐标为 0。相比之下，\(l_2\) 约束是圆形，没有尖角，不容易产生严格的 0。
+
+\[
+l_0 \text{ 最直接表示稀疏，但难优化}
+\]
+
+\[
+l_1 \text{ 是常用凸替代，能诱导稀疏}
+\]
+
+#### 过完备字典：用少量“原子”表示样本
+
+\[
+D\in \mathbb{R}^{p\times k}
+\]
+
+样本 \(\mathbf{x}\in\mathbb{R}^p\)，我们希望找到一个系数向量 \(\boldsymbol{\alpha}\in\mathbb{R}^k\)，使得：
+
+\[
+\mathbf{x}\approx D\boldsymbol{\alpha}
+\]
+
+如果 D 已知，并且希望表示是稀疏的，就求解：
+
+\[
+\min_{\boldsymbol{\alpha}_i}\left\|\mathbf{x}_i-D\boldsymbol{\alpha}_i\right\|^2+\lambda\|\boldsymbol{\alpha}_i\|_1
+\]
+
+欠完备字典：p>k
+
+过完备字典：p<k
+
+过完备字典给了更多可选原子，因此表达能力更强，但表示不唯一，所以需要稀疏约束来选出少数关键原子。
+
+#### 字典学习：字典也可以从数据中学出来
+
+字典学习的目标是从数据集中学习一个字典 D，使得所有样本 \(\mathbf{x}_i\) 都能被字典中的原子稀疏表示。典型目标可以写成：
+
+\[
+\min_{D,\{\boldsymbol{\alpha}_i\}}\sum_i\left\|\mathbf{x}_i-D\boldsymbol{\alpha}_i\right\|^2+\lambda\|\boldsymbol{\alpha}_i\|_1
+\]
+
+这里要同时优化字典 D 和每个样本的稀疏系数 \(\boldsymbol{\alpha}_i\)。这比固定字典更难，因为 D 和 \(\boldsymbol{\alpha}\) 耦合在一起。常见做法是交替优化：固定 D 求系数，固定系数更新 D，反复迭代。
+
+字典学习的好处是字典原子更贴合数据本身。例如自然图像 patch 学出来的字典往往类似边缘、纹理和局部结构，比固定基更适合图像重构、去噪和压缩。
+
+稀疏表示的应用：压缩、去噪、修复、MRI
+
+#### 低秩矩阵
+
+如果在二维结构上具有稀疏性，会出现低秩矩阵 Low-Rank Matrix。这里“低秩”可以理解为：一个矩阵虽然看起来很大，但它的列或行之间存在强相关性，可以由少数几个基本方向解释。
+
+例如：58 张同一个人在不同光照下的人脸图像，可以分解成低秩部分和稀疏误差部分。图中 Y 是原始观测，X 是恢复出的低秩干净部分，E 是稀疏异常部分
+
+![image.png](assets/image.png)
+
+\[
+Y=X+E
+\]
+
+其中 X 是低秩矩阵，表示主要结构；E 是稀疏矩阵，表示异常、噪声、遮挡、阴影等局部突变。RPCA 的目标就是从观测 Y 中同时恢复低秩部分和稀疏部分。
+
+典型优化结构是：
+
+\[
+\min_{X,E}\|X\|_*+\lambda\|E\|_1\quad s.t.\quad Y=X+E
+\]
+
+\(\|X\|_*\) 是是核范数，等于奇异值之和，用来鼓励低秩；\(\|E\|_1\) 用来鼓励稀疏。低秩对应“整体稳定结构”，稀疏对应“局部异常”。
+
+## 第六章 图像的基本操作
+
+**What is an image?** 
+
+\[
+I \in \mathbb{R}^{H\times W\times C}
+\]
+
+这里 H 是图像高度，也就是行数；W 是图像宽度，也就是列数；C 是通道数。
+
+如果图像是 8-bit 灰度图，那么灰度值通常在：[0, 255]
+
+0 表示黑，255 表示白，中间值表示不同灰度。
+
+如果是浮点图像，也可能被归一化到：[0, 1]
+
+#### 图像变换的两大类：Filtering 和 Warping
+
+Filtering 改变的是像素值，也就是图像函数的值域 range。比如把图像变暗、变亮、模糊、锐化、边缘增强，都属于 filtering。数学上可以写成：
+
+\[
+G(x)=h(F(x))
+\]
+
+Warping 改变的是像素位置，也就是图像函数的定义域 domain。比如旋转、缩放、平移、透视变换，属于 warping。数学上可以写成：
+
+\[
+G(x)=F(h(x))
+\]
+
+#### 点操作 Point Operation
+
+\[
+G(x,y)=h(F(x,y))
+\]
+
+![image.png](assets/image-1.png)
+
+#### 线性平移不变滤波：每个像素用邻域加权平均
+
+**Linear Shift-Invariant Image Filtering**
+
+**线性** 表示输出像素是输入邻域像素的线性组合：
+
+\[
+G(m,n)=\sum_{k,l} w_{k,l}F(m+k,n+l)
+\]
+
+这里 \(G(m,n)\) 是输出图像在位置 \((m,n)\) 的像素值，\(F(m+k,n+l)\) 是输入图像附近位置的像素值，\(w_{k,l}\) 是对应权重。
+
+Shift-invariant，平移不变，表示同一个滤波核在图像每个位置都使用相同的权重。也就是说，不管处理图像左上角还是右下角，只要邻域结构一样，用的 kernel 都一样。
+
+Kernel，滤波核，就是这些权重组成的小矩阵。例如一个 \(3\times3\) 核：
+
+\[
+K=\begin{bmatrix}k_{-1,-1} & k_{-1,0} & k_{-1,1}\\k_{0,-1} & k_{0,0} & k_{0,1}\\k_{1,-1} & k_{1,0} & k_{1,1}\end{bmatrix}
+\]
+
+滤波时，把这个核放到图像某个位置，对应元素相乘再求和，得到输出图像该位置的值。
+
+#### Box Filter：局部平均为什么会模糊？
+
+\[
+K=\frac{1}{9}\begin{bmatrix}1&1&1\\1&1&1\\1&1&1\end{bmatrix}
+\]
+
+\[
+G(m,n)=\frac{1}{9}\sum_{i=-1}^{1}\sum_{j=-1}^{1}F(m+i,n+j)
+\]
+
+为什么它会模糊？因为原本一个像素的值会被周围像素平均掉。如果某个位置是边缘，一边很亮、一边很暗，那么平均之后亮暗差异会变小，边缘就变软了。
+
+![image.png](assets/image-2.png)
+
+![image.png](assets/image-3.png)
+
+![image.png](assets/image-4.png)
+
+#### 卷积：Filtering 的标准数学形式
+
+\[
+(f*I)(x,y)=\sum_{i,j=-\infty}^{\infty}f(i,j)I(x-i,y-j)
+\]
+
+如果滤波器只在一个有限窗口内非零，比如 \(3\times3\) 滤波器，那么求和就变成：
+
+\[
+(f*I)(x,y)=\sum_{i=-1}^{1}\sum_{j=-1}^{1}f(i,j)I(x-i,y-j)
+\]
+
+卷积里对应的是 - 号，这意味着严格卷积会把滤波核翻转再滑动，不翻转核则是cross-correlation
+
+对于对称核，比如 box filter、高斯核，翻不翻转没有区别；但对于非对称核，比如梯度滤波器，严格数学卷积和相关操作会有符号或方向差异。
+
+#### 可分离滤波器
+
+\[
+K=\mathbf{a}\mathbf{b}^T
+\]
+
+例如 \(3\times3\) box filter 可以写成：
+
+\[
+\begin{bmatrix}1&1&1\\1&1&1\\1&1&1\end{bmatrix}=\begin{bmatrix}1\\1\\1\end{bmatrix}\begin{bmatrix}1&1&1\end{bmatrix}
+\]
+
+先用列滤波器在竖直方向滤波，再用行滤波器在水平方向滤波，结果等价于直接用二维核卷积。
+
+计算复杂度差别很大。假设图像大小是：
+
+\[
+M\times M
+\]
+
+滤波核大小是：
+
+\[
+N\times N
+\]
+
+普通二维卷积中，每个像素要做 N^2 次乘加，总共有 M^2 个像素，所以复杂度是：
+
+\[
+O(M^2N^2)
+\]
+
+如果滤波器可分离，两次一维卷积，每次每个像素只要 N 次操作，两次就是 2N，总复杂度是：
+
+\[
+O(2M^2N)
+\]
+
+#### 高斯滤波：比 Box Filter 更自然的平滑
+
+\[
+f(x,y)=\frac{1}{2\pi\sigma^2}\exp\left(-\frac{x^2+y^2}{2\sigma^2}\right)
+\]
+
+这里 \((x,y)\) 是相对于滤波核中心的位置，\(\sigma\) 控制平滑尺度。距离中心越近，权重越大；距离中心越远，权重越小。相比 box filter 中每个邻域像素权重都一样，高斯滤波更符合直觉：离中心近的像素更相关，离中心远的像素影响应该更小。
+
+高斯函数理论上无限延伸，但实际滤波核必须有限大小，所以通常截断到：\(2\sigma \sim 3\sigma\)
+
+一个常见的 \(3\times3\) 近似高斯核是：
+
+\[
+K=
+\frac{1}{16}
+\begin{bmatrix}
+1&2&1\\
+2&4&2\\
+1&2&1
+\end{bmatrix}
+\]
+
+这个核是可分离的，因为：
+
+\[
+\begin{bmatrix}1&2&1\\2&4&2\\1&2&1\end{bmatrix}=\begin{bmatrix}1\\2\\1\end{bmatrix}\begin{bmatrix}1&2&1\end{bmatrix}
+\]
+
+![image.png](assets/image-5.png)
+
+![image.png](assets/image-6.png)
+
+#### 其他滤波器
+
+恒等滤波器：
+
+\[
+K=\begin{bmatrix}0&0&0\\0&1&0\\0&0&0\end{bmatrix}
+\]
+
+如果核是：
+
+\[
+K=\begin{bmatrix}0&0&0\\0&0&1\\0&0&0\end{bmatrix}
+\]
+
+那么输出会变成邻近某个方向的像素，效果相当于图像平移。
+
+![image.png](assets/image-7.png)
+
+锐化滤波器：
+
+\[
+\text{sharpened}=2I-\text{blur}(I)
+\]
+
+\[
+2\begin{bmatrix}0&0&0\\0&1&0\\0&0&0\end{bmatrix}-\frac{1}{9}\begin{bmatrix}1&1&1\\1&1&1\\1&1&1\end{bmatrix}
+\]
+
+平坦区域里，原图和模糊图差不多，所以变化不大；在强边缘或强峰值处，原图与模糊图差异大，减去模糊图后会突出细节。
+
+![image.png](assets/image-8.png)
+
+#### 图像边缘和梯度
+
+边缘是 intensity 的 sharp discontinuities，也就是灰度强度的剧烈不连续变化
+
+如果把灰度图像看成函数：
+
+\[
+I(x,y)
+\]
+
+那么边缘就是函数变化很快的位置。在连续函数里，我们用导数衡量变化率。因此检测边缘的自然方法就是求导。对于离散图像，则用 finite differences，也就是有限差分。
+
+一维连续函数的导数定义是：
+
+\[
+f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}
+\]
+
+但图像是离散的，像素位置之间没有无限小间隔，所以不能真正让 \(h\to0\)。我们用有限差分近似导数。前向差分可以写成：
+
+\[
+f'(x)\approx f(x+1)-f(x)
+\]
+
+中心差分可以写成：
+
+\[
+f'(x)\approx \frac{f(x+1)-f(x-1)}{2}
+\]
+
+如果忽略常数 \(\frac{1}{2}\)，对应一维滤波器可以写成：
+
+\[
+[-1,\ 0,\ 1]
+\]
+
+在二维图像上，水平方向导数可以用：
+
+\[
+I_x(x,y)\approx I(x+1,y)-I(x-1,y)
+\]
+
+竖直方向导数可以用：
+
+\[
+I_y(x,y)\approx I(x,y+1)-I(x,y-1)
+\]
+
+#### Sobel 滤波器：平滑 + 求导
+
+一个常见的水平导数 Sobel 核是：
+
+\[
+S_x=\begin{bmatrix}1&0&-1\\2&0&-2\\1&0&-1\end{bmatrix}=\begin{bmatrix}
+1\\2\\1
+\end{bmatrix}
+\begin{bmatrix}
+1&0&-1
+\end{bmatrix}
+\]
+
+对应的竖直导数 Sobel 核是：
+
+\[
+S_y=
+\begin{bmatrix}
+1&2&1\\
+0&0&0\\
+-1&-2&-1
+\end{bmatrix}
+\]
+
+\(S_x\)  计算水平方向导数，通常对垂直边缘响应强；\(S_y\) 计算竖直方向导数，通常对水平边缘响应强。
+
+![image.png](assets/image-9.png)
+
+![image.png](assets/image-10.png)
+
+计算图像梯度：
+
+![image.png](assets/image-11.png)
+
+#### 图像下采样
+
+最直接的想法是，如果要把图像缩小一半，就删除偶数行和偶数列。这样图像宽高各减半，像素数量变为原来的：1/4
+
+但是这种方法会导致严重的aliasing，也就是混叠（摩尔纹）
+
+![image.png](assets/image-12.png)
+
+产生的原因：图像是连续世界的离散采样。原图中存在高频细节，比如细密纹理、栅格、头发、草地。如果采样率降低，但高频信息没有先被去除，那么高频信号会伪装成低频信号，产生错误图案。
+
+一个经典说法是：**下采样之前要先低通滤波。** 在图像里，低通滤波通常就是模糊，比如用高斯滤波。先把高频细节平滑掉，再删除行列，就能减少混叠，即：
+
+\[
+\text{blur} \rightarrow \text{subsample}
+\]
+
+图像是连续世界的离散采样。一个连续信号如果采样太少，就会丢失信息。更严重的是，欠采样不仅丢信息，还可能让高频信号看起来像低频信号。
+
+![image.png](assets/image-13.png)
+
+![image.png](assets/image-14.png)
+
+在图像中，aliasing 常表现为锯齿、摩尔纹、奇怪条纹和错误纹理。时间混叠 temporal aliasing会导致车轮在视频中看起来倒转，就是时间采样率不足导致的 temporal aliasing。
+
+#### 高斯金字塔：多尺度表示
+
+这是一组逐级变小的图像，构造方法是反复执行：
+
+\[
+\text{filter} \rightarrow \text{subsample}
+\]
+
+假设原图大小是 S，那么整个金字塔的总大小是：
+
+\[
+S+\frac{S}{4}+\frac{S}{16}+\frac{S}{64}+\cdots
+\]
+
+Just 4/3 times the size of the original image
+
+#### 拉普拉斯金字塔：保存残差，允许重建
+
+每一级不直接保存模糊图，而是保存残差 residual。基本思想是：
+
+\[
+\text{residual}=\text{current image}-\text{upsampled next level image}
+\]
+
+假设当前层是 \(G_l\)，下一层低分辨率图像是 \(G_{l+1}\)。把 \(G_{l+1}\) **上采样并平滑到当前层大小**，记为：
+
+\[
+\operatorname{expand}(G_{l+1})
+\]
+
+则拉普拉斯残差层是：
+
+\[
+L_l=G_l-\operatorname{expand}(G_{l+1})
+\]
+
+这个 \(L_l\) 保存的是当前层中无法由更粗尺度图像解释的细节。重建时反过来：
+
+\[
+G_l=L_l+\operatorname{expand}(G_{l+1})
+\]
+
+![image.png](assets/image-15.png)
+
+![image.png](assets/image-16.png)
+
+![d92a23e99cd36802551b1c2e94528d78.png](assets/d92a23e99cd36802551b1c2e94528d78.png)
+
+图像金字塔的应用：
+
+![image.png](assets/image-17.png)
+
+## 第七章 频域处理方法
+
+频域的理解方式不同。它不再问“这个位置的像素值是多少”，而是问：**这张图像由哪些不同频率的波组成？低频成分有多少？高频成分有多少？这些成分的方向是什么？**
+
+#### Fourier Series：任何周期信号都可以由正弦信号叠加
+
+**Fourier’s claim: Add enough of these to get any *periodic* signal you want!**
+
+\[
+f(t)=A\sin(\omega t+\phi)
+\]
+
+\[
+ω=2πf
+\]
+
+\(A\) 是 amplitude，振幅，决定波有多高。振幅越大，这个频率成分对信号影响越强。\(\omega\) 是 angular frequency，角频率，决定波振荡得多快。频率越高，单位长度内波动次数越多。\(\phi\) 是 phase，相位，决定波整体向左或向右平移多少。\(t\) 是变量，可以理解成时间，也可以理解成一维空间位置。
+
+傅里叶级数的典型形式：
+
+\[
+f(t)=a_0+\sum_{n=1}^{\infty}\left[a_n\cos(n\omega_0 t)+b_n\sin(n\omega_0 t)\right]
+\]
+
+这里 \(\omega_0\) 是基频，\(n\omega_0\) 是基频的整数倍，也叫 harmonic，谐波。\(a_0\) 表示常数项，也就是信号平均值；\(a_n\),\(b_n\) 是不同频率的权重。这个式子的意思是：一个复杂周期函数可以拆成很多正弦、余弦函数的加权和。
+
+![image.png](assets/image-18.png)
+
+![image.png](assets/image-19.png)
+
+![image.png](assets/image-20.png)
+
+只用少数低频正弦波时，方波边缘看起来平滑；加入越来越多高频项之后，跳变边缘越来越接近真实方波。
+
+#### 频域
+
+![image.png](assets/image-21.png)
+
+频谱中心通常代表低频，尤其是 DC component，也就是图像平均亮度；离中心越远，代表越高频的变化。图像中的平滑背景主要贡献低频，边缘和纹理贡献高频。
+
+#### 傅里叶变换
+
+\[
+z=a+bi=re^{i\theta}
+\]
+
+分别代表直角坐标系和极坐标系
+
+这里 r 是模长 magnitude，\(\theta\) 是相位 phase。
+
+\[
+re^{i\theta}=r\cos\theta+i r\sin\theta
+\]
+
+![image.png](assets/image-22.png)
+
+#### 连续傅里叶变换：把信号分解成所有频率
+
+\[
+F(\omega)=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}\,dt
+\]
+
+\[
+F(k) = \int f(x) e^{-i 2\pi k x} dx
+\]
+
+以上两种表示中频率的单位不同，一个是角频率一个是空间频率
+
+两种表示方式完全等价，但是要注意逆变换的系数有所不同
+
+\[
+f(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) e^{i \omega t} d\omega
+\]
+
+\[
+f(x) = \int_{-\infty}^{\infty} F(k) e^{i 2\pi k x} dk
+\]
+
+这里的 \(F(\omega)\) 通常是复数，因此它包含两部分信息：
+
+\[
+|F(\omega)|
+\]
+
+叫幅度谱 magnitude spectrum，表示这个频率成分有多强；
+
+\[
+\arg F(\omega)
+\]
+
+叫相位谱 phase spectrum，表示这个频率成分在空间中如何平移或对齐。
+
+#### 离散傅里叶变换 DFT：图像里真正计算的是离散版本
+
+\[
+F[k]=\sum_{n=0}^{N-1}f[n]e^{-i2\pi kn/N},\quad k=0,1,\dots,N-1
+\]
+
+这里 \(f[n]\) 是长度为 \(N\) 的离散信号，\(F[k]\) 是第 \(k\) 个离散频率上的复数系数。\(n\) 是空间或时间索引，\(k\) 是频率索引。
+
+\[
+f[n]=\frac{1}{N}\sum_{k=0}^{N-1}F[k]e^{i2\pi kn/N}
+\]
+
+二维图像是一位图像的推广：
+
+\[
+F[u,v]=\sum_{x=0}^{M-1}\sum_{y=0}^{N-1}I[x,y]e^{-i2\pi\left(\frac{ux}{M}+\frac{vy}{N}\right)}
+\]
+
+\[
+I[x,y]=\frac{1}{MN}\sum_{u=0}^{M-1}\sum_{v=0}^{N-1}F[u,v]e^{i2\pi\left(\frac{ux}{M}+\frac{vy}{N}\right)}
+\]
+
+DFT本质上是一个矩阵乘法，可以用FFT进行加速计算（**利用 W 的周期性和对称性，把一个大的 DFT 分解成两个小的 DFT，递归地做下去，从 \(O(N^2)\) 的计算复杂度降低到 \(O(N \log N)\)）**
+
+![image.png](assets/image-23.png)
+
+#### 二维频率
+
+\[
+I(x,y)=A\cos(2\pi(ux+vy)+\phi)
+\]
+
+这里 u 控制沿 x 方向的变化频率，v 控制沿 y 方向的变化频率。如果 \(u\neq0,v=0\)，图像只沿 x 方向变化，表现为竖直条纹；如果 \(u=0,v\neq0\)，图像只沿 y 方向变化，表现为水平条纹；如果 u,v 都不为 0，就会出现斜向条纹。
+
+![image.png](assets/image-24.png)
+
+![image.png](assets/image-25.png)
+
+中间那个点是：\((k_x,k_y)=(0,0)\)
+
+它叫 DC component，也就是零频分量。它对应图像的平均亮度。只要图像整体不是正负对称、平均值不为 0，频谱中心一般就会有一个亮点。
+
+另外两个对称点对应正负频率：
+
+\[
+(k_x,k_y),\quad (-k_x,-k_y)
+\]
+
+它们共同生成空间域中的一个实值余弦条纹。为什么要两个？因为真实图像的像素值是实数，而一个单独的复指数 \(e^{i2\pi(k_xx+k_yy)}\) 是复数。要得到实数余弦，就需要正频率和负频率成对出现：
+
+\[
+\cos(2\pi(k_xx+k_yy))=\frac{1}{2}e^{i2\pi(k_xx+k_yy)}
++
+\frac{1}{2}e^{-i2\pi(k_xx+k_yy)}
+\]
+
+所以频域中的一对对称点对应空间域中的一组正弦/余弦条纹。
+
+那三个点就是：
+
+\[
+(0,0),\quad (k_x,k_y),\quad (-k_x,-k_y)
+\]
+
+分别对应：平均亮度、一个正频率成分、一个负频率成分。
+
+空间里的条纹越密，频域亮点离中心越远。因为条纹密意味着频率高；频率高，在频谱中就离零频更远。
+
+空间里的条纹越稀，频域亮点离中心越近。因为变化慢，对应低频。
+
+![image.png](assets/image-26.png)
+
+空间域中的图像相加，对应频域中的频谱也相加。
+
+![image.png](assets/image-27.png)
+
+\[
+F(u,v)=|F(u,v)|e^{i\phi(u,v)}
+\]
+
+Amplitude 更像是在说：这张图里有多少低频、有多少高频、有多少水平纹理、有多少竖直纹理。自然图像的 amplitude 通常中心比较亮，因为自然图像大部分能量集中在低频，也就是大轮廓和光照变化。斑马图里有明显条纹，所以它的频谱中会出现和条纹方向相关的频率结构。
+
+Phase 更像是在说：这些频率成分应该在空间哪里对齐，才能组成正确的物体轮廓。也就是说，相位决定“结构在哪里”。虽然 phase 图看起来像噪声，但它对重建图像的形状非常重要。
+
+![image.png](assets/image-28.png)
+
+#### 频域滤波
+
+**Convolution theorem，卷积定理：** 空间域中两个函数的卷积，其傅里叶变换等于两个傅里叶变换的乘积；反过来，频域乘积的反变换等于空间域卷积
+
+\[
+\mathcal{F}\{f*g\}=\mathcal{F}\{f\}\cdot \mathcal{F}\{g\}
+\]
+
+\[
+\mathcal{F}^{-1}\{gh\}=\mathcal{F}^{-1}\{g\}*\mathcal{F}^{-1}\{h\}
+\]
+
+它有两个意义。第一，解释意义：不同滤波器本质上是在保留或抑制不同频率。第二，计算意义：对于大尺寸滤波核，直接卷积复杂度高；可以先 FFT 到频域，相乘，再 inverse FFT 回来，可能更快。
+
+![image.png](assets/image-29.png)
+
+低通滤波 low-pass filter 保留低频，抑制高频。因为低频对应平滑、大尺度结构，所以低通滤波的结果是图像变模糊。高斯模糊就是典型低通滤波。公式上，如果图像频谱是 \(F(u,v)\)，低通滤波器是 \(H(u,v)\)，那么：
+
+\[
+G(u,v)=H(u,v)F(u,v)
+\]
+
+其中 \(H(u,v)\) 在中心低频区域接近 1，在远离中心的高频区域接近 0。反变换后图像细节减少，整体结构保留。
+
+高通滤波 high-pass filter 保留高频，抑制低频。因为高频对应边缘、细节、噪声，所以高通结果通常显示边缘和纹理，而大块平滑区域被削弱。图像锐化、边缘检测都和高通有关。
+
+带通滤波 band-pass filter 只保留某个频率范围，既去掉很低频的大尺度平滑成分，也去掉很高频的噪声，只保留中间尺度结构。
+
+| 滤波类型 | 保留 | 抑制 | 图像效果 |
+| --- | --- | --- | --- |
+| Low-pass | 低频 | 高频 | 模糊、平滑 |
+| High-pass | 高频 | 低频 | 边缘、细节、噪声更明显 |
+| Band-pass | 中间频率 | 太低和太高 | 特定尺度纹理/结构 |
+
+![image.png](assets/image-30.png)
+
+![image.png](assets/image-31.png)
+
+空间域中的 box filter 是一个方形窗口，窗口内权重相等，窗口外突然变成 0。这种“突然截断”在频域里会产生振荡，也就是 sinc 型频率响应。它不是一个平滑的低通滤波器，而是会带来旁瓣 sidelobes。这些旁瓣会让某些频率没有被干净地抑制，甚至产生 ringing 或 blocky/edgy artifacts。
+
+高斯滤波则不同。高斯函数的傅里叶变换仍然是高斯：
+
+\[
+\mathcal{F}\left\{\exp\left(-\frac{x^2}{2\sigma^2}\right)\right\}\propto\exp\left(-\frac{\sigma^2\omega^2}{2}\right)
+\]
+
+也就是说，高斯在空间域平滑，在频域也平滑，没有强烈旁瓣。它会自然地逐渐衰减高频，而不是像 box filter 那样硬切。因此视觉效果通常更自然。
+
+总结来说：高斯滤波在频域中也是平滑低通滤波器，不容易引入振铃和边缘伪影。
+
+![image.png](assets/image-32.png)
+
+![image.png](assets/image-33.png)
+
+![image.png](assets/image-34.png)
+
+![image.png](assets/image-35.png)
+
+![image.png](assets/image-36.png)
+
+![image.png](assets/image-37.png)
+
+#### 重新理解采样：Nyquist-Shannon 采样定理
+
+连续信号如果以足够高的频率采样，就可以从离散版本中完美重建；这个临界频率叫 Nyquist frequency。当下采样时，如果采样频率达到 Nyquist 频率或更高，就不会发生 aliasing
+
+如果一个连续信号的最高频率为：
+
+\[
+f_{\max}
+\]
+
+那么采样频率 \(f_s\) 必须满足：
+
+\[
+f_s \geq 2f_{\max}
+\]
+
+才能无混叠地采样。这个 \(2f_{\max}\) 就是 Nyquist rate；对应的：
+
+\[
+\frac{f_s}{2}
+\]
+
+叫 Nyquist frequency，是采样系统能够表示的最高频率。
+
+为什么是 2 倍？直观理解是，一个正弦周期至少需要两个采样点才能分辨其上下变化。如果采样点太少，高频信号就会被误认为低频信号，这就是 aliasing。
+
+假设我们要把图像宽高各缩小一半，那么采样率降低为原来的一半。为了避免 aliasing，你必须先去掉超过新 Nyquist 频率的高频成分。
+
+#### Hybrid image：人眼也在做频率选择
+
+把一张图像的低频成分和另一张图像的高频成分合成在一起。近看时，人眼更容易看到高频细节；远看或缩小时，高频细节消失，低频结构占主导，所以会看到另一张图像。
+
+人眼对中频最敏感；早期视觉处理会对不同方向和尺度的频率进行滤波，中频线索往往主导感知
+
+![image.png](assets/image-38.png)
+
+#### 边缘、边界和频率：边缘强度不等于物体边界
+
+Edge 通常是图像强度变化大的地方，可以通过梯度、高通滤波、多尺度边缘检测得到。Boundary 则是人类语义上认为的物体边界，比如山的轮廓、人的轮廓、道路边线。
+
+![image.png](assets/image-39.png)
+
+![image.png](assets/image-40.png)
+
+![image.png](assets/image-41.png)
+
+![image.png](assets/image-42.png)
+
+梯度强的地方不一定是物体边界，物体边界也不一定总是梯度最强。
+
+例如纹理内部可能有很多强边缘，但它们不是物体边界；远处山脉边界可能因为雾气、光照而很弱，但人仍然能感知它是边界。线和边界很难找，因为 edge image 可能 noisy，boundaries 可能 incomplete，简单 thresholding 会遇到问题。
+
+边缘检测是低层视觉操作，物体边界是更高层的感知/语义问题。不要以为 Sobel 得到的强梯度就等价于目标边界。
+
+#### 线拟合：从边缘点到几何结构
+
+\[
+y=ax+b
+\]
+
+\[
+(x_i,y_i),\quad i=1,\dots,n
+\]
+
+![image.png](assets/image-43.png)
+
+最小二乘目标可以写成：
+
+\[
+E(a,b)=\frac{1}{n}\sum_{i=1}^{n}(y_i-ax_i-b)^2
+\]
+
+用矩阵形式来表示：
+
+\[
+X=\begin{bmatrix}x_1&1\\x_2&1\\\vdots&\vdots\\x_n&1\end{bmatrix},\quad\boldsymbol{\theta}=\begin{bmatrix}a\\b\end{bmatrix},\quad\mathbf{y}=\begin{bmatrix}y_1\\y_2\\\vdots\\y_n\end{bmatrix}
+\]
+
+\[
+\min_{\boldsymbol{\theta}}\|X\boldsymbol{\theta}-\mathbf{y}\|^2
+\]
+
+如果 \(X^TX\) 可逆，则闭式解为：
+
+\[
+\boldsymbol{\theta}=(X^TX)^{-1}X^T\mathbf{y}
+\]
+
+但是这种参数化存在问题，\(y=ax+b\) 无法表示竖直线，而且竖直残差也不是点到线的真实几何距离，并且对 outlier 也很敏感。
+
+![image.png](assets/image-44.png)
+
+更稳定的直线表示是法线式：
+
+\[
+ax+by+c=0
+\]
+
+\[
+a^2+b^2=1
+\]
+
+此时点 \((x_i,y_i)\) 到直线的几何距离是：
+
+\[
+d_i=|ax_i+by_i+c|
+\]
+
+因为 \(a^2+b^2=1\)。平方误差可以写成：
+
+\[
+E(a,b,c)=\sum_i(ax_i+by_i+c)^2\quad s.t.\quad a^2+b^2=1
+\]
+
+## 第八章 霍夫变换
+
+model fitting的困难：有 clutter，有多个模型，有缺失数据，有噪声，而且不可能枚举所有特征子集去拟合模型
+
+#### 直线的三种参数化：为什么最后要用 normal form？
+
+**第一种是斜截式：**
+
+\[
+y=mx+b
+\]
+
+这里 m 是斜率，b 是 y 轴截距。它直观，但有竖直线问题：竖直线不能写成有限 m 的形式。并且 m 的范围理论上是：
+
+\[
+m\in(-\infty,+\infty)
+\]
+
+这对霍夫变换很不友好，因为参数空间太大。
+
+**第二种是双截距式：**
+
+\[
+\frac{x}{a}+\frac{y}{b}=1
+\]
+
+这里 a 是 x-intercept，表示直线与 x 轴交点的横坐标；b 是 y-intercept，表示直线与 y 轴交点的纵坐标。它能表达一些斜截式不方便的情况，但如果直线过原点或者平行某个轴，也会遇到特殊情况。
+
+**第三种，也是霍夫变换最常用的，是法线式 normal form：**
+
+\[
+\rho=x\cos\theta+y\sin\theta
+\]
+
+\(\rho\) 表示从原点到直线的垂直距离，也就是直线的法向距离。 \(\theta\) 表示这条垂线，也就是直线法向量，与 x 轴的夹角。法向量可以写成：
+
+\[
+\mathbf{n}=\begin{bmatrix}\cos\theta\\\sin\theta\end{bmatrix}
+\]
+
+如果点 \((x,y)\) 在这条直线上，那么点向量：
+
+\[
+\mathbf{p}=\begin{bmatrix}x\\y\end{bmatrix}
+\]
+
+在法向量方向上的投影长度就是：
+
+\[
+\mathbf{n}^T\mathbf{p}=x\cos\theta+y\sin\theta
+\]
+
+这正好等于 \(\rho\)
+
+这个参数化的好处是：它可以表示所有方向的直线，包括竖直线；而且如果限制：
+
+\[
+\theta\in[0,\pi)
+\]
+
+那么 \(\rho\) 的范围在图像大小确定时也是有限的。例如图像宽为 W、高为 H，那么 \(\rho\) 大致范围可以设为：
+
+\[
+-\sqrt{W^2+H^2}\leq\rho\leq\sqrt{W^2+H^2}
+\]
+
+#### 霍夫变换的核心思想：从图像空间到参数空间投票
+
+**edges vote for the possible models**
+
+把问题从图像空间转移到参数空间 parameter space。在图像空间中，一个点可以属于无数条直线；换到参数空间中，这个点会对应一条曲线，表示“所有经过这个点的直线参数”。
+
+用 normal form：
+
+\[
+\rho=x\cos\theta+y\sin\theta
+\]
+
+对于一个固定图像点 \((x_0,y_0)\)，它对应的参数关系是：
+
+\[
+\rho=x_0\cos\theta+y_0\sin\theta
+\]
+
+这里 \((x_0,y_0)\) 是固定的，变量是 \(\theta\) 和 \(\rho\)。当 \(\theta\) 从 0 到 \(\pi\)  变化时，\(\rho\) 也随之变化，形成一条正弦曲线。
+
+如果图像空间里有多个点位于同一条直线上，那么它们各自在参数空间中对应的正弦曲线会在同一个点 \((\rho^* ,\theta^*)\) 相交。这个交点就表示：存在一条参数为 \((\rho^* ,\theta^*)\) 的直线，同时经过这些图像点。于是我们只要在参数空间里找投票峰值，就能找到图像中的直线。
+
+**图像空间中的点 → 参数空间中的曲线。**
+
+**图像空间中的直线 → 参数空间中的交点/峰值。**
+
+#### 霍夫直线检测算法
+
+首先，量化参数空间。把 \(\theta\) 离散成很多 bin，比如：
+
+\[
+\theta=0^\circ,1^\circ,2^\circ,\dots,179^\circ
+\]
+
+把 \(\rho\) 也离散成一系列 bin。然后创建 accumulator array：
+
+初始化为 0：
+
+\[
+H(\theta,\rho)=0
+\]
+
+接下来，对图像中的每一个边缘点 \((x,y)\)，枚举所有 \(\theta\)：
+
+\[
+\rho=x\cos\theta+y\sin\theta
+\]
+
+然后把对应 accumulator 的值加 1：
+
+\[
+H(\theta,\rho)\leftarrow H(\theta,\rho)+1
+\]
+
+最后，在 H 中寻找局部最大值 local maxima。某个 bin 的票数越高，说明有越多边缘点支持这条直线。
+
+![image.png](assets/image-45.png)
+
+![image.png](assets/image-46.png)
+
+![image.png](assets/image-47.png)
+
+注意坐标系，image origin is top left。图像坐标通常左上角为原点，x 向右，y 向下；而数学坐标常常 y 向上。所以实现时 \(\theta\) 和方向解释要小心
+
+同一条线既可以写成 \((\rho,\theta)\)，还可以写成 \((-\rho,\theta+\pi)\)
+
+为了避免重复表示，实际实现时常常限制 \(\theta\) 范围，例如 \([0,\pi)\)，并允许 \(\rho\) 为正或负；或者限制 \(\rho\geq0\)，同时让 \(\theta\) 范围覆盖更大。两种方式都可以，只要定义一致。
+
+![image.png](assets/image-48.png)
+
+#### 噪声和外点对霍夫变换的影响
+
+测量噪声会让原本应该投到同一个参数 bin 的点分散到附近 bin 中，因此正确 bin 的最大票数会下降。
+
+所以霍夫变换虽然比最小二乘更抗遮挡和部分噪声，但不是无限鲁棒。它依赖几个设计选择：边缘检测质量、参数空间量化精度、阈值设置、局部极大值检测、是否使用梯度方向约束等。
+
+这里有一个很重要的 trade-off。参数 bin 太粗，很多不同的线会被混在一起，定位不准；bin 太细，同一条真实线的投票会被分散，峰值不明显，而且计算和存储代价更大。因此 accumulator 的分辨率本身就是一个重要超参数。
+
+![image.png](assets/image-49.png)
+
+![image.png](assets/image-50.png)
+
+遮挡不影响所有点投向同一个模型，多实例对应多个投票峰值。
+
+#### 霍夫圆检测：从直线参数变成圆参数
+
+\[
+(x-a)^2+(y-b)^2=r^2
+\]
+
+检测圆就是要找到参数：
+
+\[
+(a,b,r)
+\]
+
+如果半径 r 已知，那么参数空间只需要二维：
+
+\[
+(a,b)
+\]
+
+对于图像空间中的一个边缘点 (x,y)，如果它在某个半径为 r 的圆上，那么圆心 (a,b) 必须满足：
+
+\[
+(x-a)^2+(y-b)^2=r^2
+\]
+
+这意味着在参数空间 \((a,b)\) 中，所有可能的圆心构成一个以 \((x,y)\) 为中心、半径为 r 的圆。因此：
+
+**图像空间中的一个点 → 圆心参数空间中的一个圆。**
+
+如果多个边缘点来自同一个真实圆，那么它们在参数空间中对应的圆会交于同一个圆心  \((a^*,b^*)\)，那里就会形成投票峰值。
+
+![image.png](assets/image-51.png)
+
+还可以通过梯度方向加速圆检测，边缘点不仅有位置 \((x,y)\)，通常还可以从图像梯度得到边缘方向。对于圆来说，圆边界处的梯度方向大致沿着半径方向，也就是指向圆心或背离圆心。
+
+如果半径 r 已知，并且边缘点位置是 (x,y)，梯度方向单位向量是：
+
+\[
+\mathbf{g}=\begin{bmatrix}g_x\\g_y\end{bmatrix}
+\]
+
+那么圆心候选不再是整整一个圆，而只可能在梯度方向上两个位置：
+
+\[
+(a,b)=(x,y)\pm r\mathbf{g}
+\]
+
+如果能确定梯度朝向，就甚至只需要投一个点。
+
+这个思想也适用于直线检测：如果知道边缘点的梯度方向，就可以限制可能的 θ，不必枚举所有角度。
+
+#### 霍夫变换的优缺点总结
+
+它对遮挡比较友好，因为不需要完整连续边缘，只要部分点能投到同一个模型参数，就能形成峰值。
+
+它能检测多个实例，因为不同实例对应参数空间中的不同局部峰值。
+
+它对一定噪声有鲁棒性，但不是完全鲁棒。测量噪声会分散正确投票，外点会制造错误峰值。边缘检测质量和参数空间量化都会影响结果。
+
+它的计算复杂度不一定好。直线检测时，如果有 \(N\) 个边缘点，\(\theta\) 离散为 \(T\) 个角度，那么复杂度大约是：
+
+\[
+O(NT)
+\]
+
+圆检测如果半径未知，参数空间是三维，复杂度和存储都会明显增加。如果检测更复杂的形状，参数维度越高，霍夫变换越容易遇到“参数空间维数灾难”。
+
+所以霍夫变换适合参数数量较少、形状模型明确的对象，比如直线、圆、简单曲线；如果模型参数太多，直接霍夫投票会变得非常昂贵。
+
+## 第九章 Harris角点检测
+
+#### why
+
+**角点在各个方向移动都会导致局部窗口灰度变化大，因此比平坦区域和边缘更容易被稳定匹配。它用于图像配准、三维重建、运动跟踪、物体识别、检索和机器人定位。**
+
+![image.png](assets/image-52.png)
+
+![image.png](assets/image-53.png)
+
+![image.png](assets/image-54.png)
+
+![image.png](assets/image-55.png)
+
+![image.png](assets/image-56.png)
+
+![image.png](assets/image-57.png)
+
+可用于图像配准（单应性变换、基本矩阵）；三维重建；运动追踪；目标识别；索引与数据库检索；机器人导航。
+
+角点检测的核心动机是：在两张图像之间做匹配时，我们希望选一些“好认、稳定、不容易混淆”的点。比如火星车拍摄的连续图像中，我们希望在第一张图里选一个点，然后在下一张图里重新找到它。
+
+Pick a point in the image, find it again in the next image, what type of feature would you select? 
+
+**a corner**
+
+为什么不是平坦区域？因为平坦区域到处都差不多，一个小窗口平移后图像内容几乎不变，你很难知道它到底移动到哪里。为什么不是普通边缘？因为边缘沿着边缘方向移动时，窗口内容也变化不大，这叫 aperture problem，可以理解成“沿边缘方向无法定位”。而角点不同，角点附近通常有两个方向的强烈变化。只要窗口稍微向任何方向移动，局部外观都会明显改变，所以它更容易被重新找到。
+
+所以角点的直观定义是：
+
+**一个局部窗口无论向哪个方向平移，窗口内灰度都会发生明显变化。**
+
+平坦区域：
+
+\[
+\text{all directions: small change}
+\]
+
+边缘区域：
+
+\[
+\text{one direction: small change,\quad another direction: large change}
+\]
+
+角点区域：
+
+\[
+\text{all directions: large change}
+\]
+
+![image.png](assets/image-58.png)
+
+#### 数学准备：二次型和椭圆
+
+一个二维二次型可以写成：
+
+\[
+E(u,v)=\begin{bmatrix}u & v\end{bmatrix}M\begin{bmatrix}u\\v\end{bmatrix}
+\]
+
+\[
+M=\begin{bmatrix}a & b\\b & c\end{bmatrix}
+\]
+
+\[
+E(u,v)=au^2+2buv+cv^2
+\]
+
+这里 \((u,v)\) 表示窗口移动的方向和大小，\(E(u,v)\) 表示移动后窗口外观变化有多大。
+
+为什么这个二次型重要？因为它描述了一个“碗状曲面”。如果这个碗在两个方向都很陡，那么你往任何方向移动，误差都会快速变大，对应角点；如果这个碗在一个方向陡、另一个方向平，那么对应边缘；如果两个方向都很平，那么对应平坦区域。
+
+对称矩阵 M 可以特征分解：
+
+\[
+M=R\Lambda R^T
+\]
+
+\[
+\Lambda=\begin{bmatrix}\lambda_1 & 0\\0 & \lambda_2\end{bmatrix}
+\]
+
+\(\lambda_1,\lambda_2\) 是特征值，表示二次型在两个主方向上的变化强度；R 的列向量是特征向量，表示这两个主方向。特征向量决定椭圆轴的方向，特征值和轴长有关，特征值越大，二次曲面在对应方向越陡
+
+![image.png](assets/image-59.png)
+
+![image.png](assets/image-60.png)
+
+![image.png](assets/image-61.png)
+
+![image.png](assets/image-62.png)
+
+#### Harris 的核心误差函数：窗口移动后图像变化多少？
+
+设图像灰度函数为：
+
+\[
+I(x,y)
+\]
+
+考虑一个小窗口，当窗口整体平移 \((u,v)\) 后，我们比较原窗口和移动后窗口的灰度差异。误差函数可以写成：
+
+\[
+E(u,v)=\sum_{x,y}w(x,y)\left[I(x+u,y+v)-I(x,y)\right]^2
+\]
+
+\(w(x,y)\) 是窗口函数。它决定哪些像素参与计算，以及权重多大。最简单可以是矩形窗口：窗口内 w=1，窗口外 w=0。也可以是 Gaussian window，让窗口中心权重大，边缘权重小。
+
+#### 用 Taylor 展开把误差函数变成二次型
+
+直接处理 \(I(x+u,y+v)-I(x,y)\) 不方便，所以 Harris 用小位移近似，使用一阶 Taylor 展开
+
+\[
+I(x+u,y+v)\approx I(x,y)+I_x(x,y)u+I_y(x,y)v
+\]
+
+这里 \(I_x\) 是图像在 x 方向的偏导，也就是水平梯度；\(I_y\) 是图像在 y 方向的偏导，也就是竖直梯度。
+
+\[
+E(u,v)\approx\sum_{x,y}w(x,y)(I_x u+I_y v)^2
+\]
+
+\[
+E(u,v)\approx u^2\sum wI_x^2+2uv\sum wI_xI_y+v^2\sum wI_y^2
+\]
+
+\[
+E(u,v)\approx\begin{bmatrix}u & v\end{bmatrix}M\begin{bmatrix}u\\v\end{bmatrix}
+\]
+
+\[
+M=\sum_{x,y}w(x,y)\begin{bmatrix}I_x^2 & I_xI_y\\I_xI_y & I_y^2\end{bmatrix}=
+\begin{bmatrix}
+\sum wI_x^2 & \sum wI_xI_y\\
+\sum wI_xI_y & \sum wI_y^2
+\end{bmatrix}
+\]
+
+这个 M 就叫 **second moment matrix**，也叫 **structure tensor**。
+
+![image.png](assets/image-63.png)
+
+#### 用特征值判断 flat / edge / corner
+
+![image.png](assets/image-64.png)
+
+\[
+\text{corner} \Longleftrightarrow \min(\lambda_1,\lambda_2) \text{ 很大}
+\]
+
+#### 为什么不直接算特征值？Harris response 的来源
+
+每个像素都求特征值比较麻烦，所以 Harris 和 Stephens 提出了一个不显式求特征值的响应函数。Harris Detector 的核心步骤：在每个像素定义矩阵 M，计算 detector response R，对 R 阈值化并做 non-max suppression.
+
+Harris 响应函数是：
+
+\[
+R=\det(M)-k\operatorname{trace}(M)^2
+\]
+
+其中 k 是经验常数，常取：
+
+\[
+k\in[0.04,0.06]
+\]
+
+\[
+\det(M)=\lambda_1\lambda_2
+\]
+
+\[
+\operatorname{trace}(M)=\lambda_1+\lambda_2
+\]
+
+\[
+R=\lambda_1\lambda_2-k(\lambda_1+\lambda_2)^2
+\]
+
+这个式子不需要显式计算特征值，因为：
+
+\[
+M=\begin{bmatrix}A & B\\B & C\end{bmatrix}
+\]
+
+\[
+\det(M)=AC-B^2
+\]
+
+\[
+\operatorname{trace}(M)=A+C
+\]
+
+\[
+R=(AC-B^2)-k(A+C)^2
+\]
+
+\[
+A=\sum wI_x^2,\quad B=\sum wI_xI_y,\quad C=\sum wI_y^2
+\]
+
+![image.png](assets/image-65.png)
+
+\[
+R \approx 0 \Rightarrow \text{flat}
+\]
+
+\[
+R\lt 0 \Rightarrow \text{edge}
+\]
+
+\[
+R \gg 0 \Rightarrow \text{corner}
+\]
+
+![image.png](assets/image-66.png)
+
+#### Harris 角点检测的完整算法
+
+**第一步，计算图像梯度：**
+
+\[
+I_x,\quad I_y
+\]
+
+可以用 Sobel、Prewitt 或简单差分滤波器。
+
+**第二步，在每个像素附近计算结构张量：**
+
+\[
+M=\sum_{x,y}w(x,y)\begin{bmatrix}I_x^2 & I_xI_y\\I_xI_y & I_y^2\end{bmatrix}
+\]
+
+实际实现中，通常先计算三张图：
+
+\[
+I_x^2,\quad I_y^2,\quad I_xI_y
+\]
+
+然后分别用 Gaussian window 做平滑，相当于在局部窗口内加权求和。
+
+**第三步，计算 Harris 响应：**
+
+\[
+R=\det(M)-k\operatorname{trace}(M)^2
+\]
+
+**第四步，对 R 进行阈值化，只保留响应足够大的点：**
+
+\[
+R\gt T
+\]
+
+**第五步，做非极大值抑制 non-maximum suppression**。也就是在局部邻域内，只保留 R 最大的点，避免一个角点附近出现一大片响应点。
+
+最后输出剩下的点作为 Harris corners。
+
+![image.png](assets/image-67.png)
+
+![image.png](assets/image-68.png)
+
+#### Harris 的不变性：旋转不变、亮度平移不变，但不尺度不变
+
+![image.png](assets/image-69.png)
+
+![image.png](assets/image-70.png)
+
+![image.png](assets/image-71.png)
+
+#### 多尺度检测
+
+前面 Harris 角点检测是在一个固定窗口里判断：这个窗口向任意方向移动，灰度变化是不是都很大。问题是，现实图像里的同一个物体可能有大有小。比如一朵向日葵，在近处图像里很大，在远处图像里很小。如果你只用一个固定大小的窗口去检测，它可能对近处的大花盘太小，对远处的小花盘又太大。
+
+这就带来一个问题：**同一个图像结构，在不同缩放比例下，应该还能被检测出来。** 这就是 scale-invariant feature detector 想解决的问题。
+
+此时的特征点是：
+
+\[
+(x,y,\sigma)
+\]
+
+![image.png](assets/image-72.png)
+
+这里主要讲解的是 **Multi-scale blob detection**
+
+Blob 可以理解成一块局部区域，它和周围区域在亮度、颜色或纹理上有明显差异，而且通常近似圆形或椭圆形。
+
+比如向日葵的黑色花盘，就是一个典型 blob。它不是一个尖锐的角点，而是一块有面积的区域。这个区域有自己的大小：近处的大花盘半径大，远处的小花盘半径小。
+
+**Laplacian：**
+
+\[
+\nabla^2 I = I_{xx}+I_{yy}
+\]
+
+这里 \(I(x,y)\)  是图像灰度函数。\(I_{xx}\) 是图像在 x 方向的二阶导数，\(I_{yy}\) 是图像在 y 方向的二阶导数。
+
+一阶导数看的是“变化快不快”，所以适合检测边缘。二阶导数看的是“变化趋势有没有从上升变下降，或者从下降变上升”，所以它对局部凸起、局部凹陷、亮斑、暗斑特别敏感。Blob 通常就是一个局部亮斑或暗斑，所以 Laplacian 很适合检测 blob。
+
+但直接对原图做二阶导数很容易受噪声影响，所以实际不是直接算：
+
+\[
+\nabla^2 I
+\]
+
+而是先用高斯核平滑图像，再算 Laplacian：
+
+\[
+\nabla^2(G_\sigma * I)
+\]
+
+由于卷积和求导可以交换，也常写成：
+
+\[
+(\nabla^2 G_\sigma) * I
+\]
+
+**尺度归一化 Laplacian：**
+
+\[
+\sigma^2 \nabla^2 G_\sigma * I
+\]
+
+不同尺度的滤波器大小不一样，导数响应的数值大小也会自然变化。如果不做归一化，小尺度滤波器和大尺度滤波器的响应值不能直接比较。这样你就无法判断“到底哪个尺度更匹配”。
+
+![image.png](assets/image-73.png)
+
+> **Highest response when the signal has the same characteristic scale as the filter.**
+> 
+> 
+> 目标多大，就用差不多大的滤波器看它；看得刚刚好时，响应最大。
+> 
+
+![image.png](assets/image-74.png)
+
+![image.png](assets/image-75.png)
+
+拿不同大小的“圆形探测器”去扫描图像。小探测器找小斑点，大探测器找大斑点。对于每个候选斑点，哪个探测器响应最强，哪个尺度就是它的 characteristic scale。最后保留那些在空间位置和尺度方向上都达到局部峰值的点。
+
+## 第十章 2D图像变换
+
+![image.png](assets/image-76.png)
+
+所谓线性变换，就是把一个二维点：
+
+\[
+\mathbf{x}=\begin{bmatrix}x\\y\end{bmatrix}
+\]
+
+通过一个 \(2\times 2\) 矩阵变成另一个点：
+
+\[
+\mathbf{x}'=A\mathbf{x}
+\]
+
+\[
+A=\begin{bmatrix}a & b\\c & d\end{bmatrix}
+\]
+
+\[
+\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}a & b\\c & d\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}ax+by\\cx+dy\end{bmatrix}
+\]
+
+#### 缩放 Scale
+
+缩放的意思是让每个坐标乘以一个比例。若 x 方向缩放比例为 \(s_x\)，y 方向缩放比例为 \(s_y\)，则：
+
+\[
+x'=s_xx
+\]
+
+\[
+y'=s_yy
+\]
+
+\[
+\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}s_x & 0\\0 & s_y\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}
+\]
+
+\(S= \begin{bmatrix} s_x & 0\\ 0 & s_y \end{bmatrix}\)叫scaling matrix
+
+如果 \(s_x=s_y=s\)，就是 uniform scaling，等比例缩放，图像整体放大或缩小，形状比例不变。
+
+#### 剪切 Shear
+
+剪切变换会让图像像被“斜着推了一下”。例如 x 方向剪切可以写成：
+
+\[
+x'=x+ky
+\]
+
+\[
+y'=y
+\]
+
+\[
+\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}1 & k\\0 & 1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}
+\]
+
+这里 k 控制剪切强度。你可以看到，新的 x′ 不只取决于原来的 x，还取决于 y。这意味着 y 越大的点，在 x 方向被推得越多，所以竖直线会变斜。
+
+类似地，y 方向剪切可以写成：
+
+\[
+x'=x
+\]
+
+\[
+y'=kx+y
+\]
+
+\[
+\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}1 & 0\\k & 1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}
+\]
+
+#### 旋转 Rotation
+
+绕原点旋转 θ 角的公式是：
+
+\[
+x'=x\cos\theta-y\sin\theta
+\]
+
+\[
+y'=x\sin\theta+y\cos\theta
+\]
+
+\[
+\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}\cos\theta & -\sin\theta\\\sin\theta & \cos\theta\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}
+\]
+
+这个矩阵叫 rotation matrix：
+
+\[
+R(\theta)=\begin{bmatrix}\cos\theta & -\sin\theta\\\sin\theta & \cos\theta\end{bmatrix}
+\]
+
+旋转矩阵是正交矩阵，它不会改变长度和角度，只会改变方向，因此旋转属于刚体变换的一部分
+
+**旋转矩阵的推导：**
+
+可以用单位向量理解。原来的 x 轴方向 \((1,0)^T\) 旋转 \(\theta\) 后变成：
+
+\[
+(\cos\theta,\sin\theta)^T
+\]
+
+原来的 y 轴方向 \((0,1)^T\) 旋转 \(\theta\) 后变成：
+
+\[
+(-\sin\theta,\cos\theta)^T
+\]
+
+这两个新基向量正好作为旋转矩阵的两列。
+
+#### 为什么普通 \(2\times2\) 矩阵不能表示平移？
+
+\[
+x'=x+t_x
+\]
+
+\[
+y'=y+t_y
+\]
+
+这个变换不是单纯的 \(2\times2\) 矩阵乘法，因为平移会把原点变成 \((t_x,t_y)\)
+
+所以需要引出 **齐次坐标 Homogeneous Coordinates**
+
+#### 齐次坐标：用三维向量表示二维点
+
+\[
+\tilde{\mathbf{x}}=\begin{bmatrix}x\\y\\1\end{bmatrix}
+\]
+
+和
+
+\[
+\begin{bmatrix}
+kx\\
+ky\\
+k
+\end{bmatrix}
+\]
+
+表示同一个二维点，只要 \(k\neq0\)，也就是说，齐次坐标只在比例意义下定义。
+
+从齐次坐标转回普通坐标时，如果齐次坐标是：
+
+\[
+\tilde{\mathbf{x}}=\begin{bmatrix}X\\Y\\W\end{bmatrix}
+\]
+
+且 \(W\neq0\)，那么普通坐标是：
+
+\[
+x=\frac{X}{W}
+\]
+
+\[
+y=\frac{Y}{W}
+\]
+
+这一步叫 dehomogenization，或者归一化齐次坐标。
+
+\([x,y,0]^T\) 是无穷远点，\([0,0,0]^T\)  是undefined
+
+#### 用齐次坐标表示平移
+
+\[
+\begin{bmatrix}x'\\y'\\1\end{bmatrix}=\begin{bmatrix}1 & 0 & t_x\\0 & 1 & t_y\\0 & 0 & 1\end{bmatrix}\begin{bmatrix}x\\y\\1\end{bmatrix}
+\]
+
+齐次坐标的关键意义：**它把平移、旋转、缩放、剪切、投影变换都统一成矩阵乘法。**
+
+#### 用 \(3\times3\) 矩阵统一表示常见 2D 变换
+
+\[
+\tilde{\mathbf{x}}'=H\tilde{\mathbf{x}}
+\]
+
+**平移矩阵：**
+
+\[
+T(t_x,t_y)=\begin{bmatrix}1 & 0 & t_x\\0 & 1 & t_y\\0 & 0 & 1\end{bmatrix}
+\]
+
+**缩放矩阵：**
+
+\[
+S(s_x,s_y)=\begin{bmatrix}s_x & 0 & 0\\0 & s_y & 0\\0 & 0 & 1\end{bmatrix}
+\]
+
+**旋转矩阵：**
+
+\[
+R(\theta)=\begin{bmatrix}\cos\theta & -\sin\theta & 0\\\sin\theta & \cos\theta & 0\\0 & 0 & 1\end{bmatrix}
+\]
+
+**剪切矩阵，例如 x 方向剪切：**
+
+\[
+Sh_x(k)=\begin{bmatrix}1 & k & 0\\0 & 1 & 0\\0 & 0 & 1\end{bmatrix}
+\]
+
+#### 矩阵组合：变换顺序非常重要
+
+\[
+\tilde{\mathbf{p}}'=T R S \tilde{\mathbf{p}}
+\]
+
+\[
+\tilde{\mathbf{p}}\overset{S}{\longrightarrow}S\tilde{\mathbf{p}}\overset{R}{\longrightarrow}RS\tilde{\mathbf{p}}\overset{T}{\longrightarrow}TRS\tilde{\mathbf{p}}
+\]
+
+multiplication order matters，因为矩阵乘法一般不满足交换律
+
+#### Translation：平移，2 个自由度
+
+平移只有两个参数：
+
+\[
+t_x,t_y
+\]
+
+矩阵为：
+
+\[
+\begin{bmatrix}1 & 0 & t_x\\0 & 1 & t_y\\0 & 0 & 1\end{bmatrix}
+\]
+
+自由度是：
+
+\[
+2
+\]
+
+它保留长度、角度、平行性和形状，只改变位置。
+
+#### Euclidean / Rigid Transform：刚体变换，3 个自由度
+
+刚体变换由旋转和平移组成：
+
+\[
+\begin{bmatrix}x'\\y'\\1\end{bmatrix}=\begin{bmatrix}\cos\theta & -\sin\theta & t_x\\\sin\theta & \cos\theta & t_y\\0 & 0 & 1\end{bmatrix}\begin{bmatrix}x\\y\\1\end{bmatrix}
+\]
+
+参数是：
+
+\[
+\theta,t_x,t_y
+\]
+
+所以自由度是：
+
+\[
+3
+\]
+
+刚体变换保持距离和角度。一个物体在平面上只旋转和平移，形状不会变。
+
+#### Similarity Transform：相似变换，4 个自由度
+
+相似变换包括等比例缩放、旋转和平移：
+
+\[
+\begin{bmatrix}x'\\y'\\1\end{bmatrix}=\begin{bmatrix}s\cos\theta & -s\sin\theta & t_x\\s\sin\theta & s\cos\theta & t_y\\0 & 0 & 1\end{bmatrix}\begin{bmatrix}x\\y\\1\end{bmatrix}
+\]
+
+参数是：
+
+\[
+s,\theta,t_x,t_y
+\]
+
+所以自由度是：
+
+\[
+4
+\]
+
+相似变换保持角度和形状比例，但长度会整体乘以 s。例如照片整体放大、旋转、移动，就是相似变换。
+
+#### Affine Transform：仿射变换，6 个自由度
+
+仿射变换可以写成：
+
+\[
+\begin{bmatrix}x'\\y'\\1\end{bmatrix}=\begin{bmatrix}a & b & t_x\\c & d & t_y\\0 & 0 & 1\end{bmatrix}\begin{bmatrix}x\\y\\1\end{bmatrix}
+\]
+
+\[
+x'=ax+by+t_x
+\]
+
+\[
+y'=cx+dy+t_y
+\]
+
+这里有 6 个独立参数：
+
+\[
+a,b,c,d,t_x,t_y
+\]
+
+所以自由度是：
+
+\[
+6
+\]
+
+仿射变换可以看成任意 \(2\times2\) 线性变换加平移。它包括旋转、缩放、剪切和平移。
+
+仿射变换的性质：原点不一定映射到原点；直线仍映射为直线；平行线仍映射为平行线；比例关系保持；多个仿射变换组合后仍然是仿射变换。
+
+注意这里的“比例关系保持”更准确地说，是**同一直线上的长度比例保持**。比如线段 AB 和 BC 在同一直线上，那么仿射变换后：
+
+\[
+\frac{|AB|}{|BC|}
+\]
+
+保持不变。但角度和长度一般不保持，圆可能变成椭圆，正方形可能变成平行四边形。
+
+#### Projective Transform / Homography：投影变换，8 个自由度
+
+投影变换，也叫 projective transformation 或 homography，一般写成：
+
+\[
+\begin{bmatrix}x'\\y'\\w'\end{bmatrix}=\begin{bmatrix}h_{11} & h_{12} & h_{13}\\h_{21} & h_{22} & h_{23}\\h_{31} & h_{32} & h_{33}\end{bmatrix}\begin{bmatrix}x\\y\\1\end{bmatrix}
+\]
+
+转回普通坐标：
+
+\[
+x_{\text{new}}=\frac{x'}{w'}=\frac{h_{11}x+h_{12}y+h_{13}}{h_{31}x+h_{32}y+h_{33}}
+\]
+
+\[
+y_{\text{new}}=\frac{y'}{w'}=\frac{h_{21}x+h_{22}y+h_{23}}{h_{31}x+h_{32}y+h_{33}}
+\]
+
+这里 H 是 \(3\times3\) 矩阵，表面上有 9 个元素。但齐次矩阵整体乘以任意非零常数表示同一个变换：
+
+\[
+H\sim kH
+\]
+
+所以实际自由度是：
+
+\[
+9-1=8
+\]
+
+projective transformations 的性质：它包含 affine transformations 和 projective warps；直线仍映射为直线；平行线不一定仍平行；比例不一定保持；多个投影变换组合后仍然是投影变换
+
+仿射变换不能模拟透视效果，因为仿射变换保持平行线；而现实相机拍平面物体时，平行线可能在图像中汇聚到消失点，所以需要 homography。
+
+\[
+\text{Translation}\subset\text{Euclidean}\subset\text{Similarity}\subset\text{Affine}\subset\text{Projective}
+\]
+
+#### 如何根据点对应估计仿射变换
+
+假设我们有两个三角形 ABC 和 DEF，希望找一个变换把：
+
+\[
+A\mapsto D,\quad B\mapsto E,\quad C\mapsto F
+\]
+
+这是affine transform。因为任意非退化三角形到另一个非退化三角形之间，都存在唯一的仿射变换
+
+一对点会给出两个方程，因此至少需要知道3对点
+
+#### 把仿射估计写成线性方程组
+
+\[
+(x_i,y_i)\rightarrow(x_i',y_i')
+\]
+
+\[
+x_i'=ax_i+by_i+t_x
+\]
+
+\[
+y_i'=cx_i+dy_i+t_y
+\]
+
+我们把未知参数排列成向量：
+
+\[
+\mathbf{m}=\begin{bmatrix}a\\b\\t_x\\c\\d\\t_y\end{bmatrix}
+\]
+
+那么这两个方程可以写成矩阵形式：
+
+\[
+\begin{bmatrix}x_i & y_i & 1 & 0 & 0 & 0\\0 & 0 & 0 & x_i & y_i & 1\end{bmatrix}\begin{bmatrix}a\\b\\t_x\\c\\d\\t_y\end{bmatrix}=\begin{bmatrix}x_i'\\y_i'\end{bmatrix}
+\]
+
+如果有 n 对点对应，就把这些方程堆叠起来：
+
+\[
+A\mathbf{m}=\mathbf{b}
+\]
+
+其中 A 是 \(2n\times6\) 矩阵，\(\mathbf{m}\) 是 6 维未知参数，\(\mathbf{b}\) 是 2n 维观测坐标。
+
+如果刚好 n=3，通常可以解出唯一解；如果 n>3，方程数量多于未知数，通常没有精确解，因为匹配点有噪声。这时就用最小二乘。
+
+#### 最小二乘：当点对应有噪声时，找误差最小的变换
+
+假设预测位置是：
+
+\[
+\hat{\mathbf{x}}_i'
+\]
+
+测量位置是：
+
+\[
+\mathbf{x}_i'
+\]
+
+残差是：
+
+\[
+\mathbf{r}_i=\hat{\mathbf{x}}_i'-\mathbf{x}_i'
+\]
+
+最小二乘目标是最小化所有残差的平方和：
+
+\[
+\min_{\mathbf{m}}\sum_i\left\|\hat{\mathbf{x}}_i'-\mathbf{x}_i'\right\|_2^2
+\]
+
+写成矩阵形式：
+
+\[
+\min_{\mathbf{m}}\|A\mathbf{m}-\mathbf{b}\|_2^2
+\]
+
+这个目标函数是二次函数。求解方法和前面线性回归一样，对参数求导并令导数为 0：
+
+\[
+\frac{\partial}{\partial\mathbf{m}}\|A\mathbf{m}-\mathbf{b}\|_2^2=2A^T(A\mathbf{m}-\mathbf{b})
+\]
+
+\[
+A^TA\mathbf{m}=A^T\mathbf{b}
+\]
+
+如果 \(A^TA\) 可逆：
+
+\[
+\mathbf{m}=(A^TA)^{-1}A^T\mathbf{b}
+\]
+
+**Linear least squares estimation only works when the transform function is linear!** 
+
+**Also doesn’t deal well with outliers**
+
+homographies 会有不同处理过程
+
+## **第十一章 单应性变换（Homographies）**
+
+#### 为什么需要 Homography？从全景拼接说起
+
+全景图是一个接近 \(360^\circ\) 视野范围的大图像，一般有两种处理方法：第一种是直接使用超广角或鱼眼镜头，一次拍下很大视野；第二种是拍多张图像，再把它们拼接成一张虚拟广角图像
+
+第一种方法的优点是一次成像，光学上完成；缺点是镜头昂贵、笨重，而且鱼眼畸变很强。
+
+第二种方法更常见：我们用普通相机从不同方向拍多张照片，然后通过图像对齐和融合生成全景图。
+
+最朴素的拼接方法是把一张图像相对另一张做平移，但仅靠平移无法拼接不同视角拍摄的图像
+
+原因很直观：当相机转动或拍摄平面从不同角度被观察时，图像里的物体不仅会平移，还会出现透视变形。比如同一个墙面、地板、书本封面，从斜角看会变成梯形；只用平移无法把它拉回正确形状。
+
+所以我们需要更强的二维变换：**projective transformation，也就是 homography，单应性变换**。
+
+#### Homography
+
+\[
+\mathbf{x}' \sim H\mathbf{x}
+\]
+
+\[
+\mathbf{x}=\begin{bmatrix}x\\y\\1\end{bmatrix},\qquad\mathbf{x}'=\begin{bmatrix}x'\\y'\\w'\end{bmatrix}
+\]
+
+\[
+H=\begin{bmatrix}h_{11} & h_{12} & h_{13}\\h_{21} & h_{22} & h_{23}\\h_{31} & h_{32} & h_{33}\end{bmatrix}
+\]
+
+\(\sim\) 表示“齐次意义下相等”，也就是说两边可以差一个非零比例因子。
+
+\[
+\begin{bmatrix}\tilde{x}'\\\tilde{y}'\\\tilde{w}'\end{bmatrix}=\begin{bmatrix}h_{11}x+h_{12}y+h_{13}\\h_{21}x+h_{22}y+h_{23}\\h_{31}x+h_{32}y+h_{33}\end{bmatrix}
+\]
+
+\[
+x'=\frac{h_{11}x+h_{12}y+h_{13}}{h_{31}x+h_{32}y+h_{33}}
+\]
+
+\[
+y'=\frac{h_{21}x+h_{22}y+h_{23}}{h_{31}x+h_{32}y+h_{33}}
+\]
+
+#### 什么时候可以使用 Homography？
+
+当场景是平面时可以用；当场景很远或者深度变化相对很小时，可以近似看成平面；当相机只有旋转、没有平移时，也可以使用 homography
+
+第一种情况是**场景本身是平面**。比如书本封面、海报、墙面、地板、黑板。一个平面在两张图像中的投影之间存在单应性，所以可以用 homography 对齐。
+
+第二种情况是**场景足够远或深度变化很小**。比如拍远处山脉、城市天际线，物体深度虽然不完全相同，但相对于相机距离来说变化不大，可以近似为一个平面。这时 homography 是近似有效的。
+
+第三种情况是**相机纯旋转**。如果相机绕光心旋转，没有平移，那么所有图像点之间可以由一个 homography 连接，即使场景不是平面。这是全景拼接常见假设：拍全景时相机最好绕光心旋转，避免明显视差。
+
+#### Homography 能做什么？
+
+不同变换下的 warping、view warping、virtual camera rotations、image rectification、街头艺术矫正、地板图案恢复，以及 Holbein《大使们》中变形骷髅的 rectified view
+
+![image.png](assets/image-77.png)
+
+![image.png](assets/image-78.png)
+
+![image.png](assets/image-79.png)
+
+![image.png](assets/image-80.png)
+
+homography 的直观作用是：**把一个平面的透视投影变成另一个平面的透视投影。**
+
+#### 如何应用一个 Homography？
+
+![image.png](assets/image-81.png)
+
+#### Direct Linear Transform，DLT
+
+它解决给定多对点对应：\((x_i,y_i)\leftrightarrow(x_i',y_i')\) 求出一个 H 使得 \(\mathbf{x}_i'\sim H\mathbf{x}_i\)
+
+\[
+x'=\frac{h_1x+h_2y+h_3}{h_7x+h_8y+h_9}
+\]
+
+\[
+y'=\frac{h_4x+h_5y+h_6}{h_7x+h_8y+h_9}
+\]
+
+\[
+x'(h_7x+h_8y+h_9)=h_1x+h_2y+h_3
+\]
+
+\[
+y'(h_7x+h_8y+h_9)=h_4x+h_5y+h_6
+\]
+
+\[
+h_4x+h_5y+h_6-y'h_7x-y'h_8y-y'h_9=0
+\]
+
+\[
+h_4x+h_5y+h_6-y'h_7x-y'h_8y-y'h_9=0
+\]
+
+\[
+\mathbf{h}=\begin{bmatrix}h_1\\h_2\\h_3\\h_4\\h_5\\h_6\\h_7\\h_8\\h_9\end{bmatrix}
+\]
+
+\[
+\begin{bmatrix}x & y & 1 & 0 & 0 & 0 & -x'x & -x'y & -x'\\0 & 0 & 0 & x & y & 1 & -y'x & -y'y & -y'\end{bmatrix}\mathbf{h}=\mathbf{0}
+\]
+
+注意是 \(A\mathbf{h}=0\)（齐次线性方程组），而不是 \(A\mathbf{h}=\mathbf{b}\)
+
+因为 homography 的等式本质上是：\(\mathbf{x}'\sim H\mathbf{x}\)
+
+它不是普通坐标下的直接相等，而是“差一个未知尺度”。消掉尺度之后，我们得到的是关于 H 元素的齐次约束。
+
+不能直接最小化 \(\|A\mathbf{h}\|^2\) ，需要加入约束 \(\|\mathbf{h}\|=1\)
+
+因此DLT的优化问题是：
+
+\[
+\min_{\|\mathbf{h}\|=1}\|A\mathbf{h}\|^2
+\]
+
+对A做奇异值分解：
+
+\[
+A=U\Sigma V^T
+\]
+
+其中 U 和 V 是正交矩阵，Σ 是对角矩阵（对角线元素为奇异值）。
+
+把 \(A=U\Sigma V^T\) 代入。因为 U 是正交矩阵，不改变向量长度，所以：
+
+\[
+\|A\mathbf{h}\|^2=\|U\Sigma V^T\mathbf{h}\|^2=\|\Sigma V^T\mathbf{h}\|^2
+\]
+
+令：
+
+\[
+\mathbf{z}=V^T\mathbf{h}
+\]
+
+由于 V 也是正交矩阵，\(\|\mathbf{z}\|=\|\mathbf{h}\|=1\)。目标变成：
+
+\[
+\|\Sigma\mathbf{z}\|^2=\sum_i \sigma_i^2 z_i^2
+\]
+
+其中 \(\sigma_i\) 是奇异值。为了让这个和最小，并且 \(\|\mathbf{z}\|=1\)，应该把所有权重放到最小奇异值对应的方向上。因此 \(\mathbf{h}\) 是 V 中对应最小奇异值的列向量。
+
+得到 \(\mathbf{h}\) 后，把它 reshape 成：
+
+\[
+H=\begin{bmatrix}h_1 & h_2 & h_3\\h_4 & h_5 & h_6\\h_7 & h_8 & h_9\end{bmatrix}
+\]
+
+这就是 DLT 的结果。
+
+每对点对应给 2 个独立方程。Homography 有 8 个自由度。因此至少需要4对点
+
+如果正好 4 对点，通常可以解出一个唯一的 homography，前提是点不退化。退化情况包括 4 个点中有 3 个或更多共线，这样约束不足，无法唯一确定一个平面投影变换。
+
+如果有 n>4 对点，就形成过定约束系统：
+
+\[
+A\in \mathbb{R}^{2n\times 9}
+\]
+
+由于匹配点存在噪声，通常没有精确的 \(A\mathbf{h}=0\)，所以用 SVD 找最小误差意义下的解。
+
+#### DLT 的完整步骤
+
+![image.png](assets/image-82.png)
+
+#### 为什么光有 DLT 还不够？点对应里会有 outliers
+
+线性最小二乘不擅长处理 outliers。
+
+实际需要自动建立点对应：先做 feature point detection，例如 Harris；再做 feature description，例如 multi-scale oriented patch descriptor；最后做 feature matching
+
+问题是，自动匹配得到的对应点通常会有错误匹配。比如两张图中有重复纹理、相似窗户、相似角点，特征描述子可能把错误位置匹配在一起。这些错误点就是 outliers。
+
+如果直接用所有匹配点做 DLT，结果可能被错误对应严重污染。
+
+所以需要一个更鲁棒的方法：**RANSAC**
+
+#### RANSAC 的核心思想
+
+RANSAC，全称 Random Sample Consensus。它的核心思想是：如果数据中有很多错误点，不要一开始就相信全部数据；而是随机抽少量点先拟合模型，再看这个模型能得到多少其他点支持。
+
+RANSAC 的算法：随机采样拟合模型所需的最少点数，用样本估计模型参数，用预设阈值统计 inliers 的比例，重复直到以高置信度找到最好模型
+
+RANSAC 的基本流程是：
+
+第一步，随机采样最小点集。比如估计直线需要 2 个点，估计 translation 只需要 1 对点，估计 homography 需要 4 对点。
+
+第二步，用这些点估计模型。对于 homography，就是用 4 对点通过 DLT 得到 H。
+
+第三步，用这个模型去检查所有点对应。对每个点 \(\mathbf{x}_i\)，计算预测位置：
+
+\[
+\hat{\mathbf{x}}_i'=H\mathbf{x}_i
+\]
+
+转成普通坐标后，和真实匹配点 \(\mathbf{x}_i'\) 比较，计算重投影误差：
+
+\[
+e_i=
+\left\|
+\pi(H\mathbf{x}_i)-\mathbf{x}_i'
+\right\|
+\]
+
+这里 \(\pi(\cdot)\) 表示齐次坐标归一化，即除以第三个分量。若：
+
+\[
+e_i\lt \delta
+\]
+
+则这个点是 inlier，否则是 outlier。
+
+第四步，统计 inliers 数量。inliers 越多，说明这个模型被更多数据支持，越可能是真实变换。
+
+第五步，重复多次随机采样，保留 inliers 最多的模型。
+
+最后，用所有 inliers 重新估计一次模型。
+
+**Keep H if largest number of inliers，然后 recompute H using all inliers**
+
+![image.png](assets/image-83.png)
+
+#### RANSAC 参数怎么选？
+
+![image.png](assets/image-84.png)
+
+采样次数推导如下：
+
+假设 outlier 比例是：
+
+\[
+e
+\]
+
+那么一次随机抽取 s 个点，全部都是 inlier 的概率是：
+
+\[
+(1-e)^s
+\]
+
+一次抽样失败，即至少有一个 outlier 的概率是：
+
+\[
+1-(1-e)^s
+\]
+
+连续 N 次都失败的概率是：
+
+\[
+\left[1-(1-e)^s\right]^N
+\]
+
+如果希望以概率 p 至少有一次成功采到全 inlier 样本，那么：
+
+\[
+1-\left[1-(1-e)^s\right]^N \geq p
+\]
+
+整理可得：
+
+\[
+N\geq\frac{\log(1-p)}{\log\left(1-(1-e)^s\right)}
+\]
+
+#### 用 RANSAC 估计 Homography 的完整流程
+
+输入是一组候选匹配点：
+
+\[
+\{(\mathbf{x}_i,\mathbf{x}_i')\}_{i=1}^{n}
+\]
+
+第一步，随机选择 4 对点对应。
+
+第二步，用这 4 对点通过 DLT 估计一个候选 homography：
+
+\[
+H
+\]
+
+第三步，对所有匹配点计算重投影误差：
+
+\[
+e_i=\left\|\pi(H\mathbf{x}_i)-\mathbf{x}_i'\right\|_2
+\]
+
+第四步，用阈值 \(\delta\)  判断 inliers：
+
+\[
+e_i\lt \delta
+\]
+
+第五步，记录当前 H 的 inlier 数量。如果比之前最好模型更多，就更新最好模型。
+
+第六步，重复足够多次。
+
+第七步，用最好模型对应的所有 inliers 重新运行 DLT，得到最终的 H。
+
+Harris 找点，descriptor 描述点，matching 得到候选对应，RANSAC 去掉错误对应，DLT 求 homography，最后用 homography 做 warping 和 stitching。
+
+![image.png](assets/image-85.png)
+
+![image.png](assets/image-86.png)
+
+## 第十二章 相机模型1
+
+#### 为什么裸传感器不能直接成清晰图像？
+
+裸传感器成像时，所有场景点都会向所有传感器像素发出光线，所以每个像素都会收到来自很多场景点的光，结果就是一片混合的模糊亮度，而不是清晰图像。
+
+![image.png](assets/image-87.png)
+
+![image.png](assets/image-88.png)
+
+相机成像不是因为“有传感器”就能成像，而是因为相机必须建立一种几何对应关系：
+
+\[
+\text{一个场景点} \longrightarrow \text{一个或少数几个图像点}
+\]
+
+#### 小孔相机：用一个小孔建立点到点的投影关系
+
+![image.png](assets/image-89.png)
+
+![image.png](assets/image-90.png)
+
+**each scene point contributes to only one sensor pixel**
+
+这就是小孔相机 pinhole camera，也叫 camera obscura。它的关键部件包括：pinhole/aperture 小孔或孔径、barrier/diaphragm 挡板、image plane 图像平面、camera center 或 center of projection 投影中心、digital sensor 传感器。
+
+![image.png](assets/image-91.png)
+
+小孔相机的几何本质是：所有成像光线都必须经过一个共同点，也就是 camera center。一个三维点 P、相机中心 O、图像点 p 三者共线。因此图像点 p 就是三维点 P 经过中心投影得到的结果。
+
+这和前面二维变换有根本区别。二维仿射或单应性是在二维平面内变换点；相机模型是在做：
+
+\[
+3D \rightarrow 2D
+\]
+
+也就是把三维空间压到二维图像平面上。
+
+#### 焦距 Focal length
+
+对于小孔相机，焦距 f 指的是小孔到传感器或图像平面的距离。
+
+把 focal length 从 f 变成 0.5f ：投影大小也变成一半
+
+![image.png](assets/image-92.png)
+
+设三维点在相机坐标系下是：
+
+\[
+(X,Y,Z)
+\]
+
+图像平面放在距离相机中心 f 的位置。我们采用“重排后的小孔相机”模型，把图像平面放在相机中心前方 z=f，这样图像不会倒置，公式更方便。由相似三角形：
+
+\[
+\frac{x}{f}=\frac{X}{Z}
+\]
+
+\[
+x=f\frac{X}{Z}
+\]
+
+\[
+y=f\frac{Y}{Z}
+\]
+
+这就是小孔相机最核心的投影公式。
+
+这里每一项都要理解。X,Y,Z 是三维点在相机坐标系下的位置，Z 是深度，也就是点离相机有多远；x,y 是它投影到图像平面上的二维坐标；f 是焦距。公式说明，如果 X 不变、Z 越大，x 越小，也就是远处物体看起来更靠近图像中心、更小；如果 f 越大，x,y 越大，也就是焦距越长，图像放大效果越强。
+
+所以焦距的作用可以理解为：**控制视场和放大倍率**。焦距长，视野窄，物体投影大；焦距短，视野宽，物体投影小。
+
+#### 孔径大小：亮度和清晰度的矛盾
+
+理想小孔应该无限小，因为这样每个场景点只有一条光线到达传感器，图像最清晰。但现实中无限小孔不可能，而且如果孔太小，进光量会非常少，图像会很暗。
+
+增大 pinhole diameter 会让 object projection becomes blurrier，也就是图像变模糊
+
+小孔直径变为 2 倍，进光量变为 4 倍；焦距变为 2 倍，进光量变为 1/4
+
+![image.png](assets/image-93.png)
+
+为什么小孔变大会模糊？因为孔不再是一个几何点，而是一个有面积的小区域。一个场景点发出的多条光线可以穿过孔径的不同位置，到达传感器上的一片区域，而不是一个点。于是一个点被成像成一个小斑点，多个小斑点重叠，图像就模糊了。
+
+现代相机用透镜 lens 来解决这个问题。透镜可以让来自同一个场景点的一束光线重新汇聚到传感器上的一个点，既增加进光量，又保持清晰。lens camera 和 pinhole camera 的关系：只要使用 central rays，并假设透镜相机在焦点上，我们就可以用类似小孔相机的几何模型描述成像
+
+![image.png](assets/image-94.png)
+
+![image.png](assets/image-95.png)
+
+**In a pinhole camera, focal length is distance between aperture and sensor**
+
+![image.png](assets/image-96.png)
+
+**In a lens camera, focal length is distance where parallel rays intersect**
+
+![image.png](assets/image-97.png)
+
+#### 用齐次坐标写相机投影：\(x=PX\)
+
+\[
+\mathbf{x}=P\mathbf{X}
+\]
+
+其中 \(\mathbf{x}\) 是 \(3\times1\) 的 homogeneous image coordinates，\(\mathbf{X}\) 是 \(4\times1\) 的 homogeneous world coordinates，P 是 \(3\times4\) 的 camera matrix
+
+![image.png](assets/image-98.png)
+
+#### 最简单的小孔相机矩阵
+
+相机坐标系和图像坐标系共享原点，图像平面在 z=1，也就是 f=1。此时投影为：
+
+\[
+x=\frac{X}{Z}
+\]
+
+\[
+y=\frac{Y}{Z}
+\]
+
+\[
+\tilde{\mathbf{x}}=\begin{bmatrix}X\\Y\\Z\end{bmatrix}
+\]
+
+\[
+P=\begin{bmatrix}1&0&0&0\\0&1&0&0\\0&0&1&0\end{bmatrix}
+\]
+
+\[
+\tilde{\mathbf{X}}=\begin{bmatrix}X\\Y\\Z\\1\end{bmatrix}
+\]
+
+这就是 f=1 的标准透视投影。
+
+![image.png](assets/image-99.png)
+
+![image.png](assets/image-100.png)
+
+#### 任意焦距 f 的小孔相机矩阵
+
+如果图像平面在：
+
+\[
+z=f
+\]
+
+\[
+x=f\frac{X}{Z}
+\]
+
+\[
+y=f\frac{Y}{Z}
+\]
+
+\[
+\tilde{\mathbf{x}}=\begin{bmatrix}fX\\fY\\Z\end{bmatrix}
+\]
+
+\[
+P=\begin{bmatrix}f&0&0&0\\0&f&0&0\\0&0&1&0\end{bmatrix}
+\]
+
+\[
+P\begin{bmatrix}X\\Y\\Z\\1\end{bmatrix}=\begin{bmatrix}fX\\fY\\Z\end{bmatrix}
+\]
+
+这就是小孔相机最基础的 camera matrix。
+
+![image.png](assets/image-101.png)
+
+![image.png](assets/image-102.png)
+
+#### 图像坐标原点和主点偏移
+
+我们默认图像坐标系的原点就在主点 principal point，也就是相机光轴和图像平面的交点。但真实相机图像的像素坐标通常以左上角为原点，而不是以光轴中心为原点。
+
+一般情况下，camera 和 image 有不同 coordinate systems，camera origin 和 image origin may be different，因此需要一个 shift vector，把 camera origin 转到 image origin
+
+![image.png](assets/image-103.png)
+
+假设主点坐标是：
+
+\[
+(c_x,c_y)
+\]
+
+则图像坐标应写成：
+
+\[
+u=f\frac{X}{Z}+c_x
+\]
+
+\[
+v=f\frac{Y}{Z}+c_y
+\]
+
+这里 u,v 通常表示像素坐标，而 x,y 可以表示归一化图像坐标。\(c_x,c_y\) 的作用是把以主点为原点的坐标，平移到以图像左上角为原点的像素坐标。
+
+对应的内参矩阵可以写成：
+
+\[
+K=\begin{bmatrix}f&0&c_x\\0&f&c_y\\0&0&1\end{bmatrix}
+\]
+
+如果水平方向和竖直方向的像素尺度不同，焦距要写成：
+
+\[
+f_x,\quad f_y
+\]
+
+\[
+K=\begin{bmatrix}f_x&0&c_x\\0&f_y&c_y\\0&0&1\end{bmatrix}
+\]
+
+更一般地，如果像素坐标轴不完全垂直，还可以加入 skew 参数 s：
+
+\[
+K=\begin{bmatrix}f_x&s&c_x\\0&f_y&c_y\\0&0&1\end{bmatrix}
+\]
+
+#### 相机矩阵分解：内参、透视投影、外参
+
+![image.png](assets/image-104.png)
+
+相机矩阵可以分解成几部分：一部分是从 3D 到 2D 的 perspective projection，假设 image plane at z=1，相机和图像原点共享；另一部分是 2D 到 2D 的 transformation，用来处理非单位焦距和原点平移
+
+![image.png](assets/image-105.png)
+
+\[
+\tilde{\mathbf{x}}\sim K\begin{bmatrix}R & t\end{bmatrix}\tilde{\mathbf{X}}_w
+\]
+
+\[
+P=K[R|t]
+\]
+
+\[
+\tilde{\mathbf{X}}_w=\begin{bmatrix}X_w\\Y_w\\Z_w\\1\end{bmatrix}
+\]
+
+是世界坐标系下的三维点；
+
+\[
+R\in\mathbb{R}^{3\times3}
+\]
+
+是旋转矩阵；
+
+\[
+t\in\mathbb{R}^{3\times1}
+\]
+
+是平移向量；
+
+\[
+[R|t]\in\mathbb{R}^{3\times4}
+\]
+
+把世界坐标点变换到相机坐标系；
+
+\[
+K\in\mathbb{R}^{3\times3}
+\]
+
+是内参矩阵，把相机归一化成像坐标变成像素坐标。
+
+整个过程可以分为三步：
+
+1. 世界坐标到相机坐标，靠的是**外参 extrinsic parameters**，也就是旋转 R 和平移 t：
+    
+\[
+\mathbf{X}_c = R\mathbf{X}_w + t
+\]
+    
+2. 相机坐标到图像平面，是**透视投影 perspective projection**。如果相机坐标下三维点是：
+    
+\[
+\mathbf{X}_c = (X_c, Y_c, Z_c)
+\]
+    
+    那么理想小孔模型下，它在归一化成像平面上的位置大致是：
+    
+\[
+x_{norm} = \frac{X_c}{Z_c}, \qquad y_{norm} = \frac{Y_c}{Z_c}
+\]
+    
+3. 归一化图像坐标到真实图像坐标：靠的是**内参 intrinsic parameters**。因为真实图像不是一个数学上理想的 z=1 平面，它有焦距、像素单位、主点偏移等。
+    
+\[
+\begin{bmatrix}u \\v \\1\end{bmatrix}=K\begin{bmatrix}X_c/Z_c \\Y_c/Z_c \\1\end{bmatrix}
+\]
+    
+\[
+K=\begin{bmatrix}f_x & 0 & c_x \\0 & f_y & c_y \\0 & 0 & 1\end{bmatrix}
+\]
+    
+    这里 \(f_x, f_y\) 表示焦距换算到像素尺度后的数值，\((c_x,c_y)\) 是主点位置，也可以理解成图像坐标原点和理想投影中心之间的偏移。
+    
+
+![image.png](assets/image-106.png)
+
+#### 外参 Extrinsic Parameters
+
+外参把世界坐标系中的点变成相机坐标系中的点：
+
+\[
+\mathbf{X}_c=R\mathbf{X}_w+t
+\]
+
+这里要特别小心 t 的含义。它不是简单地“相机在世界坐标系里的位置”。如果相机中心在世界坐标系中是：
+
+\[
+C
+\]
+
+那么从世界坐标到相机坐标通常有：
+
+\[
+\mathbf{X}_c=R(\mathbf{X}_w-C)=R\mathbf{X}_w-RC
+\]
+
+\[
+t=-RC
+\]
+
+所以齐次矩阵是：
+
+\[
+\begin{bmatrix}R & -R\tilde C\\0 & 1\end{bmatrix}
+\]
+
+#### Camera Matrix P 的含义
+
+camera matrix relates what two quantities?  homogeneous 3D points to 2D image points
+
+\[
+P\in\mathbb{R}^{3\times4}
+\]
+
+是一个从三维齐次世界点到二维齐次图像点的映射矩阵。它把三维点：
+
+\[
+\tilde{\mathbf{X}}=[X,Y,Z,1]^T
+\]
+
+映射到图像齐次点：
+
+\[
+\tilde{\mathbf{x}}=[u,v,w]^T
+\]
+
+最后通过 \((u/w,\ v/w)\) 得到普通图像坐标。
+
+它可以分解为：
+
+\[
+P=K[R|t]
+\]
+
+![image.png](assets/image-107.png)
+
+最简单模型：
+
+\[
+K=\begin{bmatrix}f&0&p_x\\0&f&p_y\\0&0&1\end{bmatrix}
+\]
+
+有3个内参与6个外参，共有9个自由度。
+
+更一般一点，像素不一定是正方形：
+
+\[
+K=\begin{bmatrix}\alpha_x&0&p_x\\0&\alpha_y&p_y\\0&0&1\end{bmatrix}
+\]
+
+有10个自由度。
+
+再一般一点，传感器可能有 skew：
+
+\[
+K=\begin{bmatrix}\alpha_x&s&p_x\\0&\alpha_y&p_y\\0&0&1\end{bmatrix}
+\]
+
+有11个自由度。
+
+## 第十三章 相机模型 2
+
+#### 透视畸变：放大率随深度变化 Perspective distortion
+
+透视相机，也就是 finite projective camera，会产生透视畸变。
+
+magnification changes with depth，也就是放大率随深度变化
+
+\[
+x=f\frac{X}{Z}
+\]
+
+\[
+y=f\frac{Y}{Z}
+\]
+
+对于同样大小的物体，如果 Z 越小，也就是离相机越近，那么投影越大；如果 Z 越大，投影越小。投影放大率大致正比于：
+
+\[
+\frac{f}{Z}
+\]
+
+第一，焦距 f 越大，图像越放大；第二，深度 Z 越大，图像越缩小。
+
+所以透视畸变不是镜头坏了，而是中心投影的自然结果。近大远小、平行线汇聚、脸部近距离自拍鼻子变大、远距离长焦人脸变平，这些都和 f/Z 有关。
+
+![image.png](assets/image-108.png)
+
+![image.png](assets/image-109.png)
+
+#### 焦距、距离和放大率：为什么会有 Vertigo effect？
+
+Vertigo effect，也叫 dolly zoom。核心关系还是：
+
+\[
+\text{magnification}\approx \frac{f}{Z}
+\]
+
+如果我们同时把焦距和距离按相同倍数改变：
+
+\[
+\frac{2f}{2Z}=\frac{f}{Z}
+\]
+
+主体大小可以保持不变。但整个场景的透视关系不一样。相机离主体近时，不同深度物体之间的相对深度变化很明显，背景会显得变化大；相机离主体远、焦距长时，深度差相对于整体距离变小，背景看起来被压缩。这就是 Vertigo effect：通过移动相机改变 Z，同时改变焦距 f 保持主体大小不变，背景透视却发生明显变化。
+
+**主体投影大小由 f/Z 控制；透视感强弱由场景深度变化相对于相机距离的比例控制。**
+
+#### 弱透视相机 Weak Perspective Camera
+
+![image.png](assets/image-110.png)
+
+如果一个物体内部所有点的深度 Z 都接近某个平均深度 \(Z_0\)，那么可以近似：
+
+\[
+x\approx f\frac{X}{Z_0}=sX
+\]
+
+\[
+y\approx f\frac{Y}{Z_0}=sY
+\]
+
+\[
+s=\frac{f}{Z_0}
+\]
+
+是一个常数放大率。这个模型就叫 weak perspective projection。它不是每个点都除以自己的 Z，而是统一除以平均深度 \(Z_0\)，因此整个物体内部的透视变化被忽略了。
+
+这在两种情况下成立：第一，场景或场景的一部分非常远，比如山脉；第二，使用 telecentric lens，它只允许与主光线平行的光线通过。
+
+所以弱透视适用于：
+
+\[
+\text{物体深度变化} \ll \text{物体到相机的距离}
+\]
+
+比如拍远处山、远处建筑、或者只分析一个小物体而它相对于相机距离较远。
+
+![image.png](assets/image-111.png)
+
+![image.png](assets/image-112.png)
+
+#### 正交相机 Orthographic Camera
+
+constant magnification 等于 1；camera 和 image origin 没有 shift；world 和 camera coordinate systems 相同。
+
+正交投影最简单的形式就是直接丢掉深度 Z：
+
+\[
+x=X
+\]
+
+\[
+y=Y
+\]
+
+矩阵写作：
+
+\[
+P_{\text{ortho}}=\begin{bmatrix}1&0&0&0\\0&1&0&0\\0&0&0&1\end{bmatrix}
+\]
+
+也常直接写为从三维到二维：
+
+\[
+\begin{bmatrix}x\\y\end{bmatrix}=\begin{bmatrix}1&0&0\\0&1&0\end{bmatrix}\begin{bmatrix}X\\Y\\Z\end{bmatrix}
+\]
+
+**正交投影没有近大远小，深度不影响投影大小。**
+
+透视投影：每个点都除以自己的深度 Z，有明显近大远小。
+
+弱透视：用平均深度 \(Z_0\) 代替每个点的 Z，有统一缩放。
+
+正交投影：连缩放都设为 1，直接忽略深度影响。
+
+![image.png](assets/image-113.png)
+
+#### 几何相机标定：已知 3D-2D 对应，求相机矩阵
+
+\[
+\mathbf{X}_i=(X_i,Y_i,Z_i,1)^T
+\]
+
+\[
+\mathbf{x}_i=(u_i,v_i,1)^T
+\]
+
+目标是求：
+
+\[
+\mathbf{x}_i\sim P\mathbf{X}_i
+\]
+
+其中 P 有 \(3\times4=12\) 个元素，但整体尺度无意义，所以自由度为 11。
+
+假设：
+
+\[
+P=\begin{bmatrix}p_1^T\\p_2^T\\p_3^T\end{bmatrix}
+\]
+
+其中 \(p_1^T,p_2^T,p_3^T\) 是 P 的三行，每行都是 \(1\times4\)。对三维齐次点 \(\mathbf{X}\)，有：
+
+\[
+P\mathbf{X}=\begin{bmatrix}p_1^T\mathbf{X}\\p_2^T\mathbf{X}\\p_3^T\mathbf{X}\end{bmatrix}
+\]
+
+齐次归一化后：
+
+\[
+u=\frac{p_1^T\mathbf{X}}{p_3^T\mathbf{X}}
+\]
+
+\[
+v=\frac{p_2^T\mathbf{X}}{p_3^T\mathbf{X}}
+\]
+
+这两个式子因为分母里有未知参数，所以看起来是非线性的。和 Homography 的 DLT 一样，我们把分母乘过去：
+
+\[
+u(p_3^T\mathbf{X})=p_1^T\mathbf{X}
+\]
+
+\[
+v(p_3^T\mathbf{X})=p_2^T\mathbf{X}
+\]
+
+\[
+p_1^T\mathbf{X}-u p_3^T\mathbf{X}=0
+\]
+
+\[
+p_2^T\mathbf{X}-v p_3^T\mathbf{X}=0
+\]
+
+把 P 的 12 个元素排列成一个向量：
+
+\[
+\mathbf{p}=[p_{11},p_{12},p_{13},p_{14},p_{21},p_{22},p_{23},p_{24},p_{31},p_{32},p_{33},p_{34}]^T
+\]
+
+每个 3D-2D 对应点可以提供两条线性约束：
+
+\[
+\begin{bmatrix}X&Y&Z&1&0&0&0&0&-uX&-uY&-uZ&-u\\0&0&0&0&X&Y&Z&1&-vX&-vY&-vZ&-v\end{bmatrix}\mathbf{p}=0
+\]
+
+相机矩阵 P 有 12 个元素，但整体尺度无意义，所以自由度为：12-1=11
+
+每个 3D-2D 点对应给 2 个独立方程，所以至少需要：6个点对应才能提供 12 条方程，从而求解 P。严格说，由于自由度是 11，理论上 5.5 对是不可能的，所以最少需要 6 对点。
+
+并且这些点不能处在退化配置中。比如所有 3D 点都共面时，可能无法唯一确定一般 3D 相机矩阵，因为它退化成平面到图像的 homography 问题。
+
+Solve for camera matrix by SVD；solution x is the column of V corresponding to smallest singular value；等价地，也可以看作 \(A^TA\) 最小特征值对应的 eigenvector
+
+构造所有点对应的线性系统：
+
+\[
+A\mathbf{p}=0
+\]
+
+由于 \(\mathbf{p}=0\) 是无意义解，所以加约束：
+
+\[
+\|\mathbf{p}\|=1
+\]
+
+\[
+\min_{\|\mathbf{p}\|=1}\|A\mathbf{p}\|^2
+\]
+
+对 A 做奇异值分解：
+
+\[
+A=U\Sigma V^T
+\]
+
+取最小奇异值对应的右奇异向量作为 \(\mathbf{p}\)，再 reshape 成 \(3\times4\) 的矩阵：
+
+\[
+P=\begin{bmatrix}p_{11}&p_{12}&p_{13}&p_{14}\\p_{21}&p_{22}&p_{23}&p_{24}\\p_{31}&p_{32}&p_{33}&p_{34}\end{bmatrix}
+\]
+
+这个方法就是相机矩阵估计的线性 DLT。它简单、解析、和 Homography 估计形式非常一致。
+
+#### 求出 P 之后，还要分解出 K,R,t
+
+\[
+P=K[R|t]
+\]
+
+我们不仅想要一个整体投影矩阵，还想知道相机内参 K、旋转 R、平移 t，甚至相机中心 C。
+
+相机中心不投影到有限图像点，因为所有投影光线都经过它，它对应 projection matrix 的零空间。数学上：
+
+\[
+P\tilde C=0
+\]
+
+其中 \(\tilde C\) 是相机中心的齐次坐标。也就是说，相机中心是 P 的右零空间向量。对 P 做 SVD，c 是最小奇异值对应的 singular vector
+
+那么如何找 K 和 R ？利用 K 和 R 的性质，并使用 RQ decomposition
+
+具体来说，设 P 的左 \(3\times3\) 部分为：
+
+\[
+M
+\]
+
+\[
+M=KR
+\]
+
+其中 K 是上三角矩阵，R 是旋转矩阵。对 M 做 RQ 分解，可以得到：
+
+\[
+M=KR
+\]
+
+其中 K 类似内参矩阵，R 是正交矩阵。之后还要处理符号，使得 K 的对角元素通常为正，并保证 R 是合法旋转矩阵。
+
+#### 线性标定的优缺点
+
+它的优点是非常简单、可以解析求解；缺点是：必须非常准确地知道几何结构，必须知道 3D 到 2D 对应，不建模 radial distortion，难以加入已知约束，比如已知焦距，而且线性方法不直接最小化正确误差函数。
+
+这里“正确误差函数”通常是重投影误差：
+
+\[
+E=\sum_i\left\|\mathbf{x}_i-\pi(P\mathbf{X}_i)\right\|^2
+\]
+
+其中 \(\pi(\cdot)\) 表示齐次归一化。这个误差是非线性的，因为投影里有除法，而且如果加入径向畸变参数就更非线性。所以实际相机标定常常用非线性优化，比如 Levenberg-Marquardt，最小化真实重投影误差。
+
+nonlinear methods are preferred；定义 projected 3D points 和 image positions 之间的误差 E，它是 intrinsics、extrinsics、radial distortion 的非线性函数，然后用 nonlinear optimization techniques 最小化
+
+#### 径向畸变 Radial Distortion
+
+![image.png](assets/image-114.png)
+
+径向畸变主要由镜头造成。它和理想小孔模型不同：理想小孔模型假设光线按中心投影成像，而真实镜头会让靠近图像边缘的光线偏离理想位置。畸变通常随着离主点的半径增大而增大，所以叫 radial distortion。
+
+\[
+x_d=x(1+k_1r^2+k_2r^4+\cdots)
+\]
+
+\[
+y_d=y(1+k_1r^2+k_2r^4+\cdots)
+\]
+
+\[
+r^2=x^2+y^2
+\]
+
+这里 x,y 通常是以主点为原点的归一化图像坐标，\(x_d,y_d\)  是畸变后的坐标。\(k_1,k_2\) 是畸变参数。
+
+Barrel distortion，桶形畸变，会让直线向外鼓，看起来像桶；pincushion distortion，枕形畸变，会让直线向内收缩，看起来像枕头。
+
+![image.png](assets/image-115.png)
+
+#### 多平面/棋盘格标定的实际方法
+
+**multi-plane calibration**
+
+它的优点是只需要一个平面，不需要知道每次拍摄时这个平面的姿态位置，而且有成熟代码，比如 Matlab 和 OpenCV。缺点是需要求解非线性优化问题。
+
+这其实就是常见的棋盘格相机标定。我们知道棋盘格上每个角点在平面坐标系里的 3D 坐标，比如 Z=0 平面上的 \((X,Y,0)\)，拍摄多张不同角度的图片，检测图像中的棋盘角点。每张图像提供一个平面到图像的 homography，多张 homography 可以约束内参 K，再进一步估计每张图的外参和镜头畸变参数，最后用非线性优化最小化重投影误差。
+
+所以实际相机标定通常不是简单一次 SVD 求 P 就结束，而是：
+
+先用线性方法得到初值；
+
+再加入 K,R,t、径向畸变等参数；
+
+最后用非线性优化精修。
+
+![image.png](assets/image-116.png)
+
+![image.png](assets/image-117.png)
+
+#### 标定一个相机到底是什么意思？
+
+“相机标定”不是单一概念。在本章语境里，我们主要讲的是 **geometric calibration**，也就是估计相机的几何成像参数，包括：
+
+\[
+K,\quad R,\quad t,\quad \text{distortion parameters}
+\]
+
+它关心的是三维点如何映射到二维图像点。
+
+而 radiometric calibration 关心亮度响应是否线性；color calibration 关心颜色还原；noise calibration 关心噪声模型；lens calibration 关心镜头畸变和像差。
+
+考试中如果问“本章的相机标定指什么”，重点答几何标定。
+
+![image.png](assets/image-118.png)
+
+## 第十四章 双目几何 Stereo / Epipolar Geometry
+
+#### Triangulation：为什么一个图像点对应一条三维射线？
+
+问题引入：给定两个相机矩阵 P 和 P'，以及两张图中的匹配点 x 和 x'，怎样估计对应的三维点 X ？
+
+先看单张图像。一个三维点 X 投影到图像点 x，满足：
+
+\[
+x \sim PX
+\]
+
+这里 x 是二维图像点的齐次坐标，X 是三维点的齐次坐标，P 是相机矩阵。这个式子不是普通等号，而是齐次意义下相等，也就是说 x 和 PX 方向相同，可以差一个比例因子。
+
+关键问题是：**单个图像点不能唯一确定三维点。** 因为从相机中心出发，穿过图像点 x 的整条三维射线上，所有点都会投影到同一个图像点 x。近一点的点、远一点的点，在图像上都落在同一个像素位置，只是深度不同。因此单目图像丢失了深度信息。
+
+\[
+x \Rightarrow \text{one 3D ray}
+\]
+
+可以通过 backprojection 构造这条射线：找到相机中心，再用 P 的伪逆作用到图像点 x，得到射线上的另一个点，两点连线就是 backprojection ray
+
+#### 两张图为什么可以恢复三维点？
+
+如果有两个相机，第一张图像点 x 对应一条从第一个相机中心出发的射线；第二张图像点 x' 对应另一条从第二个相机中心出发的射线。如果这两个图像点确实来自同一个三维点，那么理论上这两条射线应该在空间中相交，交点就是三维点 X。
+
+这就是 triangulation 的名字来源：两个相机中心和三维点形成一个三角形，利用两条视线相交来恢复三维位置。
+
+理想无噪声情况下，两条射线相交：
+
+\[
+\text{ray}_1 \cap \text{ray}_2 = X
+\]
+
+但真实图像中有噪声、匹配误差、相机标定误差，所以两条射线通常不会精确相交。
+
+实际三角化通常会求一个“最合理”的三维点，比如让它投影回两张图时的重投影误差最小，或者在线性方法里求最小二乘解。
+
+![image.png](assets/image-119.png)
+
+#### 三角化的线性形式：为什么用叉乘消掉尺度？
+
+\[
+x \sim PX
+\]
+
+这里 x 和 PX 都是三维齐次向量。它们表示同一个图像点，因此方向相同，只差一个尺度。
+
+如何把 “方向相同但尺度不同” 变成线性方程？答案是用叉乘。
+
+线性代数里，如果两个向量方向相同，那么它们的叉乘为零：
+
+\[
+a \parallel b\quad \Longleftrightarrow \quad a \times b=0
+\]
+
+叉乘得到一个同时垂直于两个输入向量的向量；如果两个向量方向相同，那么叉乘是零向量
+
+![image.png](assets/image-120.png)
+
+\[
+x \sim PX \longrightarrow x \times (PX)=0
+\]
+
+\[
+x=\begin{bmatrix}u\\v\\1\end{bmatrix}
+\]
+
+\[
+P=\begin{bmatrix}p_1^T\\p_2^T\\p_3^T\end{bmatrix}
+\]
+
+\[
+PX=\begin{bmatrix}p_1^TX\\p_2^TX\\p_3^TX\end{bmatrix}
+\]
+
+\[
+u=\frac{p_1^TX}{p_3^TX}
+\]
+
+\[
+v=\frac{p_2^TX}{p_3^TX}
+\]
+
+\[
+p_1^TX-u p_3^TX=0
+\]
+
+\[
+p_2^TX-v p_3^TX=0
+\]
+
+\[
+(p_1^T-u p_3^T)X=0
+\]
+
+\[
+(p_2^T-v p_3^T)X=0
+\]
+
+第二张图像，若点是 \(x'=(u',v',1)^T\)，相机矩阵是 \(P'\)，三行是 \(p_1'^T,p_2'^T,p_3'^T\)，则：
+
+\[
+(p_1'^T-u' p_3'^T)X=0
+\]
+
+\[
+(p_2'^T-v' p_3'^T)X=0
+\]
+
+\[
+AX=0
+\]
+
+然后用 SVD 解齐次线性最小二乘问题：
+
+\[
+\min_{\|X\|=1}\|AX\|^2
+\]
+
+解是 A 的最小奇异值对应的右奇异向量。
+
+这个解得到的是三维点的齐次坐标：
+
+\[
+X=\begin{bmatrix}X_1\\X_2\\X_3\\X_4\end{bmatrix}
+\]
+
+最后要做齐次归一化，得到普通三维坐标：
+
+\[
+\left(\frac{X_1}{X_4},\frac{X_2}{X_4},\frac{X_3}{X_4}\right)
+\]
+
+还可以直接通过叉乘推导：
+
+![image.png](assets/image-121.png)
+
+![image.png](assets/image-122.png)
+
+如果 \((x,y)\) 和 \((x',y')\) 对应的是平行的三维射线，这个方程组没有良好解
+
+因为三角化依赖两条射线相交。如果两条射线几乎平行，它们的交点对小噪声非常敏感。图像点稍微偏一点，估计出的三维点深度可能变化非常大。这在双目视觉里非常重要：如果两个相机基线太短，或者物体太远，两条视线夹角很小，深度估计会很不稳定。
+
+所以三角化的稳定性取决于视差 disparity 或两条射线夹角。视差越大，深度估计越稳定；视差越小，深度越难估。
+
+何为视差：
+
+\[
+\boxed{\text{同一个三维点，在左、右两张图像中的位置差。}}
+\]
+
+\[
+x_L=(u_L,v)
+\]
+
+\[
+x_R=(u_R,v)
+\]
+
+\[
+\boxed{d = u_L-u_R}
+\]
+
+#### Epipolar Geometry：对极几何
+
+假设有两个相机中心：
+
+\[
+O,\quad O'
+\]
+
+它们之间的连线叫 baseline：
+
+\[
+OO'
+\]
+
+一个三维点 X 和两个相机中心 O,O' 共同确定一个平面：
+
+\[
+\pi = \text{plane}(O,O',X)
+\]
+
+这个平面叫 **epipolar plane，对极平面**。
+
+对极平面和第一张图像平面的交线，叫第一张图里的 epipolar line；对极平面和第二张图像平面的交线，叫第二张图里的 epipolar line。也就是说，对极线是对极平面与图像平面的交线。
+
+![image.png](assets/image-123.png)
+
+现在考虑一个实际任务：左图中有一个点 x，我们要在右图中找对应点 x'。如果没有几何约束，我们可能要在整张右图中搜索；但对极几何告诉我们，x' 一定在右图中的某一条对极线上。这条线是由左图点 x、左相机中心 O、右相机中心 O' 所确定的对极平面，与右图像平面相交得到的。
+
+\[
+\text{left image point } x\quad\Rightarrow\quad\text{right image epipolar line } l'
+\]
+
+![image.png](assets/image-124.png)
+
+![image.png](assets/image-125.png)
+
+#### Epipole：另一个相机中心的投影
+
+Epipole，对极点，是另一个相机中心在当前图像平面上的投影。
+
+对极点有一个重要性质：**同一张图像里的所有 epipolar lines 都经过该图像的 epipole。** 因为所有对极平面都包含 baseline，而 baseline 投影到图像中就是 epipole 所在位置。
+
+不同相机配置下，对极点的位置不同。
+
+汇聚相机的 epipole 可能出现在图像中，也可能在图像外；平行相机的 epipole 在无穷远处，因此对极线互相平行。
+
+在标准双目相机中，如果两个相机平行、图像已经校正，那么对极线通常是水平线。此时匹配一个左图点，只需要在右图同一行搜索，这就是 stereo rectification 后的常见情况。
+
+![image.png](assets/image-126.png)
+
+![image.png](assets/image-127.png)
+
+常考概念：
+
+第一，左图中的一个点 x 映射到右图中的一条线：
+
+\[
+x \mapsto l'
+\]
+
+第二，baseline 连接两个 camera centers：
+
+\[
+O \leftrightarrow O'
+\]
+
+第三，一张图中的 epipolar line 映射到另一张图中的 epipolar line。
+
+第四，epipole 是另一个 camera center 在图像平面上的 projection。
+
+第五，同一张图中的所有 epipolar lines 都相交于 epipole。
+
+#### Essential Matrix：归一化相机坐标下的对极约束
+
+本质矩阵 E 是一个 \(3\times3\) 矩阵，用来编码两个 calibrated cameras 之间的对极几何。
+
+给定一张图中的点，乘以 essential matrix 可以得到第二张图中的 epipolar line；它是 \(3\times3\) 矩阵，编码 epipolar geometry
+
+![image.png](assets/image-128.png)
+
+二维图像中的一条直线可以写成：
+
+\[
+l=\begin{bmatrix}a\\b\\c\end{bmatrix}
+\]
+
+点：
+
+\[
+x=\begin{bmatrix}u\\v\\1\end{bmatrix}
+\]
+
+在这条线上，当且仅当：
+
+\[
+l^T x=0
+\]
+
+\[
+au+bv+c=0
+\]
+
+现在 essential matrix 的作用是：
+
+\[
+l' = E x
+\]
+
+第一张图中的点 x 通过 E 映射成第二张图中的对极线 l'。如果第二张图中的点 x' 是它的真实匹配点，那么 x' 必须在这条线上：
+
+\[
+x'^T l'=0
+\]
+
+代入 l'=Ex，得到：
+
+\[
+x'^T E x=0
+\]
+
+这就是本质矩阵的对极约束，也叫 Longuet-Higgins equation。
+
+此时 2D 点表达在 camera coordinate system 下，也就是相机内参已经归一化
+
+注意这里的 x,x' 不是普通像素坐标，而是归一化相机坐标。也就是说，假如像素坐标是 \(\tilde u,\tilde u'\)，相机内参是 K,K'，则归一化坐标是：
+
+\[
+x=K^{-1}\tilde u
+\]
+
+\[
+x'=K'^{-1}\tilde u'
+\]
+
+只有在这些归一化坐标下，才直接使用 essential matrix：
+
+\[
+x'^T E x=0
+\]
+
+![image.png](assets/image-129.png)
+
+#### Essential Matrix 从哪里来？
+
+我们假设第一台相机坐标系作为参考坐标系。一个三维点在第一相机坐标系中的方向向量可以记为 x，在第二相机坐标系中的方向向量是 x'。两个相机之间有旋转 R 和平移 t。把第二相机中的方向 x' 转回第一相机坐标系，可以写成类似：
+
+\[
+R x'
+\]
+
+而两个相机中心之间的基线向量是：
+
+\[
+t
+\]
+
+同一个三维点、两个相机中心共同决定一个对极平面。因此三个向量是共面的：
+
+\[
+x,\quad t,\quad R x'
+\]
+
+如果三个向量共面，那么其中一个向量与另外两个向量叉乘得到的法向量正交。具体地：
+
+\[
+t \times (R x')
+\]
+
+是由 t 和 \(R x'\) 张成平面的法向量，而 x 也在这个平面中，所以：
+
+\[
+x^T \left(t \times R x'\right)=0
+\]
+
+叉乘可以用反对称矩阵表示。定义：
+
+\[
+[t]_\times=\begin{bmatrix}0&-t_z&t_y\\t_z&0&-t_x\\-t_y&t_x&0\end{bmatrix}
+\]
+
+\[
+[t]_\times a = t\times a
+\]
+
+所以：
+
+\[
+x^T[t]_\times R x'=0
+\]
+
+**Essential Matrix 由相机间的旋转和平移构成**：
+
+\[
+E=[t]_\times R
+\]
+
+#### Essential Matrix 的性质
+
+第一，对极约束：
+
+\[
+x'^TEx=0
+\]
+
+第二，给定第一张图的点 x，第二张图的对极线为：
+
+\[
+l'=Ex
+\]
+
+第三，给定第二张图的点 x'，第一张图的对极线为：
+
+\[
+l=E^Tx'
+\]
+
+第四，对极点满足零空间关系。第二张图中的 epipole e' 位于所有 l'=Ex 上，因此：
+
+\[
+e'^TEx=0,\quad \forall x
+\]
+
+所以：
+
+\[
+e'^T E=0
+\]
+
+也就是说 e' 是 \(E^T\) 的零空间向量。类似地，第一张图中的 epipole e 满足：
+
+\[
+Ee=0
+\]
+
+不过具体左零空间还是右零空间，要看你定义 \(x'^TEx=0\) 中哪边是哪张图。
+
+第五，尺度不影响对极约束。约束是：
+
+\[
+x'^TEx=0
+\]
+
+如果 E 被整体乘以常数 \(\alpha\)，变成：
+
+\[
+x'^T(\alpha E)x=\alpha x'^TEx=0
+\]
+
+等式仍然成立。所以 E 只能确定平移方向，不能单独确定平移尺度。这也是双目两视图重建中的一个重要事实：仅从两张图像中恢复相机运动时，整体尺度是不可确定的。
+
+#### Fundamental Matrix：像素坐标下的对极约束
+
+Essential matrix 用的是归一化相机坐标：
+
+\[
+(K'^{-1}\tilde x')^T E (K^{-1}\tilde x)=0
+\]
+
+\[
+\tilde x'^T K'^{-T} E K^{-1}\tilde x=0
+\]
+
+\[
+F=K'^{-T} E K^{-1}
+\]
+
+像素坐标下的对极约束：
+
+\[
+\tilde x'^T F \tilde x=0
+\]
+
+\[
+F=K'^{-T} [t]_\times R K^{-1}
+\]
+
+![image.png](assets/image-130.png)
+
+#### 8-Point Algorithm
+
+假设有 M 对匹配图像点，每对点都应满足对极约束：
+
+\[
+x'^T F x=0
+\]
+
+设：
+
+\[
+x=\begin{bmatrix}u\\v\\1\end{bmatrix},\quad x'=\begin{bmatrix}u'\\v'\\1\end{bmatrix}
+\]
+
+\[
+Fx=\begin{bmatrix}f_{11}u+f_{12}v+f_{13}\\f_{21}u+f_{22}v+f_{23}\\f_{31}u+f_{32}v+f_{33}\end{bmatrix}
+\]
+
+\[
+uu'f_{11}+vu'f_{12}+u'f_{13}+uv'f_{21}+vv'f_{22}+v'f_{23}+u f_{31}+v f_{32}+f_{33}=0
+\]
+
+这是关于 F 的 9 个元素的一个线性方程。写成向量形式：
+
+\[
+\begin{bmatrix}uu'&vu'&u'&uv'&vv'&v'&u&v&1\end{bmatrix}\begin{bmatrix}f_{11}\\f_{12}\\f_{13}\\f_{21}\\f_{22}\\f_{23}\\f_{31}\\f_{32}\\f_{33}\end{bmatrix}=0
+\]
+
+一对匹配点只给出一个标量方程。
+
+严格地说，真实的 F 还满足秩为 2 的约束：
+
+\[
+\operatorname{rank}(F)=2
+\]
+
+因此它实际自由度是 7，但线性八点算法先用 8 点求一个初始 F，再强制秩为 2。
+
+#### 八点算法完整步骤
+
+![image.png](assets/image-131.png)
+
+第一步，点归一化。把两张图像中的点分别做平移和缩放，使得点的均值接近原点，平均距离适中。这个步骤在理论公式里可以省略，但数值计算中非常重要。Hartley normalized eight-point algorithm 就强调如果不归一化，八点算法会很不稳定。
+
+\[
+\hat x=T x
+\]
+
+\[
+\hat x'=T' x'
+\]
+
+第四步，强制 rank 2 约束。线性 SVD 得到的 \(\hat F\) 一般是满秩 3，但真实基础矩阵应该 rank 2。
+
+对 F 做 SVD：
+
+\[
+\hat F=U\Sigma V^T
+\]
+
+其中：
+
+\[
+\Sigma=\operatorname{diag}(\sigma_1,\sigma_2,\sigma_3)
+\]
+
+把最小奇异值置为 0：
+
+\[
+\Sigma'=\operatorname{diag}(\sigma_1,\sigma_2,0)
+\]
+
+然后：
+
+\[
+F'=U\Sigma'V^T
+\]
+
+这就是离原矩阵最近的 rank-2 矩阵。
+
+第五步，如果前面做了点归一化，还需要反归一化：
+
+\[
+F=T'^T \hat F T
+\]
+
+或者根据符号约定使用对应的反归一化形式。核心思想是把归一化坐标下估计的 F 转回原始像素坐标下的 F。
+
+#### **为什么基础矩阵 rank 为 2？**
+
+\[
+e'^T F=0
+\]
+
+F 有非零左零空间，因此不是满秩矩阵，秩最多为 2。对于一般非退化双目配置，它的秩正好是 2。
+
+\[
+\boxed{求 null space 就是在求 Ax=0 的非零解；用 SVD 时，取最小奇异值对应的右奇异向量。}
+\]
+
+## 第十五章 双目立体视觉
+
+#### 从双目重建流程开始：想恢复 3D 点到底要做什么？
+
+给左右两张图像，怎样恢复三维点？它把流程拆成四步：先在一张图中选择一个点；然后在另一张图中形成这个点对应的 epipolar line；再沿着这条线寻找匹配点；最后用 triangulation 恢复三维点。
+
+但是这个流程有两个实际问题。第一，如果每个点都要算一条任意方向的对极线，再沿斜线搜索，计算和实现都不方便；第二，图像匹配本身很难，很多区域没有纹理，或者有重复纹理、反光、遮挡，导致找不到可靠对应点。于是本章引入两个关键工具：**stereo rectification** 和 **stereo matching**。
+
+#### Disparity：双目视觉里最核心的量
+
+考虑最标准的双目相机配置：两台相机完全平行，焦距相同，图像平面共面，右相机相对于左相机沿 x 方向平移一个 baseline：
+
+\[
+B
+\]
+
+左相机中心作为原点，三维点为：
+
+\[
+(X,Y,Z)
+\]
+
+根据小孔相机模型，左图横坐标为：
+
+\[
+x = f\frac{X}{Z}
+\]
+
+右相机中心在左相机右侧 B，所以同一个三维点在右相机坐标系中的横向坐标可以看成：
+
+\[
+X-B
+\]
+
+因此右图横坐标为：
+
+\[
+x' = f\frac{X-B}{Z}
+\]
+
+于是左右图横坐标差，也就是 disparity 视差，可以写为：
+
+\[
+d = x - x’
+\]
+
+\[
+d=f\frac{X}{Z}-f\frac{X-B}{Z}=
+f\frac{B}{Z}
+\]
+
+进一步得到深度公式：
+
+\[
+Z=\frac{fB}{d}
+\]
+
+焦距 f 和基线 B 已知时，只要得到视差 d，就能算深度 Z。
+
+视差越大，深度越小，说明物体越近；视差越小，深度越大，说明物体越远。
+
+如果 \(f\neq0\)，\(B\neq0\)，那么有限深度 Z 下 d 不会严格等于 0。只有当：
+
+\[
+Z\rightarrow \infty
+\]
+
+也就是点在无穷远处时，视差趋近于 0。或者如果两个相机没有基线，即 B=0，那当然所有点都没有双目视差，但这时也无法通过双目恢复深度。
+
+#### 为什么不是任意两张图都能直接算深度？
+
+第一，需要 sufficient baseline；第二，图像需要先 rectified，使 epipolar lines horizontal
+
+先说 sufficient baseline。双目深度来自视差：
+
+\[
+Z=\frac{fB}{d}
+\]
+
+如果 B 太小，视差 d 也很小。由于图像定位有像素级误差，视差太小会导致深度估计非常不稳定。比如 d 只有 1 个像素，而匹配误差可能是 0.5 像素，那么深度误差会很大。所以基线太短，深度估计不准；但基线太长也会带来问题，因为两张图视角差太大，遮挡变多，匹配更困难。
+
+再说 rectification。一般两台相机不一定完全平行，对极线可能是斜的、方向不同的。如果直接做匹配，就要沿任意方向的对极线搜索。为了简化，我们希望把两张图变换到一个新的共同坐标系，使得所有对极线都变成水平线。这样匹配点只会出现在同一行，搜索从“沿一条斜线”变成“沿同一 scanline 水平扫描”。这就是 stereo rectification。
+
+#### Stereo Rectification：把对极线变成水平线
+
+先 rectify images，使对极线水平；然后对每个像素，找它的 epipolar line；沿 scanline 找最佳匹配；最后由 disparity 计算 depth
+
+当两个相机平行，并且相机之间只有 x 方向平移时，对极线天然水平：
+
+\[
+R=I,\qquad t=(T,0,0)
+\]
+
+也就是说两台相机光轴平行，图像平面平行，右相机只在水平 x 方向上相对左相机平移。这时 epipole 在无穷远处，对极线彼此平行，并且可以设为水平线。
+
+stereo rectification：把两个图像平面重新投影到一个共同平面上，这个共同平面平行于两个相机中心连线；实现上需要两个 homographies，每张输入图像一个 \(3\times3\) 变换。
+
+所以 stereo rectification 的本质是：
+
+**对左右图分别做一个单应性变换，让它们看起来像由一对标准平行双目相机拍摄。**
+
+变换后，同一个三维点在左右图中的对应位置应当具有相同的纵坐标：
+
+\[
+y_L = y_R
+\]
+
+而水平坐标差：
+
+\[
+d=x_L-x_R
+\]
+
+就是视差。
+
+![image.png](assets/image-132.png)
+
+![image.png](assets/image-133.png)
+
+\[
+\boxed{3D 眼镜的核心就是：左右眼分离图像 + 制造视差 + 大脑融合产生深度。}
+\]
+
+![image.png](assets/image-134.png)
+
+#### Rectification 的算法思想
+
+右相机可以通过旋转 R 对齐相机坐标系方向；然后把左右相机都旋转，使 epipole 到无穷远处；最后调整尺度。
+
+更具体的算法：估计 E，用 E 得到 epipole，构造 \(R_{\text{rect}}\)，分解 E 得到 R,T，设置左右相机的 rectification rotation，然后对每个图像点进行旋转和投影
+
+![image.png](assets/image-135.png)
+
+![image.png](assets/image-136.png)
+
+![image.png](assets/image-137.png)
+
+![image.png](assets/image-138.png)
+
+![image.png](assets/image-139.png)
+
+构造 \(R_{\text{rect}}\) 这一步是整套算法的核心
+
+\[
+R_{\text{rect}}=\begin{bmatrix}r_1^T\\r_2^T\\r_3^T\end{bmatrix}
+\]
+
+这里 \(R_{\text{rect}}\) 是一个新的旋转矩阵。它的作用是：**把原来的相机坐标系旋转到一个新的 rectified coordinate system。**
+
+这个新坐标系怎么选？共有三个轴：
+
+\[
+r_1 = e_1 = \frac{T}{\|T\|}
+\]
+
+新坐标系的第一个轴 \(r_1\) 取为 baseline 方向，也就是两个相机中心之间的平移方向。
+
+为什么要这样？因为如果我们让 x-轴沿着 baseline，那么另一个相机中心就位于当前相机的 x-方向。投影到图像平面后，epipole 就会落在 x-方向无穷远：
+
+\[
+R_{\text{rect}} e_1 =\begin{bmatrix}1\\0\\0\end{bmatrix}
+\]
+
+这就实现了“把 epipole 放到 x-infinity”。
+
+然后构造第二个轴：
+
+\[
+r_2 =\frac{1}{\sqrt{T_x^2+T_y^2}}\begin{bmatrix}-T_y & T_x & 0\end{bmatrix}
+\]
+
+这一步是在找一个和 T 垂直、并且尽量接近原来图像竖直方向的向量。你可以把它理解成：既然 \(r_1\) 已经选成 baseline 方向了，那么 \(r_2\) 要和它正交，作为新的 y-轴。
+
+它其实类似于把 translation direction 和 optical axis 做叉乘，得到一个垂直方向。
+
+\[
+\text{cross product of } e \text{ and the direction vector of the optical axis}
+\]
+
+最后第三个轴：
+
+\[
+r_3 = r_1 \times r_2
+\]
+
+这样 \(r_1,r_2,r_3\)  三个向量互相正交，组成一个合法的旋转矩阵。
+
+所以：
+
+\[
+R_{\text{rect}}=
+\begin{bmatrix}
+r_1^T\\
+r_2^T\\
+r_3^T
+\end{bmatrix}
+\]
+
+就是新的校正旋转。
+
+\[
+\text{Decompose }E\text{ into }R\text{ and }T
+\]
+
+给定 E，可以通过 SVD 分解出两个可能的旋转和两个可能的平移方向，所以一共有四种组合：
+
+\[
+(R,+t),\quad (R,-t),\quad (R',+t),\quad (R',-t)
+\]
+
+然后怎么选正确解？用 cheirality constraint，也就是三维点必须在两个相机前方。PPT 写：
+
+\[
+\text{valid solution has positive }Z\text{ value}
+\]
+
+也就是说，把匹配点三角化出来，检查三维点在两台相机坐标系中的深度是否都为正。只有一种配置会让点落在两个相机前方。
+
+\[
+R_1=R_{\text{rect}}
+\]
+
+\[
+R_2=R R_{\text{rect}}
+\]
+
+\[
+\boxed{\text{分别旋转左右相机，使它们具有相同的图像平面方向，并且 baseline 沿水平轴。}}
+\]
+
+下面对左图像做warp：
+
+\[
+[x'\ y'\ z'] = R_1[x\ y\ z]
+\]
+
+\[
+p = \frac{f}{z'}[x'\ y'\ z']
+\]
+
+如果考虑相机内参 K，更完整的图像单应变换可以写成：
+
+\[
+H_1 = K R_1 K^{-1}
+\]
+
+\[
+H_2 = K R_2 K^{-1}
+\]
+
+然后用 \(H_1,H_2\) 分别 warp 左右图像。这样得到的两张图就是 rectified images。
+
+最后对右图像做同样操作，再通过：
+
+\[
+Z=\frac{fB}{d}
+\]
+
+恢复深度。
+
+<aside>
+💡
+
+Stereo rectification 的目标是把一般双目几何变成标准平行双目几何。首先用 8 点算法由匹配点估计 E，再由 E 通过 SVD 得到 epipole 或平移方向 T。构造新的校正坐标系，使第一轴 \(r_1=T/\|T\|\) 沿 baseline，第二轴 \(r_2\) 与 \(r_1\) 和原光轴方向正交，第三轴 \(r_3=r_1\times r_2\)，从而得到 \(R_{\text{rect}}\)。由于 \(R_{\text{rect}}e=[1,0,0]^T\)，epipole 被送到 x-方向无穷远，所以对极线变成水平线。之后分解 E 得到相对 R,T，选择使三维点在两相机前方的正确解，再用 \(R_1,R_2\) 分别 warp 左右图像，得到校正后的图像。校正后对应点满足同一行约束，可以通过水平视差计算深度。
+
+</aside>
+
+#### Stereo Matching：如何沿同一行找匹配？
+
+rectify 之后怎么做？答案是对每个像素，沿同一 scanline 搜索最佳匹配，然后由视差计算深度
+
+对于左图中的像素：
+
+\[
+I_L(x,y)
+\]
+
+我们要在右图同一行 y 上寻找：
+
+\[
+I_R(x-d,y)
+\]
+
+其中 d 是候选视差。因为近处物体在左右图之间水平移动更多，所以我们枚举一系列可能的 d，比较左图窗口和右图窗口的相似度，选择匹配代价最低或相似度最高的那个 d。
+
+> 沿 epipolar line 滑动一个窗口，把右图窗口和左图 reference window 比较，matching cost 可以用 SSD 或 normalized correlation
+> 
+
+数学上，对左图像素 (x,y)，取一个窗口 W。对每个候选视差 d，比较左图窗口：
+
+\[
+I_L(x+i,y+j)
+\]
+
+和右图窗口：
+
+\[
+I_R(x-d+i,y+j)
+\]
+
+其中 \((i,j)\in W\)。然后得到匹配代价：
+
+\[
+C(x,y,d)
+\]
+
+最后选择：
+
+\[
+d^*(x,y)=\arg\min_d C(x,y,d)
+\]
+
+或者如果用相似度：
+
+\[
+d^*(x,y)=\arg\max_d S(x,y,d)
+\]
+
+得到整张图每个像素的 d(x,y)，就是 disparity map 视差图。再通过：
+
+\[
+Z(x,y)=\frac{fB}{d(x,y)}
+\]
+
+得到 depth map 深度图。
+
+#### SAD 和 SSD：最直接的窗口差异
+
+最直接的代价是 SAD，Sum of Absolute Differences：
+
+\[
+C_{\text{SAD}}(d)=\sum_{(i,j)\in W}\left|I_L(x+i,y+j)-I_R(x-d+i,y+j)\right|
+\]
+
+它把两个窗口中对应像素的绝对差相加。差越小，说明两个窗口越像。
+
+SSD，Sum of Squared Differences，是：
+
+\[
+C_{\text{SSD}}(d)=\sum_{(i,j)\in W}\left(I_L(x+i,y+j)-I_R(x-d+i,y+j)\right)^2
+\]
+
+SSD 会对大差异惩罚更重。但它不鲁棒于局部亮度变化。
+
+为什么 SSD 对亮度变化敏感？假设右图整体比左图亮了一个常数 b：
+
+\[
+I_R = I_L + b
+\]
+
+即使两个窗口确实对应，差值也会变成 b，SSD 会产生较大代价。这时匹配可能被亮度偏差干扰。
+
+#### Zero-mean：为什么要减均值？
+
+subtracting mean deals with brightness bias，dividing by standard deviation removes contrast bias
+
+\[
+\bar Q=\bar P+b
+\]
+
+\[
+Q(i,j)-\bar Q=P(i,j)+b-(\bar P+b)=P(i,j)-\bar P
+\]
+
+减均值可以消除整体亮度偏移。这就是 zero-mean SAD / zero-mean SSD 的思想。
+
+#### NCC：归一化互相关为什么更鲁棒？
+
+Normalized Cross-Correlation，NCC，它同时减去均值并除以标准差，因此对 brightness 和 contrast 变化都更鲁棒
+
+设左图窗口为 P，右图候选窗口为 \(Q_d\)。NCC 定义为：
+
+\[
+\text{NCC}(P,Q_d)=\frac{\sum_{(i,j)\in W}(P(i,j)-\bar P)(Q_d(i,j)-\bar Q_d)}{\sqrt{\sum_{(i,j)\in W}(P(i,j)-\bar P)^2}\sqrt{\sum_{(i,j)\in W}(Q_d(i,j)-\bar Q_d)^2}}
+\]
+
+NCC 的值通常在 [-1,1] 之间，越接近 1，说明两个窗口越相似。
+
+减均值会消掉 b，除以标准差会消掉 a 的尺度影响。因此 NCC 更关注局部纹理结构是否一致，而不是绝对亮度和对比度。
+
+不同方法的取舍：zero-mean 最快，但对局部强度敏感；SSD 速度中等，但对 intensity offsets 敏感；NCC 最慢，但对 contrast 和 brightness 不变性最好
+
+![image.png](assets/image-140.png)
+
+![image.png](assets/image-141.png)
+
+![image.png](assets/image-142.png)
+
+![image.png](assets/image-143.png)
+
+#### 窗口大小的影响：细节和稳定性的 trade-off
+
+小窗口 W=3 和大窗口 W=20 的效果不同。小窗口有更多细节，但噪声更多；大窗口得到更平滑的 disparity map，但细节少，并且在边界附近容易失败
+
+![image.png](assets/image-144.png)
+
+小窗口：
+
+\[
+\mathord{+} \text{保留细节}
+\]
+
+\[
+\mathord{-} \text{噪声大，匹配不稳定}
+\]
+
+大窗口：
+
+\[
+\mathord{+} \text{视差图更平滑}
+\]
+
+\[
+\mathord{-} \text{细节少，边界处容易错}
+\]
+
+#### Stereo Block Matching 什么时候会失败？
+
+第一类是无纹理区域。比如一面白墙、天空、纯色桌面。局部窗口到处都差不多，沿扫描线移动时匹配代价变化不明显，无法确定哪个 d 是正确的。
+
+第二类是重复纹理。比如栅栏、窗户、棋盘格、砖墙。多个候选位置看起来都很像，算法可能匹配到错误周期。
+
+第三类是高光和镜面反射 specularities。双目匹配通常假设同一个物体点在左右图中外观相似，也叫 brightness constancy。但镜面反射会随视角变化，同一个三维点在左右相机里亮度可能完全不同，导致匹配失败。
+
+#### 如何改进 stereo matching：从局部匹配到能量最小化
+
+一个好的 stereo correspondence 需要两个条件，第一是 match quality，每个像素都要在另一张图中找到好匹配；第二是 smoothness，相邻像素通常应该移动差不多的量
+
+这就是经典的 stereo energy：
+
+\[
+E(d)=\sum_p D_p(d_p)+\lambda\sum_{(p,q)\in \mathcal{N}}V(d_p,d_q)
+\]
+
+这里 p 表示像素，\(d_p\) 表示像素 p 的视差；第一项是 data term，衡量当前视差下左右图匹配得好不好；第二项是 smoothness term，鼓励相邻像素的视差不要变化太剧烈；\(\lambda\) 控制平滑约束的强度。
+
+\[
+D_p(d)=\text{SSD}\big(\text{window around } I(p),\text{window around } J(p+d)\big)
+\]
+
+smoothness term 时引入邻域  \(\mathcal{N}\)，可以是 4-connected neighborhood 或 8-connected neighborhood。也就是说，我们会对相邻像素 p,q 加惩罚：
+
+\[
+V(d_p,d_q)
+\]
+
+如果两个相邻像素视差差太多，就惩罚较大。
+
+有两种常见 smoothness model：Potts model 和 L1 distance
+
+Potts model 可以写成：
+
+\[
+V(d_p,d_q)=\begin{cases}0,& d_p=d_q\\1,& d_p\neq d_q\end{cases}
+\]
+
+它鼓励相邻像素具有相同视差。L1 smoothness 可以写成：
+
+\[
+V(d_p,d_q)=|d_p-d_q|
+\]
+
+它允许视差缓慢变化，但惩罚大的跳变。
+
+![image.png](assets/image-145.png)
+
+![image.png](assets/image-146.png)
+
+![image.png](assets/image-147.png)
+
+#### Structured Light：为什么要主动打光？
+
+传统双目被动匹配依赖图像本身的纹理，如果物体表面没纹理，就很难匹配。Structured light 的思想是：**既然自然纹理不够，那我们主动投射可识别的光模式，让对应关系更容易找到。**
+
+一种方式是两台相机加一束激光或投影光。激光照到物体表面形成明显亮线或亮点，左右相机都能看到这些点。因为激光点很容易识别，匹配问题变简单，然后用双目三角化求出 3D 坐标。
+
+另一种方式是一个相机加一个 projector。 projector acts like “reverse” camera。
+
+普通相机把三维点投影到二维图像；投影仪则把二维图案投到三维世界上，可以看成反向相机。相机看到被投影的图案后，就能根据图案编码建立“相机像素—投影仪像素”的对应关系。由于投影仪几何已知，它就相当于第二个视角，于是可以三角化恢复深度。
+
+Structured light 的典型优势是对无纹理物体更有效，因为它主动制造纹理；缺点是需要额外硬件，对环境光、反光表面和动态场景可能敏感。
+
+![image.png](assets/image-148.png)

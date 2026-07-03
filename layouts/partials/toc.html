@@ -1,0 +1,154 @@
+<details
+  open
+  id="TOCView"
+  class="toc-right mt-0 overflow-y-auto overscroll-contain bf-scrollbar rounded-lg -ms-5 ps-5 pe-2 hidden lg:block">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 -ms-5 ps-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    {{ i18n "article.table_of_contents" }}
+  </summary>
+  <div
+    class="toc-panel min-w-[220px] py-2 border-dotted border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+    {{ .TableOfContents | emojify }}
+  </div>
+</details>
+<details class="toc-inside mt-0 overflow-hidden rounded-lg -ms-5 ps-5 lg:hidden">
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 -ms-5 ps-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    {{ i18n "article.table_of_contents" }}
+  </summary>
+  <div
+    class="toc-panel py-2 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+    {{ .TableOfContents | emojify }}
+  </div>
+</details>
+
+<script>
+  (function () {
+    'use strict'
+
+    const SCROLL_OFFSET_RATIO = 0.28
+    const TOC_SELECTOR = '#TableOfContents'
+    const DESKTOP_TOC_SELECTOR = '#TOCView'
+    const ANCHOR_SELECTOR = '.article-content h1[id], .article-content h2[id], .article-content h3[id], .article-content h4[id]'
+    const TOC_LINK_SELECTOR = 'a[href^="#"]'
+    const ACTIVE_CLASS = 'active'
+    const ACTIVE_PARENT_CLASS = 'active-parent'
+    let isJumpingToAnchor = false
+    let rafId = 0
+
+    function getHashId(link) {
+      const href = link.getAttribute('href') || ''
+      return href.startsWith('#') ? decodeURIComponent(href.slice(1)) : ''
+    }
+
+    function getActiveAnchorId(anchors, tocIds, offsetRatio) {
+      const threshold = window.scrollY + window.innerHeight * offsetRatio
+
+      if (isJumpingToAnchor) {
+        for (let i = 0; i < anchors.length; i++) {
+          const anchor = anchors[i]
+          if (!tocIds.has(anchor.id)) continue
+          const top = anchor.getBoundingClientRect().top + window.scrollY
+          if (Math.abs(window.scrollY - top) < 120) return anchor.id
+        }
+      }
+
+      for (let i = anchors.length - 1; i >= 0; i--) {
+        const anchor = anchors[i]
+        const top = anchor.getBoundingClientRect().top + window.scrollY
+        if (top <= threshold && tocIds.has(anchor.id)) return anchor.id
+      }
+
+      return anchors.find(anchor => tocIds.has(anchor.id))?.id || ''
+    }
+
+    function directChildLink(li) {
+      if (!li) return null
+      return Array.prototype.find.call(li.children, child => child.tagName === 'A') || null
+    }
+
+    function markParentLinks(activeLink) {
+      let parentLi = activeLink?.closest('li')?.parentElement?.closest('li')
+      while (parentLi) {
+        const link = directChildLink(parentLi)
+        if (link) link.classList.add(ACTIVE_PARENT_CLASS)
+        parentLi = parentLi.parentElement?.closest('li')
+      }
+    }
+
+    function keepActiveLinkVisible(activeLink) {
+      const tocScroller = document.querySelector(DESKTOP_TOC_SELECTOR)
+      if (!tocScroller || !activeLink || window.innerWidth < 1024) return
+
+      const scrollerRect = tocScroller.getBoundingClientRect()
+      const linkRect = activeLink.getBoundingClientRect()
+      const comfortableTop = scrollerRect.top + 64
+      const comfortableBottom = scrollerRect.bottom - 64
+
+      if (linkRect.top < comfortableTop || linkRect.bottom > comfortableBottom) {
+        const offset = linkRect.top - scrollerRect.top - scrollerRect.height * 0.38
+        tocScroller.scrollTo({
+          top: tocScroller.scrollTop + offset,
+          behavior: isJumpingToAnchor ? 'smooth' : 'auto'
+        })
+      }
+    }
+
+    function updateTOC(config) {
+      const activeId = getActiveAnchorId(config.anchors, config.tocIds, config.scrollOffset)
+      if (!activeId) return
+
+      let activeLink = null
+      config.links.forEach(link => {
+        const isActive = getHashId(link) === activeId
+        link.classList.toggle(ACTIVE_CLASS, isActive)
+        link.classList.remove(ACTIVE_PARENT_CLASS)
+        if (isActive) activeLink = link
+      })
+
+      markParentLinks(activeLink)
+      keepActiveLinkVisible(activeLink)
+      if (isJumpingToAnchor) window.setTimeout(() => { isJumpingToAnchor = false }, 260)
+    }
+
+    function scheduleUpdate(config) {
+      if (rafId) return
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0
+        updateTOC(config)
+      })
+    }
+
+    function initTOC() {
+      const toc = document.querySelector(TOC_SELECTOR)
+      if (!toc) return
+
+      const anchors = [...document.querySelectorAll(ANCHOR_SELECTOR)]
+      const links = [...toc.querySelectorAll(TOC_LINK_SELECTOR)]
+      const tocIds = new Set(links.map(getHashId))
+      const config = {
+        toc,
+        anchors,
+        links,
+        tocIds,
+        scrollOffset: SCROLL_OFFSET_RATIO
+      }
+
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          isJumpingToAnchor = true
+          window.setTimeout(() => scheduleUpdate(config), 80)
+        })
+      })
+
+      window.addEventListener('scroll', () => scheduleUpdate(config), { passive: true })
+      window.addEventListener('resize', () => scheduleUpdate(config), { passive: true })
+      window.addEventListener('hashchange', () => scheduleUpdate(config), { passive: true })
+      updateTOC(config)
+    }
+
+    document.readyState === 'loading'
+      ? document.addEventListener('DOMContentLoaded', initTOC)
+      : initTOC()
+  })()
+</script>

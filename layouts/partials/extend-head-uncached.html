@@ -1,6 +1,50 @@
 <script>
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   var imgs = document.querySelectorAll(".article-content figure > img");
+  var shouldCorrectHash = Boolean(window.location.hash);
+  var hashCorrectionRun = 0;
+
+  function scrollToHashTarget() {
+    if (!shouldCorrectHash || !window.location.hash) return;
+
+    var rawId = window.location.hash.slice(1);
+    var decodedId = rawId;
+    try {
+      decodedId = decodeURIComponent(rawId);
+    } catch (error) {
+      decodedId = rawId;
+    }
+
+    var target = document.getElementById(decodedId) || document.getElementById(rawId);
+    if (!target) return;
+
+    target.scrollIntoView({ block: "start" });
+  }
+
+  function scheduleHashCorrection() {
+    if (!window.location.hash) return;
+    var run = ++hashCorrectionRun;
+    [80, 350, 900, 1600, 3000, 5000].forEach(function (delay) {
+      window.setTimeout(function () {
+        if (run !== hashCorrectionRun) return;
+        scrollToHashTarget();
+      }, delay);
+    });
+    window.setTimeout(function () {
+      if (run !== hashCorrectionRun) return;
+      shouldCorrectHash = false;
+    }, 5600);
+  }
+
+  function cancelHashCorrection() {
+    shouldCorrectHash = false;
+    hashCorrectionRun += 1;
+  }
+
   imgs.forEach(function (img) {
     var applyClass = function () {
       if (!img.naturalWidth || !img.naturalHeight) return;
@@ -14,8 +58,28 @@ document.addEventListener("DOMContentLoaded", function () {
     if (img.complete) {
       applyClass();
     } else {
-      img.addEventListener("load", applyClass, { once: true });
+      img.addEventListener("load", function () {
+        applyClass();
+      }, { once: true });
     }
   });
+
+  scheduleHashCorrection();
+  window.addEventListener("load", scheduleHashCorrection, { once: true });
+  window.addEventListener("hashchange", function () {
+    shouldCorrectHash = true;
+    scheduleHashCorrection();
+  });
+  window.addEventListener("wheel", function () {
+    cancelHashCorrection();
+  }, { passive: true });
+  window.addEventListener("touchmove", function () {
+    cancelHashCorrection();
+  }, { passive: true });
+  window.addEventListener("keydown", function (event) {
+    if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "].indexOf(event.key) !== -1) {
+      cancelHashCorrection();
+    }
+  }, { passive: true });
 });
 </script>

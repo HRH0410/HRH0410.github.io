@@ -119,8 +119,8 @@
   <link
     type="text/css"
     rel="stylesheet"
-    href="/css/main.bundle.min.e41ee59dc46558c0c96396ad66f321c091dff5db3bbb7051cdc9a60b4bee881917c4434c7a46e6938a9db5e9e056c5f448cfdfb6ab7eb2843fb174b1b89a1228.css"
-    integrity="sha512-5B7lncRlWMDJY5atZvMhwJHf9ds7u3BRzcmmC0vuiBkXxENMekbmk4qdtengVsX0SM/ftqt&#43;soQ/sXSxuJoSKA==">
+    href="/css/main.bundle.min.31459664648fa2897b92c75e31d9d3b5e8163561e336d94906904d1a7f2b597f21c5883a88c4300a1e9785fc7b0230740771c734bfbc82144bbf05c9ad23057b.css"
+    integrity="sha512-MUWWZGSPool7ksdeMdnTtegWNWHjNtlJBpBNGn8rWX8hxYg6iMQwCh6Xhfx7AjB0B3HHNL&#43;8ghRLvwXJrSMFew==">
 
   
   
@@ -396,8 +396,41 @@
   
   
     <script>
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   var imgs = document.querySelectorAll(".article-content figure > img");
+  var shouldCorrectHash = Boolean(window.location.hash);
+
+  function scrollToHashTarget() {
+    if (!shouldCorrectHash || !window.location.hash) return;
+
+    var rawId = window.location.hash.slice(1);
+    var decodedId = rawId;
+    try {
+      decodedId = decodeURIComponent(rawId);
+    } catch (error) {
+      decodedId = rawId;
+    }
+
+    var target = document.getElementById(decodedId) || document.getElementById(rawId);
+    if (!target) return;
+
+    target.scrollIntoView({ block: "start" });
+  }
+
+  function scheduleHashCorrection() {
+    if (!window.location.hash) return;
+    [80, 350, 900, 1600, 3000, 5000].forEach(function (delay) {
+      window.setTimeout(scrollToHashTarget, delay);
+    });
+    window.setTimeout(function () {
+      shouldCorrectHash = false;
+    }, 5600);
+  }
+
   imgs.forEach(function (img) {
     var applyClass = function () {
       if (!img.naturalWidth || !img.naturalHeight) return;
@@ -411,9 +444,24 @@ document.addEventListener("DOMContentLoaded", function () {
     if (img.complete) {
       applyClass();
     } else {
-      img.addEventListener("load", applyClass, { once: true });
+      img.addEventListener("load", function () {
+        applyClass();
+      }, { once: true });
     }
   });
+
+  scheduleHashCorrection();
+  window.addEventListener("load", scheduleHashCorrection, { once: true });
+  window.addEventListener("hashchange", function () {
+    shouldCorrectHash = true;
+    scheduleHashCorrection();
+  });
+  window.addEventListener("wheel", function () {
+    shouldCorrectHash = false;
+  }, { once: true, passive: true });
+  window.addEventListener("touchmove", function () {
+    shouldCorrectHash = false;
+  }, { once: true, passive: true });
 });
 </script>
 
@@ -456,7 +504,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     
       <div class="h-24"></div>
-<div class="fixed inset-x-0 top-4 z-100 flex justify-center px-6">
+<div class="site-nav-shell fixed inset-x-0 top-4 z-100 flex justify-center px-6">
   <nav
     id="menu-blur"
     class="pill-nav flex items-center gap-6 px-8 py-2.5 rounded-full">
@@ -692,14 +740,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         
   
-    <div
-      class="flex flex-wrap items-center [&_span]:text-2xl [&_.translation_button_.icon]:text-4xl! [&_.translation_button_span]:text-base! [&_.translation_.menuhide_span]:text-sm! gap-x-6 ps-2 mt-8 pt-8 border-t bf-border-color">
-      
-
-
-      
-    </div>
-  
 
       </nav>
     </div>
@@ -873,14 +913,152 @@ document.addEventListener("DOMContentLoaded", function () {
 
    
   @media (max-width: 768px) {
-    #menu-blur {
-      padding: 0.5rem 1.25rem !important;
-      gap: 0.25rem !important;
+    .site-nav-shell {
+      top: 0.45rem !important;
+      padding-left: 0.95rem !important;
+      padding-right: 0.95rem !important;
+      z-index: 100 !important;
     }
-    #menu-blur .logo {
-      height: 30px !important;
-      width: 30px !important;
-      min-width: 30px !important;
+
+    #menu-blur {
+      width: min(100%, 18.75rem) !important;
+      min-height: 2.82rem !important;
+      padding: 0.3rem 0.52rem !important;
+      gap: 0.18rem !important;
+      border-radius: 999px !important;
+    }
+
+    #menu-blur .main-menu {
+      gap: 0.12rem !important;
+      width: 100% !important;
+    }
+
+    #menu-blur .logo,
+    #menu-blur img.logo,
+    .pill-nav .logo,
+    .pill-nav img.logo {
+      height: 24px !important;
+      width: 24px !important;
+      min-width: 24px !important;
+      max-width: 24px !important;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1) !important;
+    }
+
+    #menu-blur .main-menu > div:first-child {
+      margin-right: 0 !important;
+    }
+
+    #menu-blur .main-menu > a.text-base {
+      font-size: 0.86rem !important;
+      max-width: 5.8rem !important;
+      margin-right: 0 !important;
+      padding: 0.22rem 0.38rem !important;
+      line-height: 1.1 !important;
+    }
+
+    #menu-blur .main-menu .ms-auto,
+    #menu-blur .main-menu > div:last-child {
+      gap: 0.1rem !important;
+      margin-left: auto !important;
+      height: auto !important;
+      min-height: 0 !important;
+    }
+
+    #menu-blur .main-menu .ms-auto::before {
+      height: 1.25rem !important;
+      margin-right: 0.26rem !important;
+    }
+
+    #menu-blur .main-menu .ms-auto > .flex {
+      height: auto !important;
+      min-height: 0 !important;
+      gap: 0.18rem !important;
+      align-items: center !important;
+    }
+
+    #search-button-mobile,
+    #appearance-switcher-mobile,
+    #mobile-menu-toggle + label {
+      width: 1.7rem !important;
+      height: 1.7rem !important;
+      padding: 0.26rem !important;
+      border-radius: 999px !important;
+    }
+
+    #search-button-mobile svg,
+    #appearance-switcher-mobile svg,
+    #mobile-menu-toggle + label svg {
+      width: 1.08rem !important;
+      height: 1.08rem !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] {
+      position: fixed !important;
+      inset: auto 0.85rem auto auto !important;
+      top: 3.75rem !important;
+      width: min(12.4rem, calc(100vw - 1.7rem)) !important;
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 0.42rem !important;
+      border-radius: 0.95rem !important;
+      background: rgba(255, 255, 255, 0.92) !important;
+      border: 1px solid rgba(127, 143, 166, 0.2) !important;
+      box-shadow: 0 18px 42px rgba(30, 41, 59, 0.18) !important;
+      backdrop-filter: blur(16px) saturate(150%) !important;
+      -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    .dark #mobile-menu-toggle:checked ~ div[role="dialog"] {
+      background: rgba(18, 22, 31, 0.93) !important;
+      border-color: rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36) !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] > label {
+      top: 0.34rem !important;
+      right: 0.34rem !important;
+      width: 1.62rem !important;
+      height: 1.62rem !important;
+      border-radius: 999px !important;
+      box-shadow: none !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] nav {
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 1.58rem 0 0 !important;
+      display: grid !important;
+      gap: 0.26rem !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] nav > div {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a {
+      min-height: 1.86rem !important;
+      justify-content: flex-start !important;
+      border-radius: 0.62rem !important;
+      padding: 0.24rem 0.48rem !important;
+      background: rgba(255, 255, 255, 0.58) !important;
+      border: 1px solid rgba(127, 143, 166, 0.18) !important;
+      box-shadow: none !important;
+    }
+
+    .dark #mobile-menu-toggle:checked ~ div[role="dialog"] a {
+      background: rgba(255, 255, 255, 0.06) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      box-shadow: none !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a span {
+      font-size: 0.82rem !important;
+      line-height: 1.2 !important;
+      font-weight: 650 !important;
+      letter-spacing: 0 !important;
     }
   }
 </style>
@@ -890,23 +1068,22 @@ document.addEventListener("DOMContentLoaded", function () {
       <main id="main-content" class="grow">
         
   
-  <article>
+  <article class="article-shell">
     
     
 
     
-    <header id="single_header" class="mt-5 max-w-prose">
+    <header id="single_header" class="article-header mt-5">
       
-      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      <h1 class="article-title mt-0 text-neutral-900 dark:text-neutral">
         Transformer 学习笔记
       </h1>
-      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+      <div class="article-meta mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
         
 
 
 
 
-
   
   
 
@@ -914,7 +1091,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   
 
-  
   
   
     
@@ -930,9 +1106,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   
     
+      
+        
+      
+    
   
 
   
+    
+      
+        
+      
     
   
 
@@ -945,26 +1129,16 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
   
-
 
   <div class="flex flex-row flex-wrap items-center">
-    
     
       <time datetime="2026-02-07T20:45:00&#43;08:00">2026-02-07</time><span class="px-2 text-primary-500">&middot;</span><span>6939 字</span><span class="px-2 text-primary-500">&middot;</span><span title="预计阅读">14 分钟</span>
     
 
     
-    
   </div>
 
   
-
-  
-  
-
-  
-  
-
 
 
       </div>
@@ -989,13 +1163,13 @@ document.addEventListener("DOMContentLoaded", function () {
     </header>
 
     
-    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+    <section class="article-layout flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
       
       
       
       
       
-        <div class="order-first lg:ms-auto px-0 lg:order-last lg:ps-8 lg:max-w-2xs">
+        <div class="article-toc-column order-first lg:ms-auto px-0 lg:order-last lg:ps-8">
           <div class="toc ps-5 print:hidden lg:sticky lg:top-[140px]">
             <details
   open
@@ -1006,7 +1180,7 @@ document.addEventListener("DOMContentLoaded", function () {
     目录
   </summary>
   <div
-    class="min-w-[220px] py-2 border-dotted border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+    class="toc-panel min-w-[220px] py-2 border-dotted border-s-1 -ms-5 ps-5 dark:border-neutral-600">
     <nav id="TableOfContents">
   <ul>
     <li><a href="#transformer的诞生背景">Transformer的诞生背景</a></li>
@@ -1057,7 +1231,7 @@ document.addEventListener("DOMContentLoaded", function () {
     目录
   </summary>
   <div
-    class="py-2 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+    class="toc-panel py-2 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
     <nav id="TableOfContents">
   <ul>
     <li><a href="#transformer的诞生背景">Transformer的诞生背景</a></li>
@@ -1103,22 +1277,149 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </details>
 
+<script>
+  (function () {
+    'use strict'
 
+    const SCROLL_OFFSET_RATIO = 0.28
+    const TOC_SELECTOR = '#TableOfContents'
+    const DESKTOP_TOC_SELECTOR = '#TOCView'
+    const ANCHOR_SELECTOR = '.article-content h1[id], .article-content h2[id], .article-content h3[id], .article-content h4[id]'
+    const TOC_LINK_SELECTOR = 'a[href^="#"]'
+    const ACTIVE_CLASS = 'active'
+    const ACTIVE_PARENT_CLASS = 'active-parent'
+    let isJumpingToAnchor = false
+    let rafId = 0
+
+    function getHashId(link) {
+      const href = link.getAttribute('href') || ''
+      return href.startsWith('#') ? decodeURIComponent(href.slice(1)) : ''
+    }
+
+    function getActiveAnchorId(anchors, tocIds, offsetRatio) {
+      const threshold = window.scrollY + window.innerHeight * offsetRatio
+
+      if (isJumpingToAnchor) {
+        for (let i = 0; i < anchors.length; i++) {
+          const anchor = anchors[i]
+          if (!tocIds.has(anchor.id)) continue
+          const top = anchor.getBoundingClientRect().top + window.scrollY
+          if (Math.abs(window.scrollY - top) < 120) return anchor.id
+        }
+      }
+
+      for (let i = anchors.length - 1; i >= 0; i--) {
+        const anchor = anchors[i]
+        const top = anchor.getBoundingClientRect().top + window.scrollY
+        if (top <= threshold && tocIds.has(anchor.id)) return anchor.id
+      }
+
+      return anchors.find(anchor => tocIds.has(anchor.id))?.id || ''
+    }
+
+    function directChildLink(li) {
+      if (!li) return null
+      return Array.prototype.find.call(li.children, child => child.tagName === 'A') || null
+    }
+
+    function markParentLinks(activeLink) {
+      let parentLi = activeLink?.closest('li')?.parentElement?.closest('li')
+      while (parentLi) {
+        const link = directChildLink(parentLi)
+        if (link) link.classList.add(ACTIVE_PARENT_CLASS)
+        parentLi = parentLi.parentElement?.closest('li')
+      }
+    }
+
+    function keepActiveLinkVisible(activeLink) {
+      const tocScroller = document.querySelector(DESKTOP_TOC_SELECTOR)
+      if (!tocScroller || !activeLink || window.innerWidth < 1024) return
+
+      const scrollerRect = tocScroller.getBoundingClientRect()
+      const linkRect = activeLink.getBoundingClientRect()
+      const comfortableTop = scrollerRect.top + 64
+      const comfortableBottom = scrollerRect.bottom - 64
+
+      if (linkRect.top < comfortableTop || linkRect.bottom > comfortableBottom) {
+        const offset = linkRect.top - scrollerRect.top - scrollerRect.height * 0.38
+        tocScroller.scrollTo({
+          top: tocScroller.scrollTop + offset,
+          behavior: isJumpingToAnchor ? 'smooth' : 'auto'
+        })
+      }
+    }
+
+    function updateTOC(config) {
+      const activeId = getActiveAnchorId(config.anchors, config.tocIds, config.scrollOffset)
+      if (!activeId) return
+
+      let activeLink = null
+      config.links.forEach(link => {
+        const isActive = getHashId(link) === activeId
+        link.classList.toggle(ACTIVE_CLASS, isActive)
+        link.classList.remove(ACTIVE_PARENT_CLASS)
+        if (isActive) activeLink = link
+      })
+
+      markParentLinks(activeLink)
+      keepActiveLinkVisible(activeLink)
+      if (isJumpingToAnchor) window.setTimeout(() => { isJumpingToAnchor = false }, 260)
+    }
+
+    function scheduleUpdate(config) {
+      if (rafId) return
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0
+        updateTOC(config)
+      })
+    }
+
+    function initTOC() {
+      const toc = document.querySelector(TOC_SELECTOR)
+      if (!toc) return
+
+      const anchors = [...document.querySelectorAll(ANCHOR_SELECTOR)]
+      const links = [...toc.querySelectorAll(TOC_LINK_SELECTOR)]
+      const tocIds = new Set(links.map(getHashId))
+      const config = {
+        toc,
+        anchors,
+        links,
+        tocIds,
+        scrollOffset: SCROLL_OFFSET_RATIO
+      }
+
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          isJumpingToAnchor = true
+          window.setTimeout(() => scheduleUpdate(config), 80)
+        })
+      })
+
+      window.addEventListener('scroll', () => scheduleUpdate(config), { passive: true })
+      window.addEventListener('resize', () => scheduleUpdate(config), { passive: true })
+      window.addEventListener('hashchange', () => scheduleUpdate(config), { passive: true })
+      updateTOC(config)
+    }
+
+    document.readyState === 'loading'
+      ? document.addEventListener('DOMContentLoaded', initTOC)
+      : initTOC()
+  })()
+</script>
 
           </div>
         </div>
       
 
-
-      <div class="min-w-0 min-h-0 max-w-fit">
+      <div class="article-body-column min-w-0 min-h-0">
         
 
-        <div class="article-content max-w-prose mb-20">
+        <div class="article-content article-reading-content mb-20">
           
 
 
-<h2 class="relative group">Transformer的诞生背景
-    <div id="transformer的诞生背景" class="anchor"></div>
+<h2 id="transformer的诞生背景" class="relative group">Transformer的诞生背景
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1137,8 +1438,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </ul>
 <p>而Transformer的出现改变了这一状况，它直接抛弃了循环结构，提出了一个<strong>全并行的注意力机制模型</strong>。他可以一次性看到全文，可以反复回看，找到关键句，还能从多角度理解句子。</p>
 
-<h2 class="relative group">Transformer整体结构
-    <div id="transformer整体结构" class="anchor"></div>
+<h2 id="transformer整体结构" class="relative group">Transformer整体结构
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1157,8 +1457,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>Transformer 由 Encoder 和 Decoder 两个部分组成，Encoder 和 Decoder
 都包含 6 个 block。Transformer 的工作流程大体如下：</p>
 
-<h4 class="relative group">第一步
-    <div id="第一步" class="anchor"></div>
+<h4 id="第一步" class="relative group">第一步
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1178,8 +1477,7 @@ Embedding 相加得到。</p>
     src="/img/posts/transformer/image2.png"
     ><figcaption>Transformer的输入表示</figcaption></figure>
 
-<h4 class="relative group">第二步
-    <div id="第二步" class="anchor"></div>
+<h4 id="第二步" class="relative group">第二步
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1201,8 +1499,7 @@ block 输出的矩阵维度与输入完全一致。</p>
     src="/img/posts/transformer/image3.png"
     ><figcaption>Transformer Encoder 编码句子信息</figcaption></figure>
 
-<h4 class="relative group">第三步
-    <div id="第三步" class="anchor"></div>
+<h4 id="第三步" class="relative group">第三步
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1227,8 +1524,7 @@ i+1，如下图所示。在使用的过程中，翻译到单词 i+1 的时候需
 &ldquo;I&rdquo;，预测单词 &ldquo;have&rdquo;，以此类推。</p>
 <p>这是 Transformer 使用时候的大致流程，细节将在下方娓娓道来。</p>
 
-<h3 class="relative group">Transformer的输入
-    <div id="transformer的输入" class="anchor"></div>
+<h3 id="transformer的输入" class="relative group">Transformer的输入
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1273,8 +1569,7 @@ Cos(A+B) = Cos(A)Cos(B) - Sin(A)Sin(B)。</li>
 </blockquote><p>将单词的词 Embedding 和位置 Embedding 相加，就可以得到单词的表示向量
 x，x 就是 Transformer 的输入。</p>
 
-<h3 class="relative group">Self-Attention（自注意力机制）
-    <div id="self-attention自注意力机制" class="anchor"></div>
+<h3 id="self-attention自注意力机制" class="relative group">Self-Attention（自注意力机制）
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1303,8 +1598,7 @@ Normalization，用于对每一层的激活值进行归一化</li>
 </li>
 </ul>
 
-<h4 class="relative group">Self-Attention内部结构
-    <div id="self-attention内部结构" class="anchor"></div>
+<h4 id="self-attention内部结构" class="relative group">Self-Attention内部结构
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1325,8 +1619,7 @@ Normalization，用于对每一层的激活值进行归一化</li>
 或者上一个 Encoder block 的输出。而Q,K,V正是通过 Self-Attention
 的输入进行<strong>线性变换</strong>得到的。</p>
 
-<h4 class="relative group">Q，K，V的计算
-    <div id="qkv的计算" class="anchor"></div>
+<h4 id="qkv的计算" class="relative group">Q，K，V的计算
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1346,8 +1639,7 @@ Normalization，用于对每一层的激活值进行归一化</li>
     src="/img/posts/transformer/image9.png"
     ><figcaption>Q, K, V 的计算</figcaption></figure>
 
-<h4 class="relative group">Self-Attention 的输出
-    <div id="self-attention-的输出" class="anchor"></div>
+<h4 id="self-attention-的输出" class="relative group">Self-Attention 的输出
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1407,8 +1699,7 @@ Normalization，用于对每一层的激活值进行归一化</li>
     src="/img/posts/transformer/image14.png"
     ><figcaption>Zi 的计算方法</figcaption></figure>
 
-<h4 class="relative group">从语义角度理解：
-    <div id="从语义角度理解" class="anchor"></div>
+<h4 id="从语义角度理解" class="relative group">从语义角度理解：
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1450,8 +1741,7 @@ hotel.”。我们对其中“booked”这个单词（实际上是 token）做 A
     src="/img/posts/transformer/image17.png"
     ><figcaption>Multi-Head Attention 机制关系图</figcaption></figure>
 
-<h4 class="relative group">Multi-Head Attention
-    <div id="multi-head-attention" class="anchor"></div>
+<h4 id="multi-head-attention" class="relative group">Multi-Head Attention
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1500,8 +1790,7 @@ hotel.”。我们对其中“booked”这个单词（实际上是 token）做 A
     ></figure>
 <blockquote><p>通过把 Embedding 向量线性变幻成 8 个 1/8 的向量再分别去做 Attention 机制运算，这其实在本质上并不会耽误每个 token 的语义表达，而只是细分出了不同的语义子空间，即不同类型的细分语义逻辑而已，Attention 机制运算起来将更细腻精准、更有针对性。</p>
 </blockquote>
-<h3 class="relative group">Encoder结构
-    <div id="encoder结构" class="anchor"></div>
+<h3 id="encoder结构" class="relative group">Encoder结构
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1520,8 +1809,7 @@ hotel.”。我们对其中“booked”这个单词（实际上是 token）做 A
 <p>Transformer 的 Encoder block 结构，可以看到是由 Multi-Head Attention,
 Add &amp; Norm, Feed Forward, Add &amp; Norm 组成的。</p>
 
-<h4 class="relative group">Add &amp; Norm
-    <div id="add--norm" class="anchor"></div>
+<h4 id="add--norm" class="relative group">Add &amp; Norm
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1561,8 +1849,7 @@ ResNet 中经常用到：</p>
           重要
         </div>
       </div><div class="admonition-content mt-3 text-base leading-relaxed text-inherit">
-<h4 class="relative group">补充：Layer Normalization
-    <div id="补充layer-normalization" class="anchor"></div>
+<h4 id="补充layer-normalization" class="relative group">补充：Layer Normalization
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1632,8 +1919,7 @@ $$
 <li><strong>Post-LN（原始 Transformer）</strong>：\(y=\mathrm{LayerNorm}(x+F(x))\)。早期常见，但深层训练稳定性较弱(随深度增大梯度更难传播)。</li>
 <li><strong>Pre-LN（现主流，如 BERT/GPT/ViT）</strong>：\(y=x+F(\mathrm{LayerNorm}(x))\)。梯度可更顺畅穿过残差主干，通常更稳、更易扩展到深层。</li>
 </ul></div></div>
-<h4 class="relative group">Feed Forward
-    <div id="feed-forward" class="anchor"></div>
+<h4 id="feed-forward" class="relative group">Feed Forward
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1653,8 +1939,7 @@ Relu，第二层不使用激活函数，对应的公式如下。</p>
     ><figcaption>Feed Forward</figcaption></figure>
 <p>X是输入，Feed Forward 最终得到的输出矩阵的维度与X一致。</p>
 
-<h4 class="relative group">组成 Encoder
-    <div id="组成-encoder" class="anchor"></div>
+<h4 id="组成-encoder" class="relative group">组成 Encoder
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1677,8 +1962,7 @@ Encoder block 叠加就可以组成 Encoder。</p>
     src="/img/posts/transformer/image3.png"
     ><figcaption>Encoder 编码句子信息</figcaption></figure>
 
-<h3 class="relative group">Decoder 结构
-    <div id="decoder-结构" class="anchor"></div>
+<h3 id="decoder-结构" class="relative group">Decoder 结构
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1702,8 +1986,7 @@ Encoder block 叠加就可以组成 Encoder。</p>
 <li>最后有一个 Softmax 层计算下一个翻译单词的概率。</li>
 </ul>
 
-<h4 class="relative group">第一个 Multi-Head Attention
-    <div id="第一个-multi-head-attention" class="anchor"></div>
+<h4 id="第一个-multi-head-attention" class="relative group">第一个 Multi-Head Attention
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1812,8 +2095,7 @@ score，我们在 Softmax
 然后计算得到第一个 Multi-Head Attention 的输出Z，Z与输入X维度一样。</li>
 </ul>
 
-<h4 class="relative group">第二个 Multi-Head Attention
-    <div id="第二个-multi-head-attention" class="anchor"></div>
+<h4 id="第二个-multi-head-attention" class="relative group">第二个 Multi-Head Attention
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1829,8 +2111,7 @@ score，我们在 Softmax
 <p>这样做的好处是在 Decoder 的时候，每一位单词都可以利用到 Encoder
 所有单词的信息 (这些信息无需 Mask)。</p>
 
-<h4 class="relative group">Softmax 预测输出单词
-    <div id="softmax-预测输出单词" class="anchor"></div>
+<h4 id="softmax-预测输出单词" class="relative group">Softmax 预测输出单词
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1905,8 +2186,7 @@ z_i，即训练阶段一次性输出所有预测，正如上图所示。</p>
   </tbody>
 </table>
 
-<h2 class="relative group">Transformer 总结
-    <div id="transformer-总结" class="anchor"></div>
+<h2 id="transformer-总结" class="relative group">Transformer 总结
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
@@ -1956,7 +2236,7 @@ Self-Attention，可以捕获单词之间多种维度上的相关系数 attentio
     </section>
 
     
-    <footer class="pt-8 max-w-prose print:hidden">
+    <footer class="article-footer pt-8 print:hidden">
       
   
     
@@ -1982,6 +2262,19 @@ Self-Attention，可以捕获单词之间多种维度上的相关系数 attentio
           
         </span>
         <span class="flex flex-col items-end">
+          
+            <a
+              class="flex text-right text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+              href="/posts/2026%E6%98%A5-nlp-%E6%9C%9F%E6%9C%AB%E7%AC%94%E8%AE%B0/">
+              <span class="leading-6">
+                2026春 NLP 期末笔记&ensp;<span class="inline-block rtl:rotate-180">&rarr;</span>
+              </span>
+            </a>
+            
+              <span class="me-6 mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+                <time datetime="2026-07-02T08:05:16&#43;08:00">2026-07-02</time>
+              </span>
+            
           
         </span>
       </div>

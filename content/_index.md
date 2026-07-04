@@ -36,20 +36,20 @@ showDate: false
       transform: none !important;
     }
   }
-  
+
   @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
     100% { transform: translateY(0px); }
   }
-  
+
   .floating-avatar {
     animation: float 6s ease-in-out infinite;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     border: 4px solid white;
     transition: all 0.5s ease;
   }
-  
+
   .floating-avatar:hover {
     transform: scale(1.05) translateY(-5px);
   }
@@ -59,7 +59,7 @@ showDate: false
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 
+    box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.04),
       0 12px 48px rgba(0, 0, 0, 0.03),
       0 24px 80px rgba(0, 0, 0, 0.02),
@@ -74,7 +74,7 @@ showDate: false
   .dark .glass-card {
     background: linear-gradient(145deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.6) 100%);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 
+    box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.2),
       0 12px 48px rgba(0, 0, 0, 0.15),
       0 24px 80px rgba(0, 0, 0, 0.1),
@@ -91,7 +91,7 @@ showDate: false
     flex-direction: column;
     align-items: center;
   }
-  
+
   .garden-nav-item:hover {
     background: rgba(255, 255, 255, 0.4);
     transform: translateY(-4px);
@@ -100,11 +100,11 @@ showDate: false
   .dark .garden-nav-item:hover {
     background: rgba(255, 255, 255, 0.1);
   }
-  
+
   /* 去掉丑陋的黑线，改用优雅的渐变下划线 */
   .nav-line { display: none; }
   .nav-active-line { display: none; }
-  
+
   /* 悬停时的微妙效果 */
   .garden-nav-item .nav-title {
     position: relative;
@@ -124,33 +124,33 @@ showDate: false
   .garden-nav-item:hover .nav-title::after {
     width: 80%;
   }
-  
+
   /* 浅色模式下的文字颜色 */
   .garden-nav-item span:first-of-type {
     color: #ccc;
   }
-  
+
   .garden-nav-item .nav-title {
     color: #333;
   }
-  
+
   .garden-nav-item span:last-of-type {
     color: #aaa;
   }
-  
+
   /* 深色模式下的文字颜色 */
   .dark .garden-nav-item .nav-title::after {
     background: linear-gradient(90deg, transparent, rgba(200, 200, 200, 0.3), transparent);
   }
-  
+
   .dark .garden-nav-item .nav-title {
     color: #e5e5e5 !important;
   }
-  
+
   .dark .garden-nav-item span:first-of-type {
     color: #777 !important;
   }
-  
+
   .dark .garden-nav-item span:last-of-type {
     color: #999 !important;
   }
@@ -306,46 +306,47 @@ showDate: false
     <span style="display: flex; align-items: center; gap: 6px;">{{< icon "mug-hot" >}} 近况：在世界里慢慢走</span>
   </div>
 
-<div style="margin-bottom: 2.5rem; max-width: 550px; margin-left: auto; margin-right: auto;">
+  <div style="margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto;">
     <p class="quote-text" style="font-family: serif; font-style: italic; color: #777; font-size: 1.10rem; line-height: 1.8; opacity: 0.9;">
       —— " 只有滚动的石头 才能不长青苔"
     </p>
   </div>
 
+  {{< home-record-carousel >}}
 
-<!-- 四个导航入口 - 带分隔线的立体设计 -->
-<div class="home-nav-grid" style="display: flex; justify-content: center; align-items: stretch; flex-wrap: nowrap; margin: 0 auto; position: relative;">
-<!-- 顶部装饰线 -->
-<div class="separator-line-horizontal" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);"></div>
-<a href="/notes/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
-<span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 01</span>
-<span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">拾光笔记</span>
-<span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">学习与记录</span>
-</a>
-<!-- 竖线分隔 -->
-<div class="separator-line-vertical" style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
-<a href="/projects/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
-<span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 02</span>
-<span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">造物手记</span>
-<span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">项目与作品</span>
-</a>
-<!-- 竖线分隔 -->
-<div class="separator-line-vertical" style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
-<a href="/daily/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
-<span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 03</span>
-<span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">漫步日常</span>
-<span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">生活与思考</span>
-</a>
-<!-- 竖线分隔 -->
-<div class="separator-line-vertical" style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
-<a href="/about/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
-<span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 04</span>
-<span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">关于我</span>
-<span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">认识一下</span>
-</a>
-<!-- 底部装饰线 -->
-<div class="separator-line-horizontal" style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);"></div>
-</div>
+  <!-- 四个导航入口 - 带分隔线的立体设计 -->
+  <div class="home-nav-grid" style="display: flex; justify-content: center; align-items: stretch; flex-wrap: nowrap; margin: 0 auto; position: relative;">
+    <!-- 顶部装饰线 -->
+    <div class="separator-line-horizontal" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);"></div>
+    <a href="/notes/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+      <span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 01</span>
+      <span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">拾光笔记</span>
+      <span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">学习与记录</span>
+    </a>
+    <!-- 竖线分隔 -->
+    <div class="separator-line-vertical" style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
+    <a href="/projects/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+      <span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 02</span>
+      <span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">造物手记</span>
+      <span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">项目与作品</span>
+    </a>
+    <!-- 竖线分隔 -->
+    <div class="separator-line-vertical" style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
+    <a href="/daily/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+      <span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 03</span>
+      <span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">漫步日常</span>
+      <span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">生活与思考</span>
+    </a>
+    <!-- 竖线分隔 -->
+    <div class="separator-line-vertical" style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
+    <a href="/about/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+      <span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 04</span>
+      <span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">关于我</span>
+      <span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">认识一下</span>
+    </a>
+    <!-- 底部装饰线 -->
+    <div class="separator-line-horizontal" style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);"></div>
+  </div>
 
   <!-- 社交链接 - 更精致的设计 -->
   <div style="margin-top: 3rem; margin-bottom: 2rem;">

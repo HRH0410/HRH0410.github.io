@@ -1,0 +1,71 @@
+{{ $footprints := site.Data.footprints }}
+
+{{ if $footprints }}
+{{ $assetVersion := now.Unix }}
+{{ $years := slice }}
+{{ range $year, $_ := $footprints }}
+  {{ $years = $years | append $year }}
+{{ end }}
+{{ $years = sort $years "value" "desc" }}
+
+<section class="journey-section" id="footprint-film-archive" aria-label="足迹胶片档案">
+  <canvas id="journey-map-canvas" class="journey-map-canvas" aria-hidden="true"></canvas>
+
+  <div class="journey-timeline" id="journey-timeline" aria-label="按年份浏览足迹">
+    <div class="journey-track" id="journey-track">
+      {{ range $years }}
+        {{ $year := . }}
+        {{ $cities := index $footprints $year }}
+        <section class="journey-year-group" data-year="{{ $year }}" aria-label="{{ $year }} 年足迹">
+          <div class="journey-cards">
+            {{ range $i, $city := $cities }}
+              {{ $versionedPhotos := slice }}
+              {{ range $city.photos }}
+                {{ $versionedPhotos = $versionedPhotos | append (printf "%s?v=%d" . $assetVersion) }}
+              {{ end }}
+              {{ $photo := index $versionedPhotos 0 }}
+              <button
+                class="journey-card"
+                type="button"
+                data-photos='{{ $versionedPhotos | jsonify }}'
+                data-city="{{ $city.city }}"
+                data-year="{{ $year }}"
+                data-emoji="{{ $city.emoji }}"
+                data-story="{{ $city.story | default "" }}"
+                aria-label="打开 {{ $city.city }} 的旅行照片">
+                <span class="film-perf film-perf--top" aria-hidden="true"></span>
+                <span class="film-frame">
+                  <span class="film-photo">
+                    <img class="nozoom" src="{{ $photo }}" alt="{{ $city.city }}" loading="lazy">
+                  </span>
+                  <span class="film-scanline" aria-hidden="true"></span>
+                </span>
+                <span class="film-caption">
+                  <span class="film-stop">{{ printf "%02d" (add $i 1) }}</span>
+                  <span class="film-city"><span aria-hidden="true">{{ $city.emoji }}</span>{{ $city.city }}</span>
+                </span>
+                <span class="film-perf film-perf--bottom" aria-hidden="true"></span>
+              </button>
+            {{ end }}
+          </div>
+        </section>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<div class="journey-lightbox" id="journey-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lightbox-city">
+  <button class="lightbox-close" id="lightbox-close" aria-label="关闭" type="button">×</button>
+  <button class="lightbox-nav lightbox-nav--prev" id="lightbox-prev" aria-label="上一张足迹" type="button">‹</button>
+  <button class="lightbox-nav lightbox-nav--next" id="lightbox-next" aria-label="下一张足迹" type="button">›</button>
+  <div class="lightbox-content">
+    <div class="lightbox-meta">
+      <span class="lightbox-year" id="lightbox-year"></span>
+      <span class="lightbox-emoji" id="lightbox-emoji"></span>
+    </div>
+    <h3 class="lightbox-city" id="lightbox-city"></h3>
+    <div class="lightbox-photos" id="lightbox-photos"></div>
+    <p class="lightbox-story" id="lightbox-story"></p>
+  </div>
+</div>
+{{ end }}

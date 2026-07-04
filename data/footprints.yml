@@ -1,0 +1,168 @@
+# Steph.H 的足迹长廊
+# 每个城市可配 1-3 张照片，放入 static/img/footprints/
+# 路径按年份 + 出现顺序连接
+
+2026:
+  - city: "拉萨"
+    emoji: "🏔️"
+    date: "2026"
+    photos:
+      - "/img/footprints/lhasa-1.jpg"
+    story: "高原的风，吹得人很安静。"
+
+  - city: "日喀则"
+    emoji: "🏞️"
+    date: "2026"
+    photos:
+      - "/img/footprints/shigatse-1.jpg"
+    story: ""
+
+  - city: "林芝"
+    emoji: "🌲"
+    date: "2026"
+    photos:
+      - "/img/footprints/linzhi-1.jpg"
+    story: ""
+
+  - city: "泰兴"
+    emoji: "🃏"
+    date: "2026"
+    photos:
+      - "/img/footprints/taixing-1.jpg"
+    story: ""
+
+  - city: "连云港"
+    emoji: "🌊"
+    date: "2026"
+    photos:
+      - "/img/footprints/lianyungang-1.jpg"
+    story: "海边的日落， salt in the air."
+
+2025:
+  - city: "北京"
+    emoji: "🎭"
+    date: "2025"
+    photos:
+      - "/img/footprints/beijing-1.jpg"
+    story: ""
+
+  - city: "扬州"
+    emoji: "🌊"
+    date: "2025"
+    photos:
+      - "/img/footprints/yangzhou-1.jpg"
+    story: ""
+
+  - city: "大阪"
+    emoji: "🏯"
+    date: "2025"
+    photos:
+      - "/img/footprints/osaka-1.jpg"
+    story: ""
+
+  - city: "东京"
+    emoji: "🗼"
+    date: "2025"
+    photos:
+      - "/img/footprints/tokyo-1.jpg"
+    story: ""
+
+  - city: "京都"
+    emoji: "🌸"
+    date: "2025"
+    photos:
+      - "/img/footprints/kyoto-1.jpg"
+    story: ""
+
+  - city: "镰仓"
+    emoji: "⛩️"
+    date: "2025"
+    photos:
+      - "/img/footprints/kamakura-1.jpg"
+    story: ""
+
+  - city: "广州"
+    emoji: "🌃"
+    date: "2025"
+    photos:
+      - "/img/footprints/guangzhou-1.jpg"
+    story: ""
+
+  - city: "武汉"
+    emoji: "🏮"
+    date: "2025"
+    photos:
+      - "/img/footprints/wuhan-1.jpg"
+    story: ""
+
+2024:
+  - city: "莫干山"
+    emoji: "🎋"
+    date: "2024"
+    photos:
+      - "/img/footprints/moganshan-1.jpg"
+    story: ""
+
+  - city: "杭州"
+    emoji: "🏞️"
+    date: "2024"
+    photos:
+      - "/img/footprints/hangzhou-1.jpg"
+    story: ""
+
+  - city: "威海"
+    emoji: "🌊"
+    date: "2024"
+    photos:
+      - "/img/footprints/weihai-1.jpg"
+    story: ""
+
+  - city: "贵阳"
+    emoji: "🏔️"
+    date: "2024"
+    photos:
+      - "/img/footprints/guiyang-1.jpg"
+    story: ""
+
+2023:
+  - city: "长沙"
+    emoji: "🌶️"
+    date: "2023"
+    photos:
+      - "/img/footprints/changsha-1.jpg"
+    story: ""
+
+  - city: "厦门"
+    emoji: "🏝️"
+    date: "2023"
+    photos:
+      - "/img/footprints/xiamen-1.jpg"
+    story: ""
+
+  - city: "成都"
+    emoji: "🐼"
+    date: "2023"
+    photos:
+      - "/img/footprints/chengdu-1.jpg"
+    story: ""
+
+  - city: "重庆"
+    emoji: "🍜"
+    date: "2023"
+    photos:
+      - "/img/footprints/chongqing-1.jpg"
+    story: ""
+
+  - city: "广州"
+    emoji: "🌃"
+    date: "2023"
+    photos:
+      - "/img/footprints/guangzhou-2023-1.jpg"
+    story: ""
+
+  - city: "上海"
+    emoji: "🌆"
+    date: "2023"
+    photos:
+      - "/img/footprints/shanghai-1.jpg"
+    story: ""

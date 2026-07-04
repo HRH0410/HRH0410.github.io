@@ -1,0 +1,96 @@
+{{ $tracks := site.Data.music }}
+{{ $count := len $tracks }}
+
+<script>
+window.homePlaylist = [
+  {{ range $i, $track := $tracks }}
+  {{ if $i }},{{ end }}{
+    title: {{ $track.title | jsonify | safeJS }},
+    artist: {{ $track.artist | jsonify | safeJS }},
+    album: {{ $track.album | default "" | jsonify | safeJS }},
+    note: {{ $track.note | default "" | jsonify | safeJS }},
+    cover: {{ $track.cover | jsonify | safeJS }},
+    audio: {{ $track.audio | jsonify | safeJS }},
+    color: {{ $track.color | default "#c9a227" | jsonify | safeJS }}
+  }
+  {{ end }}
+];
+</script>
+
+{{ if $tracks }}
+<section class="record-carousel-section" id="home-listening-station" aria-label="Steph.H 的私人电台">
+  <canvas id="player-ambience-canvas" class="player-ambience-canvas" aria-hidden="true"></canvas>
+
+  <div class="station-shell">
+    <div class="station-layout">
+      <div class="turntable-deck" aria-hidden="true">
+        <div class="deck-shadow"></div>
+        <div class="platter-ring">
+          <div class="vinyl-disc" id="vinyl-disc">
+            <span class="vinyl-groove vinyl-groove--one"></span>
+            <span class="vinyl-groove vinyl-groove--two"></span>
+            <span class="vinyl-groove vinyl-groove--three"></span>
+            <div class="vinyl-label" id="vinyl-label" style="--record-cover-image: url('{{ (index $tracks 0).cover }}');">
+              <img id="record-cover" class="nozoom" data-no-zoom="true" draggable="false" src="{{ (index $tracks 0).cover }}" alt="">
+            </div>
+            <span class="vinyl-pin"></span>
+          </div>
+        </div>
+        <div class="tonearm-assembly" id="tonearm">
+          <span class="tonearm-base"></span>
+          <span class="tonearm-bar"></span>
+          <span class="tonearm-head"></span>
+        </div>
+      </div>
+
+      <div class="sleeve-console">
+        <div class="sleeve-rail" id="record-carousel" data-count="{{ $count }}">
+          {{ range $i, $track := $tracks }}
+            <button class="carousel-card" data-index="{{ $i }}" type="button" aria-label="播放 {{ $track.title }}">
+              <span class="sleeve-order">{{ printf "%02d" (add $i 1) }}</span>
+              <span class="carousel-sleeve">
+                <img class="nozoom" data-no-zoom="true" draggable="false" src="{{ $track.cover }}" alt="{{ $track.title }} - {{ $track.artist }}" loading="{{ if eq $i 0 }}eager{{ else }}lazy{{ end }}">
+              </span>
+              <span class="sleeve-meta">
+                <span class="sleeve-title">{{ $track.title }}</span>
+                <span class="sleeve-artist">{{ $track.artist }}</span>
+              </span>
+            </button>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+    <div class="station-player">
+      <div class="player-track-info">
+        <p id="player-track-title" class="player-track-title">{{ (index $tracks 0).title }}</p>
+        <p id="player-track-artist" class="player-track-artist">{{ (index $tracks 0).artist }}</p>
+        <p id="player-track-note" class="player-track-note">{{ (index $tracks 0).note | default "一首放进私人电台里的歌。" }}</p>
+      </div>
+
+      <div class="player-progress">
+        <span id="player-current-time" class="player-time">0:00</span>
+        <div id="player-progress-bar" class="player-progress-bar" role="slider" aria-label="播放进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+          <div id="player-progress-fill" class="player-progress-fill"></div>
+        </div>
+        <span id="player-total-time" class="player-time">0:00</span>
+      </div>
+
+      <div class="player-buttons">
+        <button id="player-mode" class="player-btn player-btn--mode" aria-label="顺序播放" title="顺序播放" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13"/><path d="M4 17h13"/><path d="m17 4 3 3-3 3"/><path d="m17 14 3 3-3 3"/></svg>
+        </button>
+        <button id="player-prev" class="player-btn" aria-label="上一首" type="button">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        </button>
+        <button id="player-play" class="player-btn player-btn--play" aria-label="播放/暂停" type="button">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button id="player-next" class="player-btn" aria-label="下一首" type="button">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -1,4 +1,12 @@
 {{ $disableImageOptimization := .Site.Params.disableImageOptimization | default false }}
+
+{{/* 加载首页专属样式与脚本 */}}
+{{ $homeCSS := resources.Get "css/pages/home.css" | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $homeCSS.RelPermalink }}" integrity="{{ $homeCSS.Data.Integrity }}">
+
+{{ $homeJS := resources.Get "js/home-player.js" | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $homeJS.RelPermalink }}" integrity="{{ $homeJS.Data.Integrity }}"></script>
+
 <article class="prose dark:prose-invert max-w-full">
   <div class="relative">
     <div class="absolute inset-x-0 bottom-0 h-1/2"></div>
@@ -42,7 +50,6 @@
           {{ end }}
         </div>
         <div class="relative flex flex-col items-center justify-center px-1 py-1 text-center">
-          <!-- 这里去掉了原有的作者头像、姓名、简介和社交链接，直接显示内容 -->
           <section class="prose dark:prose-invert w-full">{{ .Content }}</section>
         </div>
       </div>

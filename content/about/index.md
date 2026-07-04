@@ -395,318 +395,6 @@ article h2::after {
   color: #555;
 }
 
-/* 旅行钉子墙 */
-.travel-wall {
-  margin: 2rem 0;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.8), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(240,240,240,0.6), transparent 40%),
-    linear-gradient(135deg, #f8f8f8, #f2f2f2);
-  border-radius: 20px;
-  padding: 3rem 2rem;
-  border: 1px solid rgba(0,0,0,0.03);
-  position: relative;
-  box-shadow: inset 0 1px 2px rgba(255,255,255,0.8), 0 2px 8px rgba(0,0,0,0.04);
-}
-.dark .travel-wall {
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.02), transparent 40%),
-    linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-  border-color: rgba(255,255,255,0.06);
-  box-shadow: inset 0 1px 2px rgba(255,255,255,0.02), 0 2px 8px rgba(0,0,0,0.2);
-}
-
-/* 时间轴线 */
-.travel-wall::before {
-  content: '';
-  position: absolute;
-  left: 108px;
-  top: 2.5rem;
-  bottom: 2.5rem;
-  width: 2px;
-  background: linear-gradient(180deg, 
-    transparent 0%, 
-    rgba(0,0,0,0.06) 3%, 
-    rgba(0,0,0,0.1) 10%, 
-    rgba(0,0,0,0.1) 90%, 
-    rgba(0,0,0,0.06) 97%,
-    transparent 100%);
-  border-radius: 2px;
-  box-shadow: 1px 0 2px rgba(0,0,0,0.05);
-}
-.dark .travel-wall::before {
-  background: linear-gradient(180deg, 
-    transparent 0%, 
-    rgba(255,255,255,0.08) 3%, 
-    rgba(255,255,255,0.12) 10%, 
-    rgba(255,255,255,0.12) 90%, 
-    rgba(255,255,255,0.08) 97%,
-    transparent 100%);
-  box-shadow: 1px 0 2px rgba(0,0,0,0.3);
-}
-
-.wall-timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-
-.year-section {
-  position: relative;
-  padding-left: 120px;
-  animation: fadeInUp 0.6s ease-out backwards;
-}
-.year-section:nth-child(1) { animation-delay: 0.1s; }
-.year-section:nth-child(2) { animation-delay: 0.2s; }
-.year-section:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.year-label {
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  letter-spacing: 0.05em;
-  font-family: "Georgia", "Times New Roman", serif;
-}
-.dark .year-label {
-  color: #e5e5e5;
-}
-
-/* 年份标记点 - 更立体 */
-.year-label::after {
-  content: '';
-  position: absolute;
-  right: -38px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
-  background: radial-gradient(circle at 30% 30%, #888, #555);
-  border: 3px solid #f5f5f5;
-  border-radius: 50%;
-  box-shadow: 
-    0 0 0 1px rgba(0,0,0,0.1),
-    0 2px 4px rgba(0,0,0,0.15),
-    inset 0 1px 1px rgba(255,255,255,0.3);
-}
-.dark .year-label::after {
-  background: radial-gradient(circle at 30% 30%, #aaa, #777);
-  border-color: rgba(255,255,255,0.03);
-  box-shadow: 
-    0 0 0 1px rgba(255,255,255,0.1),
-    0 2px 4px rgba(0,0,0,0.4),
-    inset 0 1px 1px rgba(255,255,255,0.2);
-}
-
-.cities-pins {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-/* 2026 单独排布：桌面端固定每行 4 个 */
-.year-section.year-2026 .cities-pins {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-}
-.year-section.year-2026 .pin-card {
-  min-width: 0;
-}
-
-/* 钉子卡片 - 纸张质感 */
-.pin-card {
-  position: relative;
-  background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 8px;
-  padding: 0.85rem 1.1rem;
-  box-shadow: 
-    0 1px 2px rgba(0,0,0,0.04),
-    0 3px 8px rgba(0,0,0,0.06),
-    0 0 0 1px rgba(255,255,255,0.8) inset;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: default;
-  transform: rotate(-1.5deg);
-}
-.pin-card:nth-child(even) {
-  transform: rotate(1.2deg);
-}
-.pin-card:nth-child(3n) {
-  transform: rotate(-0.8deg);
-}
-.pin-card:nth-child(4n) {
-  transform: rotate(1.8deg);
-}
-
-/* 钉子效果 - 更真实 */
-.pin-card::before {
-  content: '📍';
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1rem;
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25));
-  z-index: 2;
-}
-
-/* 钉子阴影 */
-.pin-card::after {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 8px;
-  background: radial-gradient(circle, rgba(0,0,0,0.15), transparent 70%);
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.pin-card:hover {
-  transform: rotate(0deg) translateY(-6px) scale(1.08);
-  box-shadow: 
-    0 4px 12px rgba(0,0,0,0.08),
-    0 12px 32px rgba(0,0,0,0.12),
-    0 0 0 1px rgba(255,255,255,1) inset;
-  border-color: rgba(0,0,0,0.12);
-  z-index: 10;
-}
-
-.dark .pin-card {
-  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.04) 100%);
-  border-color: rgba(255,255,255,0.12);
-  box-shadow: 
-    0 1px 2px rgba(0,0,0,0.2),
-    0 3px 8px rgba(0,0,0,0.25),
-    0 0 0 1px rgba(255,255,255,0.08) inset;
-}
-.dark .pin-card:hover {
-  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.06) 100%);
-  box-shadow: 
-    0 4px 12px rgba(0,0,0,0.3),
-    0 12px 32px rgba(0,0,0,0.4),
-    0 0 0 1px rgba(255,255,255,0.15) inset;
-  border-color: rgba(255,255,255,0.2);
-}
-
-.pin-city {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  white-space: nowrap;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #2a2a2a;
-  letter-spacing: 0.02em;
-}
-.pin-city span:not(.pin-emoji) {
-  word-break: keep-all;
-}
-.dark .pin-city {
-  color: #e0e0e0;
-}
-.pin-emoji {
-  font-size: 1.3rem;
-  filter: grayscale(15%) brightness(0.95);
-  transition: all 0.35s ease;
-  transform-origin: center;
-}
-.pin-card:hover .pin-emoji {
-  filter: grayscale(0%) brightness(1.05);
-  transform: scale(1.15) rotate(-5deg);
-}
-
-@media (max-width: 768px) {
-  .travel-wall {
-    padding: 2.5rem 1.5rem;
-  }
-  .travel-wall::before {
-    left: 70px;
-  }
-  .year-section {
-    padding-left: 95px;
-  }
-  .year-label {
-    font-size: 1.2rem;
-  }
-  .year-label::after {
-    right: -28px;
-    width: 8px;
-    height: 8px;
-  }
-  .cities-pins {
-    gap: 0.75rem;
-  }
-
-  .year-section.year-2026 .cities-pins {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .year-section.year-2026 .pin-card {
-    flex: 0 0 auto;
-  }
-}
-
-/* 足迹地图 - 简约风 */
-.footprint-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 1px;
-  margin: 1rem 0;
-  background: rgba(0,0,0,0.04);
-  border-radius: 12px;
-  overflow: hidden;
-}
-.footprint-item {
-  text-align: center;
-  padding: 1.25rem 0.5rem;
-  background: #fafafa;
-  transition: all 0.3s ease;
-}
-.footprint-item:hover {
-  background: #fff;
-}
-.dark .footprint-item {
-  background: rgba(255,255,255,0.02);
-}
-.dark .footprint-item:hover {
-  background: rgba(255,255,255,0.05);
-}
-.footprint-item .emoji {
-  font-size: 1.5rem;
-  display: block;
-  margin-bottom: 0.35rem;
-  filter: grayscale(30%);
-  transition: filter 0.3s ease;
-}
-.footprint-item:hover .emoji {
-  filter: grayscale(0%);
-}
-.footprint-item .place {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #666;
-}
-.dark .footprint-item .place {
-  color: #bbb;
-}
 
 /* 奖项列表 - 优雅线条版 */
 .awards-list {
@@ -1645,37 +1333,6 @@ article h2::after {
   border-color: rgba(255,255,255,0.1);
 }
 
-.travel-wall {
-  border-radius: 18px;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.65), transparent 42%),
-    radial-gradient(circle at 80% 70%, rgba(240,240,240,0.4), transparent 38%),
-    linear-gradient(135deg, #f7f9fc, #f2f5fa);
-}
-.travel-wall::before {
-  width: 1px;
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.14), transparent);
-  box-shadow: none;
-}
-.pin-card {
-  transform: none !important;
-  border-radius: 10px;
-}
-.pin-card::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  top: -4px;
-  border-radius: 50%;
-  background: #8a8a8a;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.18);
-}
-.pin-card::after {
-  display: none;
-}
-.pin-card:hover {
-  transform: translateY(-2px) scale(1.02);
-}
 
 .award-item:hover {
   transform: translateX(4px);
@@ -1707,6 +1364,59 @@ article h2::before {
   content: none !important;
 }
 
+.about-page-content .hobby-archive {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.82rem;
+  margin: 1.45rem 0 0.4rem;
+}
+
+.about-page-content .hobby-archive .tag {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.92), rgba(248,250,252,0.78)),
+    rgba(255,255,255,0.86);
+  color: #253044;
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.2;
+  box-shadow:
+    0 12px 28px rgba(30, 41, 59, 0.045),
+    inset 0 1px 0 rgba(255,255,255,0.88);
+}
+
+.about-page-content .hobby-archive .tag::before {
+  content: none;
+}
+
+.about-page-content .hobby-archive .tag::after {
+  content: none;
+}
+
+.about-page-content .hobby-archive .tag:hover {
+  border-color: rgba(100, 116, 139, 0.26);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.98), rgba(241,245,249,0.86)),
+    rgba(255,255,255,0.92);
+  transform: translateY(-2px);
+}
+
+.dark .about-page-content .hobby-archive .tag {
+  border-color: rgba(203, 213, 225, 0.13);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.075), rgba(148,163,184,0.045)),
+    rgba(255,255,255,0.035);
+  color: #e2e8f0;
+}
+
 /* 响应式 */
 @media (max-width: 640px) {
   #single_header h1,
@@ -1722,6 +1432,9 @@ article h2::before {
   .profile-avatar {
     width: 120px;
     height: 120px;
+  }
+  .about-page-content .hobby-archive {
+    grid-template-columns: 1fr;
   }
 }
 </style>
@@ -1947,7 +1660,7 @@ article h2::before {
 <!-- ==================== 兴趣爱好 ==================== -->
 ## Hobbies
 
-<div class="tag-list">
+<div class="tag-list hobby-archive">
 <span class="tag">🎵 音乐</span>
 <span class="tag">📷 摄影</span>
 <span class="tag">✈️ 旅行</span>
@@ -1959,177 +1672,7 @@ article h2::before {
 <!-- ==================== 走过的足迹 ==================== -->
 ## Footprints
 
-<div class="travel-wall">
-<div class="wall-timeline">
-
-<!-- 2026 -->
-<div class="year-section year-2026">
-<div class="year-label">2026</div>
-<div class="cities-pins">
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🏔️</span>
-<span>拉萨</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🏞️</span>
-<span>日喀则</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🌲</span>
-<span>林芝</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🃏</span>
-<span>泰兴</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🌊</span>
-<span>连云港</span>
-</div>
-</div>
-</div>
-</div>
-
-<!-- 2025 -->
-<div class="year-section">
-<div class="year-label">2025</div>
-<div class="cities-pins">
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🎭</span>
-<span>北京</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🌊</span>
-<span>扬州</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🏯</span>
-<span>大阪</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🗼</span>
-<span>东京</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🌸</span>
-<span>京都</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">⛩️</span>
-<span>镰仓</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🌃</span>
-<span>广州</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🏮</span>
-<span>武汉</span>
-</div>
-</div>
-</div>
-</div>
-
-<!-- 2024 -->
-<div class="year-section">
-<div class="year-label">2024</div>
-<div class="cities-pins">
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🎋</span>
-<span>莫干山</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🏞️</span>
-<span>杭州</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🌊</span>
-<span>威海</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🏔️</span>
-<span>贵阳</span>
-</div>
-</div>
-</div>
-</div>
-
-<!-- 2023 -->
-<div class="year-section">
-<div class="year-label">2023</div>
-<div class="cities-pins">
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🌶️</span>
-<span>长沙</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🏝️</span>
-<span>厦门</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🐼</span>
-<span>成都</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🍜</span>
-<span>重庆</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🌃</span>
-<span>广州</span>
-</div>
-</div>
-<div class="pin-card">
-<div class="pin-city">
-<span class="pin-emoji">🌆</span>
-<span>上海</span>
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
+{{< about-journey >}}
 
 <!-- ==================== 关于这个网站 ==================== -->
 ## About This Site

@@ -1,0 +1,26 @@
+{{ $tracks := site.Data.music }}
+
+{{ if $tracks }}
+<section class="album-shelf-section" aria-label="专辑墙">
+  <header class="album-shelf-header">
+    <p class="album-shelf-label">On the Shelf</p>
+  </header>
+
+  <div id="album-shelf" class="album-shelf">
+    {{ range $i, $track := $tracks }}
+      <div class="album-card" data-index="{{ $i }}">
+        <img
+          class="album-cover"
+          src="{{ $track.cover }}"
+          alt="{{ $track.title }} - {{ $track.artist }}"
+          loading="lazy"
+        />
+        <div class="album-meta">
+          <p class="album-title">{{ $track.title }}</p>
+          <p class="album-artist">{{ $track.artist }}</p>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

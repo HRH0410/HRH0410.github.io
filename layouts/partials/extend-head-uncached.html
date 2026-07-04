@@ -1,3 +1,10 @@
+{{ if eq .RelPermalink "/about/" }}
+  {{ $aboutCSS := resources.Get "css/pages/about.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $aboutCSS.RelPermalink }}" integrity="{{ $aboutCSS.Data.Integrity }}">
+  {{ $aboutJS := resources.Get "js/about-journey.js" | resources.Minify | resources.Fingerprint }}
+  <script defer src="{{ $aboutJS.RelPermalink }}" integrity="{{ $aboutJS.Data.Integrity }}"></script>
+{{ end }}
+
 <script>
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";

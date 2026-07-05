@@ -40,6 +40,7 @@
   let carouselStartX = 0;
   let carouselStartScrollLeft = 0;
   let carouselMoved = false;
+  let carouselPressIndex = null;
   let pointerInside = false;
   let playMode = "sequence";
 
@@ -99,9 +100,6 @@
 
   function updateCards() {
     cards.forEach((card, i) => {
-      card.style.transform = i === currentIndex ? "translateY(-2px)" : "none";
-      card.style.opacity = "1";
-      card.style.filter = "none";
       card.style.zIndex = i === currentIndex ? "3" : "1";
       card.classList.toggle("is-active", i === currentIndex);
       card.setAttribute("aria-current", i === currentIndex ? "true" : "false");
@@ -320,16 +318,23 @@
 
     cards.forEach((card) => {
       card.addEventListener("click", (event) => {
-        if (carouselMoved) return;
+        event.preventDefault();
+      });
+
+      card.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
         selectTrack(Number.parseInt(card.dataset.index, 10));
       });
     });
 
     carousel.addEventListener("pointerdown", (event) => {
       if (event.button !== 0) return;
+      const pressedCard = event.target.closest(".carousel-card");
       isCarouselDragging = true;
       carouselMoved = false;
       carouselPointerId = event.pointerId;
+      carouselPressIndex = pressedCard ? Number.parseInt(pressedCard.dataset.index, 10) : null;
       carouselStartX = event.clientX;
       carouselStartScrollLeft = carousel.scrollLeft;
       carousel.classList.add("is-dragging");
@@ -351,6 +356,10 @@
       if (carousel.hasPointerCapture(event.pointerId)) {
         carousel.releasePointerCapture(event.pointerId);
       }
+      if (event.type === "pointerup" && !carouselMoved && Number.isInteger(carouselPressIndex)) {
+        selectTrack(carouselPressIndex);
+      }
+      carouselPressIndex = null;
       window.setTimeout(() => {
         carouselMoved = false;
       }, 120);

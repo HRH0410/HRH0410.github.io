@@ -5,6 +5,23 @@
   <script defer src="{{ $aboutJS.RelPermalink }}" integrity="{{ $aboutJS.Data.Integrity }}"></script>
 {{ end }}
 
+{{ if site.Data.music }}
+  <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.12/dist/turbo.es2017-umd.js" defer></script>
+  <script>window.homePlaylist = {{ site.Data.music | jsonify | safeJS }};</script>
+  {{ $globalPlayerCSS := resources.Get "css/global-player.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $globalPlayerCSS.RelPermalink }}" integrity="{{ $globalPlayerCSS.Data.Integrity }}">
+  {{ $playerStateJS := resources.Get "js/player-state.js" | resources.Minify | resources.Fingerprint }}
+  <script defer src="{{ $playerStateJS.RelPermalink }}" integrity="{{ $playerStateJS.Data.Integrity }}"></script>
+  {{ $globalPlayerJS := resources.Get "js/global-player.js" | resources.Minify | resources.Fingerprint }}
+  <script defer src="{{ $globalPlayerJS.RelPermalink }}" integrity="{{ $globalPlayerJS.Data.Integrity }}"></script>
+  {{ $turboInitJS := resources.Get "js/turbo-init.js" | resources.Minify | resources.Fingerprint }}
+  <script defer src="{{ $turboInitJS.RelPermalink }}" integrity="{{ $turboInitJS.Data.Integrity }}"></script>
+{{ end }}
+
+{{ if .IsHome }}
+  <script>document.documentElement.classList.add("is-home-page");</script>
+{{ end }}
+
 <script>
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";

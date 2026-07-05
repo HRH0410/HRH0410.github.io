@@ -1,0 +1,71 @@
+{{ $tracks := site.Data.music }}
+{{ if $tracks }}
+<div id="global-player-root" data-turbo-permanent class="global-player-root" aria-label="音乐播放器">
+  <audio id="global-player-audio" class="global-player-audio" preload="metadata" playsinline crossorigin="anonymous"></audio>
+
+  <!-- Collapsed floating button -->
+  <button id="global-player-fab" class="global-player-fab" type="button" aria-label="展开音乐播放器">
+    <img id="global-player-fab-cover" class="global-player-fab-cover" src="{{ (index $tracks 0).cover }}" alt="{{ (index $tracks 0).title }}">
+    <span id="global-player-fab-state" class="global-player-fab-state" aria-hidden="true"></span>
+  </button>
+
+  <!-- Expanded sidebar panel -->
+  <div id="global-player-panel" class="global-player-panel">
+    <div class="global-player-header">
+      <span class="global-player-header-title">正在播放</span>
+      <button id="global-player-collapse" class="global-player-icon-btn" type="button" aria-label="折叠音乐播放器">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="global-player-body">
+      <div class="global-player-vinyl">
+        <div id="global-player-disc" class="global-player-disc">
+          <img id="global-player-cover" class="global-player-cover" src="{{ (index $tracks 0).cover }}" alt="{{ (index $tracks 0).title }}">
+        </div>
+      </div>
+
+      <div class="global-player-track">
+        <p id="global-player-title" class="global-player-track-title">{{ (index $tracks 0).title }}</p>
+        <p class="global-player-track-meta">
+          <span id="global-player-artist" class="global-player-track-artist">{{ (index $tracks 0).artist }}</span>
+        </p>
+      </div>
+
+      <div class="global-player-progress">
+        <span id="global-player-current-time" class="global-player-time">0:00</span>
+        <div id="global-player-progress-bar" class="global-player-progress-bar" role="slider" aria-label="播放进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+          <div id="global-player-progress-fill" class="global-player-progress-fill"></div>
+        </div>
+        <span id="global-player-total-time" class="global-player-time">0:00</span>
+      </div>
+
+      <div class="global-player-controls">
+        <button id="global-player-mode" class="global-player-btn global-player-btn--mode" type="button" aria-label="顺序播放" title="顺序播放">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13"/><path d="M4 17h13"/><path d="m17 4 3 3-3 3"/><path d="m17 14 3 3-3 3"/></svg>
+        </button>
+        <button id="global-player-prev" class="global-player-btn" type="button" aria-label="上一首">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6z"/><path d="M19 5l-11 7 11 7z"/></svg>
+        </button>
+        <button id="global-player-play" class="global-player-btn global-player-btn--play" type="button" aria-label="播放" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button id="global-player-next" class="global-player-btn" type="button" aria-label="下一首">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 5h2v14h-2z"/><path d="M5 5l11 7-11 7z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="global-player-playlist">
+      <button id="global-player-toggle-playlist" class="global-player-playlist-toggle" type="button" aria-expanded="false">
+        <span>播放列表</span>
+        <span id="global-player-playlist-count" class="global-player-playlist-count">0</span>
+        <svg class="global-player-playlist-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div id="global-player-playlist-panel" class="global-player-playlist-panel" aria-hidden="true">
+        <ul id="global-player-playlist-list" class="global-player-playlist-list"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

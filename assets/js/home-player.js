@@ -1,5 +1,6 @@
 /* =============================================
    Steph.H home - private vinyl listening station
+   Now a view layer on top of the global VinylPlayer state
    ============================================= */
 
 (function () {
@@ -7,6 +8,9 @@
 
   const tracks = window.homePlaylist || [];
   if (!tracks.length) return;
+
+  const Player = window.VinylPlayer;
+  if (!Player) return;
 
   const section = document.getElementById("home-listening-station");
   const carousel = document.getElementById("record-carousel");
@@ -31,9 +35,6 @@
 
   const total = tracks.length;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let currentIndex = 0;
-  let isPlaying = false;
-  let audio = null;
   let isDragging = false;
   let isCarouselDragging = false;
   let carouselPointerId = null;
@@ -42,46 +43,8 @@
   let carouselMoved = false;
   let carouselPressIndex = null;
   let pointerInside = false;
-  let playMode = "sequence";
 
-  const playModes = ["sequence", "shuffle", "repeat"];
-  const modeIcons = {
-    sequence: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13"/><path d="M4 17h13"/><path d="m17 4 3 3-3 3"/><path d="m17 14 3 3-3 3"/></svg>',
-    shuffle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="m4 4 5 5"/></svg>',
-    repeat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="m7 22-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/><path d="M11 10h1v5"/></svg>'
-  };
-
-  const modeLabels = {
-    sequence: "顺序播放",
-    shuffle: "随机播放",
-    repeat: "单曲循环"
-  };
-
-  audio = document.createElement("audio");
-  audio.className = "home-player-audio";
-  audio.preload = "metadata";
-  audio.setAttribute("playsinline", "");
-  section.appendChild(audio);
-
-  function formatTime(seconds) {
-    if (!isFinite(seconds) || isNaN(seconds)) return "0:00";
-    const m = Math.floor(seconds / 60);
-    const s = Math.floor(seconds % 60);
-    return `${m}:${s.toString().padStart(2, "0")}`;
-  }
-
-  function hexToRgb(hex) {
-    const normalized = String(hex || "").replace("#", "").trim();
-    if (normalized.length !== 3 && normalized.length !== 6) return [185, 148, 49];
-    const full = normalized.length === 3
-      ? normalized.split("").map((char) => char + char).join("")
-      : normalized;
-    const int = Number.parseInt(full, 16);
-    if (Number.isNaN(int)) return [185, 148, 49];
-    return [(int >> 16) & 255, (int >> 8) & 255, int & 255];
-  }
-
-  function updatePlayButton() {
+  function updatePlayButton(isPlaying) {
     playBtn.setAttribute("aria-pressed", isPlaying ? "true" : "false");
     playBtn.innerHTML = isPlaying
       ? '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>'
@@ -89,16 +52,16 @@
     section.classList.toggle("is-playing", isPlaying);
   }
 
-  function updateModeButton() {
+  function updateModeButton(playMode) {
     if (!modeBtn) return;
-    modeBtn.innerHTML = modeIcons[playMode];
-    modeBtn.setAttribute("aria-label", modeLabels[playMode]);
-    modeBtn.setAttribute("title", modeLabels[playMode]);
+    modeBtn.innerHTML = Player.modeIcons[playMode] || "";
+    modeBtn.setAttribute("aria-label", Player.modeLabels[playMode] || playMode);
+    modeBtn.setAttribute("title", Player.modeLabels[playMode] || playMode);
     modeBtn.dataset.mode = playMode;
     section.dataset.playMode = playMode;
   }
 
-  function updateCards() {
+  function updateCards(currentIndex) {
     cards.forEach((card, i) => {
       card.style.zIndex = i === currentIndex ? "3" : "1";
       card.classList.toggle("is-active", i === currentIndex);
@@ -107,19 +70,19 @@
     });
   }
 
-  function centerActiveCard(behavior = "smooth") {
+  function centerActiveCard(currentIndex, behavior) {
     const activeCard = cards[currentIndex];
     if (!activeCard || !carousel) return;
     const target = activeCard.offsetLeft - (carousel.clientWidth - activeCard.offsetWidth) / 2;
     carousel.scrollTo({
       left: Math.max(0, target),
-      behavior: reducedMotion ? "auto" : behavior
+      behavior: reducedMotion || behavior === "auto" ? "auto" : "smooth"
     });
   }
 
   function applyTrackVisuals(track) {
     const color = track.color || "#b99431";
-    const rgb = hexToRgb(color);
+    const rgb = Player.hexToRgb(color);
     section.style.setProperty("--home-accent", color);
     section.style.setProperty("--home-accent-rgb", rgb.join(", "));
 
@@ -134,163 +97,75 @@
     }
   }
 
-  function getRandomIndex() {
-    if (total <= 1) return currentIndex;
-    let nextIndex = currentIndex;
-    while (nextIndex === currentIndex) {
-      nextIndex = Math.floor(Math.random() * total);
-    }
-    return nextIndex;
-  }
-
-  function updateProgress(percent, currentTime) {
-    const clamped = Math.max(0, Math.min(100, percent || 0));
-    progressFill.style.width = `${clamped}%`;
-    progressBar.setAttribute("aria-valuenow", String(Math.round(clamped)));
-    if (typeof currentTime === "number") {
-      currentTimeEl.textContent = formatTime(currentTime);
-    }
-  }
-
-  function loadTrack(index) {
-    if (audio) {
-      audio.pause();
-      audio.removeAttribute("src");
-      audio.load();
-    }
-
-    currentIndex = ((index % total) + total) % total;
-    const track = tracks[currentIndex];
-    audio.src = track.audio;
-    audio.preload = "metadata";
+  function updateTrackInfo(state) {
+    const track = tracks[state.currentIndex];
+    if (!track) return;
 
     trackTitleEl.textContent = track.title;
     trackArtistEl.textContent = track.artist;
     if (trackNoteEl) trackNoteEl.textContent = track.note || track.album || "一首放进私人电台里的歌。";
-    if (trackIndexEl) trackIndexEl.textContent = String(currentIndex + 1).padStart(2, "0");
+    if (trackIndexEl) trackIndexEl.textContent = String(state.currentIndex + 1).padStart(2, "0");
 
     applyTrackVisuals(track);
-    updateCards();
-    centerActiveCard();
+    updateCards(state.currentIndex);
+    centerActiveCard(state.currentIndex, "auto");
   }
 
-  function bindAudioEvents() {
-    if (!audio) return;
-
-    audio.addEventListener("loadedmetadata", () => {
-      totalTimeEl.textContent = formatTime(audio.duration);
-      updateProgress(0, 0);
-    });
-
-    audio.addEventListener("timeupdate", () => {
-      if (!audio || isDragging) return;
-      const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
-      updateProgress(pct, audio.currentTime);
-    });
-
-    audio.addEventListener("ended", () => {
-      handleTrackEnded();
-    });
-
-    audio.addEventListener("error", () => {
-      totalTimeEl.textContent = "0:00";
-    });
+  function updateProgress(state) {
+    if (isDragging) return;
+    const pct = state.duration ? (state.currentTime / state.duration) * 100 : 0;
+    const clamped = Math.max(0, Math.min(100, pct));
+    progressFill.style.width = `${clamped}%`;
+    progressBar.setAttribute("aria-valuenow", String(Math.round(clamped)));
+    currentTimeEl.textContent = Player.formatTime(state.currentTime);
+    totalTimeEl.textContent = Player.formatTime(state.duration);
   }
 
-  function playTrack() {
-    if (!audio) loadTrack(currentIndex);
-    if (!audio) return;
-
-    const promise = audio.play();
-    if (promise && typeof promise.then === "function") {
-      promise
-        .then(() => {
-          section.dataset.playError = "";
-          isPlaying = true;
-          updatePlayButton();
-        })
-        .catch((error) => {
-          section.dataset.playError = error && error.name ? error.name : "play-failed";
-          isPlaying = false;
-          updatePlayButton();
-        });
+  function handleStateChange(state, changes) {
+    if ("isPlaying" in changes) updatePlayButton(state.isPlaying);
+    if ("playMode" in changes) updateModeButton(state.playMode);
+    if ("currentIndex" in changes || "duration" in changes) {
+      updateTrackInfo(state);
+    }
+    if ("currentTime" in changes || "duration" in changes) {
+      updateProgress(state);
+    }
+    if (state.error) {
+      section.dataset.playError = state.error;
     } else {
-      isPlaying = true;
-      updatePlayButton();
+      section.dataset.playError = "";
     }
-  }
-
-  function pauseTrack() {
-    if (audio) audio.pause();
-    isPlaying = false;
-    updatePlayButton();
-  }
-
-  function togglePlay() {
-    if (isPlaying) pauseTrack();
-    else playTrack();
-  }
-
-  function prevTrack() {
-    const shouldResume = isPlaying;
-    const targetIndex = playMode === "shuffle" ? getRandomIndex() : currentIndex - 1;
-    loadTrack(targetIndex);
-    if (shouldResume) playTrack();
-  }
-
-  function nextTrack() {
-    const shouldResume = isPlaying;
-    const targetIndex = playMode === "shuffle" ? getRandomIndex() : currentIndex + 1;
-    loadTrack(targetIndex);
-    if (shouldResume) playTrack();
-  }
-
-  function handleTrackEnded() {
-    if (playMode === "repeat") {
-      loadTrack(currentIndex);
-    } else if (playMode === "shuffle") {
-      loadTrack(getRandomIndex());
-    } else {
-      loadTrack(currentIndex + 1);
-    }
-    playTrack();
-  }
-
-  function selectTrack(index) {
-    if (index === currentIndex) {
-      togglePlay();
-      return;
-    }
-    loadTrack(index);
-    playTrack();
   }
 
   function seekToClientX(clientX, commit) {
+    const audio = Player.getAudio();
     if (!audio || !audio.duration) return;
     const rect = progressBar.getBoundingClientRect();
     const pct = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
-    updateProgress(pct, (pct / 100) * audio.duration);
-    if (commit) audio.currentTime = (pct / 100) * audio.duration;
+    const time = (pct / 100) * audio.duration;
+    progressFill.style.width = `${pct}%`;
+    currentTimeEl.textContent = Player.formatTime(time);
+    if (commit) Player.seek(pct);
   }
 
   function bindEvents() {
     if (modeBtn) {
       modeBtn.addEventListener("click", () => {
-        const currentModeIndex = playModes.indexOf(playMode);
-        playMode = playModes[(currentModeIndex + 1) % playModes.length];
-        updateModeButton();
+        Player.cycleMode();
       });
     }
 
-    playBtn.addEventListener("click", togglePlay);
-    prevBtn.addEventListener("click", prevTrack);
-    nextBtn.addEventListener("click", nextTrack);
+    playBtn.addEventListener("click", () => Player.toggle());
+    prevBtn.addEventListener("click", () => Player.prev());
+    nextBtn.addEventListener("click", () => Player.next());
 
     section.addEventListener("mouseenter", () => { pointerInside = true; });
     section.addEventListener("mouseleave", () => { pointerInside = false; });
 
     progressBar.addEventListener("pointerdown", (event) => {
       isDragging = true;
+      Player.setDragging(true);
+      progressBar.classList.add("is-dragging");
       progressBar.setPointerCapture(event.pointerId);
       seekToClientX(event.clientX, false);
     });
@@ -303,17 +178,19 @@
     progressBar.addEventListener("pointerup", (event) => {
       if (!isDragging) return;
       isDragging = false;
+      Player.setDragging(false);
+      progressBar.classList.remove("is-dragging");
       seekToClientX(event.clientX, true);
       progressBar.releasePointerCapture(event.pointerId);
     });
 
     progressBar.addEventListener("keydown", (event) => {
+      const audio = Player.getAudio();
       if (!audio || !audio.duration) return;
       if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
       event.preventDefault();
       const delta = event.key === "ArrowRight" ? 5 : -5;
-      audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + delta));
-      updateProgress((audio.currentTime / audio.duration) * 100, audio.currentTime);
+      Player.seekByTime(delta);
     });
 
     cards.forEach((card) => {
@@ -324,7 +201,7 @@
       card.addEventListener("keydown", (event) => {
         if (event.key !== "Enter" && event.key !== " ") return;
         event.preventDefault();
-        selectTrack(Number.parseInt(card.dataset.index, 10));
+        Player.select(Number.parseInt(card.dataset.index, 10));
       });
     });
 
@@ -357,7 +234,7 @@
         carousel.releasePointerCapture(event.pointerId);
       }
       if (event.type === "pointerup" && !carouselMoved && Number.isInteger(carouselPressIndex)) {
-        selectTrack(carouselPressIndex);
+        Player.select(carouselPressIndex);
       }
       carouselPressIndex = null;
       window.setTimeout(() => {
@@ -386,28 +263,31 @@
       if (!focusedInside && !pointerInside) return;
       if (event.key === "ArrowLeft") {
         event.preventDefault();
-        prevTrack();
+        Player.prev();
       }
       if (event.key === "ArrowRight") {
         event.preventDefault();
-        nextTrack();
+        Player.next();
       }
     });
 
     window.addEventListener("resize", () => {
-      updateCards();
-      centerActiveCard("auto");
+      const state = Player.getState();
+      updateCards(state.currentIndex);
+      centerActiveCard(state.currentIndex, "auto");
     });
   }
 
   function initCanvas() {
-    if (!canvas) return;
+    if (!canvas) return function cleanup() {};
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) return function cleanup() {};
 
     let width = 0;
     let height = 0;
     let frame = 0;
+    let frameId = null;
+    let stopped = false;
 
     function resize() {
       const rect = canvas.getBoundingClientRect();
@@ -420,13 +300,15 @@
     }
 
     function draw() {
-      frame += isPlaying ? 0.018 : 0.006;
-      const track = tracks[currentIndex] || {};
-      const rgb = hexToRgb(track.color);
+      if (stopped) return;
+      const state = Player.getState();
+      frame += state.isPlaying ? 0.018 : 0.006;
+      const track = tracks[state.currentIndex] || {};
+      const rgb = Player.hexToRgb(track.color);
       ctx.clearRect(0, 0, width, height);
 
       const gradient = ctx.createRadialGradient(width * 0.48, height * 0.42, 0, width * 0.48, height * 0.42, Math.max(width, height) * 0.62);
-      gradient.addColorStop(0, `rgba(${rgb.join(",")}, ${isPlaying ? 0.18 : 0.11})`);
+      gradient.addColorStop(0, `rgba(${rgb.join(",")}, ${state.isPlaying ? 0.18 : 0.11})`);
       gradient.addColorStop(0.48, "rgba(255, 255, 255, 0.02)");
       gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
       ctx.fillStyle = gradient;
@@ -435,7 +317,7 @@
       ctx.lineWidth = 1.1;
       for (let i = 0; i < 4; i += 1) {
         const y = height * (0.24 + i * 0.14);
-        const amp = (isPlaying ? 12 : 6) + i * 2;
+        const amp = (state.isPlaying ? 12 : 6) + i * 2;
         ctx.beginPath();
         for (let x = 0; x <= width; x += 8) {
           const wave = Math.sin(x * 0.018 + frame * (2 + i * 0.2) + i) * amp;
@@ -448,7 +330,7 @@
         ctx.stroke();
       }
 
-      if (isPlaying && !reducedMotion) {
+      if (state.isPlaying && !reducedMotion) {
         for (let i = 0; i < 14; i += 1) {
           const x = ((Math.sin(frame * 0.8 + i * 2.1) + 1) / 2) * width;
           const y = ((Math.cos(frame * 0.7 + i * 1.4) + 1) / 2) * height;
@@ -459,19 +341,43 @@
         }
       }
 
-      if (!reducedMotion) window.requestAnimationFrame(draw);
+      if (!reducedMotion) {
+        frameId = window.requestAnimationFrame(draw);
+      }
+    }
+
+    function cleanup() {
+      stopped = true;
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+        frameId = null;
+      }
+      window.removeEventListener("resize", resize);
     }
 
     resize();
     draw();
     window.addEventListener("resize", resize);
+    return cleanup;
   }
 
-  bindAudioEvents();
-  loadTrack(currentIndex);
-  updatePlayButton();
-  updateModeButton();
+  Player.init(tracks);
+  const unsubscribe = Player.subscribe(handleStateChange);
   bindEvents();
-  centerActiveCard("auto");
-  initCanvas();
+
+  // Ensure carousel is centered on initial paint
+  const initialState = Player.getState();
+  updateCards(initialState.currentIndex);
+  centerActiveCard(initialState.currentIndex, "auto");
+  updatePlayButton(initialState.isPlaying);
+  updateModeButton(initialState.playMode);
+  updateTrackInfo(initialState);
+  updateProgress(initialState);
+  const cleanupCanvas = initCanvas();
+
+  // Clean up subscription when the section is removed (e.g. Turbo navigation)
+  section.addEventListener("player-disconnect", () => {
+    unsubscribe();
+    cleanupCanvas();
+  });
 })();

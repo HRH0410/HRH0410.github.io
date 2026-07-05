@@ -64,8 +64,10 @@ window.homePlaylist = [
     <div class="station-player">
       <div class="player-track-info">
         <p id="player-track-title" class="player-track-title">{{ (index $tracks 0).title }}</p>
-        <p id="player-track-artist" class="player-track-artist">{{ (index $tracks 0).artist }}</p>
-        <p id="player-track-note" class="player-track-note">{{ (index $tracks 0).note | default "一首放进私人电台里的歌。" }}</p>
+        <p class="player-track-meta">
+          <span id="player-track-artist" class="player-track-artist">{{ (index $tracks 0).artist }}</span>
+          <span id="player-track-note" class="player-track-note">{{ (index $tracks 0).note | default "一首放进私人电台里的歌。" }}</span>
+        </p>
       </div>
 
       <div class="player-progress">

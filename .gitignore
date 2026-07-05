@@ -1,0 +1,13 @@
+# Python virtual environment
+.venv/
+
+# Hugo build outputs
+public/
+resources/_gen/
+.hugo_build.lock
+
+# OS files
+.DS_Store
+
+# Backup files
+*.bak

@@ -1,0 +1,43 @@
+{{- $content := split .Inner "\n" -}}
+{{- $initialString := .Get "initialString" | default "" -}}
+{{- $speed := .Get "speed" | default 100 -}}
+{{- $lifeLike := .Get "lifeLike" | default false -}}
+{{- $startDelay := .Get "startDelay" | default 0 -}}
+{{- $breakLines := .Get "breakLines" | default true -}}
+{{- $waitUntilVisible := .Get "waitUntilVisible" | default true -}}
+{{- $loop := .Get "loop" | default false -}}
+{{- $classList := slice -}}
+{{- with .Get "class" -}}
+  {{- $classList = $classList | append . -}}
+{{- end -}}
+{{- $tag := .Get "tag" | default "div" -}}
+
+{{ $id := delimit (slice "typeit" (partial "functions/uid.html" .)) "-" }}
+
+{{- $attrs := printf `id="%v"` $id -}}
+{{- with $classList -}}
+  {{- $attrs = delimit $classList " " | printf `%v class="%v"` $attrs -}}
+{{- end -}}
+{{- $attrs = printf `%v data-typeit-config='{"strings":%s,"speed":%v,"lifeLike":%v,"startDelay":%v,"breakLines":%v,"waitUntilVisible":%v,"loop":%v}'` $attrs ($content | jsonify) $speed $lifeLike $startDelay $breakLines $waitUntilVisible $loop -}}
+
+{{ printf `<%v %v>%s</%v>` $tag $attrs $initialString $tag | safeHTML }}
+
+<script>
+  (function () {
+    function initThisTypeIt() {
+      var el = document.getElementById("{{ $id }}");
+      if (!el || el.dataset.typeitInitialized) return;
+      if (typeof TypeIt === "undefined") return;
+      var config = JSON.parse(el.dataset.typeitConfig || "{}");
+      config.waitUntilVisible = false;
+      new TypeIt(el, config).go();
+      el.dataset.typeitInitialized = "true";
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initThisTypeIt);
+    } else {
+      initThisTypeIt();
+    }
+    document.addEventListener("turbo:load", initThisTypeIt);
+  })();
+</script>

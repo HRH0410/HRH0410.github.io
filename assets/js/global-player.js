@@ -67,11 +67,12 @@
     }
   }
 
-  function setCollapsed(collapsed) {
+  function setCollapsed(collapsed, options = {}) {
+    const persist = options.persist !== false;
     root.classList.toggle("is-collapsed", collapsed);
     fab.setAttribute("aria-expanded", collapsed ? "false" : "true");
     panel.setAttribute("aria-hidden", collapsed ? "true" : "false");
-    saveCollapsedState(collapsed);
+    if (persist) saveCollapsedState(collapsed);
   }
 
   function updatePlayButton(isPlaying) {
@@ -94,6 +95,25 @@
     modeBtn.dataset.mode = playMode;
   }
 
+  function markNoZoom(img) {
+    if (!img) return;
+    img.classList.add("nozoom");
+    img.classList.remove("medium-zoom-image", "medium-zoom-image--hidden");
+    img.dataset.noZoom = "true";
+    img.setAttribute("draggable", "false");
+  }
+
+  function markPlayerImagesNoZoom() {
+    root.querySelectorAll("img").forEach(markNoZoom);
+  }
+
+  function preventPlayerImageZoom(event) {
+    const img = event.target.closest && event.target.closest("#global-player-root img");
+    if (!img) return;
+    markNoZoom(img);
+    event.stopImmediatePropagation();
+  }
+
   function updateTrackInfo(state) {
     const track = tracks[state.currentIndex];
     if (!track) return;
@@ -102,10 +122,12 @@
     artistEl.textContent = track.artist;
 
     if (coverEl) {
+      markNoZoom(coverEl);
       coverEl.src = track.cover;
       coverEl.alt = track.title;
     }
     if (fabCoverEl) {
+      markNoZoom(fabCoverEl);
       fabCoverEl.src = track.cover;
       fabCoverEl.alt = track.title;
     }
@@ -159,10 +181,13 @@
       li.dataset.index = String(index);
 
       const img = document.createElement("img");
-      img.className = "global-player-playlist-thumb";
+      img.className = "global-player-playlist-thumb nozoom";
+      img.dataset.noZoom = "true";
       img.src = track.cover;
       img.alt = track.title;
       img.loading = "lazy";
+      img.draggable = false;
+      markNoZoom(img);
 
       const meta = document.createElement("div");
       meta.className = "global-player-playlist-meta";
@@ -205,6 +230,8 @@
   }
 
   function bindEvents() {
+    root.addEventListener("click", preventPlayerImageZoom, true);
+
     fab.addEventListener("click", () => setCollapsed(false));
     collapseBtn.addEventListener("click", () => setCollapsed(true));
 
@@ -251,6 +278,7 @@
   Player.init(tracks);
   unsubscribe = Player.subscribe(handleStateChange);
   renderPlaylist();
+  markPlayerImagesNoZoom();
   bindEvents();
 
   const initialState = Player.getState();
@@ -262,9 +290,11 @@
   // Visibility: hidden on homepage (full station handles it there), visible elsewhere.
   root.classList.toggle("is-home", isHomePage);
 
-  // Collapsed state only matters when the sidebar is visible.
-  // First-time visitors see the collapsed FAB by default.
-  if (!isHomePage) {
+  // The homepage has its own full player, so leaving it should always reveal
+  // the permanent sidebar as a folded FAB instead of an already-open panel.
+  if (isHomePage) {
+    setCollapsed(true);
+  } else {
     const saved = loadCollapsedState();
     const defaultCollapsed = saved === null ? true : saved;
     setCollapsed(defaultCollapsed);

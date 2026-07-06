@@ -13,10 +13,27 @@
     const root = document.getElementById("global-player-root");
     const isHome = Boolean(document.getElementById("home-listening-station"));
     if (root) {
+      const wasHome = root.classList.contains("is-home") || document.documentElement.classList.contains("is-home-page");
       root.classList.toggle("is-home", isHome);
+      if (wasHome && !isHome) {
+        collapseGlobalPlayer(root);
+      }
     }
     // Sync the build-time <html> class used to hide the player on the homepage.
     document.documentElement.classList.toggle("is-home-page", isHome);
+  }
+
+  function collapseGlobalPlayer(root) {
+    const fab = root.querySelector("#global-player-fab");
+    const panel = root.querySelector("#global-player-panel");
+    root.classList.add("is-collapsed");
+    if (fab) fab.setAttribute("aria-expanded", "false");
+    if (panel) panel.setAttribute("aria-hidden", "true");
+    try {
+      localStorage.setItem("vinyl-player-collapsed", "true");
+    } catch (_) {
+      // ignore
+    }
   }
 
   function initScrollToTop() {
@@ -166,6 +183,78 @@
     }
   }
 
+  function initTypeIt() {
+    const nodes = Array.from(document.querySelectorAll("[data-typeit-config]"));
+    if (!nodes.length) return;
+
+    if (typeof TypeIt === "undefined") {
+      scheduleTypeItRetry();
+      return;
+    }
+
+    nodes.forEach((el) => {
+      if (el.dataset.typeitInitialized) return;
+
+      let config = {};
+      try {
+        config = JSON.parse(el.dataset.typeitConfig || "{}");
+      } catch (_) {
+        return;
+      }
+
+      config.waitUntilVisible = false;
+      new TypeIt(el, config).go();
+      el.dataset.typeitInitialized = "true";
+    });
+  }
+
+  function scheduleTypeItRetry() {
+    if (window.__stephTypeItRetryScheduled) return;
+    window.__stephTypeItRetryScheduled = true;
+
+    [80, 180, 360, 720, 1200, 2000, 3200].forEach((delay) => {
+      window.setTimeout(() => {
+        if (typeof TypeIt !== "undefined") {
+          window.__stephTypeItRetryScheduled = false;
+        }
+        initTypeIt();
+      }, delay);
+    });
+
+    window.setTimeout(() => {
+      window.__stephTypeItRetryScheduled = false;
+    }, 3600);
+  }
+
+  async function recoverMissingTrackedStylesheets() {
+    const trackedStyles = Array.from(document.querySelectorAll('link[rel="stylesheet"][data-turbo-track="reload"]'));
+    let missing = null;
+
+    for (const link of trackedStyles) {
+      if (!link.href || !link.href.startsWith(window.location.origin)) continue;
+      try {
+        const response = await fetch(link.href, { method: "HEAD", cache: "no-store" });
+        if (!response.ok) {
+          missing = link;
+          break;
+        }
+      } catch (_) {
+        // A temporary dev-server outage is not fixed by a browser reload loop.
+      }
+    }
+
+    if (!missing) return;
+
+    const key = `steph-missing-css:${window.location.pathname}:${missing.href}`;
+    try {
+      if (sessionStorage.getItem(key)) return;
+      sessionStorage.setItem(key, "1");
+    } catch (_) {
+      // If sessionStorage is unavailable, still avoid aggressive loops by reloading only on load checks.
+    }
+    window.location.reload();
+  }
+
   function onPageChange() {
     updatePlayerVisibility();
     initScrollToTop();
@@ -174,6 +263,8 @@
     initAppearance();
     initLikesButton();
     initSearch();
+    initTypeIt();
+    window.setTimeout(recoverMissingTrackedStylesheets, 500);
   }
 
   document.addEventListener("turbo:load", onPageChange);

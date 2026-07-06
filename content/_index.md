@@ -72,13 +72,15 @@ showDate: false
   }
 
   .dark .glass-card {
-    background: linear-gradient(145deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.6) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+      radial-gradient(circle at 22% 8%, rgba(208, 162, 77, 0.10), transparent 34%),
+      linear-gradient(145deg, rgba(31, 32, 31, 0.82) 0%, rgba(18, 20, 21, 0.72) 100%);
+    border: 1px solid rgba(239, 230, 215, 0.12);
     box-shadow:
-      0 4px 24px rgba(0, 0, 0, 0.2),
-      0 12px 48px rgba(0, 0, 0, 0.15),
-      0 24px 80px rgba(0, 0, 0, 0.1),
-      inset 0 1px 1px rgba(255, 255, 255, 0.05);
+      0 4px 24px rgba(0, 0, 0, 0.24),
+      0 12px 48px rgba(0, 0, 0, 0.2),
+      0 24px 80px rgba(0, 0, 0, 0.16),
+      inset 0 1px 1px rgba(255, 248, 235, 0.08);
   }
 
   .garden-nav-item {

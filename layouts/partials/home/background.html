@@ -2,10 +2,10 @@
 
 {{/* 加载首页专属样式与脚本 */}}
 {{ $homeCSS := resources.Get "css/pages/home.css" | resources.Minify | resources.Fingerprint }}
-<link rel="stylesheet" href="{{ $homeCSS.RelPermalink }}" integrity="{{ $homeCSS.Data.Integrity }}">
+<link rel="stylesheet" href="{{ $homeCSS.RelPermalink }}" integrity="{{ $homeCSS.Data.Integrity }}" data-turbo-track="reload">
 
 {{ $homeJS := resources.Get "js/home-player.js" | resources.Minify | resources.Fingerprint }}
-<script defer src="{{ $homeJS.RelPermalink }}" integrity="{{ $homeJS.Data.Integrity }}"></script>
+<script defer src="{{ $homeJS.RelPermalink }}" integrity="{{ $homeJS.Data.Integrity }}" data-turbo-track="reload"></script>
 
 <article class="prose dark:prose-invert max-w-full">
   <div class="relative">

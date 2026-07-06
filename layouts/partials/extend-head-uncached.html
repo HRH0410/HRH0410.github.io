@@ -1,21 +1,21 @@
 {{ if eq .RelPermalink "/about/" }}
   {{ $aboutCSS := resources.Get "css/pages/about.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $aboutCSS.RelPermalink }}" integrity="{{ $aboutCSS.Data.Integrity }}">
+  <link rel="stylesheet" href="{{ $aboutCSS.RelPermalink }}" integrity="{{ $aboutCSS.Data.Integrity }}" data-turbo-track="reload">
   {{ $aboutJS := resources.Get "js/about-journey.js" | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $aboutJS.RelPermalink }}" integrity="{{ $aboutJS.Data.Integrity }}"></script>
+  <script defer src="{{ $aboutJS.RelPermalink }}" integrity="{{ $aboutJS.Data.Integrity }}" data-turbo-track="reload"></script>
 {{ end }}
 
 {{ if site.Data.music }}
   <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.12/dist/turbo.es2017-umd.js" defer></script>
   <script>window.homePlaylist = {{ site.Data.music | jsonify | safeJS }};</script>
   {{ $globalPlayerCSS := resources.Get "css/global-player.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $globalPlayerCSS.RelPermalink }}" integrity="{{ $globalPlayerCSS.Data.Integrity }}">
+  <link rel="stylesheet" href="{{ $globalPlayerCSS.RelPermalink }}" integrity="{{ $globalPlayerCSS.Data.Integrity }}" data-turbo-track="reload">
   {{ $playerStateJS := resources.Get "js/player-state.js" | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $playerStateJS.RelPermalink }}" integrity="{{ $playerStateJS.Data.Integrity }}"></script>
+  <script defer src="{{ $playerStateJS.RelPermalink }}" integrity="{{ $playerStateJS.Data.Integrity }}" data-turbo-track="reload"></script>
   {{ $globalPlayerJS := resources.Get "js/global-player.js" | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $globalPlayerJS.RelPermalink }}" integrity="{{ $globalPlayerJS.Data.Integrity }}"></script>
+  <script defer src="{{ $globalPlayerJS.RelPermalink }}" integrity="{{ $globalPlayerJS.Data.Integrity }}" data-turbo-track="reload"></script>
   {{ $turboInitJS := resources.Get "js/turbo-init.js" | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $turboInitJS.RelPermalink }}" integrity="{{ $turboInitJS.Data.Integrity }}"></script>
+  <script defer src="{{ $turboInitJS.RelPermalink }}" integrity="{{ $turboInitJS.Data.Integrity }}" data-turbo-track="reload"></script>
 {{ end }}
 
 {{ if .IsHome }}

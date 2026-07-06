@@ -10,6 +10,7 @@
 <style>
   /* === Apple-Style Pill Navigation === */
   .pill-nav {
+    --nav-section-accent: 142, 115, 56;
     background: rgba(255, 255, 255, 0.72) !important;
     backdrop-filter: saturate(180%) blur(20px) !important;
     -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
@@ -20,6 +21,18 @@
     transition: all 0.25s ease !important;
     padding-left: 1rem !important;
     padding-right: 1.25rem !important; /* 右边多给点空间给月亮图标 */
+  }
+
+  .pill-nav[data-current-section="posts"] {
+    --nav-section-accent: 168, 126, 46;
+  }
+
+  .pill-nav[data-current-section="projects"] {
+    --nav-section-accent: 72, 127, 126;
+  }
+
+  .pill-nav[data-current-section="about"] {
+    --nav-section-accent: 132, 103, 154;
   }
 
   .site-nav-shell {
@@ -76,12 +89,42 @@
   /* Navigation Links */
   #menu-blur .main-menu a,
   #menu-blur nav a {
+    position: relative !important;
     color: rgba(0, 0, 0, 0.75) !important;
     font-size: 0.9rem !important;
     font-weight: 500 !important;
     padding: 0.4rem 1rem !important;
     border-radius: 8px !important;
     transition: all 0.15s ease !important;
+  }
+
+  #menu-blur .main-menu a span,
+  #menu-blur nav a span {
+    text-decoration: none !important;
+    border-bottom: 0 !important;
+  }
+
+  #menu-blur nav a.is-current,
+  #menu-blur .main-menu > a.text-base.is-current {
+    background: transparent !important;
+    color: rgba(0, 0, 0, 0.82) !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    border-bottom: 0 !important;
+  }
+
+  #menu-blur nav a.is-current::after,
+  #menu-blur .main-menu > a.text-base.is-current::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0.2rem;
+    width: 1.55rem;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(72, 72, 72, 0.22);
+    transform: translateX(-50%);
+    pointer-events: none;
   }
 
   #menu-blur .main-menu a:hover,
@@ -93,6 +136,20 @@
   .dark #menu-blur .main-menu a,
   .dark #menu-blur nav a {
     color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  .dark #menu-blur nav a.is-current,
+  .dark #menu-blur .main-menu > a.text-base.is-current {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    border-bottom: 0 !important;
+  }
+
+  .dark #menu-blur nav a.is-current::after,
+  .dark #menu-blur .main-menu > a.text-base.is-current::after {
+    background: rgba(235, 235, 235, 0.24);
   }
 
   .dark #menu-blur .main-menu a:hover,
@@ -301,10 +358,22 @@
       box-shadow: none !important;
     }
 
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a.is-current {
+      background: transparent !important;
+      border-color: rgba(127, 143, 166, 0.15) !important;
+      color: rgba(28, 27, 24, 0.88) !important;
+    }
+
     .dark #mobile-menu-toggle:checked ~ div[role="dialog"] a {
       background: rgba(255, 255, 255, 0.06) !important;
       border-color: rgba(255, 255, 255, 0.1) !important;
       box-shadow: none !important;
+    }
+
+    .dark #mobile-menu-toggle:checked ~ div[role="dialog"] a.is-current {
+      background: transparent !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      color: rgba(255, 250, 238, 0.94) !important;
     }
 
     #mobile-menu-toggle:checked ~ div[role="dialog"] a span {
@@ -315,3 +384,74 @@
     }
   }
 </style>
+
+<script>
+  (function () {
+    var sections = [
+      { key: "home", path: "/" },
+      { key: "posts", path: "/posts" },
+      { key: "projects", path: "/projects" },
+      { key: "about", path: "/about" }
+    ];
+
+    function currentSection(path) {
+      if (path === "/") return sections[0];
+      for (var i = 0; i < sections.length; i += 1) {
+        var section = sections[i];
+        if (section.path === "/") continue;
+        if (path === section.path || path.indexOf(section.path + "/") === 0) {
+          return section;
+        }
+      }
+      return null;
+    }
+
+    function normalizePath(rawPath) {
+      try {
+        var url = new URL(rawPath, window.location.origin);
+        return url.pathname.replace(/\/+$/, "") || "/";
+      } catch (error) {
+        return rawPath.replace(/\/+$/, "") || "/";
+      }
+    }
+
+    function updateCurrentNav() {
+      var nav = document.getElementById("menu-blur");
+      if (!nav) return;
+
+      var path = window.location.pathname.replace(/\/+$/, "") || "/";
+      var active = currentSection(path);
+
+      nav.querySelectorAll("a.is-current, span.active").forEach(function (el) {
+        el.classList.remove("is-current", "active");
+        el.removeAttribute("aria-current");
+      });
+
+      if (!active) {
+        nav.removeAttribute("data-current-section");
+        return;
+      }
+
+      nav.dataset.currentSection = active.key;
+
+      var links = active.key === "home"
+        ? nav.querySelectorAll(".main-menu > a.text-base[href]")
+        : nav.querySelectorAll("nav a[href]");
+
+      links.forEach(function (link) {
+        if (normalizePath(link.getAttribute("href")) !== active.path) return;
+        link.classList.add("is-current");
+        link.setAttribute("aria-current", "page");
+      });
+    }
+
+    window.__stephUpdateCurrentNav = updateCurrentNav;
+    updateCurrentNav();
+    if (!window.__stephNavCurrentBound) {
+      document.addEventListener("turbo:load", function () {
+        if (window.__stephUpdateCurrentNav) window.__stephUpdateCurrentNav();
+      });
+      window.__stephNavCurrentBound = true;
+    }
+  })();
+</script>

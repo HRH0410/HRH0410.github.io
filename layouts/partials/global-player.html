@@ -1,18 +1,20 @@
 {{ $tracks := site.Data.music }}
 {{ if $tracks }}
-<div id="global-player-root" data-turbo-permanent class="global-player-root" aria-label="音乐播放器">
+<div id="global-player-root" data-turbo-permanent class="global-player-root is-collapsed" aria-label="音乐播放器">
   <audio id="global-player-audio" class="global-player-audio" preload="metadata" playsinline crossorigin="anonymous"></audio>
 
   <!-- Collapsed floating button -->
-  <button id="global-player-fab" class="global-player-fab" type="button" aria-label="展开音乐播放器">
-    <img id="global-player-fab-cover" class="global-player-fab-cover" src="{{ (index $tracks 0).cover }}" alt="{{ (index $tracks 0).title }}">
+  <button id="global-player-fab" class="global-player-fab" type="button" aria-label="展开音乐播放器" aria-expanded="false">
+    <img id="global-player-fab-cover" class="global-player-fab-cover nozoom" data-no-zoom="true" draggable="false" src="{{ (index $tracks 0).cover }}" alt="{{ (index $tracks 0).title }}">
     <span id="global-player-fab-state" class="global-player-fab-state" aria-hidden="true"></span>
   </button>
 
   <!-- Expanded sidebar panel -->
-  <div id="global-player-panel" class="global-player-panel">
+  <div id="global-player-panel" class="global-player-panel" aria-hidden="true">
     <div class="global-player-header">
-      <span class="global-player-header-title">正在播放</span>
+      <span class="global-player-header-title">
+        <span class="global-player-header-kicker">Now Playing</span>
+      </span>
       <button id="global-player-collapse" class="global-player-icon-btn" type="button" aria-label="折叠音乐播放器">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
@@ -21,7 +23,7 @@
     <div class="global-player-body">
       <div class="global-player-vinyl">
         <div id="global-player-disc" class="global-player-disc">
-          <img id="global-player-cover" class="global-player-cover" src="{{ (index $tracks 0).cover }}" alt="{{ (index $tracks 0).title }}">
+          <img id="global-player-cover" class="global-player-cover nozoom" data-no-zoom="true" draggable="false" src="{{ (index $tracks 0).cover }}" alt="{{ (index $tracks 0).title }}">
         </div>
       </div>
 
@@ -44,13 +46,13 @@
         <button id="global-player-mode" class="global-player-btn global-player-btn--mode" type="button" aria-label="顺序播放" title="顺序播放">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h13"/><path d="M4 17h13"/><path d="m17 4 3 3-3 3"/><path d="m17 14 3 3-3 3"/></svg>
         </button>
-        <button id="global-player-prev" class="global-player-btn" type="button" aria-label="上一首">
+        <button id="global-player-prev" class="global-player-btn global-player-btn--prev" type="button" aria-label="上一首">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6z"/><path d="M19 5l-11 7 11 7z"/></svg>
         </button>
         <button id="global-player-play" class="global-player-btn global-player-btn--play" type="button" aria-label="播放" aria-pressed="false">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         </button>
-        <button id="global-player-next" class="global-player-btn" type="button" aria-label="下一首">
+        <button id="global-player-next" class="global-player-btn global-player-btn--next" type="button" aria-label="下一首">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 5h2v14h-2z"/><path d="M5 5l11 7-11 7z"/></svg>
         </button>
       </div>

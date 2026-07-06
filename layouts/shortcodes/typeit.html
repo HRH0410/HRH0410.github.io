@@ -24,20 +24,55 @@
 
 <script>
   (function () {
-    function initThisTypeIt() {
-      var el = document.getElementById("{{ $id }}");
-      if (!el || el.dataset.typeitInitialized) return;
-      if (typeof TypeIt === "undefined") return;
-      var config = JSON.parse(el.dataset.typeitConfig || "{}");
+    var retryDelays = [0, 80, 180, 360, 720, 1200, 2000, 3200];
+
+    function initTypeItElement(el) {
+      if (!el || el.dataset.typeitInitialized) return false;
+      if (typeof TypeIt === "undefined") return false;
+
+      var config = {};
+      try {
+        config = JSON.parse(el.dataset.typeitConfig || "{}");
+      } catch (error) {
+        return false;
+      }
+
       config.waitUntilVisible = false;
       new TypeIt(el, config).go();
       el.dataset.typeitInitialized = "true";
+      return true;
     }
+
+    function initTypeIt(scope) {
+      var root = scope && scope.querySelectorAll ? scope : document;
+      root.querySelectorAll("[data-typeit-config]").forEach(initTypeItElement);
+    }
+
+    function scheduleTypeItInit(scope) {
+      retryDelays.forEach(function (delay) {
+        window.setTimeout(function () {
+          initTypeIt(scope);
+        }, delay);
+      });
+    }
+
+    if (!window.__stephInitTypeIt) {
+      window.__stephInitTypeIt = scheduleTypeItInit;
+    }
+
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initThisTypeIt);
+      document.addEventListener("DOMContentLoaded", function () {
+        scheduleTypeItInit(document);
+      }, { once: true });
     } else {
-      initThisTypeIt();
+      scheduleTypeItInit(document);
     }
-    document.addEventListener("turbo:load", initThisTypeIt);
+
+    if (!window.__stephTypeItTurboBound) {
+      document.addEventListener("turbo:load", function () {
+        scheduleTypeItInit(document);
+      });
+      window.__stephTypeItTurboBound = true;
+    }
   })();
 </script>

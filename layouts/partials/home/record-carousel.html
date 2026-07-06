@@ -18,6 +18,61 @@ window.homePlaylist = [
 </script>
 
 {{ if $tracks }}
+<style>
+  #home-listening-station {
+    box-sizing: border-box;
+    width: min(100%, 680px);
+    margin: 2.35rem auto 2.85rem;
+  }
+
+  #home-listening-station,
+  #home-listening-station * {
+    box-sizing: border-box;
+  }
+
+  #home-listening-station .station-shell {
+    overflow: hidden;
+  }
+
+  #home-listening-station .station-layout {
+    display: grid;
+    grid-template-columns: minmax(212px, 0.76fr) minmax(0, 1.24fr);
+    align-items: center;
+  }
+
+  #home-listening-station .sleeve-rail {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.94rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  #home-listening-station .carousel-card {
+    flex: 0 0 118px;
+    width: 118px;
+    min-width: 118px;
+    display: grid;
+    grid-template-rows: 118px auto;
+    justify-items: center;
+    border: 0;
+    background: transparent;
+  }
+
+  #home-listening-station .carousel-sleeve,
+  #home-listening-station .carousel-sleeve > img {
+    display: block;
+    width: 118px !important;
+    height: 118px !important;
+    max-width: 118px !important;
+    max-height: 118px !important;
+  }
+
+  #home-listening-station .carousel-sleeve > img {
+    object-fit: cover;
+    border-radius: 8px;
+  }
+</style>
 <section class="record-carousel-section" id="home-listening-station" aria-label="Steph.H 的私人电台">
   <canvas id="player-ambience-canvas" class="player-ambience-canvas" aria-hidden="true"></canvas>
 

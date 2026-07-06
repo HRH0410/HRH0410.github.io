@@ -261,7 +261,7 @@
       if (audio) audio.currentTime = 0;
       play();
     } else {
-      next();
+      loadTrack(getNextIndex(), true);
     }
   }
 

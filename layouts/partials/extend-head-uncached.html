@@ -1,8 +1,8 @@
-{{ if eq .RelPermalink "/about/" }}
+{{ if site.Data.footprints }}
   {{ $aboutCSS := resources.Get "css/pages/about.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $aboutCSS.RelPermalink }}" integrity="{{ $aboutCSS.Data.Integrity }}" data-turbo-track="reload">
+  <link rel="stylesheet" href="{{ $aboutCSS.RelPermalink }}" integrity="{{ $aboutCSS.Data.Integrity }}">
   {{ $aboutJS := resources.Get "js/about-journey.js" | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $aboutJS.RelPermalink }}" integrity="{{ $aboutJS.Data.Integrity }}" data-turbo-track="reload"></script>
+  <script defer src="{{ $aboutJS.RelPermalink }}" integrity="{{ $aboutJS.Data.Integrity }}"></script>
 {{ end }}
 
 {{ if site.Data.music }}

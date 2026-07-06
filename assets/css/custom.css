@@ -1403,6 +1403,11 @@ html.dark #appearance-switcher svg path {
 
 .channel-page {
     position: relative;
+    margin-top: clamp(1.35rem, 3vw, 2.2rem);
+}
+
+.channel-page--notes {
+    margin-top: clamp(5.4rem, 9vw, 7rem);
 }
 
 .channel-page::before {

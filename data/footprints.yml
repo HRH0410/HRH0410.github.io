@@ -3,40 +3,54 @@
 # 路径按年份 + 出现顺序连接
 
 2026:
+  - city: "宁波"
+    emoji: "🐟"
+    date: "2026"
+    photos:
+      - "/img/footprints/ningbo-1.jpg"
+    story: "三人半夜十二点临时起意买了凌晨三点半的绿皮火车夜袭宁波"
+
+  - city: "临港"
+    emoji: "⛵️"
+    date: "2026"
+    photos:
+      - "/img/footprints/lingang-1.jpg"
+    story: "这是一座年轻而充满活力的新城"
+
   - city: "拉萨"
     emoji: "🏔️"
     date: "2026"
     photos:
       - "/img/footprints/lhasa-1.jpg"
-    story: "高原的风，吹得人很安静。"
+    story: "日光之城 缺氧却不缺信仰"
 
   - city: "日喀则"
     emoji: "🏞️"
     date: "2026"
     photos:
       - "/img/footprints/shigatse-1.jpg"
-    story: ""
+    story: "第一天去了珠峰大本营却云雾缭绕未见珠峰 第二天终于是拨得云开见珠峰"
 
   - city: "林芝"
     emoji: "🌲"
     date: "2026"
     photos:
       - "/img/footprints/linzhi-1.jpg"
-    story: ""
+    story: "纳木错 藏语中的”天湖“ 离天空最近的一抹湛蓝"
 
   - city: "泰兴"
     emoji: "🃏"
     date: "2026"
     photos:
       - "/img/footprints/taixing-1.jpg"
-    story: ""
+    story: "赴泰兴督导组在泰兴掼蛋掼到天昏地暗"
 
   - city: "连云港"
     emoji: "🌊"
     date: "2026"
     photos:
       - "/img/footprints/lianyungang-1.jpg"
-    story: "海边的日落， salt in the air."
+    story: "连岛边的海岸"
 
 2025:
   - city: "北京"
@@ -44,56 +58,56 @@
     date: "2025"
     photos:
       - "/img/footprints/beijing-1.jpg"
-    story: ""
+    story: "时隔12年再赴北京 感受北京那份地道北京味儿 也专门去打卡了很多喜欢的歌里写到的地方"
 
   - city: "扬州"
     emoji: "🌊"
     date: "2025"
     photos:
       - "/img/footprints/yangzhou-1.jpg"
-    story: ""
+    story: "趁着音乐节来到扬州 就记得在停车场堵了两个小时没听到梁博"
 
   - city: "大阪"
     emoji: "🏯"
     date: "2025"
     photos:
       - "/img/footprints/osaka-1.jpg"
-    story: ""
+    story: "环球影城的butter beer真的超级无敌好喝 Hollywood Dream更是让人回味无穷"
 
   - city: "东京"
     emoji: "🗼"
     date: "2025"
     photos:
       - "/img/footprints/tokyo-1.jpg"
-    story: ""
+    story: "shibuya sky上将东京的繁华一览无余 涩谷的十字路口也是一如既往的人来人往"
 
   - city: "京都"
     emoji: "🌸"
     date: "2025"
     photos:
       - "/img/footprints/kyoto-1.jpg"
-    story: ""
+    story: "在清水寺转一圈真的能让人静下心来"
 
   - city: "镰仓"
     emoji: "⛩️"
     date: "2025"
     photos:
       - "/img/footprints/kamakura-1.jpg"
-    story: ""
+    story: "镰仓的海景和沿途风景真的call back非常多童年时看的动画片"
 
   - city: "广州"
     emoji: "🌃"
     date: "2025"
     photos:
       - "/img/footprints/guangzhou-1.jpg"
-    story: ""
+    story: "参加比赛顺便在广州玩了两天 大学生去长隆笑的比小朋友还开心哈哈哈哈哈"
 
   - city: "武汉"
     emoji: "🏮"
     date: "2025"
     photos:
       - "/img/footprints/wuhan-1.jpg"
-    story: ""
+    story: "临时起意说走就走的武汉行 与四位初中挚友漫步武汉的街头小巷"
 
 2024:
   - city: "莫干山"
@@ -101,28 +115,28 @@
     date: "2024"
     photos:
       - "/img/footprints/moganshan-1.jpg"
-    story: ""
+    story: "莫干山的夜空真的很美 好久没看过这么多星星了"
 
   - city: "杭州"
     emoji: "🏞️"
     date: "2024"
     photos:
       - "/img/footprints/hangzhou-1.jpg"
-    story: ""
+    story: "欲把西湖比西子 淡妆浓抹总相宜"
 
   - city: "威海"
     emoji: "🌊"
     date: "2024"
     photos:
       - "/img/footprints/weihai-1.jpg"
-    story: ""
+    story: "沉默的威斯布鲁号 静静地躺在岸边"
 
   - city: "贵阳"
     emoji: "🏔️"
     date: "2024"
     photos:
       - "/img/footprints/guiyang-1.jpg"
-    story: ""
+    story: "崇明命运共同体于此游山玩水 闲适恬淡"
 
 2023:
   - city: "长沙"
@@ -130,39 +144,39 @@
     date: "2023"
     photos:
       - "/img/footprints/changsha-1.jpg"
-    story: ""
+    story: "黑色经典的臭豆腐真的夯爆了"
 
   - city: "厦门"
     emoji: "🏝️"
     date: "2023"
     photos:
       - "/img/footprints/xiamen-1.jpg"
-    story: ""
+    story: "一上鼓浪屿就开始下暴雨 岛上还没有任何代步工具 难以忘却"
 
   - city: "成都"
     emoji: "🐼"
     date: "2023"
     photos:
       - "/img/footprints/chengdu-1.jpg"
-    story: ""
+    story: "和我在成都的街头走一走～"
 
   - city: "重庆"
     emoji: "🍜"
     date: "2023"
     photos:
       - "/img/footprints/chongqing-1.jpg"
-    story: ""
+    story: "我就爬上爬下爬上爬下爬上爬下"
 
   - city: "广州"
     emoji: "🌃"
     date: "2023"
     photos:
       - "/img/footprints/guangzhou-2023-1.jpg"
-    story: ""
+    story: "广州真的啥啥都好吃啊"
 
   - city: "上海"
     emoji: "🌆"
     date: "2023"
     photos:
       - "/img/footprints/shanghai-1.jpg"
-    story: ""
+    story: "高考完的第一站"

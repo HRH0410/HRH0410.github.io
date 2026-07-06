@@ -1614,6 +1614,11 @@ article h2::before {
 <span class="award-name">人民奖学金</span>
 </div>
 
+<div class="award-item">
+<span class="award-date">2023.11</span>
+<span class="award-name">健雄书院第二届十佳歌手<span class="award-badge">🎤 冠军</span></span>
+</div>
+
 </div>
 
 <!-- ==================== 技能清单 ==================== -->
@@ -1651,7 +1656,6 @@ article h2::before {
 <div class="skill-items">
 <div class="skill-item">视频剪辑</div>
 <div class="skill-item">美编设计</div>
-<div class="skill-item">内容写作</div>
 </div>
 </div>
 

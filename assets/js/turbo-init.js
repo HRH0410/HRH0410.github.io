@@ -112,14 +112,56 @@
     });
   }
 
+  function pageNeedsKaTeX() {
+    return Boolean(
+      document.getElementById("katex-render") ||
+      document.querySelector(".article-content, .prose")?.textContent?.match(/\\\(|\\\[|\$\$/)
+    );
+  }
+
   function initKaTeX() {
-    if (typeof renderMathInElement !== "function") return;
-    renderMathInElement(document.body, {
-      delimiters: [
-        { left: "$$", right: "$$", display: true },
-        { left: "$", right: "$", display: false }
-      ]
+    if (!pageNeedsKaTeX()) return;
+
+    if (typeof renderMathInElement !== "function") {
+      scheduleKaTeXRetry();
+      return;
+    }
+
+    const target = document.querySelector(".article-content") || document.body;
+    if (!target || target.dataset.katexRendered === "true") return;
+
+    try {
+      renderMathInElement(target, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "\\[", right: "\\]", display: true },
+          { left: "\\(", right: "\\)", display: false }
+        ],
+        throwOnError: false,
+        ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+      });
+      target.dataset.katexRendered = "true";
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      if (window.console && console.warn) console.warn("[katex] render failed", error);
+    }
+  }
+
+  function scheduleKaTeXRetry() {
+    if (window.__stephKaTeXRetryScheduled) return;
+    window.__stephKaTeXRetryScheduled = true;
+
+    [80, 180, 360, 720, 1200, 2000, 3200].forEach((delay) => {
+      window.setTimeout(() => {
+        if (typeof renderMathInElement !== "function") return;
+        window.__stephKaTeXRetryScheduled = false;
+        initKaTeX();
+      }, delay);
     });
+
+    window.setTimeout(() => {
+      window.__stephKaTeXRetryScheduled = false;
+    }, 3600);
   }
 
   function initAppearance() {
@@ -257,6 +299,9 @@
 
   function onPageChange() {
     updatePlayerVisibility();
+    if (window.StephJourney && typeof window.StephJourney.init === "function") {
+      window.StephJourney.init();
+    }
     initScrollToTop();
     initCodeCopy();
     initKaTeX();

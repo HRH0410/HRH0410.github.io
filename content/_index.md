@@ -303,7 +303,7 @@ showDate: false
       {{< icon "location-dot" >}} 苏州 · NJU
     </span>
     <span class="info-separator" style="opacity: 0.3;">|</span>
-    <span style="display: flex; align-items: center; gap: 6px;">{{< icon "fire" >}} 正在探索 AIGC</span>
+    <span style="display: flex; align-items: center; gap: 6px;">{{< icon "fire" >}} 正在探索 AI Product</span>
     <span class="info-separator" style="opacity: 0.3;">|</span>
     <span style="display: flex; align-items: center; gap: 6px;">{{< icon "mug-hot" >}} 近况：在世界里慢慢走</span>
   </div>

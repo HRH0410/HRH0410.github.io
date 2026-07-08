@@ -1192,7 +1192,7 @@ main#main-content > article > header > h1 {
 <figure class="project-shot">
 <img src="/img/works/zhiwei-jianji.png" alt="知微见疾项目界面截图" loading="lazy">
 </figure>
-<p class="project-desc">基层医疗场景下的 AI 健康问诊与智能报告解读助手，围绕真实问诊流程设计多模态交互与可靠输出能力。</p>
+<p class="project-desc">知微见疾聚焦大众面对化验单“看不懂、难判断、缺指导”的现实痛点，基于Web、移动端与鸿蒙原生的多端协同架构，依托百炼平台打造了集智能报告识别、中西医多路径问诊于一体的全场景健康助手，实现“检—诊—调—护”闭环式健康陪伴。</p>
 </div>
 <div class="highlight-grid">
 <article><strong>多模态问诊</strong><span>结合文本与报告理解的场景化交互</span></article>

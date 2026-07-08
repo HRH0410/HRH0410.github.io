@@ -5,6 +5,18 @@
   <script defer src="{{ $aboutJS.RelPermalink }}" integrity="{{ $aboutJS.Data.Integrity }}"></script>
 {{ end }}
 
+{{ $clipboardCSS := resources.Get "css/about-clipboard.css" | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $clipboardCSS.RelPermalink }}" integrity="{{ $clipboardCSS.Data.Integrity }}">
+{{ $clipboardJS := resources.Get "js/about-clipboard.js" | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $clipboardJS.RelPermalink }}" integrity="{{ $clipboardJS.Data.Integrity }}"></script>
+
+{{ if and .IsPage (eq .RelPermalink "/about/") }}
+  {{ $aboutRevealCSS := resources.Get "css/about-reveal.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $aboutRevealCSS.RelPermalink }}" integrity="{{ $aboutRevealCSS.Data.Integrity }}" data-turbo-track="reload">
+  {{ $aboutRevealJS := resources.Get "js/about-reveal.js" | resources.Minify | resources.Fingerprint }}
+  <script defer src="{{ $aboutRevealJS.RelPermalink }}" integrity="{{ $aboutRevealJS.Data.Integrity }}" data-turbo-track="reload"></script>
+{{ end }}
+
 {{ if site.Data.music }}
   <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.12/dist/turbo.es2017-umd.js" defer></script>
   <script>window.homePlaylist = {{ site.Data.music | jsonify | safeJS }};</script>

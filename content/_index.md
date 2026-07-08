@@ -290,7 +290,7 @@ showDate: false
 
 <div class="glass-card">
 
-  <img src="/img/author.jpg" alt="Steph.H" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; margin-bottom: 2rem;" class="floating-avatar">
+  <img src="/img/author.jpg" alt="Steph.H" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; margin-bottom: 2rem;" class="floating-avatar nozoom" data-no-zoom="true">
 
   <h1 style="font-size: 2.4rem; font-weight: 800; margin-bottom: 3rem; letter-spacing: 0.01em; line-height: 1.3;">
     {{< typeit speed=70 lifeLike=true >}}
@@ -320,28 +320,28 @@ showDate: false
   <div class="home-nav-grid" style="display: flex; justify-content: center; align-items: stretch; flex-wrap: nowrap; margin: 0 auto; position: relative;">
     <!-- 顶部装饰线 -->
     <div class="separator-line-horizontal" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);"></div>
-    <a href="/notes/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+    <a href="/notes/" class="garden-nav-item is-magnetic" style="padding: 1.5rem 2rem; position: relative;">
       <span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 01</span>
       <span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">拾光笔记</span>
       <span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">学习与记录</span>
     </a>
     <!-- 竖线分隔 -->
     <div class="separator-line-vertical" style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
-    <a href="/projects/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+    <a href="/projects/" class="garden-nav-item is-magnetic" style="padding: 1.5rem 2rem; position: relative;">
       <span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 02</span>
       <span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">造物手记</span>
       <span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">项目与作品</span>
     </a>
     <!-- 竖线分隔 -->
     <div class="separator-line-vertical" style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
-    <a href="/daily/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+    <a href="/daily/" class="garden-nav-item is-magnetic" style="padding: 1.5rem 2rem; position: relative;">
       <span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 03</span>
       <span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">漫步日常</span>
       <span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">生活与思考</span>
     </a>
     <!-- 竖线分隔 -->
     <div class="separator-line-vertical" style="width: 1px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08), transparent); margin: 0.5rem 0;"></div>
-    <a href="/about/" class="garden-nav-item" style="padding: 1.5rem 2rem; position: relative;">
+    <a href="/about/" class="garden-nav-item is-magnetic" style="padding: 1.5rem 2rem; position: relative;">
       <span style="font-size: 0.6rem; letter-spacing: 0.2rem; text-transform: uppercase; font-weight: 300;">Vol. 04</span>
       <span class="nav-title" style="font-size: 1.05rem; font-weight: 600; margin-top: 0.35rem; position: relative;">关于我</span>
       <span style="font-size: 0.65rem; margin-top: 0.4rem; font-weight: 300;">认识一下</span>

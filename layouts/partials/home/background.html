@@ -7,6 +7,12 @@
 {{ $homeJS := resources.Get "js/home-player.js" | resources.Minify | resources.Fingerprint }}
 <script defer src="{{ $homeJS.RelPermalink }}" integrity="{{ $homeJS.Data.Integrity }}" data-turbo-track="reload"></script>
 
+{{ $microCSS := resources.Get "css/home-micro-interactions.css" | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $microCSS.RelPermalink }}" integrity="{{ $microCSS.Data.Integrity }}" data-turbo-track="reload">
+
+{{ $microJS := resources.Get "js/home-micro-interactions.js" | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $microJS.RelPermalink }}" integrity="{{ $microJS.Data.Integrity }}" data-turbo-track="reload"></script>
+
 <article class="prose dark:prose-invert max-w-full">
   <div class="relative">
     <div class="absolute inset-x-0 bottom-0 h-1/2"></div>

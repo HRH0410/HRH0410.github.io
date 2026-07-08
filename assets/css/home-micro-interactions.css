@@ -1,0 +1,17 @@
+/* 首页微交互：磁性导航 */
+
+.garden-nav-item.is-magnetic {
+  transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.garden-nav-item.is-magnetic:hover {
+  transform: translate(var(--mag-x, 0px), calc(var(--mag-y, 0px) - 4px));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .garden-nav-item.is-magnetic,
+  .garden-nav-item.is-magnetic:hover {
+    transition: none;
+    transform: none;
+  }
+}

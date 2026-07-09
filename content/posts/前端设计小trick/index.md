@@ -38,7 +38,7 @@ notionSource = "前端设计小trick 398f867979aa8007ae37e63dafa46006.md"
 
 #### Figma Community
 
-[](https://www.figma.com/community)
+[community](https://www.figma.com/community)
 
 Figma 官方社区资源入口，适合找设计系统、网页模板、App UI Kit、原型文件、图标套件、作品集模板。
 

@@ -8,6 +8,9 @@
   </summary>
   <div
     class="toc-panel min-w-[220px] py-2 border-dotted border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+    {{ if and (eq .Section "posts") (or (eq .Params.postType "study") (eq .Params.postType "personal")) }}
+      <p class="article-toc-label"><span lang="en">CONTENTS</span><span aria-hidden="true">·</span><span>目录</span></p>
+    {{ end }}
     {{ .TableOfContents | emojify }}
   </div>
 </details>
@@ -18,6 +21,9 @@
   </summary>
   <div
     class="toc-panel py-2 border-dotted border-neutral-300 border-s-1 -ms-5 ps-5 dark:border-neutral-600">
+    {{ if and (eq .Section "posts") (or (eq .Params.postType "study") (eq .Params.postType "personal")) }}
+      <p class="article-toc-label"><span lang="en">CONTENTS</span><span aria-hidden="true">·</span><span>目录</span></p>
+    {{ end }}
     {{ .TableOfContents | emojify }}
   </div>
 </details>

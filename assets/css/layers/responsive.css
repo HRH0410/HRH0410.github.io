@@ -231,18 +231,32 @@
     }
 
     .posts-hub-latest {
-        margin-top: 1rem !important;
-        padding: 0.88rem 0.86rem !important;
+        width: 100% !important;
+        margin: 1.2rem 0 0 !important;
+        padding: 0 !important;
     }
 
-    .posts-hub-latest-link {
-        font-size: 0.98rem !important;
-        line-height: 1.32 !important;
+    .posts-hub-latest-label {
+        margin-bottom: 0 !important;
     }
 
-    .posts-hub-latest-meta {
-        font-size: 0.78rem !important;
+    .posts-hub-latest-item {
+        grid-template-columns: 3.55rem minmax(0, 1fr) 0.8rem !important;
+        gap: 0.44rem !important;
+        min-height: 2.48rem !important;
+        padding: 0.34rem 0.06rem !important;
+    }
+
+    .posts-hub-latest-date {
+        font-size: 0.68rem !important;
         line-height: 1.4 !important;
+    }
+
+    .posts-hub-latest-title {
+        grid-column: auto;
+        grid-row: auto;
+        font-size: 0.9rem !important;
+        line-height: 1.32 !important;
     }
 
     .channel-header {
@@ -449,4 +463,3 @@
         padding-left: 4.35rem !important;
     }
 }
-

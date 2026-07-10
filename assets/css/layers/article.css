@@ -289,6 +289,112 @@
     color: var(--article-muted);
 }
 
+/* =============================================
+   Post identity and reading journey
+   Scoped to categorized posts so About and other single pages stay unchanged.
+   ============================================= */
+.article-shell[data-article-type] {
+    --article-accent: #4f7188;
+    --article-accent-soft: rgba(79, 113, 136, 0.11);
+    --article-accent-line: rgba(79, 113, 136, 0.32);
+}
+
+.article-shell--personal {
+    --article-accent: #a86f2d;
+    --article-accent-soft: rgba(168, 111, 45, 0.11);
+    --article-accent-line: rgba(168, 111, 45, 0.32);
+}
+
+.dark .article-shell--study {
+    --article-accent: #9bb8cb;
+    --article-accent-soft: rgba(155, 184, 203, 0.13);
+    --article-accent-line: rgba(155, 184, 203, 0.34);
+}
+
+.dark .article-shell--personal {
+    --article-accent: #d6ae78;
+    --article-accent-soft: rgba(214, 174, 120, 0.13);
+    --article-accent-line: rgba(214, 174, 120, 0.34);
+}
+
+.article-reading-progress {
+    position: fixed;
+    z-index: 70;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 2px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.article-reading-progress-bar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--article-accent);
+    box-shadow: 0 0 8px var(--article-accent-line);
+    transform: scaleX(var(--article-reading-progress, 0));
+    transform-origin: left center;
+    will-change: transform;
+}
+
+.article-channel-mark {
+    display: flex;
+    align-items: center;
+    gap: 0.38rem;
+    margin: 0 0 0.7rem;
+    color: var(--article-accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.105em;
+    text-transform: uppercase;
+}
+
+.article-channel-mark::before {
+    width: 1.55rem;
+    height: 1px;
+    background: var(--article-accent-line);
+    content: "";
+}
+
+.article-shell[data-article-type] .article-toc-label {
+    display: flex;
+    align-items: center;
+    gap: 0.36rem;
+    margin: 0 0 0.58rem;
+    padding: 0.1rem 0.5rem 0.38rem 0.7rem;
+    color: var(--article-accent);
+    font-size: 0.66rem;
+    font-weight: 750;
+    letter-spacing: 0.11em;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+    .article-channel-mark {
+        margin-bottom: 0.6rem;
+        font-size: 0.68rem;
+    }
+
+}
+
+@media print {
+    .article-reading-progress,
+    .article-channel-mark,
+    .article-toc-label {
+        display: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .article-reading-progress-bar {
+        will-change: auto;
+    }
+}
+
 /* TOC: hierarchy, active chain, and Notion-like quiet chrome. */
 .toc-right {
     position: static !important;
@@ -991,4 +1097,3 @@ html.dark #appearance-switcher svg path {
         margin-top: 2.1rem;
     }
 }
-

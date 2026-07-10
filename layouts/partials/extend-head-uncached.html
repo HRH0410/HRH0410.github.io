@@ -10,6 +10,9 @@
 {{ $clipboardJS := resources.Get "js/about-clipboard.js" | resources.Minify | resources.Fingerprint }}
 <script defer src="{{ $clipboardJS.RelPermalink }}" integrity="{{ $clipboardJS.Data.Integrity }}"></script>
 
+{{ $articleReadingJS := resources.Get "js/article-reading.js" | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $articleReadingJS.RelPermalink }}" integrity="{{ $articleReadingJS.Data.Integrity }}" data-turbo-track="reload"></script>
+
 {{ if and .IsPage (eq .RelPermalink "/about/") }}
   {{ $aboutRevealCSS := resources.Get "css/about-reveal.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $aboutRevealCSS.RelPermalink }}" integrity="{{ $aboutRevealCSS.Data.Integrity }}" data-turbo-track="reload">

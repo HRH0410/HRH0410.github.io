@@ -1,6 +1,15 @@
 {{ define "main" }}
   {{ .Scratch.Set "scope" "single" }}
-  <article class="article-shell">
+  {{ $postType := .Params.postType | default "" }}
+  {{ $isReadingPost := and (eq .Section "posts") (or (eq $postType "study") (eq $postType "personal")) }}
+  <article
+    class="article-shell{{ if $isReadingPost }} article-shell--{{ $postType }}{{ end }}"
+    {{ if $isReadingPost }}data-article-type="{{ $postType }}"{{ end }}>
+    {{ if $isReadingPost }}
+      <div class="article-reading-progress" aria-hidden="true">
+        <span class="article-reading-progress-bar" data-article-progress></span>
+      </div>
+    {{ end }}
     {{/* Hero */}}
     {{ if .Params.showHero | default (site.Params.article.showHero | default false) }}
       {{ $heroStyle := .Params.heroStyle }}
@@ -17,6 +26,15 @@
     <header id="single_header" class="article-header mt-5">
       {{ if .Params.showBreadcrumbs | default (site.Params.article.showBreadcrumbs | default false) }}
         {{ partial "breadcrumbs.html" . }}
+      {{ end }}
+      {{ if $isReadingPost }}
+        <p class="article-channel-mark">
+          {{ if eq $postType "study" }}
+            <span lang="en">FIELD NOTES</span><span aria-hidden="true">·</span><span>学习笔记</span>
+          {{ else }}
+            <span lang="en">PERSONAL JOURNAL</span><span aria-hidden="true">·</span><span>漫步日常</span>
+          {{ end }}
+        </p>
       {{ end }}
       <h1 class="article-title mt-0 text-neutral-900 dark:text-neutral">
         {{ .Title | emojify }}

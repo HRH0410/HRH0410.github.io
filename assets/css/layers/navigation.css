@@ -1,0 +1,91 @@
+@media (max-width: 768px) {
+    .site-nav-shell {
+        top: 0.5rem !important;
+        padding-inline: 0.95rem !important;
+    }
+
+    #menu-blur {
+        width: min(100%, 18.75rem) !important;
+        min-height: 2.82rem !important;
+        padding: 0.3rem 0.52rem !important;
+    }
+
+    #menu-blur .main-menu,
+    #menu-blur .main-menu .ms-auto,
+    #menu-blur .main-menu .ms-auto > .flex,
+    #menu-blur .main-menu .ms-auto .h-14 {
+        height: auto !important;
+        min-height: 0 !important;
+        gap: 0.18rem !important;
+        align-items: center !important;
+    }
+
+    #menu-blur .logo,
+    #menu-blur img.logo,
+    .pill-nav .logo,
+    .pill-nav img.logo {
+        width: 24px !important;
+        min-width: 24px !important;
+        max-width: 24px !important;
+        height: 24px !important;
+    }
+
+    #search-button-mobile,
+    #appearance-switcher-mobile,
+    #mobile-menu-toggle + label {
+        width: 1.7rem !important;
+        height: 1.7rem !important;
+        padding: 0.26rem !important;
+    }
+
+    #search-button-mobile svg,
+    #appearance-switcher-mobile svg,
+    #mobile-menu-toggle + label svg {
+        width: 1.08rem !important;
+        height: 1.08rem !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] {
+        top: 3.45rem !important;
+        width: min(10.8rem, calc(100vw - 1.7rem)) !important;
+        padding: 0.36rem !important;
+        border-radius: 0.82rem !important;
+        background: rgba(255, 255, 255, 0.86) !important;
+        border-color: rgba(127, 143, 166, 0.16) !important;
+        box-shadow: 0 14px 34px rgba(30, 41, 59, 0.12) !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] > label {
+        top: 0.3rem !important;
+        right: 0.3rem !important;
+        width: 1.3rem !important;
+        height: 1.3rem !important;
+        opacity: 0.48 !important;
+        border-color: transparent !important;
+        background: transparent !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] nav {
+        padding-top: 1.28rem !important;
+        gap: 0.22rem !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] nav > div {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding-inline: 0 !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a {
+        min-height: 1.62rem !important;
+        padding: 0.18rem 0.44rem !important;
+        border-radius: 999px !important;
+        background: rgba(255, 255, 255, 0.5) !important;
+        border-color: rgba(127, 143, 166, 0.15) !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a span {
+        font-size: 0.76rem !important;
+        font-weight: 620 !important;
+    }
+}

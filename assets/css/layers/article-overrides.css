@@ -1,0 +1,328 @@
+/* =============================================
+   Final Article Reading Overrides
+   Keep this section last so imported notes share one rendering standard.
+   ============================================= */
+.article-shell {
+    width: min(100%, 1160px);
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 3.2vw, 2.25rem);
+}
+
+.article-header,
+.article-body-column,
+.article-footer {
+    width: min(100%, 780px);
+    max-width: none !important;
+}
+
+.article-title {
+    max-width: 13.5em;
+    font-size: clamp(1.95rem, 3.45vw, 2.55rem) !important;
+    line-height: 1.08 !important;
+    font-weight: 760 !important;
+    letter-spacing: 0 !important;
+    color: var(--article-ink) !important;
+}
+
+.article-layout {
+    gap: clamp(1.5rem, 4vw, 3.1rem);
+    align-items: flex-start;
+}
+
+.article-body-column {
+    flex: 0 1 780px;
+}
+
+.article-toc-column {
+    width: 280px;
+    flex: 0 0 280px;
+}
+
+.article-reading-content {
+    width: 100%;
+    max-width: none !important;
+    color: var(--article-ink) !important;
+    font-size: 1.02rem;
+    line-height: 1.82;
+    letter-spacing: 0;
+}
+
+.article-content p {
+    line-height: 1.86;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4 {
+    color: var(--article-ink) !important;
+    font-weight: 720;
+    letter-spacing: 0 !important;
+    scroll-margin-top: 8.5rem;
+}
+
+.article-content h1 {
+    margin-top: 3rem;
+    margin-bottom: 1.05rem;
+    font-size: clamp(1.55rem, 2.25vw, 1.86rem);
+    line-height: 1.22;
+}
+
+.article-content h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    font-size: clamp(1.55rem, 2.25vw, 1.82rem);
+    line-height: 1.26;
+}
+
+.article-content h3 {
+    margin-top: 2.15rem;
+    margin-bottom: 0.8rem;
+    font-size: clamp(1.28rem, 1.8vw, 1.44rem);
+    line-height: 1.32;
+}
+
+.article-content h4 {
+    margin-top: 1.75rem;
+    margin-bottom: 0.65rem;
+    font-size: 1.08rem;
+    line-height: 1.42;
+    font-weight: 690;
+    color: #31302e !important;
+}
+
+.dark .article-content h4 {
+    color: #e4ded7 !important;
+}
+
+.article-content h2::before {
+    content: "";
+    position: absolute;
+    left: -1rem;
+    top: 0.3em;
+    width: 3px;
+    height: 1.05em;
+    border-radius: 999px;
+    background: var(--article-link);
+}
+
+.article-content > h1:first-child,
+.article-content > h2:first-child,
+.article-content > h3:first-child,
+.article-content > h4:first-child {
+    margin-top: 0.9rem;
+}
+
+.article-content a {
+    color: var(--article-link);
+    text-decoration-color: rgba(0, 117, 222, 0.38);
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 0.075em;
+}
+
+.article-content strong {
+    color: var(--article-ink);
+    font-weight: 700;
+}
+
+.article-content blockquote {
+    margin: 1.35rem 0;
+    border-left: 3px solid rgba(0, 117, 222, 0.35);
+    border-radius: 8px;
+    background: var(--article-link-soft);
+    padding: 0.85rem 1rem;
+    color: var(--article-ink);
+}
+
+.article-content :not(pre) > code {
+    border: 1px solid var(--article-soft-line);
+    border-radius: 5px;
+    background: var(--article-code-bg);
+    padding: 0.12em 0.34em;
+    color: var(--article-ink);
+    font-size: 0.9em;
+}
+
+.article-content .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.3rem 0.2rem;
+}
+
+.article-content figure > img {
+    border: 1px solid var(--article-soft-line);
+    border-radius: 8px;
+    box-shadow: 0 12px 28px rgba(34, 32, 29, 0.08);
+}
+
+.article-content figure > figcaption {
+    color: var(--article-faint);
+    font-size: 0.84rem;
+}
+
+.toc-right {
+    position: static !important;
+    top: 6.4rem;
+    max-height: calc(100vh - 8.4rem);
+    padding-right: 0.2rem !important;
+}
+
+.toc-right > div,
+.toc-inside > div,
+.toc-panel {
+    border-left: 1px solid var(--article-hairline) !important;
+    padding-left: 0.95rem !important;
+}
+
+#TableOfContents {
+    font-size: 0.88rem;
+    line-height: 1.45;
+}
+
+#TableOfContents ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#TableOfContents li {
+    margin: 0;
+}
+
+#TableOfContents li ul {
+    padding-left: 0.78rem;
+    margin-top: 0.1rem;
+    margin-bottom: 0.18rem;
+}
+
+#TableOfContents a {
+    position: relative;
+    display: block;
+    border-radius: 7px;
+    padding: 0.28rem 0.5rem 0.28rem 0.7rem;
+    color: var(--article-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+#TableOfContents a::before {
+    content: "";
+    position: absolute;
+    left: -0.98rem;
+    top: 0.58rem;
+    width: 2px;
+    height: calc(100% - 1.16rem);
+    min-height: 0.65rem;
+    border-radius: 999px;
+    background: transparent;
+}
+
+#TableOfContents > ul > li > a {
+    margin-top: 0.12rem;
+    color: var(--article-ink);
+    font-size: 0.92rem;
+    font-weight: 680;
+}
+
+#TableOfContents > ul > li > ul > li > a {
+    font-size: 0.82rem;
+    font-weight: 540;
+    color: var(--article-muted);
+}
+
+#TableOfContents > ul > li > ul > li > ul > li > a {
+    font-size: 0.78rem;
+    font-weight: 460;
+    color: var(--article-faint);
+    padding-top: 0.22rem;
+    padding-bottom: 0.22rem;
+}
+
+#TableOfContents a:hover {
+    color: var(--article-ink);
+    background: var(--article-code-bg);
+    transform: translateX(1px);
+}
+
+#TableOfContents a.active-parent {
+    color: var(--article-ink);
+}
+
+#TableOfContents a.active {
+    color: var(--article-link);
+    font-weight: 700;
+    background: var(--article-link-soft);
+}
+
+#TableOfContents a.active::before,
+#TableOfContents a.active-parent::before {
+    background: var(--article-link);
+}
+
+#TableOfContents a.active-parent::before {
+    opacity: 0.42;
+}
+
+#TableOfContents a.active::before {
+    opacity: 1;
+}
+
+@media (max-width: 1023px) {
+    .article-shell {
+        width: min(100%, 820px);
+    }
+
+    .article-header,
+    .article-body-column,
+    .article-footer {
+        width: 100%;
+    }
+
+    .article-toc-column {
+        width: 100%;
+        flex-basis: auto;
+    }
+
+    .article-content h2::before {
+        left: -0.72rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .article-shell {
+        padding-inline: 1rem;
+    }
+
+    .article-title {
+        font-size: clamp(1.9rem, 9vw, 2.35rem) !important;
+    }
+
+    .article-reading-content {
+        font-size: 1rem;
+        line-height: 1.78;
+    }
+
+    .article-content p {
+        line-height: 1.78;
+    }
+
+    .article-content h1 {
+        font-size: 1.68rem;
+    }
+
+    .article-content h2 {
+        font-size: 1.48rem;
+    }
+
+    .article-content h3 {
+        font-size: 1.24rem;
+    }
+
+    .article-content h4 {
+        font-size: 1.06rem;
+    }
+}
+

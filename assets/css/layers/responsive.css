@@ -1,0 +1,452 @@
+/* =============================================
+   Mobile Layout Rescue
+   Kept last and mobile-only so desktop rendering stays untouched.
+   ============================================= */
+@media (max-width: 768px) {
+    main#main-content {
+        padding-top: 0 !important;
+        overflow-x: clip;
+    }
+
+    .article-shell,
+    .posts-hub-page,
+    .channel-page {
+        width: min(100%, 390px) !important;
+        max-width: 100% !important;
+        margin-inline: auto !important;
+        padding-inline: 1rem !important;
+        box-sizing: border-box !important;
+    }
+
+    #single_header {
+        padding-top: 5.65rem !important;
+        margin-top: 0 !important;
+        margin-bottom: 0.85rem !important;
+    }
+
+    .article-header,
+    .article-body-column,
+    .article-footer {
+        width: 100% !important;
+    }
+
+    .article-title {
+        max-width: 100% !important;
+        font-size: clamp(1.52rem, 7.1vw, 1.95rem) !important;
+        line-height: 1.14 !important;
+        letter-spacing: 0 !important;
+        overflow-wrap: anywhere;
+    }
+
+    .article-meta {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 0.2rem 0.42rem !important;
+        margin-top: 0.55rem !important;
+        margin-bottom: 0.7rem !important;
+        font-size: 0.92rem !important;
+        line-height: 1.35 !important;
+    }
+
+    .article-layout {
+        display: block !important;
+        gap: 0.8rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 0 !important;
+    }
+
+    .article-body-column {
+        display: block !important;
+        flex: none !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        margin-inline: 0 !important;
+        overflow: visible !important;
+    }
+
+    .article-content,
+    .article-reading-content {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .article-footer {
+        position: relative !important;
+        clear: both !important;
+        margin-top: 2.25rem !important;
+    }
+
+    .article-toc-column {
+        width: 100% !important;
+        flex: 0 0 auto !important;
+        padding-left: 0 !important;
+        margin: 0 0 0.6rem !important;
+    }
+
+    .article-toc-column .toc,
+    .toc-right {
+        position: static !important;
+        max-height: none !important;
+        padding: 0 !important;
+    }
+
+    .toc-right > div,
+    .toc-inside > div,
+    .toc-panel {
+        padding-left: 0.7rem !important;
+    }
+
+    #TableOfContents {
+        font-size: 0.82rem !important;
+        line-height: 1.35 !important;
+        max-height: 12rem;
+        overflow-y: auto;
+    }
+
+    .article-reading-content {
+        font-size: 0.98rem !important;
+        line-height: 1.76 !important;
+        overflow-wrap: anywhere;
+    }
+
+    .article-content p {
+        line-height: 1.78 !important;
+    }
+
+    .article-content h1 {
+        font-size: 1.42rem !important;
+        line-height: 1.22 !important;
+    }
+
+    .article-content h2 {
+        font-size: 1.42rem !important;
+        line-height: 1.28 !important;
+        margin-top: 2rem !important;
+    }
+
+    .article-content h3 {
+        font-size: 1.18rem !important;
+        line-height: 1.34 !important;
+    }
+
+    .article-content h2::before {
+        left: -0.62rem !important;
+        width: 2px !important;
+    }
+
+    .katex-display,
+    .article-content table,
+    .article-content pre {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .posts-hub-page,
+    .channel-page {
+        padding-top: 5.25rem !important;
+    }
+
+    .posts-hub-page::before,
+    .channel-page::before {
+        inset: 4.8rem 0.5rem auto !important;
+        min-height: 18rem;
+        border-radius: 1.2rem;
+    }
+
+    .posts-hub-header,
+    .channel-header {
+        margin-top: 0 !important;
+        margin-bottom: 1.1rem !important;
+    }
+
+    .posts-hub-kicker,
+    .channel-kicker {
+        font-size: 0.68rem !important;
+        letter-spacing: 0.13em !important;
+    }
+
+    .posts-hub-title,
+    .channel-title {
+        font-size: clamp(1.85rem, 8.2vw, 2.25rem) !important;
+        line-height: 1.08 !important;
+    }
+
+    .posts-hub-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.55rem !important;
+        margin-bottom: 0.9rem !important;
+    }
+
+    .posts-hub-stat-card {
+        min-height: 4.65rem;
+        padding: 0.72rem 0.72rem 0.66rem !important;
+        border-radius: 14px !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .posts-hub-stat-card::before {
+        width: 2.1rem !important;
+        height: 0.5rem !important;
+        top: -0.28rem !important;
+        left: 0.72rem !important;
+    }
+
+    .posts-hub-stat-label {
+        font-size: 0.72rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .posts-hub-stat-value {
+        margin-top: 0.22rem;
+        font-size: clamp(1.08rem, 5vw, 1.34rem) !important;
+        line-height: 1.08 !important;
+        overflow-wrap: anywhere;
+    }
+
+    .posts-hub-branches {
+        gap: 0.85rem !important;
+        margin-top: 1rem !important;
+    }
+
+    .branch-card-content {
+        padding: 1.25rem 1.05rem 1.08rem !important;
+    }
+
+    .branch-title {
+        font-size: 1.34rem !important;
+    }
+
+    .branch-meta {
+        gap: 0.35rem !important;
+    }
+
+    .branch-meta span {
+        font-size: 0.76rem !important;
+    }
+
+    .posts-hub-latest {
+        margin-top: 1rem !important;
+        padding: 0.88rem 0.86rem !important;
+    }
+
+    .posts-hub-latest-link {
+        font-size: 0.98rem !important;
+        line-height: 1.32 !important;
+    }
+
+    .posts-hub-latest-meta {
+        font-size: 0.78rem !important;
+        line-height: 1.4 !important;
+    }
+
+    .channel-header {
+        padding: 0.95rem 0.9rem 0.84rem !important;
+    }
+
+    .channel-badge {
+        font-size: 0.74rem !important;
+    }
+
+    .channel-item {
+        padding: 0.78rem 0.8rem 0.72rem !important;
+        border-radius: 14px !important;
+    }
+
+    .channel-item .article-link--simple h2 {
+        font-size: 1rem !important;
+        line-height: 1.35 !important;
+    }
+
+    .article-content .profile-card {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0.4rem 0 1.6rem !important;
+        padding: 1.35rem 1rem !important;
+        gap: 1.1rem !important;
+        border-radius: 20px !important;
+        box-sizing: border-box !important;
+    }
+
+    .article-content .profile-avatar {
+        width: 112px !important;
+        height: 112px !important;
+        border-radius: 18px !important;
+        margin: 0 auto !important;
+    }
+
+    .article-content .profile-info {
+        width: 100%;
+    }
+
+    .article-content .profile-info > h2 {
+        font-size: 1.36rem !important;
+        line-height: 1.2 !important;
+        margin: 0.25rem 0 0.8rem !important;
+        text-align: center !important;
+    }
+
+    .article-content .profile-info > p {
+        font-size: 1rem !important;
+        line-height: 1.9 !important;
+        text-align: left !important;
+        margin: 0.82rem 0 !important;
+    }
+
+    .article-content .profile-info > p:first-of-type {
+        margin-top: 0 !important;
+    }
+
+    .article-content .timeline {
+        padding-left: 1rem !important;
+        margin: 0.7rem 0 1.2rem !important;
+    }
+
+    .article-content .timeline-item {
+        padding: 0.95rem 0 0.95rem 1rem !important;
+    }
+
+    .article-content .timeline-item::before {
+        left: -1rem !important;
+        top: 1.55rem !important;
+        transform: translateX(-3px) !important;
+    }
+
+    .article-content .timeline-date {
+        font-size: 0.76rem !important;
+    }
+
+    .article-content .timeline-title {
+        font-size: 1rem !important;
+        line-height: 1.35 !important;
+    }
+
+    .article-content .timeline-desc {
+        font-size: 0.82rem !important;
+        line-height: 1.45 !important;
+    }
+
+    .article-content .tag-list {
+        gap: 0.48rem !important;
+    }
+
+    .article-content .tag {
+        padding: 0.4rem 0.75rem !important;
+        font-size: 0.8rem !important;
+    }
+
+    .article-content .project-card,
+    .article-content .contact-card {
+        padding: 1.15rem !important;
+        border-radius: 14px !important;
+    }
+
+    .article-content .mini-cards {
+        grid-template-columns: 1fr !important;
+        gap: 0.7rem !important;
+    }
+
+    .article-content .travel-wall {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 1rem 0 1.4rem !important;
+        padding: 1.15rem 0.85rem !important;
+        border-radius: 16px !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    .article-content .travel-wall::before {
+        left: 3.65rem !important;
+        top: 1rem !important;
+        bottom: 1rem !important;
+    }
+
+    .article-content .wall-timeline {
+        gap: 1.35rem !important;
+    }
+
+    .article-content .year-section {
+        padding-left: 4.8rem !important;
+    }
+
+    .article-content .year-label {
+        font-size: 1.1rem !important;
+        top: 0.55rem !important;
+    }
+
+    .article-content .year-label::after {
+        right: -1.22rem !important;
+        width: 0.48rem !important;
+        height: 0.48rem !important;
+        border-width: 2px !important;
+    }
+
+    .article-content .cities-pins {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 0.58rem !important;
+        min-width: 0 !important;
+    }
+
+    .article-content .pin-card {
+        width: 100% !important;
+        min-width: 0 !important;
+        padding: 0.75rem 0.85rem !important;
+        border-radius: 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    .article-content .pin-city {
+        justify-content: flex-start !important;
+        gap: 0.55rem !important;
+        font-size: 0.95rem !important;
+        white-space: normal !important;
+    }
+
+    .article-content .pin-emoji {
+        font-size: 1.08rem !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .article-shell,
+    .posts-hub-page,
+    .channel-page {
+        padding-inline: 0.82rem !important;
+    }
+
+    .article-title {
+        font-size: clamp(1.62rem, 8.2vw, 2rem) !important;
+    }
+
+    .posts-hub-stats {
+        gap: 0.48rem !important;
+    }
+
+    .posts-hub-stat-card {
+        padding-inline: 0.58rem !important;
+    }
+
+    .posts-hub-stat-value {
+        font-size: clamp(0.98rem, 4.8vw, 1.2rem) !important;
+    }
+
+    .article-content .travel-wall::before {
+        left: 3.25rem !important;
+    }
+
+    .article-content .year-section {
+        padding-left: 4.35rem !important;
+    }
+}
+

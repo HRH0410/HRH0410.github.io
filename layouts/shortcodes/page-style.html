@@ -1,0 +1,7 @@
+{{- $path := .Get 0 -}}
+{{- with resources.Get $path -}}
+  {{- $style := . | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") -}}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+{{- else -}}
+  {{- errorf "page-style shortcode could not find asset %q" $path -}}
+{{- end -}}

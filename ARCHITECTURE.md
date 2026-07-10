@@ -8,16 +8,20 @@
 - 静态站点框架：Hugo
 - 主题：Blowfish（`theme = "blowfish"`）
 - 主要自定义方式：
-  - `content/` 页面内容（大量页面内联 HTML + `<style>`）
+  - `content/` 页面内容（保留页面 HTML 结构，不再内联大段 `<style>`）
   - `layouts/` 局部模板覆盖（优先级高于主题）
-  - `assets/css/custom.css` 全站样式补丁
+  - `assets/css/foundation/` 统一设计变量
+  - `assets/css/layers/` 全站样式分层
+  - `assets/css/pages/` 页面专属样式
   - `static/` 静态资源（图片等）
 
 ## 2. 目录职责
 
 - `content/`：站点内容（首页、文章、项目、关于我等）
 - `layouts/`：自定义模板（列表页、header、首页背景、head 扩展）
-- `assets/css/custom.css`：全局样式入口（目前体量最大）
+- `assets/css/foundation/tokens.css`：颜色、字体、间距、圆角、布局与动效变量
+- `assets/css/layers/`：全局、文章、频道、响应式与导航样式层
+- `assets/css/pages/`：首页、About、项目等页面级样式
 - `static/img/`：文章图片、站点图片等
 - `config/_default/`：Hugo 与主题配置（语言、菜单、参数、markup）
 - `public/`：构建产物（生成目录，不作为“源码编辑”入口）
@@ -54,13 +58,13 @@
 - 路由：`/projects/`
 - 内容文件：`content/projects/_index.md`
 - 布局：`layout = "simple"`
-- 当前实现：页面结构 + 专属样式都写在该文件内（内联 `<style>`）
+- 当前实现：页面结构保留在内容文件，专属样式位于 `assets/css/pages/projects.css`
 
 ### 3.5 关于我页
 
 - 路由：`/about/`
 - 内容文件：`content/about/index.md`
-- 特点：内容与样式高度共址（内联 `<style>` + 自定义组件块）
+- 特点：内容与自定义组件块保留在 Markdown，样式位于 `assets/css/pages/about-content.css`
 
 ## 4. 数据模型与内容约定
 
@@ -88,25 +92,24 @@
 
 ## 5.1 全局样式入口
 
-- 文件：`assets/css/custom.css`
-- 作用：
-  - 覆盖 Blowfish 默认视觉
-  - TOC 样式
-  - 文章页顶部避让 fixed nav
-  - 图注与图片尺寸控制（含横图识别类 `is-landscape`）
-  - admonition（重点框）重绘
-  - `/posts/`、`/notes/`、`/daily/` 页面样式
+- 加载模板：`layouts/partials/head.html`
+- 设计变量：`assets/css/foundation/tokens.css`（统一使用 `--steph-*` 命名空间）
+- 全局基础：`assets/css/layers/global.css`
+- 文章系统：`assets/css/layers/article.css` + `article-overrides.css`
+- 频道系统：`assets/css/layers/channels.css`
+- 响应式兼容：`assets/css/layers/responsive.css`
+- 导航覆盖：`assets/css/layers/navigation.css`
+- About 最终覆盖：`assets/css/layers/about-overrides.css`
 
-## 5.2 页面内联样式
+以上文件按旧 `custom.css` 的原始顺序加载，不能随意调整顺序。
 
-以下页面将样式与内容写在同一文件：
+## 5.2 页面样式
 
-- `content/_index.md`（首页）
-- `content/about/index.md`
-- `content/projects/_index.md`
+- 首页：`assets/css/pages/home-content.css`
+- About：`assets/css/pages/about-content.css`
+- 项目页：`assets/css/pages/projects.css`
 
-优点：改页面快。  
-代价：样式分散，不便统一重构。
+内容文件在原 `<style>` 位置使用 `page-style` shortcode 加载对应资源，从而保持原有 CSS 层叠顺序。
 
 ## 6. 关键自定义模板说明
 
@@ -175,20 +178,15 @@ CACHE_DIR="$(pwd)/.hugo_cache" && hugo --minify --gc --cleanDestinationDir --cac
 ## 10. 当前架构下的编辑建议
 
 1. 改频道聚合逻辑：优先改 `layouts/posts/list.html` 和 `layouts/partials/posts/channel-list.html`  
-2. 改 notes/daily 风格：优先改 `assets/css/custom.css` 的 `channel-*` 样式段  
-3. 改项目页：直接改 `content/projects/_index.md`（当前是页面内联样式）  
-4. 改首页视觉：`content/_index.md` + `layouts/partials/home/background.html`  
+2. 改 notes/daily 风格：优先改 `assets/css/layers/channels.css`
+3. 改项目页结构：`content/projects/_index.md`；改视觉：`assets/css/pages/projects.css`
+4. 改首页结构：`content/_index.md`；改视觉：`assets/css/pages/home-content.css` + `assets/css/pages/home.css`
 5. 改固定导航：`layouts/partials/header/fixed-fill-blur.html`
 
 ## 11. 技术债与后续可选优化（非必须）
 
-- `assets/css/custom.css` 体量较大，可分拆为：
-  - `article.css`
-  - `posts-hub.css`
-  - `channel.css`
-  - `global-overrides.css`
-- 将 `content/projects/_index.md`、`content/about/index.md` 的内联样式迁移到 `assets/css`，减少内容文件复杂度。
 - 将部分内联 HTML 组件抽成 `layouts/partials/*`，提高复用性。
+- `article-overrides.css` 与 `responsive.css` 仍保留旧层叠顺序；后续若合并重复规则，必须单独做视觉回归。
 
 ## 12. 最近变更快照（2026-02-09）
 
@@ -200,7 +198,7 @@ CACHE_DIR="$(pwd)/.hugo_cache" && hugo --minify --gc --cleanDestinationDir --cac
   - `feature-grid`（代表项目，不对称 7/5 栅格）
   - `course-grid`（课程作品，3 列工作卡）
 - 关键样式：
-  - 继续使用页面内联 `<style>` 管理（当前无独立 css 文件）
+  - 样式已迁移到 `assets/css/pages/projects.css`
   - 标题避让 fixed nav 使用：
     - `main#main-content > article > header > h1 { margin-top: ... }`
   - 深色模式在同文件内配套覆盖（`.dark ...`）

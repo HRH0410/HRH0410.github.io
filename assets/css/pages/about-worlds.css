@@ -2040,7 +2040,7 @@ Original-game asset composition. World objects are sprites, never CSS drawings.
 }
 
 .town-hobby-sign[aria-disabled="true"] {
-  cursor: wait;
+  cursor: default;
 }
 
 /* PHOTO sits at the upper-left corner of the farmhouse roof. */

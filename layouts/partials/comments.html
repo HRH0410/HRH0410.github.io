@@ -1,0 +1,70 @@
+{{/* Giscus comments — auto-syncs with Blowfish light/dark mode */}}
+<div class="giscus-comments">
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="HRH0410/HRH0410.github.io"
+    data-repo-id="R_kgDORFXBnw"
+    data-category="General"
+    data-category-id="DIC_kwDORFXBn84DBBAt"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+<script>
+  (function () {
+    function currentSiteTheme() {
+      return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    }
+
+    function sendGiscusTheme(theme) {
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe || !iframe.contentWindow) return;
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: theme } } },
+        'https://giscus.app'
+      );
+    }
+
+    function syncGiscusTheme() {
+      sendGiscusTheme(currentSiteTheme());
+    }
+
+    function bindGiscusSync() {
+      const switcher = document.getElementById('appearance-switcher');
+      const switcherMobile = document.getElementById('appearance-switcher-mobile');
+      if (switcher) {
+        switcher.removeEventListener('click', onAppearanceToggle);
+        switcher.addEventListener('click', onAppearanceToggle);
+      }
+      if (switcherMobile) {
+        switcherMobile.removeEventListener('click', onAppearanceToggle);
+        switcherMobile.addEventListener('click', onAppearanceToggle);
+      }
+      // Give Giscus a moment to mount its iframe, then sync to the current site theme
+      setTimeout(syncGiscusTheme, 100);
+      setTimeout(syncGiscusTheme, 600);
+    }
+
+    function onAppearanceToggle() {
+      setTimeout(syncGiscusTheme, 50);
+    }
+
+    // Initial page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bindGiscusSync);
+    } else {
+      bindGiscusSync();
+    }
+
+    // Turbo navigation support
+    document.addEventListener('turbo:load', bindGiscusSync);
+  })();
+</script>

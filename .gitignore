@@ -34,6 +34,51 @@ resources/_gen/
 .hugo_cache_preview/
 .hugo_build.lock
 
+# Local design references and raw source-asset libraries
+# Production-ready derivatives belong in static/img/about/ instead.
+assets-to-be-used/
+
+# About-page generated assets: keep only the production set referenced by the
+# current partials. Older scene experiments may remain locally without being
+# included in commits.
+static/img/about/worlds/**
+!static/img/about/worlds/studio/
+!static/img/about/worlds/studio/coder.gif
+!static/img/about/worlds/studio/coder-still.png
+!static/img/about/worlds/studio/ai-workplace.svg
+!static/img/about/worlds/studio/sandy-loading.svg
+!static/img/about/worlds/town/
+!static/img/about/worlds/town/farmstead-day.png
+!static/img/about/worlds/town/farmstead-night.png
+!static/img/about/worlds/town/travel-bus-front.png
+!static/img/about/worlds/town/movie-tv.png
+!static/img/about/worlds/town/movie-chair.png
+!static/img/about/worlds/town/electric-guitar.png
+!static/img/about/worlds/town/drum-kit.png
+!static/img/about/worlds/town/keyboard.png
+!static/img/about/worlds/town/amplifier.png
+!static/img/about/worlds/town/arcade-cabinet.png
+!static/img/about/worlds/town/label-music.png
+!static/img/about/worlds/town/label-photo.png
+!static/img/about/worlds/town/label-travel.png
+!static/img/about/worlds/town/label-game.png
+!static/img/about/worlds/town/label-guitar.png
+!static/img/about/worlds/town/label-movie.png
+!static/img/about/worlds/sprites/
+!static/img/about/worlds/sprites/blue-bird-flight.png
+!static/img/about/worlds/sprites/photo-flash.png
+!static/img/about/worlds/sprites/pixel-sparkle.png
+!static/img/about/worlds/sprites/shadow.png
+!static/img/about/worlds/sprites/kent-idle.png
+!static/img/about/worlds/sprites/kent-walk-down.png
+!static/img/about/worlds/sprites/kent-walk-right.png
+!static/img/about/worlds/sprites/kent-walk-up.png
+!static/img/about/worlds/sprites/cat-idle.png
+!static/img/about/worlds/sprites/chicken-peck.png
+!static/img/about/worlds/sprites/brown-chicken-peck.png
+!static/img/about/worlds/sprites/horse-walk-side.png
+!static/img/about/worlds/sprites/butterfly-flight.png
+
 # Local scratch / generated files
 tmp/
 *.log

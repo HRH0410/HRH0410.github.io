@@ -168,7 +168,9 @@
 
 .platter-ring {
   position: relative;
-  z-index: 2;
+  /* The listening station contains decorative layers up to z-index: 8. */
+  z-index: 20;
+  isolation: isolate;
   width: min(68vw, 218px);
   aspect-ratio: 1;
   display: grid;
@@ -516,6 +518,151 @@
 
 .carousel-card.is-active {
   transform: translateY(-2px);
+}
+
+/* =============================================
+   Homepage traveler — presentational only
+   No controls or JavaScript dependencies: the persistent music player remains
+   entirely outside this component's scope.
+   ============================================= */
+.home-wanderer {
+  --wanderer-ink: #3e3329;
+  --wanderer-ink-soft: rgba(62, 51, 41, 0.58);
+  --wanderer-hair: #4a3628;
+  --wanderer-skin: #dfb88e;
+  --wanderer-jacket: #eadab9;
+  --wanderer-jacket-shadow: #cdb993;
+  --wanderer-trousers: #344351;
+  --wanderer-cuff: #29353f;
+  --wanderer-boot: #ae762d;
+  --wanderer-scarf: #a4513d;
+  --wanderer-map: #d5c8ad;
+  --wanderer-route: #7f918c;
+  --wanderer-hill: #657555;
+  --wanderer-hill-shadow: #44513c;
+  --wanderer-ground: rgba(62, 51, 41, 0.14);
+
+  /* Root-level fixed positioning means there is no clipping ancestor. */
+  position: fixed;
+  top: clamp(10rem, 28vh, 19rem);
+  right: max(1.25rem, calc((100vw - var(--steph-layout-site-max)) / 2 + 1rem));
+  left: auto;
+  z-index: 30;
+  isolation: isolate;
+  width: clamp(8.5rem, 13vw, 12.25rem);
+  margin: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.94;
+  animation: home-wanderer-arrive 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+}
+
+.home-wanderer__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  transform-origin: center bottom;
+  filter: drop-shadow(0 14px 16px rgba(45, 36, 28, 0.12));
+  animation: home-wanderer-breathe 5.8s ease-in-out infinite 1.1s;
+}
+
+.home-wanderer__ground-shadow { fill: var(--wanderer-ground); }
+.home-wanderer__hill-fill { fill: var(--wanderer-hill); }
+.home-wanderer__hill-line,
+.home-wanderer__sprig,
+.home-wanderer__hair-line,
+.home-wanderer__face-line,
+.home-wanderer__map-fold,
+.home-wanderer__map-route,
+.home-wanderer__scarf-fringe {
+  stroke: var(--wanderer-ink-soft);
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.home-wanderer__hill-line { stroke: rgba(236, 229, 209, 0.36); }
+.home-wanderer__sprig { stroke: var(--wanderer-hill-shadow); }
+.home-wanderer__seed { fill: #aa965d; }
+.home-wanderer__leg { fill: var(--wanderer-trousers); }
+.home-wanderer__leg--back { fill: #2b3944; }
+.home-wanderer__cuff { fill: var(--wanderer-cuff); }
+.home-wanderer__boot { fill: var(--wanderer-boot); }
+.home-wanderer__jacket-shadow { fill: var(--wanderer-jacket-shadow); }
+.home-wanderer__jacket,
+.home-wanderer__arm { fill: var(--wanderer-jacket); }
+.home-wanderer__jacket-line { stroke: rgba(91, 72, 49, 0.33); stroke-width: 1.4; stroke-linecap: round; }
+.home-wanderer__collar { fill: #f1e4ca; }
+.home-wanderer__hand,
+.home-wanderer__neck,
+.home-wanderer__face,
+.home-wanderer__ear { fill: var(--wanderer-skin); }
+.home-wanderer__map-shadow { fill: rgba(61, 51, 40, 0.18); }
+.home-wanderer__map-paper { fill: var(--wanderer-map); }
+.home-wanderer__map-route { stroke: var(--wanderer-route); }
+.home-wanderer__hair { fill: var(--wanderer-hair); }
+.home-wanderer__scarf-loop,
+.home-wanderer__scarf-tail { fill: var(--wanderer-scarf); }
+.home-wanderer__scarf-fringe { stroke: rgba(94, 47, 37, 0.72); }
+
+.dark .home-wanderer {
+  --wanderer-ink: #e8d9c2;
+  --wanderer-ink-soft: rgba(232, 217, 194, 0.48);
+  --wanderer-hair: #392d27;
+  --wanderer-skin: #cb9b78;
+  --wanderer-jacket: #b99e78;
+  --wanderer-jacket-shadow: #927855;
+  --wanderer-trousers: #3d5260;
+  --wanderer-cuff: #273843;
+  --wanderer-boot: #a8712c;
+  --wanderer-scarf: #b6634d;
+  --wanderer-map: #a99d82;
+  --wanderer-route: #c2c6ad;
+  --wanderer-hill: #52634d;
+  --wanderer-hill-shadow: #364334;
+  --wanderer-ground: rgba(0, 0, 0, 0.34);
+}
+
+.dark .home-wanderer__art {
+  filter: drop-shadow(0 16px 19px rgba(0, 0, 0, 0.42));
+}
+
+@keyframes home-wanderer-arrive {
+  from { opacity: 0; transform: translate3d(10px, 8px, 0); }
+  to { opacity: 0.94; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes home-wanderer-breathe {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  48% { transform: translate3d(0, -2px, 0) rotate(-0.2deg); }
+  54% { transform: translate3d(0, -2px, 0) rotate(-0.2deg); }
+}
+
+@media (max-width: 1023px) {
+  .home-wanderer {
+    top: auto;
+    right: 1rem;
+    bottom: 1rem;
+    width: 8rem;
+    opacity: 0.82;
+  }
+}
+
+@media (max-width: 639px) {
+  .home-wanderer { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-wanderer,
+  .home-wanderer__art {
+    animation: none !important;
+  }
+
+  .home-wanderer {
+    opacity: 0.94;
+    transform: none;
+  }
 }
 
 .carousel-card:focus-visible .carousel-sleeve {

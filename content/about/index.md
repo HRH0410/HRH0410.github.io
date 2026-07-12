@@ -8,25 +8,10 @@ showWordCount: false
 showTableOfContents: true
 ---
 
-{{< page-style "css/pages/about-content.css" >}}
-
 <div class="about-page-content">
 
 <!-- ==================== 个人简介卡片 ==================== -->
-<div class="profile-card">
-<img src="/img/author.jpg" alt="Steph.H" class="profile-avatar">
-<div class="profile-info">
-
-## About
-
-我是 **Steph.H**，南京大学智能科学与技术专业的一名本科生。
-
-我喜欢把自己扔进各种新鲜事物里，也乐于探索技术与创意、理性与感受之间的交汇点。这些看似“不务正业”的尝试，恰恰构成了我理解世界、表达自己和创造东西的方式。
-
-在这里，我会记录自己的学习、项目、思考，也会写下生活中的一些片段——希望它们能成为时间里可回望的痕迹。
-
-</div>
-</div>
+{{< about-profile-archive >}}
 
 <!-- ==================== 教育背景 ==================== -->
 ## Education
@@ -195,54 +180,12 @@ showTableOfContents: true
 <!-- ==================== 技能清单 ==================== -->
 ## Skills
 
-<div class="skills-container">
-
-<div class="skill-category">
-<div class="skill-header" data-number="01">
-<div class="skill-label">Code</div>
-</div>
-<div class="skill-items">
-<div class="skill-item">C / C++</div>
-<div class="skill-item">Python</div>
-<div class="skill-item">PyTorch</div>
-<div class="skill-item">Git</div>
-</div>
-</div>
-
-<div class="skill-category">
-<div class="skill-header" data-number="02">
-<div class="skill-label">AI Workflow</div>
-</div>
-<div class="skill-items">
-<div class="skill-item">Vibe Coding</div>
-<div class="skill-item">Prompt Engineering</div>
-<div class="skill-item">百炼 / Dify / Coze</div>
-</div>
-</div>
-
-<div class="skill-category">
-<div class="skill-header" data-number="03">
-<div class="skill-label">Create</div>
-</div>
-<div class="skill-items">
-<div class="skill-item">视频剪辑</div>
-<div class="skill-item">美编设计</div>
-</div>
-</div>
-
-</div>
+{{< about-skills-studio >}}
 
 <!-- ==================== 兴趣爱好 ==================== -->
 ## Hobbies
 
-<div class="tag-list hobby-archive">
-<span class="tag">🎵 音乐</span>
-<span class="tag">📷 摄影</span>
-<span class="tag">✈️ 旅行</span>
-<span class="tag">🎮 游戏</span>
-<span class="tag">📚 阅读</span>
-<span class="tag">🎬 电影</span>
-</div>
+{{< about-hobby-town >}}
 
 <!-- ==================== 走过的足迹 ==================== -->
 ## Footprints
@@ -294,5 +237,8 @@ showTableOfContents: true
 感谢你来到这里，期待与你交流 🌸
 </p>
 </div>
+
+<!-- ==================== 页尾像素彩蛋 ==================== -->
+{{< about-pixel-scene >}}
 
 </div>

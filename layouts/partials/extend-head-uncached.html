@@ -14,10 +14,20 @@
 <script defer src="{{ $articleReadingJS.RelPermalink }}" integrity="{{ $articleReadingJS.Data.Integrity }}" data-turbo-track="reload"></script>
 
 {{ if and .IsPage (eq .RelPermalink "/about/") }}
+  {{ $aboutContentCSS := resources.Get "css/pages/about-content.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $aboutContentCSS.RelPermalink }}" integrity="{{ $aboutContentCSS.Data.Integrity }}" data-turbo-track="reload">
+  {{ $aboutPersonaCSS := resources.Get "css/pages/about-persona.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $aboutPersonaCSS.RelPermalink }}" integrity="{{ $aboutPersonaCSS.Data.Integrity }}" data-turbo-track="reload">
   {{ $aboutRevealCSS := resources.Get "css/about-reveal.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $aboutRevealCSS.RelPermalink }}" integrity="{{ $aboutRevealCSS.Data.Integrity }}" data-turbo-track="reload">
+  {{ $aboutWorldsCSS := resources.Get "css/pages/about-worlds.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $aboutWorldsCSS.RelPermalink }}" integrity="{{ $aboutWorldsCSS.Data.Integrity }}" data-turbo-track="reload">
   {{ $aboutRevealJS := resources.Get "js/about-reveal.js" | resources.Minify | resources.Fingerprint }}
   <script defer src="{{ $aboutRevealJS.RelPermalink }}" integrity="{{ $aboutRevealJS.Data.Integrity }}" data-turbo-track="reload"></script>
+  {{ $aboutPersonaJS := resources.Get "js/about-persona.js" | resources.Minify | resources.Fingerprint }}
+  <script defer src="{{ $aboutPersonaJS.RelPermalink }}" integrity="{{ $aboutPersonaJS.Data.Integrity }}" data-turbo-track="reload"></script>
+  {{ $aboutWorldsJS := resources.Get "js/about-worlds.js" | resources.Minify | resources.Fingerprint }}
+  <script defer src="{{ $aboutWorldsJS.RelPermalink }}" integrity="{{ $aboutWorldsJS.Data.Integrity }}" data-turbo-track="reload"></script>
 {{ end }}
 
 {{ if site.Data.music }}

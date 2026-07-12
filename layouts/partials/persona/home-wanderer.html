@@ -1,0 +1,58 @@
+{{/*
+  Homepage-only personality illustration.
+  It deliberately has no IDs, controls, or scripts so Turbo and the permanent
+  global music player remain entirely outside its scope.
+*/}}
+<div class="home-wanderer not-prose" aria-hidden="true">
+  <svg class="home-wanderer__art" viewBox="0 0 250 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g class="home-wanderer__hill">
+      <path class="home-wanderer__ground-shadow" d="M23 323C48 305 75 298 122 298C175 298 207 308 231 326C204 340 53 340 23 323Z" />
+      <path class="home-wanderer__hill-fill" d="M32 319C56 288 85 280 122 282C168 281 202 297 222 320C196 329 171 333 126 333C82 333 55 329 32 319Z" />
+      <path class="home-wanderer__hill-line" d="M55 313C81 300 96 298 125 300C157 297 184 304 204 316" />
+      <path class="home-wanderer__sprig" d="M62 311C60 301 63 295 66 290M63 302L57 298M63 299L70 295M191 314C190 304 192 298 196 293M192 304L185 300M193 301L201 297" />
+      <circle class="home-wanderer__seed" cx="56" cy="297" r="2.4" />
+      <circle class="home-wanderer__seed" cx="70" cy="294" r="2.2" />
+      <circle class="home-wanderer__seed" cx="185" cy="300" r="2.2" />
+      <circle class="home-wanderer__seed" cx="202" cy="296" r="2.4" />
+    </g>
+
+    <g>
+      <path class="home-wanderer__leg home-wanderer__leg--back" d="M117 230L141 231L146 287L128 290L117 250Z" />
+      <path class="home-wanderer__leg home-wanderer__leg--front" d="M141 231L164 228L173 285L155 289L143 251Z" />
+      <path class="home-wanderer__cuff" d="M126 279L147 277L148 290L128 293L126 279Z" />
+      <path class="home-wanderer__cuff" d="M154 276L173 274L176 287L156 291L154 276Z" />
+      <path class="home-wanderer__boot" d="M125 287C130 286 139 288 147 291L147 301C141 304 126 304 118 302C117 297 120 291 125 287Z" />
+      <path class="home-wanderer__boot" d="M156 286C163 285 171 287 177 292C181 296 184 300 182 303C171 306 156 305 150 301C150 295 152 290 156 286Z" />
+
+      <path class="home-wanderer__jacket-shadow" d="M88 159C100 151 120 147 137 151C153 157 166 176 170 208L165 239C144 247 112 246 91 235L82 204C81 184 82 169 88 159Z" />
+      <path class="home-wanderer__jacket" d="M88 157C104 147 123 147 139 153C151 159 159 174 162 194L159 238C142 244 111 243 92 234L85 199C84 181 84 166 88 157Z" />
+      <path class="home-wanderer__jacket-line" d="M121 159L123 233M96 177C99 191 101 207 101 226M148 170C143 190 142 212 145 235" />
+      <path class="home-wanderer__collar" d="M108 153L120 171L130 153L141 165L132 180L119 177L104 166L108 153Z" />
+
+      <path class="home-wanderer__arm home-wanderer__arm--left" d="M91 169C80 177 77 194 80 210C82 220 88 226 96 223L105 207L101 180L91 169Z" />
+      <path class="home-wanderer__arm home-wanderer__arm--right" d="M150 169C164 179 169 191 166 206C163 218 156 223 149 218L141 201L143 179L150 169Z" />
+      <path class="home-wanderer__hand" d="M90 211C95 209 100 211 103 216C101 221 97 225 91 224C87 221 87 215 90 211Z" />
+      <path class="home-wanderer__hand" d="M148 209C153 207 158 209 160 214C158 219 154 222 149 220C146 217 145 212 148 209Z" />
+
+      <g class="home-wanderer__map">
+        <path class="home-wanderer__map-shadow" d="M96 184L124 191L151 181L157 213L129 223L101 215L96 184Z" />
+        <path class="home-wanderer__map-paper" d="M94 181L122 188L149 178L154 209L128 219L100 212L94 181Z" />
+        <path class="home-wanderer__map-fold" d="M122 188L128 219M149 178L128 190" />
+        <path class="home-wanderer__map-route" d="M101 190C111 188 112 198 121 197C132 195 136 186 147 188M105 203C114 199 117 207 127 205C137 203 140 196 150 198" />
+      </g>
+
+      <path class="home-wanderer__neck" d="M113 142L133 143L136 159C130 166 118 166 111 158L113 142Z" />
+      <path class="home-wanderer__face" d="M104 101C115 91 137 94 147 108C153 119 150 137 138 147C128 153 113 149 106 139C100 130 97 112 104 101Z" />
+      <path class="home-wanderer__ear" d="M145 120C153 117 155 125 150 131" />
+      <path class="home-wanderer__hair" d="M102 122C94 110 96 94 106 86C115 78 133 80 143 89C150 95 152 105 149 115C145 106 139 102 133 100C128 107 121 111 113 112C112 121 110 129 106 135C102 132 101 127 102 122Z" />
+      <path class="home-wanderer__hair-line" d="M105 100C110 91 117 88 124 89M113 96C118 88 128 87 135 92M101 108C106 105 110 106 114 110" />
+      <path class="home-wanderer__face-line" d="M136 117C139 116 141 116 143 118M140 133C136 136 132 136 129 135" />
+
+      <g>
+        <path class="home-wanderer__scarf-loop" d="M105 149C112 143 134 143 142 151C143 158 137 164 128 165C117 166 106 162 102 156C101 153 102 151 105 149Z" />
+        <path class="home-wanderer__scarf-tail" d="M105 151C94 153 82 160 70 171C61 179 51 180 45 176C54 169 61 159 70 153C82 145 94 142 106 144L105 151Z" />
+        <path class="home-wanderer__scarf-fringe" d="M47 175L41 181M52 177L47 185M58 178L54 185" />
+      </g>
+    </g>
+  </svg>
+</div>

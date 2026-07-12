@@ -1,0 +1,153 @@
+{{ if eq .mode "profile" }}
+<section class="profile-archive" id="about-profile-archive" aria-labelledby="about-archive-title">
+  <header class="profile-archive__masthead">
+    <span>Personal field notes</span>
+    <span>File no. 0410</span>
+    <span>Suzhou · 31.3°N</span>
+  </header>
+
+  <div class="profile-archive__layout">
+    <figure class="profile-archive__portrait">
+      <span class="profile-archive__tape" aria-hidden="true"></span>
+      <img src="/img/author.jpg" alt="Steph.H" class="profile-archive__avatar nozoom" data-no-zoom="true">
+      <figcaption>
+        <small>digital wanderer</small>
+      </figcaption>
+    </figure>
+
+    <div class="profile-archive__copy">
+      <p class="profile-archive__eyebrow">你好，我是</p>
+      <h2 id="about-archive-title">Steph.H</h2>
+      <p class="profile-archive__lead">南京大学智能科学与技术专业的一名本科生。</p>
+      <p>我喜欢把自己扔进各种新鲜事物里，也乐于探索技术与创意、理性与感受之间的交汇点。这些看似“不务正业”的尝试，恰恰构成了我理解世界、表达自己和创造东西的方式。</p>
+      <p>这里收藏着学习、项目、旅行与生活留下的碎片——希望它们最终都能成为时间里可回望的痕迹。</p>
+    </div>
+  </div>
+</section>
+{{ else }}
+
+  <aside class="about-pixel-scene" id="about-pixel-scene" aria-label="页尾像素夜景彩蛋">
+    <div class="pixel-scene__message" id="pixel-clue-message" role="status" aria-live="polite" aria-hidden="true">
+      <span class="pixel-scene__mark" aria-hidden="true">?</span>
+      <span class="pixel-scene__message-copy">
+        <strong>CLUE RECORDED</strong>
+        <small>一段被夜色保存下来的线索。</small>
+      </span>
+    </div>
+
+    <button
+      class="pixel-scene__button"
+      id="pixel-clue-button"
+      type="button"
+      aria-label="检查页尾的像素夜景"
+      aria-controls="pixel-clue-message"
+      aria-expanded="false">
+      <svg class="pixel-scene__art" viewBox="0 0 240 132" shape-rendering="crispEdges" role="img" aria-labelledby="pixel-scene-title pixel-scene-desc" xmlns="http://www.w3.org/2000/svg">
+        <title id="pixel-scene-title">雨夜里的像素城市、漫游者与蓝色机器猫</title>
+        <desc id="pixel-scene-desc">一名小小的漫游者和蓝色机器猫站在霓虹街头，场景中藏着一个可以点击发现的线索。</desc>
+
+        <rect width="240" height="132" fill="#08131d" />
+        <rect y="88" width="240" height="44" fill="#111a20" />
+        <rect y="111" width="240" height="3" fill="#27343a" />
+        <rect y="123" width="240" height="2" fill="#202b31" />
+
+        <g class="pixel-scene__rain" fill="#36515c">
+          <rect x="18" y="10" width="1" height="7" /><rect x="47" y="25" width="1" height="6" />
+          <rect x="73" y="8" width="1" height="5" /><rect x="105" y="31" width="1" height="7" />
+          <rect x="133" y="14" width="1" height="6" /><rect x="164" y="35" width="1" height="8" />
+          <rect x="202" y="17" width="1" height="6" /><rect x="226" y="42" width="1" height="8" />
+        </g>
+
+        <g class="pixel-scene__buildings">
+          <rect x="145" y="8" width="36" height="81" fill="#101f28" />
+          <rect x="183" y="0" width="57" height="90" fill="#0c1922" />
+          <rect x="153" y="18" width="5" height="9" fill="#d5c35d" />
+          <rect x="164" y="18" width="4" height="9" fill="#427a77" />
+          <rect x="153" y="34" width="5" height="8" fill="#386775" />
+          <rect x="166" y="34" width="4" height="8" fill="#d57b52" />
+          <rect x="191" y="12" width="4" height="9" fill="#5f8f78" />
+          <rect x="202" y="12" width="5" height="9" fill="#d8a34f" />
+          <rect x="217" y="12" width="4" height="9" fill="#426979" />
+          <rect x="191" y="29" width="5" height="8" fill="#b85551" />
+          <rect x="205" y="29" width="4" height="8" fill="#5d8070" />
+          <rect x="219" y="29" width="5" height="8" fill="#d7c85c" />
+          <rect x="195" y="47" width="28" height="12" fill="#18333a" />
+          <rect x="199" y="50" width="20" height="3" fill="#54c4b6" class="pixel-scene__neon" />
+          <rect x="225" y="42" width="4" height="25" fill="#c74c65" class="pixel-scene__neon pixel-scene__neon--late" />
+        </g>
+
+        <g class="pixel-scene__tree">
+          <rect x="42" y="42" width="5" height="52" fill="#283129" />
+          <rect x="13" y="35" width="54" height="15" fill="#17291f" />
+          <rect x="7" y="48" width="66" height="14" fill="#17291f" />
+          <rect x="19" y="25" width="41" height="16" fill="#1b3124" />
+          <rect x="28" y="17" width="24" height="11" fill="#21392a" />
+          <rect x="4" y="58" width="29" height="8" fill="#15251c" />
+        </g>
+
+        <g class="pixel-scene__sign">
+          <rect x="7" y="68" width="42" height="26" fill="#2a1d2b" />
+          <rect x="10" y="71" width="36" height="20" fill="#98344d" />
+          <rect x="13" y="74" width="30" height="14" fill="#dc4f62" />
+          <rect x="17" y="77" width="22" height="8" fill="#f17768" />
+        </g>
+
+        <g class="pixel-scene__car">
+          <rect x="177" y="86" width="56" height="20" fill="#20292e" />
+          <rect x="186" y="78" width="34" height="10" fill="#26383f" />
+          <rect x="190" y="80" width="11" height="7" fill="#4a656c" />
+          <rect x="204" y="80" width="12" height="7" fill="#4a656c" />
+          <rect x="224" y="91" width="9" height="6" fill="#f4c95b" class="pixel-scene__headlight" />
+          <rect x="181" y="103" width="11" height="5" fill="#070b0e" />
+          <rect x="218" y="103" width="11" height="5" fill="#070b0e" />
+        </g>
+
+        <g class="pixel-scene__wanderer">
+          <rect x="117" y="67" width="7" height="7" fill="#ad6a3e" />
+          <rect x="114" y="74" width="13" height="20" fill="#17191b" />
+          <rect x="112" y="79" width="3" height="14" fill="#53372d" />
+          <rect x="127" y="78" width="3" height="15" fill="#53372d" />
+          <rect x="116" y="94" width="4" height="14" fill="#1b2023" />
+          <rect x="123" y="94" width="4" height="14" fill="#1b2023" />
+          <rect x="113" y="108" width="7" height="3" fill="#342a25" />
+          <rect x="123" y="108" width="7" height="3" fill="#342a25" />
+        </g>
+
+        <g class="pixel-scene__blue-cat" aria-hidden="true">
+          <rect x="95" y="81" width="12" height="2" fill="#168fc0" />
+          <rect x="92" y="83" width="18" height="11" fill="#168fc0" />
+          <rect x="94" y="94" width="14" height="3" fill="#168fc0" />
+          <rect x="95" y="84" width="12" height="9" fill="#e8eee9" />
+          <rect x="97" y="84" width="4" height="5" fill="#f3f1e8" />
+          <rect x="102" y="84" width="4" height="5" fill="#f3f1e8" />
+          <rect x="99" y="86" width="1" height="2" fill="#26343a" />
+          <rect x="103" y="86" width="1" height="2" fill="#26343a" />
+          <rect x="100" y="88" width="3" height="2" fill="#d95046" />
+          <rect x="101" y="90" width="1" height="2" fill="#26343a" />
+          <rect x="96" y="91" width="5" height="1" fill="#58676a" />
+          <rect x="102" y="91" width="5" height="1" fill="#58676a" />
+          <rect x="94" y="97" width="16" height="2" fill="#b74742" />
+          <rect x="95" y="99" width="14" height="8" fill="#168fc0" />
+          <rect x="98" y="99" width="8" height="6" fill="#e8eee9" />
+          <rect x="90" y="100" width="5" height="3" fill="#168fc0" />
+          <rect x="109" y="100" width="4" height="3" fill="#168fc0" />
+          <rect x="92" y="107" width="8" height="3" fill="#d9e6e3" />
+          <rect x="104" y="107" width="8" height="3" fill="#d9e6e3" />
+          <rect x="89" y="101" width="2" height="2" fill="#d9e6e3" />
+        </g>
+
+        <g class="pixel-scene__clue" aria-hidden="true">
+          <rect x="136" y="73" width="3" height="15" fill="#d9b94e" />
+          <rect x="130" y="79" width="15" height="3" fill="#d9b94e" />
+          <rect x="133" y="76" width="9" height="9" fill="#f1d96a" />
+          <rect x="136" y="79" width="3" height="3" fill="#fff3a1" />
+        </g>
+
+        <g fill="#1b2b32" opacity="0.9">
+          <rect x="0" y="116" width="68" height="2" /><rect x="82" y="116" width="63" height="2" />
+          <rect x="159" y="116" width="81" height="2" /><rect x="24" y="128" width="91" height="2" />
+        </g>
+      </svg>
+    </button>
+  </aside>
+{{ end }}

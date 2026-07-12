@@ -1,0 +1,77 @@
+{{ $works := site.Data.creations }}
+{{ if $works }}
+  {{ $active := index $works 0 }}
+  <section
+    class="creations-reel"
+    id="creations-reel"
+    data-creations-reel
+    data-active-work="{{ $active.id }}"
+    style="--creation-accent: {{ $active.accent }}; --creation-position: {{ $active.position }}; --creation-fit: {{ $active.fit }};"
+    aria-label="Steph.H 的作品放映台">
+    <header class="creations-reel__header">
+      <span class="creations-reel__kicker">STEPH's Creations</span>
+      <span class="creations-reel__count">05 PIECES</span>
+    </header>
+
+    <div class="creations-reel__console">
+      <div class="creations-reel__screen" data-reel-screen>
+        <span class="creations-reel__screen-cue" aria-hidden="true">NOW SHOWING</span>
+        <img
+          class="creations-reel__image nozoom"
+          data-reel-image
+          src="{{ $active.cover }}"
+          alt="《{{ $active.title }}》作品定帧"
+          decoding="async"
+          data-no-zoom="true">
+        <span class="creations-reel__screen-glow" aria-hidden="true"></span>
+      </div>
+
+      <div class="creations-reel__cue-sheet" role="tablist" aria-label="选择一件作品">
+        {{ range $index, $work := $works }}
+          <button
+            class="creation-cue{{ if eq $index 0 }} is-active{{ end }}"
+            id="creation-tab-{{ $work.id }}"
+            type="button"
+            role="tab"
+            data-creation-trigger
+            data-work-id="{{ $work.id }}"
+            data-work-cover="{{ $work.cover }}"
+            data-work-position="{{ $work.position }}"
+            data-work-fit="{{ $work.fit }}"
+            data-work-accent="{{ $work.accent }}"
+            aria-controls="creation-panel-{{ $work.id }}"
+            aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
+            tabindex="{{ if eq $index 0 }}0{{ else }}-1{{ end }}">
+            <span class="creation-cue__marker" aria-hidden="true"></span>
+            <span class="creation-cue__volume">{{ $work.volume }}</span>
+            <span class="creation-cue__title">{{ $work.title }}</span>
+          </button>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="creations-reel__details" aria-live="polite">
+      {{ range $index, $work := $works }}
+        <article
+          class="creation-entry"
+          id="creation-panel-{{ $work.id }}"
+          role="tabpanel"
+          aria-labelledby="creation-tab-{{ $work.id }}"
+          {{ if ne $index 0 }}hidden{{ end }}>
+          <div class="creation-entry__index" aria-hidden="true">
+            <span>VOL.</span>
+            <strong>{{ $work.volume }}</strong>
+          </div>
+          <div class="creation-entry__copy">
+            <p class="creation-entry__meta">{{ $work.meta }}</p>
+            <h3>{{ $work.title }}</h3>
+            <p class="creation-entry__note">{{ $work.note }}</p>
+          </div>
+          <a class="creation-entry__link" href="{{ $work.url }}" target="_blank" rel="noopener noreferrer">
+            在 {{ $work.platform }} 观看 <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

@@ -12,6 +12,8 @@
   <script defer src="{{ $aboutJS.RelPermalink }}" integrity="{{ $aboutJS.Data.Integrity }}" data-turbo-track="dynamic"></script>
   {{ $aboutContentCSS := resources.Get "css/pages/about-content.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $aboutContentCSS.RelPermalink }}" integrity="{{ $aboutContentCSS.Data.Integrity }}" data-turbo-track="dynamic">
+  {{ $aboutPerformanceCSS := resources.Get "css/pages/about-performance.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $aboutPerformanceCSS.RelPermalink }}" integrity="{{ $aboutPerformanceCSS.Data.Integrity }}" data-turbo-track="dynamic">
   {{ $aboutClosingLetterCSS := resources.Get "css/pages/about-closing-letter.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $aboutClosingLetterCSS.RelPermalink }}" integrity="{{ $aboutClosingLetterCSS.Data.Integrity }}" data-turbo-track="dynamic">
   {{ $aboutAcademicLogCSS := resources.Get "css/pages/about-academic-log.css" | resources.Minify | resources.Fingerprint }}

@@ -1,0 +1,32 @@
+/* Defer offscreen About sections without changing their visual design. */
+@supports (content-visibility: auto) {
+  .about-page-content > .academic-log {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 68rem;
+  }
+
+  .about-page-content > .creations-reel {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 74rem;
+  }
+
+  .about-page-content > .skills-studio {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 62rem;
+  }
+
+  .about-page-content > .hobby-town {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 64rem;
+  }
+
+  .about-page-content > .journey-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 180rem;
+  }
+
+  .about-page-content > .closing-letter {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 52rem;
+  }
+}

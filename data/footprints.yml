@@ -3,6 +3,12 @@
 # 路径按年份 + 出现顺序连接
 
 2026:
+  - city: "怀柔"
+    emoji: "🧑‍🌾"
+    date: "2026"
+    photos:
+      - "/img/footprints/huairou-01.jpg"
+    story: "少无适俗韵 性本爱丘山"
   - city: "宁波"
     emoji: "🐟"
     date: "2026"
@@ -138,6 +144,13 @@
       - "/img/footprints/guiyang-1.jpg"
     story: "崇明命运共同体于此游山玩水 闲适恬淡"
 
+  - city: "上海"
+    emoji: "🌆"
+    date: "2024"
+    photos:
+      - "/img/footprints/shanghai-1.jpg"
+    story: "在激烈的Shanghai刷步数大赛中荣获倒一"
+
 2023:
   - city: "长沙"
     emoji: "🌶️"
@@ -174,9 +187,4 @@
       - "/img/footprints/guangzhou-2023-1.jpg"
     story: "广州真的啥啥都好吃啊"
 
-  - city: "上海"
-    emoji: "🌆"
-    date: "2023"
-    photos:
-      - "/img/footprints/shanghai-1.jpg"
-    story: "高考完的第一站"
+

@@ -576,6 +576,8 @@
 }
 
 .channel-item .article-link--simple h2 {
+    margin-top: 0;
+    margin-bottom: 0.35rem;
     transition: color 0.28s ease, transform 0.28s ease;
 }
 

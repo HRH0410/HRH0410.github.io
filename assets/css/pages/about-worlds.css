@@ -38,14 +38,17 @@
   isolation: isolate;
   margin: 1.15rem 0 2.8rem;
   overflow: hidden;
-  border: 1px solid var(--world-line);
+  border: 1px solid rgba(77, 88, 82, 0.11);
   border-radius: 12px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(249, 245, 236, 0.86)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(249, 245, 236, 0.74)),
     repeating-linear-gradient(0deg, transparent 0 23px, rgba(78, 83, 75, 0.045) 23px 24px);
   box-shadow:
-    0 22px 45px -38px rgba(45, 48, 43, 0.34),
-    inset 0 1px rgba(255, 255, 255, 0.76);
+    0 14px 30px -24px rgba(42, 49, 57, 0.18),
+    0 22px 45px -40px rgba(45, 48, 43, 0.3),
+    inset 0 1px rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px) saturate(0.94);
+  -webkit-backdrop-filter: blur(14px) saturate(0.94);
   color: var(--world-ink);
 }
 
@@ -387,10 +390,14 @@
 }
 
 .dark .skills-studio {
+  border-color: rgba(239, 233, 223, 0.15);
   background:
-    linear-gradient(180deg, rgba(34, 40, 40, 0.96), rgba(25, 31, 31, 0.96)),
+    linear-gradient(180deg, rgba(34, 40, 40, 0.82), rgba(25, 31, 31, 0.78)),
     repeating-linear-gradient(0deg, transparent 0 23px, rgba(235, 232, 221, 0.04) 23px 24px);
-  box-shadow: 0 24px 48px -38px rgba(0, 0, 0, 0.72), inset 0 1px rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 16px 34px -22px rgba(0, 0, 0, 0.42),
+    0 24px 48px -40px rgba(0, 0, 0, 0.7),
+    inset 0 1px rgba(255, 255, 255, 0.07);
 }
 
 .dark .skill-station.is-active { background: rgba(255, 255, 255, 0.035); }
@@ -1630,6 +1637,16 @@ Original-game asset composition. World objects are sprites, never CSS drawings.
   .studio-monitor { width: 84%; }
   .skills-studio__status { align-items: flex-start; font-size: 0.58rem; line-height: 1.45; }
 
+  /* Keep inactive previews recognizable on touch screens. The desktop blur
+     still communicates focus, while mobile needs a clearer tap affordance. */
+  .skill-station:not(.is-active) .skill-station__visual img { opacity: 0.66; }
+  .skill-station:not(.is-active) .skill-station__visual::after {
+    background: rgba(232, 232, 226, 0.16);
+    backdrop-filter: blur(2px) saturate(0.62);
+    -webkit-backdrop-filter: blur(2px) saturate(0.62);
+    box-shadow: inset 0 0 1.25rem rgba(225, 227, 222, 0.25);
+  }
+
   .hobby-town {
     height: 20.5rem;
     border-width: 2px;
@@ -2299,6 +2316,10 @@ Original-game asset composition. World objects are sprites, never CSS drawings.
   .town-hobby-sign::after {
     inset: -9px -7px;
   }
+
+  /* The wider native map is cropped inside the portrait viewport. Move the
+     PHOTO label inward so its full label and tap target remain discoverable. */
+  .town-hobby-sign--photo { left: 25%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

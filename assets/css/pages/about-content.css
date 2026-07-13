@@ -52,7 +52,7 @@
 }
 
 /* 章节样式 - 高级简约 */
-article h2 {
+.article-content .about-page-content > h2 {
   position: relative;
   font-size: 1.35rem;
   font-weight: 600;
@@ -63,7 +63,7 @@ article h2 {
   color: #1a1a1a;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
-article h2::after {
+.article-content .about-page-content > h2::after {
   content: '';
   position: absolute;
   left: 0;
@@ -73,15 +73,15 @@ article h2::after {
   background: linear-gradient(90deg, #1a1a1a 0%, #888 60%, transparent 100%);
   border-radius: 2px;
 }
-.dark article h2 {
+.dark .article-content .about-page-content > h2 {
   color: #e8e8e8;
 }
-.dark article h2::after {
+.dark .article-content .about-page-content > h2::after {
   background: linear-gradient(90deg, #e8e8e8 0%, #888 60%, transparent 100%);
 }
 
 /* About 部分 h2 无下划线 */
-.profile-info + article h2::after {
+.about-page-content .profile-info + article h2::after {
   display: none;
 }
 
@@ -795,7 +795,7 @@ article h2::after {
 }
 
 /* ==================== 设计收敛优化（克制统一） ==================== */
-article h2 {
+.article-content .about-page-content > h2 {
   margin: 3rem 0 1.1rem;
   font-size: 1.52rem;
   font-weight: 720;
@@ -803,15 +803,15 @@ article h2 {
   text-transform: none;
   color: #1f2b43;
 }
-article h2::after {
+.article-content .about-page-content > h2::after {
   width: 42px;
   height: 2px;
   background: linear-gradient(90deg, rgba(31,43,67,0.9) 0%, rgba(31,43,67,0.3) 60%, transparent 100%);
 }
-.dark article h2 {
+.dark .article-content .about-page-content > h2 {
   color: #e6edf8;
 }
-.dark article h2::after {
+.dark .article-content .about-page-content > h2::after {
   background: linear-gradient(90deg, rgba(230,237,248,0.9) 0%, rgba(230,237,248,0.35) 60%, transparent 100%);
 }
 
@@ -1341,14 +1341,13 @@ article h2::after {
 }
 
 /* Final heading tuning: keep About calm and remove imported article markers. */
-#single_header h1,
-.article-title {
+body:has(.about-page-content) #single_header h1,
+body:has(.about-page-content) .article-title {
   font-size: clamp(1.95rem, 4.2vw, 2.7rem) !important;
   line-height: 1.06 !important;
 }
 
-.article-content h2::before,
-article h2::before {
+.article-content .about-page-content > h2::before {
   display: none !important;
   content: none !important;
 }
@@ -1408,8 +1407,8 @@ article h2::before {
 
 /* 响应式 */
 @media (max-width: 640px) {
-  #single_header h1,
-  .article-title {
+  body:has(.about-page-content) #single_header h1,
+  body:has(.about-page-content) .article-title {
     font-size: clamp(1.58rem, 8.4vw, 2.05rem) !important;
   }
 

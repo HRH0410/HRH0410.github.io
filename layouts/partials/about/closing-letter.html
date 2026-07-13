@@ -1,0 +1,38 @@
+{{ $note := site.Data.about_closing }}
+{{ if $note }}
+  <section class="closing-letter" aria-label="写给访客的一张便笺">
+    <div class="closing-letter__sheet">
+      <header class="closing-letter__masthead">
+        <p>{{ $note.eyebrow }}</p>
+        <span>{{ $note.postmark }}</span>
+      </header>
+
+      <div class="closing-letter__copy">
+        <p class="closing-letter__salutation">{{ $note.salutation }}</p>
+        {{ range $note.paragraphs }}
+          <p>{{ . }}</p>
+        {{ end }}
+
+        <blockquote class="closing-letter__quote">{{ $note.quote }}</blockquote>
+      </div>
+
+      <aside class="closing-letter__aside" aria-label="联系 Steph.H">
+        <dl class="closing-letter__address">
+          <div>
+            <dt>{{ $note.contact.email_label }}</dt>
+            <dd><a class="closing-letter__email-link" href="mailto:{{ $note.contact.email }}">{{ $note.contact.email }}<span aria-hidden="true"> ↗</span></a></dd>
+          </div>
+          <div>
+            <dt>{{ $note.contact.location_label }}</dt>
+            <dd>{{ $note.contact.location }}</dd>
+          </div>
+        </dl>
+
+        <div class="closing-letter__stamp">
+          <p>{{ $note.contact.stamp_label }}</p>
+          {{ partial "about/profile-archive.html" (dict "mode" "scene" "page" .) }}
+        </div>
+      </aside>
+    </div>
+  </section>
+{{ end }}

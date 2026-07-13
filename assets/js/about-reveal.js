@@ -4,6 +4,14 @@
   "use strict";
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let skillObserver = null;
+
+  function disconnectSkillObserver() {
+    if (skillObserver) {
+      skillObserver.disconnect();
+      skillObserver = null;
+    }
+  }
 
   function revealSkillItems(container) {
     const items = container.querySelectorAll(".skill-item");
@@ -17,6 +25,8 @@
   }
 
   function initSkillReveal() {
+    disconnectSkillObserver();
+
     if (reducedMotion) {
       document.querySelectorAll(".about-page-content .skill-item").forEach(function (item) {
         item.classList.add("is-revealed");
@@ -27,11 +37,11 @@
     var skillContainers = document.querySelectorAll(".about-page-content .skill-items");
     if (!skillContainers.length) return;
 
-    var observer = new IntersectionObserver(function (entries) {
+    skillObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           revealSkillItems(entry.target);
-          observer.unobserve(entry.target);
+          skillObserver.unobserve(entry.target);
         }
       });
     }, {
@@ -40,7 +50,7 @@
     });
 
     skillContainers.forEach(function (container) {
-      observer.observe(container);
+      skillObserver.observe(container);
     });
   }
 
@@ -78,4 +88,7 @@
   } else {
     init();
   }
+
+  document.addEventListener("turbo:load", init);
+  document.addEventListener("turbo:before-render", disconnectSkillObserver);
 })();

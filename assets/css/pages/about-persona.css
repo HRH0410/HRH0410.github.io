@@ -47,21 +47,21 @@
 }
 
 /* Page title and section rhythm */
-#single_header {
+body:has(.about-page-content) #single_header {
   display: none !important;
 }
 
-#single_header + .article-layout {
+body:has(.about-page-content) #single_header + .article-layout {
   padding-top: clamp(6rem, 7vw, 7.5rem);
 }
 
-#single_header,
-main#main-content > article > header {
+body:has(.about-page-content) #single_header,
+body:has(.about-page-content) main#main-content > article > header {
   margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
 }
 
-#single_header h1,
-.article-title {
+body:has(.about-page-content) #single_header h1,
+body:has(.about-page-content) .article-title {
   color: var(--about-ink, #262a28) !important;
   font-family: var(--about-serif) !important;
   font-size: clamp(1.75rem, 2.7vw, 2.35rem) !important;
@@ -70,8 +70,8 @@ main#main-content > article > header {
   line-height: 1.03 !important;
 }
 
-.dark #single_header h1,
-.dark .article-title {
+.dark body:has(.about-page-content) #single_header h1,
+.dark body:has(.about-page-content) .article-title {
   color: #f0ece4 !important;
 }
 
@@ -84,16 +84,18 @@ main#main-content > article > header {
   margin: 0 0 0.75rem;
   padding: clamp(0.9rem, 2vw, 1.25rem);
   overflow: hidden;
-  border: 1px solid rgba(72, 68, 59, 0.15);
+  border: 1px solid rgba(76, 84, 79, 0.11);
   border-radius: clamp(1.35rem, 3vw, 2.25rem);
   background:
-    linear-gradient(115deg, rgba(255, 255, 255, 0.67), transparent 38%),
+    linear-gradient(115deg, rgba(255, 255, 255, 0.76), transparent 38%),
     radial-gradient(circle at 88% 8%, rgba(36, 137, 183, 0.12), transparent 18rem),
-    linear-gradient(145deg, #f7f0e2, #fffdf8 58%, #f1eadb);
+    linear-gradient(145deg, rgba(247, 240, 226, 0.82), rgba(255, 253, 248, 0.74) 58%, rgba(241, 234, 219, 0.78));
   box-shadow:
-    0 34px 72px -50px var(--about-shadow),
-    0 14px 32px -24px rgba(50, 45, 38, 0.17),
-    inset 0 1px 0 rgba(255, 255, 255, 0.86);
+    0 12px 30px -22px rgba(44, 52, 61, 0.2),
+    0 34px 72px -52px var(--about-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(15px) saturate(0.94);
+  -webkit-backdrop-filter: blur(15px) saturate(0.94);
 }
 
 .profile-archive::before {
@@ -142,7 +144,7 @@ main#main-content > article > header {
   position: relative;
   width: min(100%, 13.4rem);
   margin: 0 auto;
-  padding: 0.72rem 0.72rem 1rem;
+  padding: 0.72rem;
   border: 1px solid rgba(76, 69, 57, 0.16);
   border-radius: 0.22rem;
   background: #fbf7ee;
@@ -155,7 +157,7 @@ main#main-content > article > header {
 .profile-archive__portrait::after {
   content: "";
   position: absolute;
-  inset: 0.72rem 0.72rem 3.2rem;
+  inset: 0.72rem;
   pointer-events: none;
   box-shadow: inset 0 0 38px rgba(31, 39, 38, 0.09);
 }
@@ -168,29 +170,6 @@ main#main-content > article > header {
   object-fit: cover;
   border-radius: 0.08rem;
   filter: saturate(0.88) contrast(0.98) sepia(0.06);
-}
-
-.profile-archive__portrait figcaption {
-  display: flex;
-  align-items: end;
-  justify-content: flex-end;
-  gap: 0.6rem;
-  padding: 0.76rem 0.2rem 0;
-  color: #31342f;
-  font-family: var(--about-serif);
-  font-size: 1rem;
-  font-weight: 760;
-  letter-spacing: 0.02em;
-}
-
-.profile-archive__portrait figcaption small {
-  color: #8a887f;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.55rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-align: right;
-  text-transform: uppercase;
 }
 
 .profile-archive__tape {
@@ -334,11 +313,9 @@ main#main-content > article > header {
   border-radius: 1px;
   background: #2c332d;
   color: #f1d96a;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.64rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
 }
+
+.pixel-scene__note-icon { display: block; width: 1.18rem; height: 1.18rem; }
 
 .pixel-scene__message-copy {
   display: grid;
@@ -368,7 +345,6 @@ main#main-content > article > header {
 .pixel-scene__wanderer,
 .pixel-scene__blue-cat { animation: about-pixel-bob 2.4s steps(2, end) infinite; }
 .pixel-scene__blue-cat { animation-delay: 0.5s; }
-.pixel-scene__clue { animation: about-pixel-clue 1.2s steps(2, end) infinite; }
 
 @keyframes about-pixel-rain {
   to { transform: translate3d(-2px, 9px, 0); }
@@ -387,11 +363,6 @@ main#main-content > article > header {
 @keyframes about-pixel-bob {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-1px); }
-}
-
-@keyframes about-pixel-clue {
-  0%, 100% { opacity: 0.48; }
-  50% { opacity: 1; }
 }
 
 /* A small amount of the same pixel language continues through the page. */
@@ -436,14 +407,15 @@ main#main-content > article > header {
 
 /* Dark archive */
 .dark .profile-archive {
-  border-color: rgba(221, 214, 200, 0.13);
+  border-color: rgba(239, 233, 223, 0.16);
   background:
-    linear-gradient(115deg, rgba(255, 255, 255, 0.045), transparent 38%),
+    linear-gradient(115deg, rgba(255, 255, 255, 0.07), transparent 38%),
     radial-gradient(circle at 88% 8%, rgba(68, 166, 204, 0.13), transparent 18rem),
-    linear-gradient(145deg, #1c2222, #252b2b 58%, #191f20);
+    linear-gradient(145deg, rgba(28, 34, 34, 0.82), rgba(37, 43, 43, 0.76) 58%, rgba(25, 31, 32, 0.82));
   box-shadow:
-    0 34px 72px -44px rgba(0, 0, 0, 0.72),
-    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+    0 16px 34px -22px rgba(0, 0, 0, 0.4),
+    0 34px 72px -48px rgba(0, 0, 0, 0.72),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
 .dark .profile-archive::before {
@@ -493,12 +465,12 @@ main#main-content > article > header {
 }
 
 @media (max-width: 700px) {
-  #single_header + .article-layout {
+  body:has(.about-page-content) #single_header + .article-layout {
     padding-top: 4.75rem;
   }
 
-  #single_header h1,
-  .article-title {
+  body:has(.about-page-content) #single_header h1,
+  body:has(.about-page-content) .article-title {
     font-size: clamp(1.7rem, 7.2vw, 2.05rem) !important;
   }
 
@@ -565,8 +537,7 @@ main#main-content > article > header {
   .pixel-scene__neon,
   .pixel-scene__headlight,
   .pixel-scene__wanderer,
-  .pixel-scene__blue-cat,
-  .pixel-scene__clue {
+  .pixel-scene__blue-cat {
     animation: none !important;
   }
 

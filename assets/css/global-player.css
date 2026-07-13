@@ -835,8 +835,8 @@ html.is-home-page .global-player-root,
 /* Mobile: bottom bar */
 @media (max-width: 767px) {
   .global-player-root {
-    top: 8rem;
-    right: 1.25rem;
+    top: 7.25rem;
+    right: 0.75rem;
     bottom: auto;
     left: auto;
     width: auto;
@@ -844,15 +844,17 @@ html.is-home-page .global-player-root,
 
   .global-player-root.is-collapsed .global-player-fab {
     position: fixed;
-    top: 8rem;
-    right: 1.25rem;
+    top: 7.25rem;
+    right: 0.75rem;
     left: auto;
     bottom: auto;
+    width: 54px;
+    height: 54px;
   }
 
   .global-player-panel {
-    top: 8rem;
-    right: 1.25rem;
+    top: 7.25rem;
+    right: 0.75rem;
     left: auto;
     bottom: auto;
     max-height: calc(100vh - 9rem);

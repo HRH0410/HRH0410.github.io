@@ -10,10 +10,17 @@
   isolation: isolate;
   margin: 0.95rem 0 3.25rem;
   overflow: hidden;
-  border: 1px solid rgba(59, 55, 47, 0.21);
+  border: 1px solid rgba(83, 78, 68, 0.12);
   border-radius: 10px;
-  background: var(--reel-paper);
-  box-shadow: 0 22px 42px -38px rgba(36, 31, 20, 0.62), 0 1px 0 rgba(255, 255, 255, 0.82) inset;
+  background:
+    linear-gradient(128deg, rgba(255, 253, 247, 0.78), rgba(243, 238, 228, 0.74)),
+    var(--reel-paper);
+  box-shadow:
+    0 14px 30px -24px rgba(42, 49, 57, 0.2),
+    0 22px 42px -40px rgba(36, 31, 20, 0.52),
+    0 1px 0 rgba(255, 255, 255, 0.88) inset;
+  backdrop-filter: blur(14px) saturate(0.92);
+  -webkit-backdrop-filter: blur(14px) saturate(0.92);
   color: var(--reel-ink);
 }
 
@@ -241,7 +248,9 @@
   height: 6.1rem;
   min-height: 6.1rem;
   overflow: hidden;
-  background: linear-gradient(118deg, rgba(255, 253, 247, 0.76), rgba(235, 226, 212, 0.7));
+  background: linear-gradient(118deg, rgba(255, 253, 247, 0.7), rgba(235, 226, 212, 0.64));
+  backdrop-filter: blur(10px) saturate(0.94);
+  -webkit-backdrop-filter: blur(10px) saturate(0.94);
 }
 
 .creation-entry {
@@ -355,8 +364,14 @@
   --reel-paper: #1d211e;
   --reel-ink: #f0e9dd;
   --reel-screen: #0b0d0b;
-  border-color: rgba(237, 228, 206, 0.16);
-  box-shadow: 0 24px 46px -38px rgba(0, 0, 0, 0.92), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+  border-color: rgba(237, 228, 206, 0.15);
+  background:
+    linear-gradient(128deg, rgba(35, 41, 38, 0.8), rgba(25, 30, 28, 0.76)),
+    var(--reel-paper);
+  box-shadow:
+    0 16px 34px -22px rgba(0, 0, 0, 0.5),
+    0 24px 46px -40px rgba(0, 0, 0, 0.86),
+    0 1px 0 rgba(255, 255, 255, 0.055) inset;
 }
 
 .dark .creations-reel::before {
@@ -369,7 +384,7 @@
 
 .dark .creations-reel__header { border-color: rgba(237, 228, 206, 0.13); color: #b8b0a1; }
 .dark .creations-reel__count { color: color-mix(in srgb, var(--creation-accent) 70%, #e8ded0); }
-.dark .creations-reel__details { background: linear-gradient(118deg, #202521, #171b18); }
+.dark .creations-reel__details { background: linear-gradient(118deg, rgba(32, 37, 33, 0.8), rgba(23, 27, 24, 0.76)); }
 .dark .creation-entry__index { border-color: rgba(237, 228, 206, 0.14); color: #aaa397; }
 .dark .creation-entry__index strong { color: color-mix(in srgb, var(--creation-accent) 76%, #e6dccd); }
 .dark .creation-entry__meta { color: #b6aea1; }

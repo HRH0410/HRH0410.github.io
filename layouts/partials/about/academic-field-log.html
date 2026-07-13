@@ -1,0 +1,41 @@
+{{ $log := site.Data.academic_log }}
+{{ if $log }}
+  <section class="academic-log" aria-label="Academic Field Log">
+    <section class="academic-log__block academic-log__block--study" id="education" aria-labelledby="academic-education-title">
+      <h3 class="academic-log__label" id="academic-education-title">Education</h3>
+      <ol class="academic-study-list">
+        {{ range $log.study }}
+          <li class="academic-study">
+            <time>{{ .range }}</time>
+            <div class="academic-study__copy">
+              <h4>{{ .school }}{{ with .program }} <span>· {{ . }}</span>{{ end }}</h4>
+              {{ with .detail }}<p>{{ . }}</p>{{ end }}
+            </div>
+          </li>
+        {{ end }}
+      </ol>
+    </section>
+
+    <section class="academic-log__block academic-log__block--research" id="research-interests" aria-labelledby="academic-research-title">
+      <h3 class="academic-log__label" id="academic-research-title">Research Interests</h3>
+      <ul class="academic-interests" aria-label="研究兴趣">
+        {{ range $log.research }}
+          <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+    </section>
+
+    <section class="academic-log__block academic-log__block--milestones" id="awards" aria-labelledby="academic-milestones-title">
+      <h3 class="academic-log__label" id="academic-milestones-title">Selected Recognition</h3>
+      <ol class="academic-timeline">
+        {{ range $log.milestones }}
+          <li class="academic-milestone{{ with .project }} is-project{{ end }}">
+            <time datetime="{{ replace .date "." "-" }}">{{ .date }}</time>
+            <span class="academic-milestone__dot" aria-hidden="true"></span>
+            <p class="academic-milestone__event">{{ with .project }}<strong>{{ . }}</strong><span aria-hidden="true"> · </span>{{ end }}{{ .event }}{{ with .result }}<span class="academic-milestone__result">{{ . }}</span>{{ end }}</p>
+          </li>
+        {{ end }}
+      </ol>
+    </section>
+  </section>
+{{ end }}

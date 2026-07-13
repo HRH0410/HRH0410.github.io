@@ -1,37 +1,37 @@
-{{ if site.Data.footprints }}
-  {{ $aboutCSS := resources.Get "css/pages/about.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $aboutCSS.RelPermalink }}" integrity="{{ $aboutCSS.Data.Integrity }}">
-  {{ $aboutJS := resources.Get "js/about-journey.js" | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $aboutJS.RelPermalink }}" integrity="{{ $aboutJS.Data.Integrity }}"></script>
-{{ end }}
-
-{{ $clipboardCSS := resources.Get "css/about-clipboard.css" | resources.Minify | resources.Fingerprint }}
-<link rel="stylesheet" href="{{ $clipboardCSS.RelPermalink }}" integrity="{{ $clipboardCSS.Data.Integrity }}">
-{{ $clipboardJS := resources.Get "js/about-clipboard.js" | resources.Minify | resources.Fingerprint }}
-<script defer src="{{ $clipboardJS.RelPermalink }}" integrity="{{ $clipboardJS.Data.Integrity }}"></script>
-
 {{ $articleReadingJS := resources.Get "js/article-reading.js" | resources.Minify | resources.Fingerprint }}
 <script defer src="{{ $articleReadingJS.RelPermalink }}" integrity="{{ $articleReadingJS.Data.Integrity }}" data-turbo-track="reload"></script>
 
 {{ if and .IsPage (eq .RelPermalink "/about/") }}
+  {{ $clipboardCSS := resources.Get "css/about-clipboard.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $clipboardCSS.RelPermalink }}" integrity="{{ $clipboardCSS.Data.Integrity }}" data-turbo-track="dynamic">
+  {{ $clipboardJS := resources.Get "js/about-clipboard.js" | resources.Minify | resources.Fingerprint }}
+  <script defer src="{{ $clipboardJS.RelPermalink }}" integrity="{{ $clipboardJS.Data.Integrity }}" data-turbo-track="dynamic"></script>
+  {{ $aboutCSS := resources.Get "css/pages/about.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $aboutCSS.RelPermalink }}" integrity="{{ $aboutCSS.Data.Integrity }}" data-turbo-track="dynamic">
+  {{ $aboutJS := resources.Get "js/about-journey.js" | resources.Minify | resources.Fingerprint }}
+  <script defer src="{{ $aboutJS.RelPermalink }}" integrity="{{ $aboutJS.Data.Integrity }}" data-turbo-track="dynamic"></script>
   {{ $aboutContentCSS := resources.Get "css/pages/about-content.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $aboutContentCSS.RelPermalink }}" integrity="{{ $aboutContentCSS.Data.Integrity }}" data-turbo-track="reload">
+  <link rel="stylesheet" href="{{ $aboutContentCSS.RelPermalink }}" integrity="{{ $aboutContentCSS.Data.Integrity }}" data-turbo-track="dynamic">
+  {{ $aboutClosingLetterCSS := resources.Get "css/pages/about-closing-letter.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $aboutClosingLetterCSS.RelPermalink }}" integrity="{{ $aboutClosingLetterCSS.Data.Integrity }}" data-turbo-track="dynamic">
+  {{ $aboutAcademicLogCSS := resources.Get "css/pages/about-academic-log.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $aboutAcademicLogCSS.RelPermalink }}" integrity="{{ $aboutAcademicLogCSS.Data.Integrity }}" data-turbo-track="dynamic">
   {{ $aboutCreationsCSS := resources.Get "css/pages/about-creations.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $aboutCreationsCSS.RelPermalink }}" integrity="{{ $aboutCreationsCSS.Data.Integrity }}" data-turbo-track="reload">
+  <link rel="stylesheet" href="{{ $aboutCreationsCSS.RelPermalink }}" integrity="{{ $aboutCreationsCSS.Data.Integrity }}" data-turbo-track="dynamic">
   {{ $aboutPersonaCSS := resources.Get "css/pages/about-persona.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $aboutPersonaCSS.RelPermalink }}" integrity="{{ $aboutPersonaCSS.Data.Integrity }}" data-turbo-track="reload">
+  <link rel="stylesheet" href="{{ $aboutPersonaCSS.RelPermalink }}" integrity="{{ $aboutPersonaCSS.Data.Integrity }}" data-turbo-track="dynamic">
   {{ $aboutRevealCSS := resources.Get "css/about-reveal.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $aboutRevealCSS.RelPermalink }}" integrity="{{ $aboutRevealCSS.Data.Integrity }}" data-turbo-track="reload">
+  <link rel="stylesheet" href="{{ $aboutRevealCSS.RelPermalink }}" integrity="{{ $aboutRevealCSS.Data.Integrity }}" data-turbo-track="dynamic">
   {{ $aboutWorldsCSS := resources.Get "css/pages/about-worlds.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $aboutWorldsCSS.RelPermalink }}" integrity="{{ $aboutWorldsCSS.Data.Integrity }}" data-turbo-track="reload">
+  <link rel="stylesheet" href="{{ $aboutWorldsCSS.RelPermalink }}" integrity="{{ $aboutWorldsCSS.Data.Integrity }}" data-turbo-track="dynamic">
   {{ $aboutRevealJS := resources.Get "js/about-reveal.js" | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $aboutRevealJS.RelPermalink }}" integrity="{{ $aboutRevealJS.Data.Integrity }}" data-turbo-track="reload"></script>
+  <script defer src="{{ $aboutRevealJS.RelPermalink }}" integrity="{{ $aboutRevealJS.Data.Integrity }}" data-turbo-track="dynamic"></script>
   {{ $aboutCreationsJS := resources.Get "js/about-creations.js" | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $aboutCreationsJS.RelPermalink }}" integrity="{{ $aboutCreationsJS.Data.Integrity }}" data-turbo-track="reload"></script>
+  <script defer src="{{ $aboutCreationsJS.RelPermalink }}" integrity="{{ $aboutCreationsJS.Data.Integrity }}" data-turbo-track="dynamic"></script>
   {{ $aboutPersonaJS := resources.Get "js/about-persona.js" | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $aboutPersonaJS.RelPermalink }}" integrity="{{ $aboutPersonaJS.Data.Integrity }}" data-turbo-track="reload"></script>
+  <script defer src="{{ $aboutPersonaJS.RelPermalink }}" integrity="{{ $aboutPersonaJS.Data.Integrity }}" data-turbo-track="dynamic"></script>
   {{ $aboutWorldsJS := resources.Get "js/about-worlds.js" | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $aboutWorldsJS.RelPermalink }}" integrity="{{ $aboutWorldsJS.Data.Integrity }}" data-turbo-track="reload"></script>
+  <script defer src="{{ $aboutWorldsJS.RelPermalink }}" integrity="{{ $aboutWorldsJS.Data.Integrity }}" data-turbo-track="dynamic"></script>
 {{ end }}
 
 {{ if site.Data.music }}

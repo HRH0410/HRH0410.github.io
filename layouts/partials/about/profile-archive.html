@@ -10,9 +10,6 @@
     <figure class="profile-archive__portrait">
       <span class="profile-archive__tape" aria-hidden="true"></span>
       <img src="/img/author.jpg" alt="Steph.H" class="profile-archive__avatar nozoom" data-no-zoom="true">
-      <figcaption>
-        <small>digital wanderer</small>
-      </figcaption>
     </figure>
 
     <div class="profile-archive__copy">
@@ -26,12 +23,21 @@
 </section>
 {{ else }}
 
-  <aside class="about-pixel-scene" id="about-pixel-scene" aria-label="页尾像素夜景彩蛋">
+  {{ $pixelClues := site.Data.pixel_clues | jsonify }}
+  <aside class="about-pixel-scene" id="about-pixel-scene" aria-label="页尾像素夜景彩蛋" data-pixel-clues='{{ $pixelClues }}'>
     <div class="pixel-scene__message" id="pixel-clue-message" role="status" aria-live="polite" aria-hidden="true">
-      <span class="pixel-scene__mark" aria-hidden="true">?</span>
+      <span class="pixel-scene__mark" aria-hidden="true">
+        <svg class="pixel-scene__note-icon" viewBox="0 0 18 18" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="2" width="2" height="10" fill="currentColor" />
+          <rect x="12" y="2" width="5" height="2" fill="currentColor" />
+          <rect x="15" y="4" width="2" height="4" fill="currentColor" />
+          <rect x="5" y="10" width="7" height="5" fill="currentColor" />
+          <rect x="4" y="12" width="2" height="2" fill="currentColor" />
+        </svg>
+      </span>
       <span class="pixel-scene__message-copy">
-        <strong>CLUE RECORDED</strong>
-        <small>一段被夜色保存下来的线索。</small>
+        <strong>UNFINISHED SONG</strong>
+        <small>去寻找这里浪费的意义～</small>
       </span>
     </div>
 
@@ -39,12 +45,12 @@
       class="pixel-scene__button"
       id="pixel-clue-button"
       type="button"
-      aria-label="检查页尾的像素夜景"
+      aria-label="打开雨夜短笺"
       aria-controls="pixel-clue-message"
       aria-expanded="false">
       <svg class="pixel-scene__art" viewBox="0 0 240 132" shape-rendering="crispEdges" role="img" aria-labelledby="pixel-scene-title pixel-scene-desc" xmlns="http://www.w3.org/2000/svg">
-        <title id="pixel-scene-title">雨夜里的像素城市、漫游者与蓝色机器猫</title>
-        <desc id="pixel-scene-desc">一名小小的漫游者和蓝色机器猫站在霓虹街头，场景中藏着一个可以点击发现的线索。</desc>
+        <title id="pixel-scene-title">路灯下的雨夜漫游者与蓝色机器猫</title>
+        <desc id="pixel-scene-desc">雨后的苏州街角，红色长椅在树下，撑伞的漫游者与蓝色机器猫站在路灯旁，远处是一栋亮着窗的楼和一辆停靠的汽车。</desc>
 
         <rect width="240" height="132" fill="#08131d" />
         <rect y="88" width="240" height="44" fill="#111a20" />
@@ -56,24 +62,30 @@
           <rect x="73" y="8" width="1" height="5" /><rect x="105" y="31" width="1" height="7" />
           <rect x="133" y="14" width="1" height="6" /><rect x="164" y="35" width="1" height="8" />
           <rect x="202" y="17" width="1" height="6" /><rect x="226" y="42" width="1" height="8" />
+          <rect x="88" y="16" width="1" height="6" /><rect x="123" y="44" width="1" height="5" />
+          <rect x="174" y="7" width="1" height="7" /><rect x="214" y="55" width="1" height="6" />
         </g>
 
         <g class="pixel-scene__buildings">
-          <rect x="145" y="8" width="36" height="81" fill="#101f28" />
-          <rect x="183" y="0" width="57" height="90" fill="#0c1922" />
+          <rect x="154" y="10" width="28" height="79" fill="#101f28" />
+          <rect x="184" y="0" width="56" height="90" fill="#0c1922" />
           <rect x="153" y="18" width="5" height="9" fill="#d5c35d" />
-          <rect x="164" y="18" width="4" height="9" fill="#427a77" />
+          <rect x="168" y="18" width="5" height="9" fill="#427a77" />
           <rect x="153" y="34" width="5" height="8" fill="#386775" />
-          <rect x="166" y="34" width="4" height="8" fill="#d57b52" />
-          <rect x="191" y="12" width="4" height="9" fill="#5f8f78" />
-          <rect x="202" y="12" width="5" height="9" fill="#d8a34f" />
-          <rect x="217" y="12" width="4" height="9" fill="#426979" />
-          <rect x="191" y="29" width="5" height="8" fill="#b85551" />
-          <rect x="205" y="29" width="4" height="8" fill="#5d8070" />
-          <rect x="219" y="29" width="5" height="8" fill="#d7c85c" />
-          <rect x="195" y="47" width="28" height="12" fill="#18333a" />
-          <rect x="199" y="50" width="20" height="3" fill="#54c4b6" class="pixel-scene__neon" />
-          <rect x="225" y="42" width="4" height="25" fill="#c74c65" class="pixel-scene__neon pixel-scene__neon--late" />
+          <rect x="168" y="34" width="5" height="8" fill="#d57b52" />
+          <rect x="192" y="14" width="5" height="8" fill="#d8a34f" />
+          <rect x="205" y="14" width="5" height="8" fill="#5f8f78" />
+          <rect x="218" y="14" width="5" height="8" fill="#426979" />
+          <rect x="192" y="31" width="5" height="8" fill="#b85551" />
+          <rect x="205" y="31" width="5" height="8" fill="#5d8070" />
+          <rect x="218" y="31" width="5" height="8" fill="#d7c85c" />
+          <rect x="191" y="50" width="12" height="14" fill="#152830" />
+          <rect x="194" y="53" width="6" height="8" fill="#4c7778" />
+          <rect x="208" y="50" width="12" height="14" fill="#152830" />
+          <rect x="211" y="53" width="6" height="8" fill="#c49f4d" class="pixel-scene__neon" />
+          <rect x="191" y="70" width="29" height="4" fill="#17262c" />
+          <rect x="230" y="46" width="6" height="38" fill="#18292e" />
+          <rect x="232" y="51" width="2" height="10" fill="#4c6a6e" />
         </g>
 
         <g class="pixel-scene__tree">
@@ -85,67 +97,86 @@
           <rect x="4" y="58" width="29" height="8" fill="#15251c" />
         </g>
 
-        <g class="pixel-scene__sign">
-          <rect x="7" y="68" width="42" height="26" fill="#2a1d2b" />
-          <rect x="10" y="71" width="36" height="20" fill="#98344d" />
-          <rect x="13" y="74" width="30" height="14" fill="#dc4f62" />
-          <rect x="17" y="77" width="22" height="8" fill="#f17768" />
+        <g class="pixel-scene__bench" aria-label="树下的红色长椅">
+          <rect x="8" y="76" width="56" height="5" fill="#4b262d" />
+          <rect x="12" y="77" width="48" height="3" fill="#b64d55" />
+          <rect x="10" y="86" width="52" height="6" fill="#4b262d" />
+          <rect x="14" y="87" width="44" height="3" fill="#cf5a5c" />
+          <rect x="14" y="92" width="5" height="14" fill="#34272a" />
+          <rect x="53" y="92" width="5" height="14" fill="#34272a" />
+          <rect x="8" y="104" width="15" height="2" fill="#1c2225" />
+          <rect x="49" y="104" width="15" height="2" fill="#1c2225" />
         </g>
 
         <g class="pixel-scene__car">
-          <rect x="177" y="86" width="56" height="20" fill="#20292e" />
-          <rect x="186" y="78" width="34" height="10" fill="#26383f" />
-          <rect x="190" y="80" width="11" height="7" fill="#4a656c" />
-          <rect x="204" y="80" width="12" height="7" fill="#4a656c" />
-          <rect x="224" y="91" width="9" height="6" fill="#f4c95b" class="pixel-scene__headlight" />
-          <rect x="181" y="103" width="11" height="5" fill="#070b0e" />
-          <rect x="218" y="103" width="11" height="5" fill="#070b0e" />
+          <rect x="176" y="88" width="58" height="18" fill="#263238" />
+          <rect x="185" y="79" width="36" height="11" fill="#30434a" />
+          <rect x="190" y="81" width="11" height="7" fill="#55717a" />
+          <rect x="204" y="81" width="12" height="7" fill="#55717a" />
+          <rect x="179" y="94" width="5" height="5" fill="#a94f4a" />
+          <rect x="226" y="93" width="8" height="5" fill="#f4c95b" class="pixel-scene__headlight" />
+          <rect x="181" y="103" width="12" height="5" fill="#070b0e" />
+          <rect x="218" y="103" width="12" height="5" fill="#070b0e" />
         </g>
 
         <g class="pixel-scene__wanderer">
-          <rect x="117" y="67" width="7" height="7" fill="#ad6a3e" />
-          <rect x="114" y="74" width="13" height="20" fill="#17191b" />
-          <rect x="112" y="79" width="3" height="14" fill="#53372d" />
-          <rect x="127" y="78" width="3" height="15" fill="#53372d" />
-          <rect x="116" y="94" width="4" height="14" fill="#1b2023" />
-          <rect x="123" y="94" width="4" height="14" fill="#1b2023" />
-          <rect x="113" y="108" width="7" height="3" fill="#342a25" />
-          <rect x="123" y="108" width="7" height="3" fill="#342a25" />
+          <rect x="108" y="56" width="8" height="2" fill="#789096" />
+          <rect x="102" y="58" width="20" height="3" fill="#617a82" />
+          <rect x="98" y="61" width="28" height="4" fill="#4f6870" />
+          <rect x="96" y="65" width="32" height="2" fill="#344951" />
+          <rect x="111" y="67" width="2" height="23" fill="#75868a" />
+          <rect x="121" y="70" width="8" height="3" fill="#342923" />
+          <rect x="120" y="73" width="10" height="7" fill="#b66e43" />
+          <rect x="122" y="80" width="6" height="2" fill="#d5b074" />
+          <rect x="117" y="82" width="16" height="17" fill="#b55242" />
+          <rect x="115" y="85" width="3" height="13" fill="#7d3d38" />
+          <rect x="112" y="87" width="5" height="3" fill="#7d3d38" />
+          <rect x="111" y="88" width="2" height="3" fill="#d5b074" />
+          <rect x="133" y="85" width="3" height="13" fill="#7d3d38" />
+          <rect x="120" y="99" width="5" height="10" fill="#26333a" />
+          <rect x="128" y="99" width="5" height="10" fill="#26333a" />
+          <rect x="117" y="108" width="8" height="3" fill="#342a25" />
+          <rect x="128" y="108" width="8" height="3" fill="#342a25" />
         </g>
 
         <g class="pixel-scene__blue-cat" aria-hidden="true">
-          <rect x="95" y="81" width="12" height="2" fill="#168fc0" />
-          <rect x="92" y="83" width="18" height="11" fill="#168fc0" />
-          <rect x="94" y="94" width="14" height="3" fill="#168fc0" />
-          <rect x="95" y="84" width="12" height="9" fill="#e8eee9" />
-          <rect x="97" y="84" width="4" height="5" fill="#f3f1e8" />
-          <rect x="102" y="84" width="4" height="5" fill="#f3f1e8" />
-          <rect x="99" y="86" width="1" height="2" fill="#26343a" />
-          <rect x="103" y="86" width="1" height="2" fill="#26343a" />
-          <rect x="100" y="88" width="3" height="2" fill="#d95046" />
-          <rect x="101" y="90" width="1" height="2" fill="#26343a" />
-          <rect x="96" y="91" width="5" height="1" fill="#58676a" />
-          <rect x="102" y="91" width="5" height="1" fill="#58676a" />
-          <rect x="94" y="97" width="16" height="2" fill="#b74742" />
-          <rect x="95" y="99" width="14" height="8" fill="#168fc0" />
-          <rect x="98" y="99" width="8" height="6" fill="#e8eee9" />
-          <rect x="90" y="100" width="5" height="3" fill="#168fc0" />
-          <rect x="109" y="100" width="4" height="3" fill="#168fc0" />
+          <rect x="96" y="80" width="12" height="2" fill="#168fc0" />
+          <rect x="92" y="82" width="20" height="13" fill="#168fc0" />
+          <rect x="95" y="83" width="14" height="11" fill="#e8eee9" />
+          <rect x="97" y="82" width="5" height="6" fill="#f5f2e8" />
+          <rect x="103" y="82" width="5" height="6" fill="#f5f2e8" />
+          <rect x="99" y="84" width="1" height="2" fill="#26343a" />
+          <rect x="105" y="84" width="1" height="2" fill="#26343a" />
+          <rect x="101" y="87" width="2" height="2" fill="#d95046" />
+          <rect x="102" y="89" width="1" height="3" fill="#26343a" />
+          <rect x="97" y="91" width="5" height="1" fill="#58676a" />
+          <rect x="103" y="91" width="5" height="1" fill="#58676a" />
+          <rect x="94" y="95" width="16" height="2" fill="#b74742" />
+          <rect x="95" y="97" width="14" height="10" fill="#168fc0" />
+          <rect x="98" y="98" width="8" height="7" fill="#e8eee9" />
+          <rect x="90" y="99" width="5" height="3" fill="#168fc0" />
+          <rect x="109" y="99" width="5" height="3" fill="#168fc0" />
           <rect x="92" y="107" width="8" height="3" fill="#d9e6e3" />
           <rect x="104" y="107" width="8" height="3" fill="#d9e6e3" />
-          <rect x="89" y="101" width="2" height="2" fill="#d9e6e3" />
+          <rect x="89" y="100" width="2" height="2" fill="#d9e6e3" />
         </g>
 
-        <g class="pixel-scene__clue" aria-hidden="true">
-          <rect x="136" y="73" width="3" height="15" fill="#d9b94e" />
-          <rect x="130" y="79" width="15" height="3" fill="#d9b94e" />
-          <rect x="133" y="76" width="9" height="9" fill="#f1d96a" />
-          <rect x="136" y="79" width="3" height="3" fill="#fff3a1" />
+        <g class="pixel-scene__lamp" aria-label="亮着的路灯">
+          <rect x="145" y="50" width="3" height="59" fill="#405156" />
+          <rect x="138" y="48" width="17" height="4" fill="#405156" />
+          <rect x="140" y="52" width="13" height="7" fill="#d8b94f" class="pixel-scene__neon" />
+          <rect x="143" y="54" width="7" height="4" fill="#fff0a0" class="pixel-scene__neon" />
+          <rect x="141" y="108" width="11" height="3" fill="#2b383c" />
         </g>
 
         <g fill="#1b2b32" opacity="0.9">
           <rect x="0" y="116" width="68" height="2" /><rect x="82" y="116" width="63" height="2" />
           <rect x="159" y="116" width="81" height="2" /><rect x="24" y="128" width="91" height="2" />
+        </g>
+        <g class="pixel-scene__reflections" opacity="0.72">
+          <rect x="13" y="112" width="34" height="1" fill="#a1454c" /><rect x="20" y="116" width="25" height="1" fill="#6d303d" />
+          <rect x="137" y="112" width="22" height="1" fill="#c1a14a" /><rect x="142" y="119" width="13" height="1" fill="#756337" />
+          <rect x="199" y="112" width="30" height="1" fill="#315d62" /><rect x="204" y="120" width="21" height="1" fill="#27454e" />
         </g>
       </svg>
     </button>

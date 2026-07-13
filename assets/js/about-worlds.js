@@ -11,7 +11,10 @@
   const townStates = {
     music: {
       mark: "♪",
-      message: "Steph 走到右侧音乐角，鼓点惊动了正在啄食的小鸡。",
+      messages: {
+        light: "心底的树屋 响起了音乐～",
+        dark: "因为蝴蝶那晚捎来了消息绝非偶然～"
+      },
       target: [74, 72],
       route: [[54, 70], [63, 68], [70, 68], [74, 72]],
       facing: "down",
@@ -19,7 +22,10 @@
     },
     photo: {
       mark: "▣",
-      message: "蝴蝶停在花圃上，快门与掠过树梢的飞鸟同时亮起。",
+      messages: {
+        light: "蝴蝶停在花圃上，Steph 掏出他新买的 D80，记录这一美好刹那",
+        dark: "夜风掠过花圃，D80快门声响，替枝头的月光留下一瞬。"
+      },
       target: [43, 68],
       route: [[48, 74], [47, 69], [43, 68]],
       facing: "left",
@@ -27,7 +33,10 @@
     },
     travel: {
       mark: "→",
-      message: "Steph 在路边等了一会儿，巴士从农舍前缓缓停靠。",
+      messages: {
+        light: "Steph 在路边等着巴士，这又是一场说走就走的旅行嘛",
+        dark: "末班巴士停在灯下，未知的下一站也值得上车。"
+      },
       target: [71, 68],
       route: [[55, 70], [63, 70], [71, 68]],
       facing: "right",
@@ -35,7 +44,10 @@
     },
     game: {
       mark: "✦",
-      message: "树荫下的街机亮起，刷新纪录时跳出一颗像素星星。",
+      messages: {
+        light: "午后的街机亮起，Steph 又开始漫游王者峡谷了。",
+        dark: "夜色落下，炉石酒馆开门，Steph 抽到了一张刚好能翻盘的牌。"
+      },
       target: [59, 72],
       route: [[52, 72], [59, 72]],
       facing: "right",
@@ -43,7 +55,10 @@
     },
     guitar: {
       mark: "♩",
-      message: "风穿过树梢，Steph 拿起草坪边的吉他弹了一段熟悉的和弦。",
+      messages: {
+        light: "Steph 拿起草坪边的吉他，弹着：又回到春末的五月。",
+        dark: "晚风穿过树梢，吉他轻响：黑夜暗自无声，天空也透明。"
+      },
       target: [69, 72],
       route: [[54, 70], [62, 68], [67, 68], [69, 72]],
       facing: "down",
@@ -51,7 +66,10 @@
     },
     movie: {
       mark: "▶",
-      message: "忙完一天后，Steph 来到菜园旁，露天电影刚好开场。",
+      messages: {
+        light: "《楚门的世界》开场了，Steph 看着他一步步走向那扇门。",
+        dark: "《火星救援》点亮了屏幕，在火星，也要种出一点希望。"
+      },
       target: [48, 87],
       route: [[49, 80], [48, 87]],
       facing: "right",
@@ -119,9 +137,14 @@
     const triggers = Array.from(town.querySelectorAll("[data-hobby-trigger]"));
     const kent = town.querySelector("[data-town-kent]");
     const message = town.querySelector("[data-town-message]");
+    const initialMessages = {
+      light: message?.dataset.messageLight || message?.textContent.trim() || "",
+      dark: message?.dataset.messageDark || message?.textContent.trim() || ""
+    };
     const mark = town.querySelector(".hobby-town__message-mark");
     let sequence = 0;
     let position = HOME.slice();
+    let activeMessages = initialMessages;
 
     function setTriggerState(name, busy) {
       triggers.forEach(function (trigger) {
@@ -130,6 +153,13 @@
         trigger.setAttribute("aria-pressed", String(active));
         trigger.setAttribute("aria-disabled", String(busy));
       });
+    }
+
+    function setMessage(messages) {
+      if (!messages) return;
+      activeMessages = messages;
+      if (!message) return;
+      message.textContent = document.documentElement.classList.contains("dark") ? messages.dark : messages.light;
     }
 
     function wait(ms, token) {
@@ -172,7 +202,7 @@
       const token = ++sequence;
       town.dataset.activeHobby = name;
       setTriggerState(name, true);
-      if (message) message.textContent = state.message;
+      setMessage(state.messages);
       if (mark) mark.textContent = state.mark;
 
       if (!(await walkRoute(state.route, token))) return;
@@ -197,8 +227,13 @@
 
     town.__worldAbort = controller;
     town.__worldObserver = attachVisibilityObserver(town);
+    town.__worldThemeObserver = new MutationObserver(function () {
+      setMessage(activeMessages);
+    });
+    town.__worldThemeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     town.__worldTimers = new Set();
     town.dataset.worldInitialized = "true";
+    setMessage(initialMessages);
     kent.style.setProperty("--kent-x", HOME[0] + "%");
     kent.style.setProperty("--kent-y", HOME[1] + "%");
     setTriggerState(town.dataset.activeHobby || "music", false);
@@ -208,9 +243,11 @@
     if (!root) return;
     if (root.__worldTimers) root.__worldTimers.forEach(window.clearTimeout);
     if (root.__worldObserver) root.__worldObserver.disconnect();
+    if (root.__worldThemeObserver) root.__worldThemeObserver.disconnect();
     if (root.__worldAbort) root.__worldAbort.abort();
     delete root.__worldTimers;
     delete root.__worldObserver;
+    delete root.__worldThemeObserver;
     delete root.__worldAbort;
     root.dataset.worldInitialized = "false";
   }

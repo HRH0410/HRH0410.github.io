@@ -28,7 +28,7 @@
 
     try {
       document.execCommand("copy");
-      showToast("邮箱已复制 📋");
+      showToast("邮箱已复制");
     } catch (error) {
       showToast("复制失败，请手动复制");
     }
@@ -39,7 +39,7 @@
   function copyEmail(email) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(email).then(function () {
-        showToast("邮箱已复制 📋");
+        showToast("邮箱已复制");
       }).catch(function () {
         fallbackCopy(email);
       });
@@ -52,10 +52,11 @@
     const emailLinks = document.querySelectorAll('.contact-card a[href^="mailto:"]');
     emailLinks.forEach(function (link) {
       const card = link.closest(".contact-card");
-      if (!card) return;
+      if (!card || card.dataset.emailCopyInitialized === "true") return;
 
       card.classList.add("is-copyable");
       card.setAttribute("title", "点击复制邮箱");
+      card.dataset.emailCopyInitialized = "true";
 
       card.addEventListener("click", function (event) {
         event.preventDefault();
@@ -63,6 +64,7 @@
         if (email) copyEmail(email);
       });
     });
+
   }
 
   function initAll() {

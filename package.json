@@ -17,5 +17,8 @@
     "url": "https://github.com/HRH0410/HRH0410.github.io/issues"
   },
   "homepage": "https://github.com/HRH0410/HRH0410.github.io#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "puppeteer": "^25.3.0"
+  }
 }

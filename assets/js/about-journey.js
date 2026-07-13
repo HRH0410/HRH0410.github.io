@@ -140,6 +140,7 @@
 
       lightbox.setAttribute("aria-hidden", "false");
       lightbox.classList.add("is-open");
+      document.body.classList.add("is-journey-lightbox-open");
       document.body.style.overflow = "hidden";
       lightboxClose.focus({ preventScroll: true });
     }
@@ -148,6 +149,7 @@
       lightbox.setAttribute("aria-hidden", "true");
       lightbox.classList.remove("is-open");
       lightbox.style.removeProperty("--journey-active-photo");
+      document.body.classList.remove("is-journey-lightbox-open");
       document.body.style.overflow = "";
       activeCardIndex = -1;
       if (previousFocus && typeof previousFocus.focus === "function") {
@@ -169,7 +171,11 @@
       }, { signal });
     });
 
-    lightboxClose.addEventListener("click", closeLightbox, { signal });
+    lightboxClose.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      closeLightbox();
+    }, { signal });
     if (lightboxPrev) {
       lightboxPrev.addEventListener("click", (event) => {
         event.preventDefault();
@@ -185,7 +191,10 @@
       }, { signal });
     }
     lightbox.addEventListener("click", (event) => {
-      if (event.target === lightbox) closeLightbox();
+      const clickedBackdrop = event.target === lightbox ||
+        (lightboxContent && !lightboxContent.contains(event.target));
+      const clickedInnerBlank = event.target === lightboxContent || event.target === lightboxPhotos;
+      if (clickedBackdrop || clickedInnerBlank) closeLightbox();
     }, { signal });
 
     document.addEventListener("keydown", (event) => {
@@ -208,6 +217,7 @@
     const section = document.getElementById("footprint-film-archive");
     if (!section || !section.__journeyAbort) return;
     section.__journeyAbort.abort();
+    document.body.classList.remove("is-journey-lightbox-open");
     document.body.style.overflow = "";
   }
 

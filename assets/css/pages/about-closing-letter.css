@@ -1,0 +1,258 @@
+/* =====================================================================
+   About closing — a postscript note with a pixel-postage epilogue.
+   ===================================================================== */
+
+.closing-letter {
+  --letter-ink: var(--about-ink, #262a28);
+  --letter-muted: var(--about-muted, #6d716b);
+  --letter-accent: var(--about-green, #6f805e);
+  --letter-rule: color-mix(in srgb, var(--letter-ink) 15%, transparent);
+
+  max-width: 52rem;
+  margin: 1.25rem 0 2.5rem;
+}
+
+.closing-letter__sheet {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(11.5rem, 13.25rem);
+  grid-template-areas:
+    "masthead masthead"
+    "copy aside";
+  gap: 1.8rem clamp(1.35rem, 4vw, 2.8rem);
+  padding: clamp(1.45rem, 4vw, 2.45rem);
+  border: 1px solid color-mix(in srgb, var(--letter-ink) 11%, transparent);
+  border-radius: 2px;
+  background:
+    radial-gradient(circle at 5% 9%, color-mix(in srgb, var(--letter-accent) 7%, transparent), transparent 20%),
+    linear-gradient(112deg, rgba(255, 255, 255, 0.68), transparent 47%),
+    color-mix(in srgb, var(--about-paper, #f8f4eb) 78%, transparent);
+  box-shadow:
+    0 14px 28px -24px color-mix(in srgb, #243241 24%, transparent),
+    10px 12px 0 color-mix(in srgb, var(--letter-ink) 3%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.84);
+  color: var(--letter-ink);
+  backdrop-filter: blur(13px) saturate(0.92);
+  -webkit-backdrop-filter: blur(13px) saturate(0.92);
+}
+
+.closing-letter__sheet::after {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-right: 1px solid color-mix(in srgb, var(--letter-accent) 36%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--letter-accent) 36%, transparent);
+  content: "";
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.closing-letter__masthead {
+  grid-area: masthead;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.72rem;
+  border-bottom: 1px solid var(--letter-rule);
+}
+
+.closing-letter__masthead p,
+.closing-letter__masthead span,
+.closing-letter__address dt,
+.closing-letter__stamp > p {
+  margin: 0 !important;
+  color: var(--letter-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.56rem;
+  font-weight: 760;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+}
+
+.closing-letter__masthead span { color: var(--letter-accent); white-space: nowrap; }
+
+.closing-letter__copy {
+  grid-area: copy;
+  min-width: 0;
+  padding-left: clamp(0.85rem, 2vw, 1.2rem);
+  border-left: 2px solid color-mix(in srgb, var(--letter-accent) 68%, transparent);
+}
+
+.closing-letter__copy > p {
+  max-width: 30rem;
+  margin: 0 0 0.65rem !important;
+  color: var(--letter-muted);
+  font-family: var(--about-serif, "Noto Serif SC", Georgia, serif);
+  font-size: 0.86rem;
+  line-height: 1.76;
+}
+
+.closing-letter__copy .closing-letter__salutation {
+  margin-bottom: 0.78rem !important;
+  color: var(--letter-ink);
+  font-size: 1rem;
+  font-weight: 720;
+}
+
+.closing-letter__quote {
+  position: relative;
+  margin: 1.16rem 0 0 !important;
+  padding: 0.1rem 0 0 0.92rem;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--letter-ink);
+  font-family: var(--about-serif, "Noto Serif SC", Georgia, serif);
+  font-size: clamp(0.98rem, 1.3vw, 1.06rem);
+  font-weight: 720;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+.closing-letter__quote::before {
+  position: absolute;
+  top: -0.35rem;
+  left: -0.12rem;
+  color: color-mix(in srgb, var(--letter-accent) 28%, transparent);
+  content: "“";
+  font-family: Georgia, serif;
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.closing-letter__aside {
+  position: relative;
+  z-index: 1;
+  grid-area: aside;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  align-content: stretch;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.closing-letter__address {
+  display: grid;
+  gap: 0.92rem;
+  margin: 0;
+  padding: 0.05rem 0 0.1rem;
+}
+
+.closing-letter__address div { display: grid; gap: 0.3rem; }
+
+.closing-letter__address dd {
+  margin: 0;
+  color: var(--letter-ink);
+  font-family: var(--about-serif, "Noto Serif SC", Georgia, serif);
+  font-size: 0.74rem;
+  font-weight: 650;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.closing-letter__email-link {
+  color: var(--letter-ink) !important;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  background-image: linear-gradient(90deg, var(--letter-accent), var(--letter-accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  transition: color 160ms ease, background-size 160ms ease;
+}
+
+.closing-letter__email-link:hover {
+  color: var(--letter-ink) !important;
+  background-size: 100% 2px;
+}
+
+.closing-letter__email-link:focus-visible {
+  outline: 2px solid var(--letter-accent);
+  outline-offset: 3px;
+}
+
+.closing-letter__stamp {
+  align-self: end;
+  justify-self: end;
+  width: min(100%, 10.2rem);
+}
+
+.closing-letter__stamp > p { margin-bottom: 0.42rem !important; color: var(--letter-accent); text-align: right; }
+
+.closing-letter .about-pixel-scene {
+  width: 100%;
+  margin: 0;
+}
+
+.closing-letter .pixel-scene__message {
+  right: 0;
+  left: auto;
+  transform: translate3d(0, 4px, 0);
+}
+
+.closing-letter .about-pixel-scene.is-clue-open .pixel-scene__message {
+  transform: translate3d(0, 0, 0);
+}
+
+.closing-letter .pixel-scene__button { box-shadow: 3px 3px 0 color-mix(in srgb, var(--letter-ink) 18%, transparent); }
+
+.dark .closing-letter__sheet {
+  background:
+    radial-gradient(circle at 5% 9%, color-mix(in srgb, var(--letter-accent) 16%, transparent), transparent 22%),
+    linear-gradient(112deg, rgba(255, 255, 255, 0.025), transparent 47%),
+    color-mix(in srgb, var(--about-paper, #1b2021) 80%, transparent);
+  border-color: color-mix(in srgb, #f0ebdf 18%, transparent);
+  box-shadow:
+    0 16px 30px -22px rgba(0, 0, 0, 0.38),
+    10px 12px 0 rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+
+@media (max-width: 680px) {
+  .closing-letter { margin-top: 0.92rem; margin-bottom: 2.2rem; }
+  .closing-letter__sheet {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "masthead"
+      "copy"
+      "aside";
+    gap: 1.38rem;
+    padding: 1.08rem;
+    box-shadow: 6px 7px 0 color-mix(in srgb, var(--letter-ink) 3%, transparent);
+  }
+  .closing-letter__masthead { padding-bottom: 0.62rem; }
+  .closing-letter__masthead p,
+  .closing-letter__masthead span { font-size: 0.48rem; letter-spacing: 0.075em; }
+  .closing-letter__copy { padding-left: 0.8rem; }
+  .closing-letter__copy > p { font-size: 0.76rem; line-height: 1.72; }
+  .closing-letter__copy .closing-letter__salutation { font-size: 0.9rem; }
+  .closing-letter__quote {
+    margin-top: 1rem !important;
+    font-size: 0.96rem;
+    line-height: 1.42;
+    white-space: normal;
+    text-wrap: balance;
+  }
+  .closing-letter__aside {
+    grid-template-columns: minmax(0, 1fr) 8.4rem;
+    grid-template-rows: none;
+    align-content: normal;
+    align-items: end;
+    gap: 0.8rem;
+  }
+  .closing-letter__address { gap: 0.75rem; }
+  .closing-letter__address dd { font-size: 0.67rem; }
+  .closing-letter__stamp { width: 8.4rem; }
+  .closing-letter__sheet::after { right: 0.58rem; bottom: 0.58rem; }
+}
+
+@media (max-width: 400px) {
+  .closing-letter__aside { grid-template-columns: 1fr; }
+  .closing-letter__stamp { justify-self: end; }
+}

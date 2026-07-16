@@ -3,9 +3,9 @@
   "use strict";
 
   const studioStates = {
-    code: "BUILDING",
-    ai: "THINKING",
-    create: "EXPORTING"
+    code: "WORKBENCH OPEN · 让想法能够运行",
+    ai: "WORKBENCH OPEN · 和模型一起拆解、搭建与验证",
+    create: "WORKBENCH OPEN · 让内容和体验被看见"
   };
 
   const townStates = {

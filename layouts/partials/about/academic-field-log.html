@@ -17,7 +17,7 @@
     </section>
 
     <section class="academic-log__block academic-log__block--research" id="research-interests" aria-labelledby="academic-research-title">
-      <h3 class="academic-log__label" id="academic-research-title">Research Interests</h3>
+      <h3 class="academic-log__label" id="academic-research-title">Current Focus</h3>
       <ul class="academic-interests" aria-label="研究兴趣">
         {{ range $log.research }}
           <li>{{ . }}</li>
@@ -25,14 +25,28 @@
       </ul>
     </section>
 
-    <section class="academic-log__block academic-log__block--milestones" id="awards" aria-labelledby="academic-milestones-title">
-      <h3 class="academic-log__label" id="academic-milestones-title">Selected Recognition</h3>
-      <ol class="academic-timeline">
-        {{ range $log.milestones }}
-          <li class="academic-milestone{{ with .project }} is-project{{ end }}">
+    <section class="academic-log__block academic-log__block--milestones" id="awards" aria-labelledby="academic-milestones-title" data-recognition>
+      {{ $milestones := $log.milestones | default $log.featured_milestones }}
+      {{ $featured := where $milestones "featured" true }}
+      <div class="academic-log__heading-row">
+        <h3 class="academic-log__label" id="academic-milestones-title">Selected Recognition / 几个有意义的坐标</h3>
+        <span class="academic-log__count">{{ printf "%02d" (len $featured) }} / {{ printf "%02d" (len $milestones) }}</span>
+      </div>
+      <ol class="academic-timeline" id="academic-recognition-list">
+        {{ range $milestones }}
+          <li class="academic-milestone{{ with .project }} is-project{{ end }}{{ if .featured }} is-featured{{ end }}" data-recognition-item data-featured="{{ if .featured }}true{{ else }}false{{ end }}" {{ if not .featured }}hidden{{ end }}>
             <time datetime="{{ replace .date "." "-" }}">{{ .date }}</time>
             <span class="academic-milestone__dot" aria-hidden="true"></span>
             <p class="academic-milestone__event">{{ with .project }}<strong>{{ . }}</strong><span aria-hidden="true"> · </span>{{ end }}{{ .event }}{{ with .result }}<span class="academic-milestone__result">{{ . }}</span>{{ end }}</p>
+          </li>
+        {{ end }}
+        {{ if gt (len $milestones) (len $featured) }}
+          <li class="academic-milestone academic-milestone--toggle">
+            <span class="academic-milestone__spacer" aria-hidden="true"></span>
+            <span class="academic-milestone__dot" aria-hidden="true"></span>
+            <button class="academic-recognition__toggle" type="button" aria-expanded="false" aria-controls="academic-recognition-list" data-recognition-toggle>
+              <span data-recognition-label>展开</span><span aria-hidden="true" data-recognition-symbol>＋</span>
+            </button>
           </li>
         {{ end }}
       </ol>

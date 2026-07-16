@@ -23,6 +23,15 @@
             <dd><a class="closing-letter__email-link" href="mailto:{{ $note.contact.email }}">{{ $note.contact.email }}<span aria-hidden="true"> ↗</span></a></dd>
           </div>
           <div>
+            <dt>{{ $note.contact.wechat_label }}</dt>
+            <dd class="closing-letter__contact-value">
+              <button class="closing-letter__wechat-reveal" type="button" aria-expanded="false" data-wechat-reveal>
+                对个暗号 <span aria-hidden="true">＋</span>
+              </button>
+              <span class="closing-letter__wechat-id" data-wechat-id hidden>{{ $note.contact.wechat }}</span>
+            </dd>
+          </div>
+          <div>
             <dt>{{ $note.contact.location_label }}</dt>
             <dd>{{ $note.contact.location }}</dd>
           </div>

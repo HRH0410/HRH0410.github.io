@@ -12,17 +12,33 @@ research:
   - "AIGC"
   - "MLLM"
 
+featured_milestones:
+  - date: "2025.11"
+    project: "知微见疾"
+    event: "第十九届挑战杯“人工智能+”创意赛"
+    result: "全国一等奖"
+    featured: true
+  - date: "2025.09"
+    event: "杜厦奖学金"
+    featured: true
+  - date: "2024.11"
+    event: "“砥砺奋进 声动南苏”南苏第二届十佳歌手"
+    result: "冠军"
+    featured: true
+
 milestones:
   - date: "2025.11"
     project: "知微见疾"
     event: "第十九届挑战杯“人工智能+”创意赛"
     result: "全国一等奖"
+    featured: true
   - date: "2025.10"
     project: "知微见疾"
     event: "“云智算杯”AI+应用创新大赛"
     result: "全国一等奖"
   - date: "2025.09"
     event: "杜厦奖学金"
+    featured: true
   - date: "2025.06"
     project: "知微见疾"
     event: "南京大学“天池杯”AI创新大赛"
@@ -33,6 +49,7 @@ milestones:
   - date: "2024.11"
     event: "“砥砺奋进 声动南苏”南苏第二届十佳歌手"
     result: "冠军"
+    featured: true
   - date: "2024.09"
     event: "人民奖学金"
   - date: "2023.11"

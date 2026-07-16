@@ -10,14 +10,3 @@
   background: linear-gradient(90deg, #d7c27e 0%, #a8c1de 52%, #7f9ac0 100%);
   box-shadow: 0 1px 8px rgba(168, 193, 222, 0.22);
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  main#main-content {
-    transition: opacity 180ms ease-out, transform 180ms ease-out;
-  }
-
-  body.turbo-page-entering main#main-content {
-    opacity: 0;
-    transform: translateY(3px);
-  }
-}

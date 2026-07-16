@@ -1,0 +1,54 @@
+/* Two quiet field notes bridging the profile and the rest of the archive. */
+
+.about-guiding-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.9rem, 2vw, 1.25rem);
+  margin: clamp(2rem, 4vw, 3.2rem) 0 3.4rem;
+}
+
+.about-guiding-note {
+  position: relative;
+  min-width: 0;
+  padding: clamp(1.35rem, 3vw, 2rem);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--about-ink, #262a28) 11%, transparent);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(115deg, rgba(255,255,255,0.68), transparent 44%),
+    color-mix(in srgb, var(--about-paper-strong, #fffdf8) 76%, transparent);
+  box-shadow: 0 18px 38px -32px var(--about-shadow, rgba(50,45,38,0.16)), inset 0 1px 0 rgba(255,255,255,0.72);
+}
+
+.about-guiding-note::after {
+  position: absolute;
+  right: -1.2rem;
+  bottom: -1.2rem;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid color-mix(in srgb, var(--about-green, #6f805e) 26%, transparent);
+  border-radius: 50%;
+  content: "";
+  opacity: 0.72;
+}
+
+.about-guiding-note--process::after {
+  border-color: color-mix(in srgb, var(--about-rust, #b85f45) 25%, transparent);
+  border-radius: 0;
+  transform: rotate(13deg);
+}
+
+.about-guiding-note header { margin-bottom: 1.05rem; }
+.about-guiding-note header span { color: var(--about-faint, #9b9b91); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.56rem; font-weight: 740; letter-spacing: 0.11em; }
+.about-guiding-note h2 { margin: 0.42rem 0 0 !important; padding: 0 !important; color: var(--about-ink, #262a28) !important; font-family: var(--about-serif, "Noto Serif SC", Georgia, serif) !important; font-size: clamp(1.28rem, 2.3vw, 1.65rem) !important; font-weight: 750 !important; letter-spacing: -0.025em !important; line-height: 1.25 !important; text-transform: none !important; }
+.about-guiding-note h2::before, .about-guiding-note h2::after { display: none !important; content: none !important; }
+.about-guiding-note p { margin: 0 0 0.72rem !important; color: var(--about-muted, #6d716b); font-family: var(--about-serif, "Noto Serif SC", Georgia, serif); font-size: 0.86rem; line-height: 1.8; }
+.about-guiding-note p:last-child { margin-bottom: 0 !important; }
+
+.dark .about-guiding-note { border-color: rgba(238,233,223,0.12); background: linear-gradient(115deg, rgba(255,255,255,0.035), transparent 44%), color-mix(in srgb, var(--about-paper-strong, #222829) 82%, transparent); box-shadow: 0 20px 42px -30px rgba(0,0,0,0.58), inset 0 1px 0 rgba(255,255,255,0.045); }
+
+@media (max-width: 720px) {
+  .about-guiding-notes { grid-template-columns: 1fr; margin: 1.8rem 0 2.8rem; }
+  .about-guiding-note { padding: 1.2rem; }
+  .about-guiding-note p { font-size: 0.82rem; }
+}

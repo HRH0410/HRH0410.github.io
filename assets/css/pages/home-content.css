@@ -56,10 +56,18 @@
       0 24px 80px rgba(0, 0, 0, 0.02),
       inset 0 1px 1px rgba(255, 255, 255, 0.8);
     border-radius: 32px;
-    padding: 3.5rem 2rem;
+    padding: 7.5rem 2rem 3.5rem;
     max-width: 800px;
     margin: 1rem auto 4rem;
     text-align: center;
+  }
+
+  .glass-card > .home-hero-title {
+    margin-bottom: 1.45rem !important;
+  }
+
+  .home-hero-quote {
+    margin-top: 2.4rem;
   }
 
   .dark .glass-card {
@@ -83,6 +91,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    padding: 1.3rem 0.72rem !important;
+  }
+
+  .home-nav-grid {
+    width: min(100%, 680px);
+  }
+
+  .garden-nav-item__meta {
+    white-space: nowrap;
   }
 
   .garden-nav-item:hover {
@@ -176,21 +196,23 @@
   @media (max-width: 768px) {
     .glass-card {
       max-width: calc(100% - 1.5rem) !important;
-      margin: 0.75rem auto 3rem !important;
+      margin: 2.25rem auto 3rem !important;
       padding: 2.25rem 1rem !important;
       border-radius: 24px !important;
     }
 
+    .home-hero-quote { margin-top: 1rem; }
+
     .floating-avatar {
       width: 108px !important;
       height: 108px !important;
-      margin-bottom: 1.5rem !important;
+      margin-bottom: 0 !important;
     }
 
     .glass-card > h1 {
       font-size: 1.72rem !important;
       line-height: 1.32 !important;
-      margin-bottom: 2rem !important;
+      margin-bottom: 1.2rem !important;
     }
 
     .info-text {
@@ -222,6 +244,7 @@
 
     .home-nav-grid .garden-nav-item {
       min-width: 0;
+      min-height: 96px;
       padding: 1rem 0.55rem !important;
       border-radius: 14px;
     }

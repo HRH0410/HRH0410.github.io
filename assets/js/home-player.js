@@ -43,6 +43,41 @@
   let carouselMoved = false;
   let carouselPressIndex = null;
   let pointerInside = false;
+  let coverObserver = null;
+
+  function normalizeTrackIndex(index) {
+    return (index + total) % total;
+  }
+
+  function loadCardCover(index, priority) {
+    const card = cards[normalizeTrackIndex(index)];
+    const image = card ? card.querySelector("img[data-cover-src]") : null;
+    if (!image || image.getAttribute("src")) return;
+
+    image.loading = priority ? "eager" : "lazy";
+    image.src = image.dataset.coverSrc;
+  }
+
+  function preloadActiveCovers(currentIndex) {
+    loadCardCover(currentIndex, true);
+    loadCardCover(currentIndex - 1, false);
+    loadCardCover(currentIndex + 1, false);
+  }
+
+  function initCoverLoading() {
+    if (!("IntersectionObserver" in window)) return;
+
+    coverObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const index = Number.parseInt(entry.target.dataset.index, 10);
+        if (Number.isInteger(index)) loadCardCover(index, false);
+        coverObserver.unobserve(entry.target);
+      });
+    }, { root: carousel, rootMargin: "0px", threshold: 0.01 });
+
+    cards.forEach((card) => coverObserver.observe(card));
+  }
 
   function updatePlayButton(isPlaying) {
     playBtn.setAttribute("aria-pressed", isPlaying ? "true" : "false");
@@ -107,6 +142,7 @@
     if (trackIndexEl) trackIndexEl.textContent = String(state.currentIndex + 1).padStart(2, "0");
 
     applyTrackVisuals(track);
+    preloadActiveCovers(state.currentIndex);
     updateCards(state.currentIndex);
     centerActiveCard(state.currentIndex, "auto");
   }
@@ -364,6 +400,7 @@
   Player.init(tracks);
   const unsubscribe = Player.subscribe(handleStateChange);
   bindEvents();
+  initCoverLoading();
 
   // Ensure carousel is centered on initial paint
   const initialState = Player.getState();
@@ -379,5 +416,6 @@
   section.addEventListener("player-disconnect", () => {
     unsubscribe();
     cleanupCanvas();
+    if (coverObserver) coverObserver.disconnect();
   });
 })();

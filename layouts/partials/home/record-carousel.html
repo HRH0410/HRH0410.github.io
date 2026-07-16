@@ -101,10 +101,19 @@ window.homePlaylist = [
       <div class="sleeve-console">
         <div class="sleeve-rail" id="record-carousel" data-count="{{ $count }}">
           {{ range $i, $track := $tracks }}
+            {{ $loadImmediately := or (eq $i 0) (eq $i 1) (eq $i (sub $count 1)) }}
             <button class="carousel-card" data-index="{{ $i }}" type="button" aria-label="播放 {{ $track.title }}">
               <span class="sleeve-order">{{ printf "%02d" (add $i 1) }}</span>
               <span class="carousel-sleeve">
-                <img class="nozoom" data-no-zoom="true" draggable="false" src="{{ $track.cover }}" alt="{{ $track.title }} - {{ $track.artist }}" loading="{{ if eq $i 0 }}eager{{ else }}lazy{{ end }}">
+                <img
+                  class="nozoom"
+                  data-no-zoom="true"
+                  data-cover-src="{{ $track.cover }}"
+                  draggable="false"
+                  {{ if $loadImmediately }}src="{{ $track.cover }}" loading="eager"{{ else }}loading="lazy"{{ end }}
+                  {{ if eq $i 0 }}fetchpriority="high"{{ end }}
+                  decoding="async"
+                  alt="{{ $track.title }} - {{ $track.artist }}">
               </span>
               <span class="sleeve-meta">
                 <span class="sleeve-title">{{ $track.title }}</span>

@@ -229,7 +229,7 @@ body:has(.about-page-content) .article-title {
 }
 
 .profile-archive__copy .profile-archive__lead {
-  margin-bottom: 1.05rem !important;
+  margin-bottom: 1.2rem !important;
   color: #313731 !important;
   font-size: clamp(1rem, 1.8vw, 1.16rem);
   font-weight: 700;

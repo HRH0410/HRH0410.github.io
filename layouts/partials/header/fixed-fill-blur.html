@@ -90,9 +90,9 @@
   #menu-blur .main-menu a,
   #menu-blur nav a {
     position: relative !important;
-    color: rgba(0, 0, 0, 0.75) !important;
+    color: rgba(0, 0, 0, 0.46) !important;
     font-size: 0.9rem !important;
-    font-weight: 500 !important;
+    font-weight: 480 !important;
     padding: 0.4rem 1rem !important;
     border-radius: 8px !important;
     transition: all 0.15s ease !important;
@@ -107,24 +107,17 @@
   #menu-blur nav a.is-current,
   #menu-blur .main-menu > a.text-base.is-current {
     background: transparent !important;
-    color: rgba(0, 0, 0, 0.82) !important;
+    color: rgba(0, 0, 0, 0.93) !important;
     box-shadow: none !important;
     text-decoration: none !important;
     border-bottom: 0 !important;
+    font-weight: 680 !important;
   }
 
   #menu-blur nav a.is-current::after,
   #menu-blur .main-menu > a.text-base.is-current::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0.2rem;
-    width: 1.55rem;
-    height: 2px;
-    border-radius: 999px;
-    background: rgba(72, 72, 72, 0.22);
-    transform: translateX(-50%);
-    pointer-events: none;
+    display: none;
+    content: none;
   }
 
   #menu-blur .main-menu a:hover,
@@ -135,13 +128,13 @@
 
   .dark #menu-blur .main-menu a,
   .dark #menu-blur nav a {
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
   }
 
   .dark #menu-blur nav a.is-current,
   .dark #menu-blur .main-menu > a.text-base.is-current {
     background: transparent !important;
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: rgba(255, 255, 255, 0.98) !important;
     box-shadow: none !important;
     text-decoration: none !important;
     border-bottom: 0 !important;
@@ -149,7 +142,7 @@
 
   .dark #menu-blur nav a.is-current::after,
   .dark #menu-blur .main-menu > a.text-base.is-current::after {
-    background: rgba(235, 235, 235, 0.24);
+    display: none;
   }
 
   .dark #menu-blur .main-menu a:hover,
@@ -217,7 +210,7 @@
   }
 
   /* Responsive */
-  @media (max-width: 768px) {
+  @media (max-width: 852px) {
     .site-nav-shell {
       top: 0.45rem !important;
       padding-left: 0.95rem !important;
@@ -299,16 +292,16 @@
 
     #mobile-menu-toggle:checked ~ div[role="dialog"] {
       position: fixed !important;
-      inset: auto 0.85rem auto auto !important;
-      top: 3.45rem !important;
-      width: min(10.8rem, calc(100vw - 1.7rem)) !important;
+      inset: auto 0.9rem auto auto !important;
+      top: 3.35rem !important;
+      width: min(5rem, calc(100vw - 1.7rem)) !important;
       min-height: 0 !important;
       height: auto !important;
-      padding: 0.36rem !important;
-      border-radius: 0.82rem !important;
-      background: rgba(255, 255, 255, 0.86) !important;
-      border: 1px solid rgba(127, 143, 166, 0.16) !important;
-      box-shadow: 0 14px 34px rgba(30, 41, 59, 0.12) !important;
+      padding: 0.18rem !important;
+      border-radius: 0.5rem !important;
+      background: rgba(255, 255, 255, 0.9) !important;
+      border: 1px solid rgba(127, 143, 166, 0.12) !important;
+      box-shadow: 0 10px 24px rgba(30, 41, 59, 0.09) !important;
       backdrop-filter: blur(14px) saturate(145%) !important;
       -webkit-backdrop-filter: blur(14px) saturate(145%) !important;
       overflow: hidden !important;
@@ -317,28 +310,22 @@
 
     .dark #mobile-menu-toggle:checked ~ div[role="dialog"] {
       background: rgba(18, 22, 31, 0.93) !important;
-      border-color: rgba(255, 255, 255, 0.12) !important;
-      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32) !important;
     }
 
     #mobile-menu-toggle:checked ~ div[role="dialog"] > label {
-      top: 0.3rem !important;
-      right: 0.3rem !important;
-      width: 1.3rem !important;
-      height: 1.3rem !important;
-      opacity: 0.48 !important;
-      border-color: transparent !important;
-      background: transparent !important;
-      border-radius: 999px !important;
-      box-shadow: none !important;
+      display: none !important;
     }
 
     #mobile-menu-toggle:checked ~ div[role="dialog"] nav {
       max-width: none !important;
       margin: 0 !important;
-      padding: 1.28rem 0 0 !important;
-      display: grid !important;
-      gap: 0.22rem !important;
+      padding: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 0.06rem !important;
     }
 
     #mobile-menu-toggle:checked ~ div[role="dialog"] nav > div {
@@ -346,40 +333,51 @@
       padding-right: 0 !important;
       margin-top: 0 !important;
       margin-bottom: 0 !important;
+      width: 100% !important;
     }
 
     #mobile-menu-toggle:checked ~ div[role="dialog"] a {
-      min-height: 1.62rem !important;
-      justify-content: flex-start !important;
-      border-radius: 999px !important;
-      padding: 0.18rem 0.44rem !important;
-      background: rgba(255, 255, 255, 0.5) !important;
-      border: 1px solid rgba(127, 143, 166, 0.15) !important;
+      width: 100% !important;
+      min-width: auto !important;
+      min-height: auto !important;
+      justify-content: center !important;
+      border-radius: 0.35rem !important;
+      padding: 0.22rem 0.2rem !important;
+      background: transparent !important;
+      border: 0 !important;
       box-shadow: none !important;
+    }
+
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a:active,
+    #mobile-menu-toggle:checked ~ div[role="dialog"] a:hover {
+      background: rgba(127, 143, 166, 0.08) !important;
     }
 
     #mobile-menu-toggle:checked ~ div[role="dialog"] a.is-current {
-      background: transparent !important;
-      border-color: rgba(127, 143, 166, 0.15) !important;
-      color: rgba(28, 27, 24, 0.88) !important;
+      background: rgba(127, 143, 166, 0.1) !important;
+      color: rgba(28, 27, 24, 0.95) !important;
     }
 
     .dark #mobile-menu-toggle:checked ~ div[role="dialog"] a {
-      background: rgba(255, 255, 255, 0.06) !important;
-      border-color: rgba(255, 255, 255, 0.1) !important;
+      background: transparent !important;
+      border: 0 !important;
       box-shadow: none !important;
     }
 
+    .dark #mobile-menu-toggle:checked ~ div[role="dialog"] a:active,
+    .dark #mobile-menu-toggle:checked ~ div[role="dialog"] a:hover {
+      background: rgba(255, 255, 255, 0.06) !important;
+    }
+
     .dark #mobile-menu-toggle:checked ~ div[role="dialog"] a.is-current {
-      background: transparent !important;
-      border-color: rgba(255, 255, 255, 0.1) !important;
-      color: rgba(255, 250, 238, 0.94) !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+      color: rgba(255, 250, 238, 0.98) !important;
     }
 
     #mobile-menu-toggle:checked ~ div[role="dialog"] a span {
-      font-size: 0.76rem !important;
+      font-size: 0.66rem !important;
       line-height: 1.2 !important;
-      font-weight: 620 !important;
+      font-weight: 520 !important;
       letter-spacing: 0 !important;
     }
   }
@@ -390,6 +388,8 @@
     var sections = [
       { key: "home", path: "/" },
       { key: "posts", path: "/posts" },
+      { key: "posts", path: "/notes" },
+      { key: "posts", path: "/daily" },
       { key: "projects", path: "/projects" },
       { key: "about", path: "/about" }
     ];
@@ -439,17 +439,94 @@
         : nav.querySelectorAll("nav a[href]");
 
       links.forEach(function (link) {
-        if (normalizePath(link.getAttribute("href")) !== active.path) return;
+        var linkPath = normalizePath(link.getAttribute("href"));
+        var isMatch = linkPath === active.path;
+        if (active.key === "posts") isMatch = linkPath === "/posts";
+        if (!isMatch) return;
         link.classList.add("is-current");
         link.setAttribute("aria-current", "page");
       });
     }
 
+    function initMobileMenuA11y() {
+      var toggle = document.getElementById("mobile-menu-toggle");
+      if (!toggle || toggle.dataset.stephA11yReady === "true") return;
+
+      var trigger = toggle.nextElementSibling;
+      var panel = toggle.parentElement && toggle.parentElement.querySelector('div[role="dialog"]');
+      if (!trigger || !panel) return;
+
+      var panelId = "steph-mobile-menu";
+      var close = panel.querySelector('label[for="mobile-menu-toggle"]');
+      panel.id = panelId;
+      panel.setAttribute("aria-label", "站点导航");
+      panel.removeAttribute("aria-modal");
+      trigger.tabIndex = 0;
+      trigger.setAttribute("role", "button");
+      trigger.setAttribute("aria-label", "打开站点导航");
+      trigger.setAttribute("aria-controls", panelId);
+      trigger.setAttribute("aria-expanded", String(toggle.checked));
+
+      if (close) {
+        close.tabIndex = 0;
+        close.setAttribute("role", "button");
+        close.setAttribute("aria-label", "关闭站点导航");
+      }
+
+      function syncState(moveFocus) {
+        var isOpen = toggle.checked;
+        trigger.setAttribute("aria-expanded", String(isOpen));
+        trigger.setAttribute("aria-label", isOpen ? "关闭站点导航" : "打开站点导航");
+        if (isOpen && moveFocus) {
+          window.requestAnimationFrame(function () {
+            var firstLink = panel.querySelector("nav a[href]");
+            if (firstLink) firstLink.focus({ preventScroll: true });
+          });
+        }
+      }
+
+      function activateLabel(event) {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        event.currentTarget.click();
+      }
+
+      toggle.addEventListener("change", function () { syncState(toggle.checked); });
+      trigger.addEventListener("keydown", activateLabel);
+      if (close) {
+        close.addEventListener("keydown", function (event) {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          close.click();
+          window.requestAnimationFrame(function () { trigger.focus({ preventScroll: true }); });
+        });
+      }
+      panel.addEventListener("keydown", function (event) {
+        if (event.key !== "Escape") return;
+        event.preventDefault();
+        toggle.checked = false;
+        syncState(false);
+        trigger.focus({ preventScroll: true });
+      });
+      panel.querySelectorAll("a[href]").forEach(function (link) {
+        link.addEventListener("click", function () {
+          toggle.checked = false;
+          syncState(false);
+        });
+      });
+
+      toggle.dataset.stephA11yReady = "true";
+      syncState(false);
+    }
+
     window.__stephUpdateCurrentNav = updateCurrentNav;
+    window.__stephInitMobileMenuA11y = initMobileMenuA11y;
     updateCurrentNav();
+    initMobileMenuA11y();
     if (!window.__stephNavCurrentBound) {
       document.addEventListener("turbo:load", function () {
         if (window.__stephUpdateCurrentNav) window.__stephUpdateCurrentNav();
+        if (window.__stephInitMobileMenuA11y) window.__stephInitMobileMenuA11y();
       });
       window.__stephNavCurrentBound = true;
     }

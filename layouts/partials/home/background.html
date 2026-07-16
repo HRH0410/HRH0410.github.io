@@ -1,17 +1,14 @@
 {{ $disableImageOptimization := .Site.Params.disableImageOptimization | default false }}
 
-{{/* 加载首页专属样式与脚本 */}}
-{{ $homeCSS := resources.Get "css/pages/home.css" | resources.Minify | resources.Fingerprint }}
-<link rel="stylesheet" href="{{ $homeCSS.RelPermalink }}" integrity="{{ $homeCSS.Data.Integrity }}" data-turbo-track="reload">
-
+{{/* 首页脚本；样式在 extend-head-uncached 中提前加载，避免首屏闪烁。 */}}
 {{ $homeJS := resources.Get "js/home-player.js" | resources.Minify | resources.Fingerprint }}
 <script defer src="{{ $homeJS.RelPermalink }}" integrity="{{ $homeJS.Data.Integrity }}" data-turbo-track="reload"></script>
 
-{{ $microCSS := resources.Get "css/home-micro-interactions.css" | resources.Minify | resources.Fingerprint }}
-<link rel="stylesheet" href="{{ $microCSS.RelPermalink }}" integrity="{{ $microCSS.Data.Integrity }}" data-turbo-track="reload">
-
 {{ $microJS := resources.Get "js/home-micro-interactions.js" | resources.Minify | resources.Fingerprint }}
 <script defer src="{{ $microJS.RelPermalink }}" integrity="{{ $microJS.Data.Integrity }}" data-turbo-track="reload"></script>
+
+{{ $personalFileJS := resources.Get "js/home-personal-file.js" | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $personalFileJS.RelPermalink }}" integrity="{{ $personalFileJS.Data.Integrity }}" data-turbo-track="reload"></script>
 
 <article class="prose dark:prose-invert max-w-full">
   <div class="relative">
@@ -62,3 +59,5 @@
     </div>
   </div>
 </article>
+
+{{ partial "home/personal-file.html" . }}

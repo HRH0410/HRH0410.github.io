@@ -66,10 +66,7 @@
 }
 
 .skills-studio__topline {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 0.75rem;
-  align-items: center;
+  display: block;
   padding: 0.66rem 0.85rem;
   border-bottom: 1px solid var(--world-line);
   color: var(--world-muted);
@@ -99,6 +96,32 @@
 .skills-studio__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.skills-studio__intro {
+  max-width: 38rem;
+  margin: 0.95rem 0 1.15rem;
+  padding-inline: 0.85rem;
+}
+
+.skills-studio__intro h3 {
+  margin: 0 0 0.32rem !important;
+  color: var(--world-ink) !important;
+  font-family: var(--about-serif, "Noto Serif SC", Georgia, serif) !important;
+  font-size: 1.18rem !important;
+  font-weight: 740 !important;
+}
+
+.skills-studio__intro p {
+  margin: 0 !important;
+  color: var(--world-muted);
+  font-family: var(--about-serif, "Noto Serif SC", Georgia, serif);
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.skill-station__content {
+  min-width: 0;
 }
 
 .skill-station {
@@ -1577,7 +1600,7 @@ Original-game asset composition. World objects are sprites, never CSS drawings.
   .skill-station {
     display: grid;
     grid-template-columns: minmax(7.4rem, 0.72fr) minmax(0, 1.28fr);
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr;
     gap: 0 1rem;
     padding: 0 1rem 1rem 0;
     border-top: 1px solid var(--world-line);
@@ -1596,12 +1619,19 @@ Original-game asset composition. World objects are sprites, never CSS drawings.
   }
 
   .skill-station__visual {
-    grid-row: 1 / 3;
+    grid-column: 1;
+    grid-row: 1 / -1;
     height: 100%;
     min-height: 9.8rem;
     margin: 0;
     border-right: 1px solid var(--world-line);
     border-bottom: 0;
+  }
+
+  .skill-station__content {
+    grid-column: 2;
+    align-self: center;
+    min-width: 0;
   }
 
   .skills-studio .skill-header {
@@ -1610,8 +1640,6 @@ Original-game asset composition. World objects are sprites, never CSS drawings.
   }
 
   .skills-studio .skill-items { padding-bottom: 0.35rem; }
-  .skills-studio__topline { grid-template-columns: 1fr auto; }
-  .skills-studio__topline > span:last-child { display: none; }
 
   .hobby-town { height: 22rem; }
   .town-home { left: 20%; width: 31%; }
@@ -1635,7 +1663,6 @@ Original-game asset composition. World objects are sprites, never CSS drawings.
   .skill-station__switch { font-size: 0.88rem; }
   .skills-studio .skill-item { font-size: 0.71rem; }
   .studio-monitor { width: 84%; }
-  .skills-studio__status { align-items: flex-start; font-size: 0.58rem; line-height: 1.45; }
 
   /* Keep inactive previews recognizable on touch screens. The desktop blur
      still communicates focus, while mobile needs a clearer tap affordance. */

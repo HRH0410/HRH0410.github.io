@@ -1,6 +1,22 @@
 {{ $articleReadingJS := resources.Get "js/article-reading.js" | resources.Minify | resources.Fingerprint }}
 <script defer src="{{ $articleReadingJS.RelPermalink }}" integrity="{{ $articleReadingJS.Data.Integrity }}" data-turbo-track="reload"></script>
 
+{{ if eq .RelPermalink "/projects/" }}
+  {{ $projectsCSS := resources.Get "css/pages/projects.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $projectsCSS.RelPermalink }}" integrity="{{ $projectsCSS.Data.Integrity }}" data-turbo-track="dynamic">
+{{ end }}
+
+{{ if .IsHome }}
+  {{ $homeCSS := resources.Get "css/pages/home.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $homeCSS.RelPermalink }}" integrity="{{ $homeCSS.Data.Integrity }}" data-turbo-track="reload">
+  {{ $homeContentCSS := resources.Get "css/pages/home-content.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $homeContentCSS.RelPermalink }}" integrity="{{ $homeContentCSS.Data.Integrity }}" data-turbo-track="reload">
+  {{ $microCSS := resources.Get "css/home-micro-interactions.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $microCSS.RelPermalink }}" integrity="{{ $microCSS.Data.Integrity }}" data-turbo-track="reload">
+  {{ $personalFileCSS := resources.Get "css/pages/home-personal-file.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $personalFileCSS.RelPermalink }}" integrity="{{ $personalFileCSS.Data.Integrity }}" data-turbo-track="reload">
+{{ end }}
+
 {{ if and .IsPage (eq .RelPermalink "/about/") }}
   {{ $clipboardCSS := resources.Get "css/about-clipboard.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $clipboardCSS.RelPermalink }}" integrity="{{ $clipboardCSS.Data.Integrity }}" data-turbo-track="dynamic">

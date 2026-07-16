@@ -250,76 +250,6 @@
     });
   }
 
-  function canPrefetchNavigation(link) {
-    if (!link || link.target || link.hasAttribute("download") || link.dataset.turbo === "false") return false;
-
-    let url;
-    try {
-      url = new URL(link.href, window.location.href);
-    } catch (_) {
-      return false;
-    }
-
-    if (url.origin !== window.location.origin || url.protocol !== window.location.protocol) return false;
-    if (url.pathname === window.location.pathname && url.search === window.location.search) return false;
-    return true;
-  }
-
-  function initNavigationPrefetch() {
-    const links = document.querySelectorAll(
-      "#menu-blur a[href], [role='dialog'][aria-modal='true'] nav a[href]"
-    );
-
-    links.forEach((link) => {
-      if (link.dataset.navigationPrefetchBound === "true" || !canPrefetchNavigation(link)) return;
-      link.dataset.navigationPrefetchBound = "true";
-
-      let timer = null;
-      const prefetch = () => {
-        timer = null;
-        const href = link.href;
-        if (!href || document.head.querySelector(`link[data-navigation-prefetch="${CSS.escape(href)}"]`)) return;
-
-        const resource = document.createElement("link");
-        resource.rel = "prefetch";
-        resource.as = "document";
-        resource.href = href;
-        resource.dataset.navigationPrefetch = href;
-        document.head.appendChild(resource);
-      };
-
-      const schedulePrefetch = () => {
-        if (timer !== null) return;
-        timer = window.setTimeout(prefetch, 90);
-      };
-
-      const cancelPrefetch = () => {
-        if (timer === null) return;
-        window.clearTimeout(timer);
-        timer = null;
-      };
-
-      link.addEventListener("pointerenter", schedulePrefetch, { passive: true });
-      link.addEventListener("focus", schedulePrefetch, { passive: true });
-      link.addEventListener("pointerleave", cancelPrefetch, { passive: true });
-      link.addEventListener("blur", cancelPrefetch, { passive: true });
-    });
-  }
-
-  function preparePageEnter(event) {
-    const nextBody = event.detail && event.detail.newBody;
-    if (nextBody) nextBody.classList.add("turbo-page-entering");
-  }
-
-  function revealPageEnter() {
-    if (!document.body.classList.contains("turbo-page-entering")) return;
-    window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => {
-        document.body.classList.remove("turbo-page-entering");
-      });
-    });
-  }
-
   function scheduleTypeItRetry() {
     if (window.__stephTypeItRetryScheduled) return;
     window.__stephTypeItRetryScheduled = true;
@@ -379,17 +309,14 @@
     initLikesButton();
     initSearch();
     initTypeIt();
-    initNavigationPrefetch();
     window.setTimeout(recoverMissingTrackedStylesheets, 500);
   }
 
   document.addEventListener("turbo:load", onPageChange);
-  document.addEventListener("turbo:render", revealPageEnter);
 
   // Before Turbo swaps the body, tell page-specific player views to unsubscribe
   // so they don't try to update DOM elements that are about to be removed.
-  document.addEventListener("turbo:before-render", (event) => {
-    preparePageEnter(event);
+  document.addEventListener("turbo:before-render", () => {
     const section = document.getElementById("home-listening-station");
     if (section) {
       section.dispatchEvent(new CustomEvent("player-disconnect", { bubbles: false }));

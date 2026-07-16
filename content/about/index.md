@@ -15,7 +15,7 @@ showComments: false
 {{< about-profile-archive >}}
 
 <!-- ==================== 学术成长档案 ==================== -->
-## Academic Field Log
+## A Few Milestones
 
 {{< about-academic-field-log >}}
 
@@ -25,7 +25,7 @@ showComments: false
 {{< about-creations-reel >}}
 
 <!-- ==================== 技能清单 ==================== -->
-## Skills
+## Workbench
 
 {{< about-skills-studio >}}
 

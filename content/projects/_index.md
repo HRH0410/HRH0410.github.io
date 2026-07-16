@@ -112,7 +112,7 @@ layout: "simple"
 <span>科研机会</span>
 <span>学术连接</span>
 <span>产品设计</span>
-<span>前端实现</span>
+<span>全栈开发</span>
 </div>
 <p class="project-etymology"><span>LAB</span><i>+</i><span>AGORA</span><small>LAB，探索开始的地方；AGORA，想法相遇的广场。</small></p>
 <div class="project-summary">
@@ -125,7 +125,7 @@ layout: "simple"
 </div>
 <div class="highlight-grid">
 <article><strong>为什么开始</strong><span>校园里并不缺机会和感兴趣的人，真正缺少的是一个清晰、可信、可以被搜索的连接入口。</span></article>
-<article><strong>我在其中</strong><span>负责产品设计、前端实现与整体推进，在真实反馈里持续调整信息结构和连接路径。</span></article>
+<article><strong>我在其中</strong><span>负责产品设计、全栈开发与整体推进，在真实反馈里持续调整信息结构和连接路径。</span></article>
 <article><strong>现在进行时</strong><span>平台已经开放内测，正从校园里的真实招募场景开始冷启动，继续验证信息供给、筛选与连接链路。</span></article>
 </div>
 <div class="actions">

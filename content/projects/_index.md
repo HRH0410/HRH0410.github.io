@@ -225,6 +225,36 @@ layout: "simple"
 <span class="sketch-btn sketch-btn--passive">鸿蒙商城上线中</span>
 </div>
 </article>
+
+<article class="sketch-card featured-card borrowed-eyes-card">
+<div class="project-head">
+<h3 class="project-name">📮 Borrowed Eyes｜异目邮局</h3>
+<span class="status">诞生于 AdventureX 2026</span>
+</div>
+<div class="tags">
+<span>叙事交互</span>
+<span>陌生人连接</span>
+<span>智能眼镜</span>
+<span>数字邮局</span>
+</div>
+<div class="project-summary">
+<figure class="project-shot">
+<img src="/img/works/borrowed-eyes-perspectives.jpg" alt="人与另一种生命望向同一处风景，想象各自眼中的世界" loading="lazy">
+</figure>
+<div class="project-copy">
+<p class="project-event"><img src="/img/works/adventurex-wordmark.svg" alt="AdventureX"><span>把一次观看，变成一封可以抵达的信</span></p>
+<p class="project-slogan">有些目光来自另一种生命，有些来自一个你永远不会遇见的人。</p>
+<p class="project-desc">我们很难想象从未见过的生活，也常常把自己所见的，当作世界本来的样子。许多误解并非来自恶意，而是我们从未有机会站到另一个位置：一根柱子也可以是神鹫眼中的山脊，一扇玻璃门也可能是海鬣蜥所感知的冷热边界；同一场雨，既可能是苔藓等待已久的舞蹈，也可能唤起一个陌生人的一段记忆。</p>
+<p class="project-desc">Borrowed Eyes 从这个念头出发。体验者戴上智能眼镜，拍下眼前再普通不过的场景；系统不急于告诉你“这是什么”，而是投递一封来自别处的信——它可能借来某种非人类生命的身体、感官与时间，也可能带来一个陌生人的真实生活。五次短暂凝视中，事物没有改变，只是它原本唯一的解释，被轻轻松开了。</p>
+<p class="project-desc">体验最后，借来的目光会被印成一张独一无二的明信片，跟随体验者离开。我们不期待一次短暂的换位消除所有隔阂；如果它能让一个熟悉之物显露出另一种可能，让一段思考开始发生，就足够了。</p>
+</div>
+</div>
+<div class="highlight-grid">
+<article><strong>从一个问题开始</strong><span>技术总在帮助我们看得更清楚、行动得更高效。我们想再追问一步：它能否不只是延伸人的目光，也让人暂时离开自己的位置，意识到我们并不是世界唯一的尺度？</span></article>
+<article><strong>我在其中</strong><span>负责产品设计与全栈开发。比起堆叠能力，我更在意如何让图像理解、叙事模型与眼镜交互退到体验背后，只留下那一瞬间真实发生的观看变化。</span></article>
+<article><strong>让技术退到幕后</strong><span>在这里，AI 不替用户解释世界，也不急着给出答案。它只负责投递一双来自别处的眼睛，在人与习以为常的现实之间打开一道很短的缝隙。至于从中看见什么，我们把它重新交还给体验者。</span></article>
+</div>
+</article>
 </div>
 </section>
 

@@ -164,7 +164,7 @@ layout: "simple"
 </div>
 <div class="project-summary">
 <figure class="project-shot">
-<img src="/img/works/njuis-wiki.png" alt="NJUIS-Wiki 网站界面截图" loading="lazy">
+<img src="/img/works/njuis_wiki.png" alt="NJUIS-Wiki 网站界面截图" loading="lazy">
 </figure>
 <div class="project-copy">
 <p class="project-desc">智科全家桶是由南京大学智科同学自发共建的民间 Wiki。它不只收纳课程攻略，也把学院全景、培养方案、升学路径、科研与竞赛、实习求职、苏州生活和常见问题，连成一份可检索、可持续更新的在校生指南。</p>
@@ -189,7 +189,7 @@ layout: "simple"
 <article class="sketch-card featured-card">
 <div class="project-head">
 <h3 class="project-name">🩺 知微见疾</h3>
-<span class="status">持续推进</span>
+<span class="status">鸿蒙商城上线中</span>
 </div>
 <div class="tags">
 <span>AI 健康助手</span>
@@ -221,9 +221,6 @@ layout: "simple"
 <article><strong>我在其中</strong><span>负责产品设计与 Agent 工作流，完成报告分析与多功能问答助手的搭建，把识别、解读、问诊与建议串成一条体验。</span></article>
 <article><strong>一个判断</strong><span>健康 AI 的价值不在替人下诊断，而在把复杂信息转成理解、对话与行动：看得清，也知道下一步怎么做。</span></article>
 </div>
-<div class="actions">
-<span class="sketch-btn sketch-btn--passive">鸿蒙商城上线中</span>
-</div>
 </article>
 
 <article class="sketch-card featured-card borrowed-eyes-card">
@@ -253,6 +250,9 @@ layout: "simple"
 <article><strong>从一个问题开始</strong><span>技术总在帮助我们看得更清楚、行动得更高效。我们想再追问一步：它能否不只是延伸人的目光，也让人暂时离开自己的位置，意识到我们并不是世界唯一的尺度？</span></article>
 <article><strong>我在其中</strong><span>负责产品设计与全栈开发。比起堆叠能力，我更在意如何让图像理解、叙事模型与眼镜交互退到体验背后，只留下那一瞬间真实发生的观看变化。</span></article>
 <article><strong>让技术退到幕后</strong><span>在这里，AI 不替用户解释世界，也不急着给出答案。它只负责投递一双来自别处的眼睛，在人与习以为常的现实之间打开一道很短的缝隙。至于从中看见什么，我们把它重新交还给体验者。</span></article>
+</div>
+<div class="actions">
+<a class="sketch-btn sketch-btn--primary" href="https://borrowed-eyes.xyz" target="_blank" rel="noopener noreferrer">打开另一种目光 →</a>
 </div>
 </article>
 </div>

@@ -8,13 +8,13 @@
 
 {{ if .IsHome }}
   {{ $homeCSS := resources.Get "css/pages/home.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $homeCSS.RelPermalink }}" integrity="{{ $homeCSS.Data.Integrity }}" data-turbo-track="reload">
+  <link rel="stylesheet" href="{{ $homeCSS.RelPermalink }}" integrity="{{ $homeCSS.Data.Integrity }}" data-turbo-track="dynamic">
   {{ $homeContentCSS := resources.Get "css/pages/home-content.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $homeContentCSS.RelPermalink }}" integrity="{{ $homeContentCSS.Data.Integrity }}" data-turbo-track="reload">
+  <link rel="stylesheet" href="{{ $homeContentCSS.RelPermalink }}" integrity="{{ $homeContentCSS.Data.Integrity }}" data-turbo-track="dynamic">
   {{ $microCSS := resources.Get "css/home-micro-interactions.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $microCSS.RelPermalink }}" integrity="{{ $microCSS.Data.Integrity }}" data-turbo-track="reload">
+  <link rel="stylesheet" href="{{ $microCSS.RelPermalink }}" integrity="{{ $microCSS.Data.Integrity }}" data-turbo-track="dynamic">
   {{ $personalFileCSS := resources.Get "css/pages/home-personal-file.css" | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $personalFileCSS.RelPermalink }}" integrity="{{ $personalFileCSS.Data.Integrity }}" data-turbo-track="reload">
+  <link rel="stylesheet" href="{{ $personalFileCSS.RelPermalink }}" integrity="{{ $personalFileCSS.Data.Integrity }}" data-turbo-track="dynamic">
 {{ end }}
 
 {{ if and .IsPage (eq .RelPermalink "/about/") }}

@@ -2,13 +2,13 @@
 
 {{/* 首页脚本；样式在 extend-head-uncached 中提前加载，避免首屏闪烁。 */}}
 {{ $homeJS := resources.Get "js/home-player.js" | resources.Minify | resources.Fingerprint }}
-<script defer src="{{ $homeJS.RelPermalink }}" integrity="{{ $homeJS.Data.Integrity }}" data-turbo-track="reload"></script>
+<script defer src="{{ $homeJS.RelPermalink }}" integrity="{{ $homeJS.Data.Integrity }}" data-turbo-track="dynamic"></script>
 
 {{ $microJS := resources.Get "js/home-micro-interactions.js" | resources.Minify | resources.Fingerprint }}
-<script defer src="{{ $microJS.RelPermalink }}" integrity="{{ $microJS.Data.Integrity }}" data-turbo-track="reload"></script>
+<script defer src="{{ $microJS.RelPermalink }}" integrity="{{ $microJS.Data.Integrity }}" data-turbo-track="dynamic"></script>
 
 {{ $personalFileJS := resources.Get "js/home-personal-file.js" | resources.Minify | resources.Fingerprint }}
-<script defer src="{{ $personalFileJS.RelPermalink }}" integrity="{{ $personalFileJS.Data.Integrity }}" data-turbo-track="reload"></script>
+<script defer src="{{ $personalFileJS.RelPermalink }}" integrity="{{ $personalFileJS.Data.Integrity }}" data-turbo-track="dynamic"></script>
 
 <article class="prose dark:prose-invert max-w-full">
   <div class="relative">
